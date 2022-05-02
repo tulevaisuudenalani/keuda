@@ -20,7 +20,7 @@ const ENEMY_SPEED = 20
 
 let isJumping = true
 
-loadSprite('laama', 'https://i.ibb.co/X73vKs8/hahmo.jpg')
+loadSprite('laama', 'https://miro.medium.com/max/1400/1*BgPLcocaAsS0AH2fEWlNmA.png')
 loadSprite('mario', 'https://i.ibb.co/X73vKs8/hahmo.jpg')
 loadRoot('https://i.imgur.com/')
 loadSprite('coin', 'wbKxhcd.png')
@@ -50,14 +50,14 @@ scene("game", ({ level, score }) => {
   const maps = [
     [
       '                                      ',
-      '       l                              ',
+      '                                      ',
       '                                      ',
       '                                      ',
       '                                      ',
       '     %   =*=%=                        ',
       '                                      ',
       '                            -+        ',
-      '                  o     ^   ()        ',
+      '                  o     ^   ()    ====',
       '==============================   =====',
     ],
     [
@@ -71,6 +71,19 @@ scene("game", ({ level, score }) => {
       '£                        x x x x  x   -+£',
       '£               z   z  x x x x x  x   ()£',
       '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!',
+    ],
+    [
+    '£                                       £',
+    '£                                       £',
+    '£                                       £',
+    '£                                x      £',
+    '£                              x        £',
+    '£    xxxx@@@@@@  xxxxxxxxxxx x x        £',
+    '£                          x x x        £',
+    '£                        x x x x  x   -+£',
+    '£     x         z   z  x x x x x  x   ()£',
+    '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!',
+
     ]
   ]
 
@@ -94,7 +107,7 @@ scene("game", ({ level, score }) => {
     '@': [sprite('blue-surprise'), solid(), scale(0.5), 'coin-surprise'],
     'x': [sprite('blue-steel'), solid(), scale(0.5)],
     'o': [sprite('tulipallo'), solid(), scale(0.5)],
-    'l': [sprite('laama'), scale(0.3)],
+    'l': [sprite('laama'), scale(0.1)],
   }
 
   const gameLevel = addLevel(maps[level], levelCfg)
@@ -108,8 +121,8 @@ scene("game", ({ level, score }) => {
     }
   ])
 
-  add([text('level ' + parseInt(level + 1) ), pos(40, 6)])
-
+  add([text(' Keudataso ' + parseInt(level + 1) ), pos(40, 6)])
+  add([sprite("laama"), pos(150,8), scale(0.1) ])
   function big() {
     let timer = 0
     let isBig = false
@@ -155,7 +168,7 @@ scene("game", ({ level, score }) => {
 
   player.on("headbump", (obj) => {
     if (obj.is('coin-surprise')) {
-      gameLevel.spawn('$', obj.gridPos.sub(0, 1))
+      gameLevel.spawn('l', obj.gridPos.sub(0, 1))
       destroy(obj)
       gameLevel.spawn('}', obj.gridPos.sub(0,0))
     }
