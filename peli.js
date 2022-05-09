@@ -1,11 +1,9 @@
-//IMPORTANT: Make sure to use Kaboom version 0.5.0 for this game by adding the correct script tag in the HTML file.
-
 kaboom({
   global: true,
   fullscreen: true,
   scale: 2,
   debug: true,
-  clearColor: [0, 0, 0, 1],
+  clearColor: [0, 0.55, 0, 1],
 })
 
 // Speed identifiers
@@ -19,14 +17,14 @@ const ENEMY_SPEED = 20
 // Game logic
 
 let isJumping = true
-
-loadSprite('laama', 'https://miro.medium.com/max/1400/1*BgPLcocaAsS0AH2fEWlNmA.png')
-loadSprite('mario', 'https://i.ibb.co/X73vKs8/hahmo.jpg')
+//loadSprite('https://web.tredu.fi/digiosalliseksi/kysely.php')
+loadSprite('kysymys', 'https://i.ibb.co/rf26fQf/Kysymys-1.png')
+loadSprite('mario', 'https://media2.giphy.com/media/bwsNi6FMuVGZFthRYE/giphy.gif')
+loadSprite('block', 'https://i.ibb.co/BLcyRSK/Vihre-blocki.png')
 loadRoot('https://i.imgur.com/')
 loadSprite('coin', 'wbKxhcd.png')
 loadSprite('evil-shroom', 'KPO3fR9.png')
 loadSprite('brick', 'pogC9x5.png')
-loadSprite('block', 'M6rwarW.png')
 loadSprite('mushroom', '0wMd92p.png')
 loadSprite('surprise', 'gesQ1KP.png')
 loadSprite('unboxed', 'bdrLpi6.png')
@@ -34,7 +32,6 @@ loadSprite('pipe-top-left', 'ReTPiWY.png')
 loadSprite('pipe-top-right', 'hj2GK4n.png')
 loadSprite('pipe-bottom-left', 'c1cYSbt.png')
 loadSprite('pipe-bottom-right', 'nqQ79eI.png')
-loadSprite('tulipallo', 'o9WizfI.png')
 
 loadSprite('blue-block', 'fVscIbn.png')
 loadSprite('blue-brick', '3e5YRQd.png')
@@ -49,48 +46,47 @@ scene("game", ({ level, score }) => {
 
   const maps = [
     [
-      '                                      ',
-      '                                      ',
-      '                                      ',
-      '                                      ',
-      '                                      ',
-      '     %   =*=%=                        ',
-      '                                      ',
-      '                            -+        ',
-      '                  o     ^   ()    ====',
-      '==============================   =====',
+      '£                                                                       £',
+      '£                                                                       £',
+      '£                                                                       £',
+      '£                                                                       £',
+      '£                                                                       £',
+      '£    %   =*=%=                     %               o                    £',
+      '£                                                                       £',
+      '£                                                                    -+ £',
+      '£                   ^   ^                                            () £',
+      '==============================   ========================================',
     ],
     [
-      '£                                       £',
-      '£                                       £',
-      '£                                       £',
-      '£                                       £',
-      '£                                       £',
-      '£        @@@@@@              x x        £',
-      '£                          x x x        £',
-      '£                        x x x x  x   -+£',
-      '£               z   z  x x x x x  x   ()£',
-      '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!',
+      '£                                                                       £',
+      '£                                                                       £',
+      '£                                                                       £',
+      '£                                                                       £',
+      '£                                                                       £',
+      '£        @@@@@@              x x                                        £',
+      '£                          x x x                                        £',
+      '£                        x x x x  x                                   -+£',
+      '£               z   z  x x x x x  x                                   ()£',
+      '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  !!!!!!!!!!!!!!!  !!!!!!!!!!!!!',
     ],
     [
-    '£                                       £',
-    '£                                       £',
-    '£                                       £',
-    '£                                x      £',
-    '£                              x        £',
-    '£    xxxx@@@@@@  xxxxxxxxxxx x x        £',
-    '£                          x x x        £',
-    '£                        x x x x  x   -+£',
-    '£     x         z   z  x x x x x  x   ()£',
-    '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!',
-
+      '£                                                                       £',
+      '£                                                                       £',
+      '£                                                                       £',
+      '£                                                                       £',
+      '£                                                                       £',
+      '£        @@@@@@              x x                                        £',
+      '£                          x x x                                        £',
+      '£                        x x x x  x                                   -+£',
+      '£               z   z  x x x x x  x                                   ()£',
+      '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  !!!!!!!!!!!!!!!  !!!!!!!!!!!!!',
     ]
   ]
 
   const levelCfg = {
     width: 20,
     height: 20,
-    '=': [sprite('block'), solid()],
+    '=': [sprite('block'), solid(), scale(0.44)],
     '$': [sprite('coin'), 'coin'],
     '%': [sprite('surprise'), solid(), 'coin-surprise'],
     '*': [sprite('surprise'), solid(), 'mushroom-surprise'],
@@ -106,8 +102,9 @@ scene("game", ({ level, score }) => {
     'z': [sprite('blue-evil-shroom'), solid(), scale(0.5), 'dangerous'],
     '@': [sprite('blue-surprise'), solid(), scale(0.5), 'coin-surprise'],
     'x': [sprite('blue-steel'), solid(), scale(0.5)],
-    'o': [sprite('tulipallo'), solid(), scale(0.5)],
-    'l': [sprite('laama'), scale(0.1)],
+    'i': [sprite('kysymys'),scale(0.5)],
+    'o': [sprite('surprise'), solid(), 'kysymys-surprise'],
+
   }
 
   const gameLevel = addLevel(maps[level], levelCfg)
@@ -121,8 +118,8 @@ scene("game", ({ level, score }) => {
     }
   ])
 
-  add([text(' Keudataso ' + parseInt(level + 1) ), pos(40, 6)])
-  add([sprite("laama"), pos(150,8), scale(0.1) ])
+  add([text('level ' + parseInt(level + 1) ), pos(40, 6)])
+
   function big() {
     let timer = 0
     let isBig = false
@@ -155,11 +152,11 @@ scene("game", ({ level, score }) => {
 
   const player = add([
     sprite('mario'), solid(),
-    pos(30, 0),
+    pos(50, 0),
     body(),
+    scale(1),
     big(),
-    origin('bot'),
-    scale(0.04)
+    origin('bot')
   ])
 
   action('mushroom', (m) => {
@@ -168,12 +165,17 @@ scene("game", ({ level, score }) => {
 
   player.on("headbump", (obj) => {
     if (obj.is('coin-surprise')) {
-      gameLevel.spawn('l', obj.gridPos.sub(0, 1))
+      gameLevel.spawn('$', obj.gridPos.sub(0, 1))
       destroy(obj)
       gameLevel.spawn('}', obj.gridPos.sub(0,0))
     }
     if (obj.is('mushroom-surprise')) {
       gameLevel.spawn('#', obj.gridPos.sub(0, 1))
+      destroy(obj)
+      gameLevel.spawn('}', obj.gridPos.sub(0,0))
+    }
+    if (obj.is('kysymys-surprise')) {
+      gameLevel.spawn('i', obj.gridPos.sub(0, 6))
       destroy(obj)
       gameLevel.spawn('}', obj.gridPos.sub(0,0))
     }
@@ -213,7 +215,7 @@ scene("game", ({ level, score }) => {
     keyPress('down', () => {
       go('game', {
         level: (level + 1) % maps.length,
-        score: scoreLabel.value,
+        score: scoreLabel.value
       })
     })
   })
