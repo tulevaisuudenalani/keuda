@@ -5,10 +5,9 @@ kaboom({
   debug: true,
   clearColor: [0, 0.55, 0, 1],
 })
-
 // Speed identifiers
 const MOVE_SPEED = 120
-const JUMP_FORCE = 360
+const JUMP_FORCE = 390
 const BIG_JUMP_FORCE = 550
 let CURRENT_JUMP_FORCE = JUMP_FORCE
 const FALL_DEATH = 400
@@ -21,12 +20,14 @@ let isJumping = true
 loadSprite('kysymys', 'https://i.ibb.co/rf26fQf/Kysymys-1.png')
 loadSprite('mario', 'https://media2.giphy.com/media/bwsNi6FMuVGZFthRYE/giphy.gif')
 loadSprite('block', 'https://i.ibb.co/BLcyRSK/Vihre-blocki.png')
+loadSprite('surprise', 'https://i.ibb.co/WcRLH9w/Kysymys.png')
+loadSprite('vastaus', 'https://i.ibb.co/61DJ1zM/Vastaus.png')
 loadRoot('https://i.imgur.com/')
 loadSprite('coin', 'wbKxhcd.png')
 loadSprite('evil-shroom', 'KPO3fR9.png')
 loadSprite('brick', 'pogC9x5.png')
 loadSprite('mushroom', '0wMd92p.png')
-loadSprite('surprise', 'gesQ1KP.png')
+
 loadSprite('unboxed', 'bdrLpi6.png')
 loadSprite('pipe-top-left', 'ReTPiWY.png')
 loadSprite('pipe-top-right', 'hj2GK4n.png')
@@ -88,8 +89,8 @@ scene("game", ({ level, score }) => {
     height: 20,
     '=': [sprite('block'), solid(), scale(0.44)],
     '$': [sprite('coin'), 'coin'],
-    '%': [sprite('surprise'), solid(), 'coin-surprise'],
-    '*': [sprite('surprise'), solid(), 'mushroom-surprise'],
+    '%': [sprite('surprise'), solid(), scale(1.2), 'coin-surprise'],
+    '*': [sprite('surprise'), solid(), scale(1.2), 'mushroom-surprise'],
     '}': [sprite('unboxed'), solid()],
     '(': [sprite('pipe-bottom-left'), solid(), scale(0.5)],
     ')': [sprite('pipe-bottom-right'), solid(), scale(0.5)],
@@ -104,13 +105,14 @@ scene("game", ({ level, score }) => {
     'x': [sprite('blue-steel'), solid(), scale(0.5)],
     'i': [sprite('kysymys'),scale(0.5)],
     'o': [sprite('surprise'), solid(), 'kysymys-surprise'],
+    'v': [sprite('vastaus'), solid()],
 
   }
 
   const gameLevel = addLevel(maps[level], levelCfg)
 
   const scoreLabel = add([
-    text(score),
+    text('Pisteet ' +score),
     pos(30, 6),
     layer('ui'),
     {
@@ -118,7 +120,7 @@ scene("game", ({ level, score }) => {
     }
   ])
 
-  add([text('level ' + parseInt(level + 1) ), pos(40, 6)])
+  add([text('SKEIDA    level ' + parseInt(level + 1) ), pos(150, 6)])
 
   function big() {
     let timer = 0
@@ -175,7 +177,11 @@ scene("game", ({ level, score }) => {
       gameLevel.spawn('}', obj.gridPos.sub(0,0))
     }
     if (obj.is('kysymys-surprise')) {
-      gameLevel.spawn('i', obj.gridPos.sub(0, 6))
+      gameLevel.spawn('i', obj.gridPos.sub(-3, 6))
+      gameLevel.spawn('v', obj.gridPos.sub(-3, 0))
+      gameLevel.spawn('v', obj.gridPos.sub(-6, 0))
+      gameLevel.spawn('v', obj.gridPos.sub(-9, 0))
+      gameLevel.spawn('v', obj.gridPos.sub(-12, 0))
       destroy(obj)
       gameLevel.spawn('}', obj.gridPos.sub(0,0))
     }
