@@ -1,4 +1,4 @@
-//kaboomin asetuksia ja taustaväri
+//Kaboomin asetuksia ja taustaväri
 kaboom({
   global: true,
   fullscreen: true,
