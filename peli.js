@@ -81,7 +81,7 @@ scene("game", ({ level, score }) => {
       '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  !!!!!!!!!!!!!!!  !!!!!!!!!!!!!',
     ]
   ]
-//grafiikoiden asetukset
+//Grafiikoiden asetukset
   const levelCfg = {
     width: 20,
     height: 20,
@@ -108,7 +108,7 @@ scene("game", ({ level, score }) => {
   }
 
   const gameLevel = addLevel(maps[level], levelCfg)
-//pisteiden näyttö
+//Pisteiden näyttö
   const scoreLabel = add([
     text('Pisteet ' +score),
     pos(30, 6),
@@ -117,7 +117,7 @@ scene("game", ({ level, score }) => {
       value: score,
     }
   ])
-//tason tiedot
+//Tason tiedot
   add([text('Keuda    level ' + parseInt(level + 1) ), pos(150, 6)])
 //Hahmon suurentuminen ja pienentyminen
   function big() {
@@ -149,7 +149,7 @@ scene("game", ({ level, score }) => {
       }
     }
   }
-//hahmon ilmestyminen ja sijainti, koko yms
+//Hahmon ilmestyminen ja sijainti, koko yms
   const player = add([
     sprite('mario'), solid(),
     pos(50, 0),
@@ -162,7 +162,7 @@ scene("game", ({ level, score }) => {
   action('mushroom', (m) => {
     m.move(20, 0)
   })
-//mitä tapahtuu hypätessä erilaisiin palikoihin
+//Mitä tapahtuu hypätessä erilaisiin palikoihin
   player.on("headbump", (obj) => {
     if (obj.is('coin-surprise')) {
       gameLevel.spawn('$', obj.gridPos.sub(0, 1))
