@@ -39,7 +39,7 @@ loadSprite('blue-evil-shroom', 'SvV4ueD.png')
 loadSprite('blue-surprise', 'RMqCc1G.png')
 
 
-//pelilevelit 
+//Pelilevelit 
 scene("game", ({ level, score }) => {
   layers(['bg', 'obj', 'ui'], 'obj')
 
