@@ -1,11 +1,12 @@
+//kaboomin asetuksia ja taustaväri
 kaboom({
   global: true,
   fullscreen: true,
   scale: 2,
   debug: true,
-  clearColor: [0, 0.55, 0, 1],
+  clearColor: [1, 0.65, 0, 1],
 })
-// Speed identifiers
+// Liikkumisnopeudet
 const MOVE_SPEED = 120
 const JUMP_FORCE = 390
 const BIG_JUMP_FORCE = 550
@@ -13,12 +14,11 @@ let CURRENT_JUMP_FORCE = JUMP_FORCE
 const FALL_DEATH = 400
 const ENEMY_SPEED = 20
 
-// Game logic
 
 let isJumping = true
-//loadSprite('https://web.tredu.fi/digiosalliseksi/kysely.php')
-loadSprite('kysymys', 'https://i.ibb.co/rf26fQf/Kysymys-1.png')
+//Grafiikat
 loadSprite('mario', 'https://media2.giphy.com/media/bwsNi6FMuVGZFthRYE/giphy.gif')
+loadSprite('kysymys', 'https://i.ibb.co/rf26fQf/Kysymys-1.png')
 loadSprite('block', 'https://i.ibb.co/BLcyRSK/Vihre-blocki.png')
 loadSprite('surprise', 'https://i.ibb.co/WcRLH9w/Kysymys.png')
 loadSprite('vastaus', 'https://i.ibb.co/61DJ1zM/Vastaus.png')
@@ -27,13 +27,11 @@ loadSprite('coin', 'wbKxhcd.png')
 loadSprite('evil-shroom', 'KPO3fR9.png')
 loadSprite('brick', 'pogC9x5.png')
 loadSprite('mushroom', '0wMd92p.png')
-
 loadSprite('unboxed', 'bdrLpi6.png')
 loadSprite('pipe-top-left', 'ReTPiWY.png')
 loadSprite('pipe-top-right', 'hj2GK4n.png')
 loadSprite('pipe-bottom-left', 'c1cYSbt.png')
 loadSprite('pipe-bottom-right', 'nqQ79eI.png')
-
 loadSprite('blue-block', 'fVscIbn.png')
 loadSprite('blue-brick', '3e5YRQd.png')
 loadSprite('blue-steel', 'gqVoI2b.png')
@@ -41,7 +39,7 @@ loadSprite('blue-evil-shroom', 'SvV4ueD.png')
 loadSprite('blue-surprise', 'RMqCc1G.png')
 
 
-
+//pelilevelit 
 scene("game", ({ level, score }) => {
   layers(['bg', 'obj', 'ui'], 'obj')
 
@@ -83,7 +81,7 @@ scene("game", ({ level, score }) => {
       '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  !!!!!!!!!!!!!!!  !!!!!!!!!!!!!',
     ]
   ]
-
+//grafiikoiden asetukset
   const levelCfg = {
     width: 20,
     height: 20,
@@ -110,7 +108,7 @@ scene("game", ({ level, score }) => {
   }
 
   const gameLevel = addLevel(maps[level], levelCfg)
-
+//pisteiden näyttö
   const scoreLabel = add([
     text('Pisteet ' +score),
     pos(30, 6),
@@ -119,9 +117,9 @@ scene("game", ({ level, score }) => {
       value: score,
     }
   ])
-
-  add([text('SKEIDA    level ' + parseInt(level + 1) ), pos(150, 6)])
-
+//tason tiedot
+  add([text('Keuda    level ' + parseInt(level + 1) ), pos(150, 6)])
+//Hahmon suurentuminen ja pienentyminen
   function big() {
     let timer = 0
     let isBig = false
@@ -151,7 +149,7 @@ scene("game", ({ level, score }) => {
       }
     }
   }
-
+//hahmon ilmestyminen ja sijainti, koko yms
   const player = add([
     sprite('mario'), solid(),
     pos(50, 0),
@@ -164,7 +162,7 @@ scene("game", ({ level, score }) => {
   action('mushroom', (m) => {
     m.move(20, 0)
   })
-
+//mitä tapahtuu hypätessä erilaisiin palikoihin
   player.on("headbump", (obj) => {
     if (obj.is('coin-surprise')) {
       gameLevel.spawn('$', obj.gridPos.sub(0, 1))
@@ -186,7 +184,7 @@ scene("game", ({ level, score }) => {
       gameLevel.spawn('}', obj.gridPos.sub(0,0))
     }
   })
-
+//Objekteihin osuessa tapahtuvat asiat
   player.collides('mushroom', (m) => {
     destroy(m)
     player.biggify(6)
@@ -225,7 +223,7 @@ scene("game", ({ level, score }) => {
       })
     })
   })
-
+//Liikkuminen
   keyDown('left', () => {
     player.move(-MOVE_SPEED, 0)
   })
@@ -247,9 +245,9 @@ scene("game", ({ level, score }) => {
     }
   })
 })
-
+//Hävitessä
 scene('lose', ({ score }) => {
   add([text(score, 32), origin('center'), pos(width()/2, height()/ 2)])
 })
-
+//Aloitus
 start("game", { level: 0, score: 0})
