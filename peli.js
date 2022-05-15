@@ -23,6 +23,7 @@ loadSprite('block', 'https://i.ibb.co/BLcyRSK/Vihre-blocki.png')
 loadSprite('surprise', 'https://i.ibb.co/WcRLH9w/Kysymys.png')
 loadSprite('vastaus', 'https://i.ibb.co/61DJ1zM/Vastaus.png')
 loadSprite('ruskea-palikka', 'https://i.ibb.co/pJJr0Zr/Idle.png')
+loadSprite('hirvio', 'https://i.ibb.co/NnB2NCy/frame-1.png')
 loadRoot('https://i.imgur.com/')
 loadSprite('coin', 'wbKxhcd.png')
 loadSprite('evil-shroom', 'KPO3fR9.png')
@@ -66,7 +67,7 @@ scene("game", ({ level, score }) => {
       '£        %@@@%@              x x                                        £',
       '£                          x x x                                        £',
       '£                        x x x x  x             x                     -+£',
-      '£               z   z  x x x x x  x            x                      ()£',
+      '£               ^   ^  x x x x x  x            x                      ()£',
       '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  !!!!!!!!!!!!!!!  !!!!!!!!!!!!!',
     ],
     [
@@ -78,7 +79,7 @@ scene("game", ({ level, score }) => {
       '£        @%@%%@              x x                                        £',
       '£                          x x x                                        £',
       '£                        x x x x  x               x                   -+£',
-      '£               z   z  x x x x x  x               x           x       ()£',
+      '£               ^   ^  x x x x x  x               x           x       ()£',
       '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  !!!!!!!!!!!!!!!  !!!!!!!!!!!!!',
     ]
   ]
@@ -95,7 +96,7 @@ scene("game", ({ level, score }) => {
     ')': [sprite('pipe-bottom-right'), solid(), scale(0.5)],
     '-': [sprite('pipe-top-left'), solid(), scale(0.5), 'pipe'],
     '+': [sprite('pipe-top-right'), solid(), scale(0.5), 'pipe'],
-    '^': [sprite('evil-shroom'), solid(), 'dangerous'],
+    '^': [sprite('hirvio'), solid(), scale(0.075), 'dangerous'],
     '#': [sprite('mushroom'), solid(), 'mushroom', body()],
     '!': [sprite('blue-block'), solid(), scale(0.5)],
     '£': [sprite('blue-brick'), solid(), scale(0.5)],
