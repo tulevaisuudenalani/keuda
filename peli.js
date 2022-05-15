@@ -14,14 +14,15 @@ let CURRENT_JUMP_FORCE = JUMP_FORCE
 const FALL_DEATH = 400
 const ENEMY_SPEED = 20
 
-
 let isJumping = true
+
 //Grafiikat
 loadSprite('mario', 'https://media2.giphy.com/media/bwsNi6FMuVGZFthRYE/giphy.gif')
 loadSprite('kysymys', 'https://i.ibb.co/rf26fQf/Kysymys-1.png')
 loadSprite('block', 'https://i.ibb.co/BLcyRSK/Vihre-blocki.png')
 loadSprite('surprise', 'https://i.ibb.co/WcRLH9w/Kysymys.png')
 loadSprite('vastaus', 'https://i.ibb.co/61DJ1zM/Vastaus.png')
+loadSprite('ruskea-palikka', 'https://i.ibb.co/pJJr0Zr/Idle.png')
 loadRoot('https://i.imgur.com/')
 loadSprite('coin', 'wbKxhcd.png')
 loadSprite('evil-shroom', 'KPO3fR9.png')
@@ -104,6 +105,7 @@ scene("game", ({ level, score }) => {
     'i': [sprite('kysymys'),scale(0.5)],
     'o': [sprite('surprise'), solid(), 'kysymys-surprise'],
     'v': [sprite('vastaus'), solid()],
+    'h': [sprite('ruskea-palikka'), solid(), scale(1)],
 
   }
 
