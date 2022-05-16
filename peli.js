@@ -152,7 +152,7 @@ scene("game", ({ level, score }) => {
       }
     }
   }
-//Hahmon ilmestyminen ja sijainti, koko 
+//Hahmon ilmestyminen ja sijainti, koko
   const player = add([
     sprite('mario'), solid(),
     pos(50, 0),
