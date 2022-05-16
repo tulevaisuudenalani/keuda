@@ -18,7 +18,7 @@ let isJumping = true
 
 //Grafiikat
 loadSprite('mario', 'https://media2.giphy.com/media/bwsNi6FMuVGZFthRYE/giphy.gif')
-loadSprite('kysymys', 'https://i.ibb.co/rf26fQf/Kysymys-1.png')
+loadSprite('kysymys', 'https://i.ibb.co/W3MGf40/Ammatinvalinta.png')
 loadSprite('block', 'https://i.ibb.co/BLcyRSK/Vihre-blocki.png')
 loadSprite('surprise', 'https://i.ibb.co/WcRLH9w/Kysymys.png')
 loadSprite('vastaus', 'https://i.ibb.co/61DJ1zM/Vastaus.png')
@@ -52,19 +52,19 @@ scene("game", ({ level, score }) => {
       '£                                                                       £',
       '£                                                                       £',
       '£                                                                       £',
-      '£    %   =*=%=                     %               o                    £',
+      '£    %   =*=%=         %           %       %       o                    £',
       '£                                                                       £',
       '£                                                                    -+ £',
       '£                   ^   ^                                            () £',
       '==============================   ========================================',
     ],
     [
+      '£                               *                                       £',
       '£                                                                       £',
       '£                                                                       £',
       '£                                                                       £',
-      '£                                                                       £',
-      '£                                               %                       £',
-      '£        %@@@%@              x x                                        £',
+      '£                              x                %                       £',
+      '£        ===%%=              x x                                        £',
       '£                          x x x                                        £',
       '£                        x x x x  x             x                     -+£',
       '£               ^   ^  x x x x x  x            x                      ()£',
@@ -103,7 +103,7 @@ scene("game", ({ level, score }) => {
     'z': [sprite('blue-evil-shroom'), solid(), scale(0.5), 'dangerous'],
     '@': [sprite('blue-surprise'), solid(), scale(0.5), 'coin-surprise'],
     'x': [sprite('blue-steel'), solid(), scale(0.5)],
-    'i': [sprite('kysymys'),scale(0.5)],
+    'i': [sprite('kysymys'),scale(0.3)],
     'o': [sprite('surprise'), solid(), 'kysymys-surprise'],
     'v': [sprite('vastaus'), solid()],
     'h': [sprite('ruskea-palikka'), solid(), scale(1)],
