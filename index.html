@@ -113,13 +113,22 @@
         }
       );
 
-      player.onCollide('surprise', (surprise) => {
+      player.onCollide("surprise", (surprise) => {
         let x = surprise.pos.x;
         let y = surprise.pos.y;
-        add([pos(x + 3, y + -15), sprite('coin'), area()]);
-        destroy(surprise);
-        add([pos(x, y), sprite('ruskea-palikka'), area(), solid()]);
-      });
+        add([
+          pos(x + 3, y + - 15),
+          sprite('coin'),
+          area(),
+        ])
+        destroy(surprise)
+        add([
+          pos(x, y),
+          sprite('ruskea-palikka'),
+          area(),
+          solid(),
+        ])
+      })
 
       player.onUpdate(() => {
         camPos(player.pos);
