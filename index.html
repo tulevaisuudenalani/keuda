@@ -29,6 +29,15 @@
       // Hyppy voimakkuus
       const JUMP_FORCE = 550;
 
+      // Logo
+      loadSprite('logo', './Kuvat/keuda_logo.png');
+
+      // Tausta
+      loadSprite('bg', './Kuvat/tausta.png');
+
+      // Taustan alareuna
+      loadSprite('ground', './Kuvat/tausta_alareuna.png');
+
       // Hahmo
       loadSprite('mario', './Kuvat/hahmo.png');
 
@@ -36,19 +45,29 @@
       loadSprite('pahis', './Kuvat/örkki.png');
 
       // Palikka
-      loadSprite('block', 'https://i.ibb.co/BLcyRSK/Vihre-blocki.png');
+      loadSprite('block', './Kuvat/block.png');
 
       // Kolikko palikka
-      loadSprite('surprise', 'https://i.ibb.co/WcRLH9w/Kysymys.png');
+      loadSprite('surprise', './Kuvat/block_kysymys.png');
 
       // Kolikko
       loadSprite('coin', './Kuvat/coin.png');
 
       // Ruskea palikka joka korvaa kysymys palikan
-      loadSprite('ruskea-palikka', 'https://i.ibb.co/pJJr0Zr/Idle.png');
+      loadSprite('ruskea-palikka', './Kuvat/block_tyhjä.png');
 
       // Kolikko
       loadSprite('cloud', './Kuvat/pilvi.png');
+
+      // Tausta
+      add([sprite('bg', { width: width(), height: height() }), pos(0, 0), fixed()]);
+
+      // Tausta alareuna
+      add([sprite('ground', { width: 2000, height: 150 }), pos(0, 500), fixed()]);
+      
+      // Keuda
+      add([sprite('logo', { width: 150, height: 50 }), pos(0, 580), fixed()]);
+      
 
       // Hahmon spawnaus
       const player = add([sprite('mario'), solid(), pos(50, 0), body(), area(), scale(0.7), origin('bot')]);
@@ -103,32 +122,23 @@
 
           '=': () => [sprite('block'), solid(), area(), scale(0.44), 'Maa'],
           '£': () => [sprite('block'), solid(), area(), scale(0.44), 'Seinä'],
-          '%': () => [sprite('surprise'), solid(), area(), scale(1.2), 'surprise'],
+          '%': () => [sprite('surprise'), solid(), area(), scale(0.4), 'surprise'],
           '*': () => [sprite('cloud'), scale(0.3), layer('bg'), 'Pilvi'],
           '#': () => [sprite('pahis'), solid(), area(), scale(1), 'Örkki'],
 
-          '$': () => [sprite('coin'), ("coin")],
+          $: () => [sprite('coin'), 'coin'],
 
-          '¤': () => [sprite('ruskea-palikka'), ("ruskea-palikka")],
+          '¤': () => [sprite('ruskea-palikka'), 'ruskea-palikka'],
         }
       );
 
-      player.onCollide("surprise", (surprise) => {
+      player.onCollide('surprise', (surprise) => {
         let x = surprise.pos.x;
         let y = surprise.pos.y;
-        add([
-          pos(x + 3, y + - 15),
-          sprite('coin'),
-          area(),
-        ])
-        destroy(surprise)
-        add([
-          pos(x, y),
-          sprite('ruskea-palikka'),
-          area(),
-          solid(),
-        ])
-      })
+        add([pos(x + 3, y + -15), sprite('coin'), area()]);
+        destroy(surprise);
+        add([pos(x, y), sprite('ruskea-palikka'), area(), solid(), scale(0.4)]);
+      });
 
       player.onUpdate(() => {
         camPos(player.pos);
