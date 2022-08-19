@@ -29,6 +29,7 @@
       // TODO: Settings
       const MOVE_SPEED = 120;
       const JUMP_FORCE = 550;
+      let pisteet = 0;
 
       // TODO: Import graphics
       loadSprite('logo', 'Kuvat/keuda_logo.png');
@@ -88,7 +89,7 @@
           '£        @%@%%@              x x                                        £',
           '£                          x x x                                        £',
           '£                        x x x x  x               x                   -+£',
-          '£           #   ^   ^  x x x x x  x               x           x       ()£',
+          '£           #    ^   ^  x x x x x  x               x           x      ()£',
           '=========================================  ===============  =============',
         ],
       ];
@@ -101,7 +102,7 @@
         '%': () => [sprite('surprise'), solid(), area(), scale(0.4), 'surprise'],
         '*': () => [sprite('cloud'), scale(0.3), layer('bg'), 'Pilvi'],
         '#': () => [sprite('pahis'), solid(), area(), scale(1), 'Örkki'],
-        $: () => [sprite('coin'), 'coin'],
+        '$': () => [sprite('coin'), 'coin'],
         '¤': () => [sprite('ruskea-palikka'), 'ruskea-palikka'],
       });
 
@@ -109,10 +110,31 @@
       player.onCollide('surprise', (surprise) => {
         let x = surprise.pos.x;
         let y = surprise.pos.y;
-        add([pos(x + 3, y + -15), sprite('coin'), area()]);
+        add([pos(x , y + -15), sprite('coin')]);
         destroy(surprise);
         add([pos(x, y), sprite('ruskea-palikka'), area(), solid(), scale(0.4)]);
       });
+
+      // Points
+      const pisteTaulu = add([
+        text('Pisteet: ' +pisteet),
+        pos(30, 6),
+        scale(0.15),
+        layer('ui'),
+        {
+          value: pisteet,
+        }
+      ])
+
+      // "Örkki" moves
+      action('Örkki', (p) => {
+        p.move(-15, 0);
+      })
+
+      // If player touches "Örkki" then screen will shake
+      player.onCollide('Örkki', (Örkki) => {
+        shake(5);
+      })
 
       // TODO: Make sure camera keeps following player
       player.onUpdate(() => {
