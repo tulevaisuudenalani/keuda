@@ -1,7 +1,10 @@
+<!DOCTYPE html>
 <html lang="fi">
   <head>
-    <meta charset="utf-8" />
-    <title>Kaboom harjoitus</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
   </head>
   <body>
     <style>
@@ -64,10 +67,9 @@
 
       // Tausta alareuna
       add([sprite('ground', { width: 2000, height: 150 }), pos(0, 500), fixed()]);
-      
+
       // Keuda
       add([sprite('logo', { width: 150, height: 50 }), pos(0, 580), fixed()]);
-      
 
       // Hahmon spawnaus
       const player = add([sprite('mario'), solid(), pos(50, 0), body(), area(), scale(0.7), origin('bot')]);
