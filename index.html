@@ -102,7 +102,7 @@
         '%': () => [sprite('surprise'), solid(), area(), scale(0.4), 'surprise'],
         '*': () => [sprite('cloud'), scale(0.3), layer('bg'), 'Pilvi'],
         '#': () => [sprite('pahis'), solid(), area(), scale(1), 'Örkki'],
-        '$': () => [sprite('coin'), 'coin'],
+        '$': () => [sprite('coin'), 'coin', solid(), area()],
         '¤': () => [sprite('ruskea-palikka'), 'ruskea-palikka'],
       });
 
@@ -117,17 +117,31 @@
 
       // Points
       const pisteTaulu = add([
-        text('Pisteet: ' +pisteet),
-        pos(30, 6),
+        text(pisteet),
+        pos(90, 6),
         scale(0.15),
+        fixed(),
         layer('ui'),
         {
           value: pisteet,
         }
       ])
 
+      add([
+        text('Pisteet: '),
+        pos(30, 6),
+        scale(0.15),
+        fixed(),
+      ])
+
+      player.onCollide('coin', (c) => {
+        destroy(c)
+        pisteTaulu.value++
+        pisteTaulu.text = pisteTaulu.value
+      })
+
       // "Örkki" moves
-      action('Örkki', (p) => {
+      onUpdate('Örkki', (p) => {
         p.move(-15, 0);
       })
 
