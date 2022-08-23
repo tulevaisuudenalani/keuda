@@ -110,7 +110,7 @@
       player.onCollide('surprise', (surprise) => {
         let x = surprise.pos.x;
         let y = surprise.pos.y;
-        add([pos(x , y + -15), sprite('coin')]);
+        add([pos(x , y + -15), area(), sprite('coin'), 'coin']);
         destroy(surprise);
         add([pos(x, y), sprite('ruskea-palikka'), area(), solid(), scale(0.4)]);
       });
