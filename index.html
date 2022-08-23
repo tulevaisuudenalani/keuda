@@ -46,6 +46,9 @@
       loadSprite('mario', 'Kuvat/hahmo.png');
       loadSprite('spider', 'Kuvat/örkki.png');
       loadSprite('block', 'Kuvat/block.png');
+
+      loadSprite('tunnel', 'Kuvat/ampari.png');
+
       // loadSprite('suprise', 'Kuvat/block_kysymys.png');
       // loadSprite('coin', 'Kuvat/coin.png');
       // loadSprite('empty', 'Kuvat/block_tyhjä.png');
@@ -66,17 +69,17 @@
 
       let levels = [
         [
-          '£                                                     £',
-          '£                                                     £',
-          '£                                                     £',
-          '£                                                     £',
-          '£                                                     £',
-          '£                                                     £',
-          '£    %        %     %       %                         £',
-          '£                                                     £',
-          '£                                                  -+ £',
-          '£                   ^   ^                          () £',
-          '=======================================================',
+          '£                                                   £',
+          '£                                                   £',
+          '£                                                   £',
+          '£                                                   £',
+          '£                                                   £',
+          '£                                                   £',
+          '£    %        %     %       %                       £',
+          '£                                                   £',
+          '£                                                 + £',
+          '£                   ^   ^                           £',
+          '=====================================================',
         ],
         [
           '£                               *                                       £',
@@ -98,9 +101,9 @@
           '£                                                                       £',
           '£        @%@%%@              x x                                        £',
           '£                          x x x                                        £',
-          '£                        x x x x  x               x                   -+£',
-          '£           #    ^   ^  x x x x x  x               x           x      ()£',
-          '=========================================  ===============  =============',
+          '£                        x x x x  x               x                     £',
+          '£           #    ^   ^  x x x x x  x               x           x       +£',
+          '=========================================  ===============  =========== =',
         ],
       ];
 
@@ -110,6 +113,7 @@
         '=': () => [sprite('block'), solid(), area(), scale(0.44), ''],
         '£': () => [sprite('block'), solid(), area(), scale(0.44), ''],
 
+        '+': () => [sprite('tunnel'), solid(), area(), scale(0.5), ''],
         // '%': () => [sprite('suprise'), solid(), area(), scale(0.4), 'Suprise'],
 
         // '*': () => [sprite('cloud'), scale(0.3), layer('bg'), 'Pilvi'],
@@ -157,6 +161,7 @@
         player.flipX(true);
       });
 
+      
       onKeyDown('right', () => {
         player.move(playerMoveSpeed, 0);
         camPos(player.pos);
