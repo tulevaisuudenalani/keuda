@@ -47,8 +47,11 @@
       loadSprite('spider', 'Kuvat/örkki.png');
       loadSprite('block', 'Kuvat/block.png');
 
-      // Amparin lisays
+      // Tunneli
       loadSprite('tunnel', 'Kuvat/ampari.png');
+
+      // Nuoli
+      loadSprite('arrow', 'Kuvat/nuoli.png')
 
       // loadSprite('suprise', 'Kuvat/block_kysymys.png');
       // loadSprite('coin', 'Kuvat/coin.png');
@@ -76,10 +79,10 @@
           '£                                                   £',
           '£                                                   £',
           '£                                                   £',
-          '£    %        %     %       %                       £',
           '£                                                   £',
+          '£                                                 ^ £',
           '£                                                 + £',
-          '£                   ^   ^                           £',
+          '£                                                   £',
           '=====================================================',
         ],
         [
@@ -101,7 +104,7 @@
           '£                                                                       £',
           '£                                                                       £',
           '£        @%@%%@              x x                                        £',
-          '£                          x x x                                        £',
+          '£                          x x x                                       ^£',
           '£                        x x x x  x               x                     £',
           '£           #    ^   ^  x x x x x  x               x           x       +£',
           '=========================================  ===============  =========== =',
@@ -114,7 +117,8 @@
         '=': () => [sprite('block'), solid(), area(), scale(0.44), ''],
         '£': () => [sprite('block'), solid(), area(), scale(0.44), ''],
 
-        '+': () => [sprite('tunnel'), solid(), area(), scale(0.5), ''],
+        '+': () => [sprite('tunnel'), solid(), area(), scale(0.5), 'Tunnel'],
+        '^': () => [sprite('arrow'), scale(0.4), 'Arrow'],
         // '%': () => [sprite('suprise'), solid(), area(), scale(0.4), 'Suprise'],
 
         // '*': () => [sprite('cloud'), scale(0.3), layer('bg'), 'Pilvi'],
@@ -125,6 +129,17 @@
 
         // '¤': () => [sprite('empty'), solid(), area(), scale(1),  'Empty'],
       });
+
+      player.onCollide('Tunnel', (Tunnel) => {
+        console.log('Level 2!')
+
+        // Destroy level
+        destroy(levels[0])
+        // Start next level
+        console.log("Finding map2")
+        console.log("Found: ", levels[1])
+        console.log("Started player in Map2")
+      })
 
       // player.onCollide('Suprise', (Suprise) => {
       //   let x = Suprise.pos.x;
