@@ -24,8 +24,8 @@
         background: [51, 151, 255],
       });
 
-      let playerMoveSpeed = 150;
-      let playerJumpForce = 550;
+      let playerMoveSpeed = 200;
+      let playerJumpForce = 250;
       let playerPoints = 0;
 
       let scopeA = 0;
@@ -41,6 +41,7 @@
       loadSprite('bg', 'Kuvat/tausta.png');
       loadSprite('ground', 'Kuvat/tausta_alareuna.png');
       loadSprite('mario', 'Kuvat/hahmo.png');
+      loadSprite('mariojumpoff', 'Kuvat/hahmo_aloitus_tippuminen.png');
       loadSprite('spider', 'Kuvat/örkki.png');
       loadSprite('block', 'Kuvat/block.png');
       loadSprite('tunnel', 'Kuvat/ampari.png');
@@ -66,7 +67,7 @@
           '£                                      ==       ======                  £',
           '£                                                                       £',
           '£                                                                       £',
-          '£           =====             ==                                   ===  £',
+          '£           =====             ==                                        £',
           '£                                      ==                             ^ £',
           '£                                                                     + £',
           '£  #                                                                    £',
@@ -75,7 +76,7 @@
         [
           '£                                                                       £',
           '£                              %                                        £',
-          '£          *                                                            £',
+          '£                                                                       £',
           '£                                                                       £',
           '£                                                                       £',
           '£        @%@%%@              x x                                        £',
@@ -83,6 +84,8 @@
           '£                        x x x x  x               x                   + £',
           '£           #           x x x x x  x               x           x        £',
           '=========================================  ===============  =============',
+          '                                                                         ',
+          '                                         **               **             ',
         ],
       ];
 
@@ -109,6 +112,8 @@
         player.onCollide('Tunnel', (Tunnel) => {
           go('secondLevel');
         });
+
+        gravity(300)
 
         onUpdate('Spider', (Spider) => {
           Spider.move(-15, 0);
@@ -155,13 +160,15 @@
         add([sprite('ground', { width: screen.width, height: screen.height }), pos(0, 250), fixed()]);
         // add([sprite('logo', { width: 150, height: 50 }), pos(0, 580), fixed()]);
 
-        let player = add([sprite('mario'), solid(), pos(50, 0), body(), area(), scale(0.8)]);
+        let player = add([sprite('mariojumpoff'), solid(), pos(50, -200), body(), area(), scale(0.8)]);
+        
+        gravity(400)
 
         addLevel(levels[1], {
           width: 20,
           height: 20,
-          '=': () => [sprite('block'), solid(), area(), scale(0.44), ''],
-          '£': () => [sprite('block'), solid(), area(), scale(0.44), ''],
+          '=': () => [sprite('block'), solid(), area(), scale(0.44), 'Block'],
+          '£': () => [sprite('block'), solid(), area(), scale(0.44), 'Wall'],
           '+': () => [sprite('tunnel'), solid(), area(), scale(0.5), 'Tunnel'],
           '^': () => [sprite('arrow'), scale(0.4), 'Arrow'],
           '#': () => [sprite('spider'), solid(), area(), scale(1), 'Spider'],
@@ -217,6 +224,8 @@
         // add([sprite('logo', { width: 150, height: 50 }), pos(0, 580), fixed()]);
 
         let player = add([sprite('mario'), solid(), pos(50, 0), body(), area(), scale(0.8)]);
+       
+        gravity(600)
 
         addLevel(levels[2], {
           width: 20,
@@ -226,9 +235,15 @@
           '+': () => [sprite('tunnel'), solid(), area(), scale(0.5), 'Tunnel'],
           '^': () => [sprite('arrow'), scale(0.4), 'Arrow'],
           '#': () => [sprite('spider'), solid(), area(), scale(1), 'Spider'],
+          '*': () => [sprite('arrow'), solid(), area(), scale(0.5), 'Death'],
         });
 
         player.onCollide('Tunnel', (Tunnel) => {
+          go('thirdLevel');
+        });
+
+        player.onCollide('Death', (Death) => {
+          shake(50);
           go('thirdLevel');
         });
 
