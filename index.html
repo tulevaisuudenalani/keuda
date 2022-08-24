@@ -42,6 +42,7 @@
       loadSprite('ground', 'Kuvat/tausta_alareuna.png');
       loadSprite('mario', 'Kuvat/hahmo.png');
       loadSprite('mariojumpoff', 'Kuvat/hahmo_aloitus_tippuminen.png');
+      loadSprite('suprise', 'Kuvat/block_kysymys.png');
       loadSprite('spider', 'Kuvat/örkki.png');
       loadSprite('block', 'Kuvat/block.png');
       loadSprite('tunnel', 'Kuvat/ampari.png');
@@ -64,12 +65,12 @@
           '£                                                   £',
           '£                                                   £',
           '£                                                   £',
-          '£                                ==   =====         £',
+          '£                         %  %  %                   £',
           '£    =====                                          £',
-          '£                          ==                       £',
-          '£           ==                                    ^ £',
-          '£                                                 + £',
-          '£              #                   #                £',
+          '£                                                   £',
+          '£                                                 ^ £',
+          '£                        ==========               + £',
+          '£              # ==     ============    #           £',
           '=====================================================',
         ],
         [
@@ -140,7 +141,18 @@
           '+': () => [sprite('tunnel'), solid(), area(), scale(0.5), 'Tunnel'],
           '^': () => [sprite('arrow'), scale(0.4), 'Arrow'],
           '#': () => [sprite('spider'), solid(), area(), scale(1), 'Spider'],
+          '%': () => [sprite('suprise'), solid(), area(), scale(0.4), 'Suprise'],
         });
+
+        add([text('Pidatko elaimista?'), pos(510, 275), scale(0.2)]);
+
+        // Ykkös vastaukset
+        add([text('Kylla'), pos(516, 325), scale(0.14)]);
+
+        add([text('Vahan'), pos(574, 325), scale(0.14)]);
+
+        add([text('En'), pos(642, 325), scale(0.14)]);
+
 
         player.onCollide('Tunnel', (Tunnel) => {
           go('secondLevel');
@@ -191,6 +203,7 @@
 
         add([sprite('bg', { width: width(), height: height() }), pos(0, 0), fixed()]);
         add([sprite('ground', { width: screen.width, height: screen.height }), pos(0, 250), fixed()]);
+
         // add([sprite('logo', { width: 150, height: 50 }), pos(0, 580), fixed()]);
 
         let player = add([sprite('mariojumpoff'), solid(), pos(140, 160), body(), area(), scale(0.8)]);
@@ -205,6 +218,7 @@
           '+': () => [sprite('tunnel'), solid(), area(), scale(0.5), 'Tunnel'],
           '^': () => [sprite('arrow'), scale(0.4), 'Arrow'],
           '#': () => [sprite('spider'), solid(), area(), scale(1), 'Spider'],
+          '%': () => [sprite('suprise'), solid(), area(), scale(0.4), 'Suprise'],
         });
 
         player.onCollide('Tunnel', (Tunnel) => {
@@ -269,6 +283,7 @@
           '^': () => [sprite('arrow'), scale(0.4), 'Arrow'],
           '#': () => [sprite('spider'), solid(), area(), scale(1), 'Spider'],
           '*': () => [sprite('arrow'), solid(), area(), scale(0.5), 'Death'],
+          '%': () => [sprite('suprise'), solid(), area(), scale(0.4), 'Suprise'],
         });
 
         player.onCollide('Tunnel', (Tunnel) => {
