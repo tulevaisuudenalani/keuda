@@ -39,6 +39,9 @@
       let scopeG = 0;
       let scopeH = 0;
 
+      // Kysymys tekstit
+      let kysymys1 = true;
+
 
       loadSprite('logo', 'Kuvat/keuda_logo.png');
       loadSprite('bg', 'Kuvat/tausta.png');
@@ -46,9 +49,9 @@
       loadSprite('mario', 'Kuvat/hahmo.png');
       loadSprite('spider', 'Kuvat/örkki.png');
       loadSprite('block', 'Kuvat/block.png');
-      // loadSprite('suprise', 'Kuvat/block_kysymys.png');
+      loadSprite('suprise', 'Kuvat/block_kysymys.png');
       // loadSprite('coin', 'Kuvat/coin.png');
-      // loadSprite('empty', 'Kuvat/block_tyhjä.png');
+      loadSprite('empty', 'Kuvat/block_tyhjä.png');
       // loadSprite('cloud', 'Kuvat/pilvi.png');
       
       add([sprite('bg', { width: width(), height: height() }), pos(0, 0), fixed()]);
@@ -70,7 +73,7 @@
           '£                                                     £',
           '£                                                     £',
           '£                                                     £',
-          '£                               =  =   =              £',
+          '£                               %  %   %              £',
           '£                                                     £',
           '£                                                     £',
           '£                                                     £',
@@ -110,7 +113,7 @@
         '=': () => [sprite('block'), solid(), area(), scale(0.44), ''],
         '£': () => [sprite('block'), solid(), area(), scale(0.44), ''],
 
-        // '%': () => [sprite('suprise'), solid(), area(), scale(0.4), 'Suprise'],
+        '%': () => [sprite('suprise'), solid(), area(), scale(0.4), 'Suprise'],
 
         // '*': () => [sprite('cloud'), scale(0.3), layer('bg'), 'Pilvi'],
 
@@ -118,7 +121,7 @@
         
         // '$': () => [sprite('coin'), solid(), area(), scale(1), 'Coin'],
 
-        // '¤': () => [sprite('empty'), solid(), area(), scale(1),  'Empty'],
+        '¤': () => [sprite('empty'), solid(), area(), scale(1),  'Empty'],
       });
 
       // player.onCollide('Suprise', (Suprise) => {
@@ -133,32 +136,41 @@
       // player.onCollide('Coin', (Coin) => {
       //   destroy(Coin);
       // })
+      if(kysymys1 == true)
+      {
+        // Ykkös kysymys
+        add([
+          text('Pidatko elaimista?'),
+          pos(640, 40),
+          scale(0.20),
+        ])
 
-      // Ykkös kysymys
-      add([
-        text('Pidatko elaimista?'),
-        pos(640, 40),
-        scale(0.20),
-      ])
+        // Ykkös vastaukset
+        add([
+          text('En'),
+          pos(643, 70),
+          scale(0.14),
+        ])
 
-      // Ykkös vastaukset
-      add([
-        text('En'),
-        pos(643, 70),
-        scale(0.14),
-      ])
+        add([
+          text('Vahan'),
+          pos(695, 70),
+          scale(0.14),
+        ])
 
-      add([
-        text('Vahan'),
-        pos(695, 70),
-        scale(0.14),
-      ])
+        add([
+          text('Kylla'),
+          pos(775, 70),
+          scale(0.14),
+        ])
 
-      add([
-        text('Kylla'),
-        pos(775, 70),
-        scale(0.14),
-      ])
+        player.onCollide('Suprise', (s) => {
+          let x = s.pos.x;
+          let y = s.pos.y;
+          destroyAll('Suprise')
+          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+        })
+      }
 
       // "Örkki" moves
       onUpdate('Spider', (Spider) => {
