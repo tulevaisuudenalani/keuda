@@ -21,16 +21,14 @@
         fullscreen: true,
         scale: 2,
         debug: true,
-        background: [51, 151, 255], // RGB
+        background: [51, 151, 255],
       });
 
-      // Pelaajan asetukset
       let playerMoveSpeed = 150;
       let playerJumpForce = 550;
       let playerPoints = 0;
 
-      // Alat
-      let scopeA = 0; 
+      let scopeA = 0;
       let scopeB = 0;
       let scopeC = 0;
       let scopeD = 0;
@@ -39,37 +37,14 @@
       let scopeG = 0;
       let scopeH = 0;
 
-
       loadSprite('logo', 'Kuvat/keuda_logo.png');
       loadSprite('bg', 'Kuvat/tausta.png');
       loadSprite('ground', 'Kuvat/tausta_alareuna.png');
       loadSprite('mario', 'Kuvat/hahmo.png');
       loadSprite('spider', 'Kuvat/örkki.png');
       loadSprite('block', 'Kuvat/block.png');
-
-      // Tunneli
       loadSprite('tunnel', 'Kuvat/ampari.png');
-
-      // Nuoli
-      loadSprite('arrow', 'Kuvat/nuoli.png')
-
-      // loadSprite('suprise', 'Kuvat/block_kysymys.png');
-      // loadSprite('coin', 'Kuvat/coin.png');
-      // loadSprite('empty', 'Kuvat/block_tyhjä.png');
-      // loadSprite('cloud', 'Kuvat/pilvi.png');
-      
-      add([sprite('bg', { width: width(), height: height() }), pos(0, 0), fixed()]);
-      add([sprite('ground', { width: 2000, height: 150 }), pos(0, 500), fixed()]);
-      add([sprite('logo', { width: 150, height: 50 }), pos(0, 580), fixed()]);
-
-      let player = add([
-        sprite('mario'), 
-        solid(), 
-        pos(50, 0), 
-        body(), 
-        area(), 
-        scale(0.7)
-      ]);
+      loadSprite('arrow', 'Kuvat/nuoli.png');
 
       let levels = [
         [
@@ -77,25 +52,25 @@
           '£                                                   £',
           '£                                                   £',
           '£                                                   £',
-          '£                                                   £',
-          '£                                                   £',
-          '£                                                   £',
-          '£                                                 ^ £',
+          '£                                ==   =====         £',
+          '£    =====                                          £',
+          '£                          ==                       £',
+          '£           ==                                    ^ £',
           '£                                                 + £',
-          '£                                                   £',
+          '£              #                   #                £',
           '=====================================================',
         ],
         [
-          '£                               *                                       £',
           '£                                                                       £',
           '£                                                                       £',
+          '£                                      ==       ======                  £',
           '£                                                                       £',
-          '£                              x                %                       £',
-          '£        ===%%=              x x                                        £',
-          '£                          x x x                                        £',
-          '£                        x x x x  x             x                     -+£',
-          '£               ^   ^  x x x x x  x            x                      ()£',
-          '=========================================  ===============  =============',
+          '£                                                                       £',
+          '£           =====             ==                                   ===  £',
+          '£                                      ==                             ^ £',
+          '£                                                                     + £',
+          '£  #                                                                    £',
+          '=========================================================================',
         ],
         [
           '£                                                                       £',
@@ -104,97 +79,198 @@
           '£                                                                       £',
           '£                                                                       £',
           '£        @%@%%@              x x                                        £',
-          '£                          x x x                                       ^£',
-          '£                        x x x x  x               x                     £',
-          '£           #    ^   ^  x x x x x  x               x           x       +£',
-          '=========================================  ===============  =========== =',
+          '£                          x x x                                      ^ £',
+          '£                        x x x x  x               x                   + £',
+          '£           #    ^   ^  x x x x x  x               x           x        £',
+          '=========================================  ===============  =============',
         ],
       ];
 
-      let level1 = addLevel(levels[0], {
-        width: 20,
-        height: 20,
-        '=': () => [sprite('block'), solid(), area(), scale(0.44), ''],
-        '£': () => [sprite('block'), solid(), area(), scale(0.44), ''],
+      // LEVEL: 1
+      scene('firstLevel', () => {
+        debug.log('LEVEL 1');
 
-        '+': () => [sprite('tunnel'), solid(), area(), scale(0.5), 'Tunnel'],
-        '^': () => [sprite('arrow'), scale(0.4), 'Arrow'],
-        // '%': () => [sprite('suprise'), solid(), area(), scale(0.4), 'Suprise'],
+        add([sprite('bg', { width: width(), height: height() }), pos(0, 0), fixed()]);
+        add([sprite('ground', { width: screen.width, height: screen.height }), pos(0, 250), fixed()]);
+        // add([sprite('logo', { width: 150, height: 50 }), pos(0, 580), fixed()]);
 
-        // '*': () => [sprite('cloud'), scale(0.3), layer('bg'), 'Pilvi'],
+        let player = add([sprite('mario'), solid(), pos(50, 0), body(), area(), scale(0.7)]);
 
-        '#': () => [sprite('spider'), solid(), area(), scale(1), 'Spider'],
-        
-        // '$': () => [sprite('coin'), solid(), area(), scale(1), 'Coin'],
+        addLevel(levels[0], {
+          width: 20,
+          height: 20,
+          '=': () => [sprite('block'), solid(), area(), scale(0.44), ''],
+          '£': () => [sprite('block'), solid(), area(), scale(0.44), ''],
+          '+': () => [sprite('tunnel'), solid(), area(), scale(0.5), 'Tunnel'],
+          '^': () => [sprite('arrow'), scale(0.4), 'Arrow'],
+          '#': () => [sprite('spider'), solid(), area(), scale(1), 'Spider'],
+        });
 
-        // '¤': () => [sprite('empty'), solid(), area(), scale(1),  'Empty'],
+        player.onCollide('Tunnel', (Tunnel) => {
+          go('secondLevel');
+        });
+
+        onUpdate('Spider', (Spider) => {
+          Spider.move(-15, 0);
+        });
+
+        player.onCollide('Spider', (Spider) => {
+          shake(5);
+        });
+
+        player.onUpdate(() => {
+          camPos(player.pos);
+        });
+
+        onKeyDown('left', () => {
+          player.move(-playerMoveSpeed, 0);
+          camPos(player.pos);
+          player.flipX(true);
+        });
+
+        onKeyDown('right', () => {
+          player.move(playerMoveSpeed, 0);
+          camPos(player.pos);
+          player.flipX(false);
+        });
+
+        onKeyPress('space', () => {
+          if (player.isGrounded()) {
+            player.jump(playerJumpForce, 0);
+          }
+        });
+
+        onKeyPress('up', () => {
+          if (player.isGrounded()) {
+            player.jump(playerJumpForce, 0);
+          }
+        });
       });
 
-      player.onCollide('Tunnel', (Tunnel) => {
-        console.log('Level 2!')
+      // LEVEL: 2
+      scene('secondLevel', () => {
+        debug.log('LEVEL 2');
 
-        // Destroy level
-        destroy(levels[0])
-        // Start next level
-        console.log("Finding map2")
-        console.log("Found: ", levels[1])
-        console.log("Started player in Map2")
-      })
+        add([sprite('bg', { width: width(), height: height() }), pos(0, 0), fixed()]);
+        add([sprite('ground', { width: screen.width, height: screen.height }), pos(0, 250), fixed()]);
+        // add([sprite('logo', { width: 150, height: 50 }), pos(0, 580), fixed()]);
 
-      // player.onCollide('Suprise', (Suprise) => {
-      //   let x = Suprise.pos.x;
-      //   let y = Suprise.pos.y;
-      //   destroy(Suprise);
-      //   onUpdate()
-      //   // add([pos(x, y - 18), sprite('coin'), area(), body()]);
-      //   add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
-      // });
+        let player = add([sprite('mario'), solid(), pos(50, 0), body(), area(), scale(0.8)]);
 
-      // player.onCollide('Coin', (Coin) => {
-      //   destroy(Coin);
-      // })
+        addLevel(levels[1], {
+          width: 20,
+          height: 20,
+          '=': () => [sprite('block'), solid(), area(), scale(0.44), ''],
+          '£': () => [sprite('block'), solid(), area(), scale(0.44), ''],
+          '+': () => [sprite('tunnel'), solid(), area(), scale(0.5), 'Tunnel'],
+          '^': () => [sprite('arrow'), scale(0.4), 'Arrow'],
+          '#': () => [sprite('spider'), solid(), area(), scale(1), 'Spider'],
+        });
 
+        player.onCollide('Tunnel', (Tunnel) => {
+          go('thirdLevel');
+        });
 
-      // "Örkki" moves
-      onUpdate('Spider', (Spider) => {
-        Spider.move(-15, 0);
+        onUpdate('Spider', (Spider) => {
+          Spider.move(-15, 0);
+        });
+
+        player.onCollide('Spider', (Spider) => {
+          shake(5);
+        });
+
+        player.onUpdate(() => {
+          camPos(player.pos);
+        });
+
+        onKeyDown('left', () => {
+          player.move(-playerMoveSpeed, 0);
+          camPos(player.pos);
+          player.flipX(true);
+        });
+
+        onKeyDown('right', () => {
+          player.move(playerMoveSpeed, 0);
+          camPos(player.pos);
+          player.flipX(false);
+        });
+
+        onKeyPress('space', () => {
+          if (player.isGrounded()) {
+            player.jump(playerJumpForce, 0);
+          }
+        });
+
+        onKeyPress('up', () => {
+          if (player.isGrounded()) {
+            player.jump(playerJumpForce, 0);
+          }
+        });
       });
 
-      // If player touches "Örkki" then screen will shake
-      player.onCollide('Spider', (Spider) => {
-        shake(5);
+      // LEVEL: 3
+      scene('thirdLevel', () => {
+        debug.log('LEVEL 3');
+
+        add([sprite('bg', { width: width(), height: height() }), pos(0, 0), fixed()]);
+        add([sprite('ground', { width: screen.width, height: screen.height }), pos(0, 250), fixed()]);
+        // add([sprite('logo', { width: 150, height: 50 }), pos(0, 580), fixed()]);
+
+        let player = add([sprite('mario'), solid(), pos(50, 0), body(), area(), scale(0.8)]);
+
+        addLevel(levels[2], {
+          width: 20,
+          height: 20,
+          '=': () => [sprite('block'), solid(), area(), scale(0.44), ''],
+          '£': () => [sprite('block'), solid(), area(), scale(0.44), ''],
+          '+': () => [sprite('tunnel'), solid(), area(), scale(0.5), 'Tunnel'],
+          '^': () => [sprite('arrow'), scale(0.4), 'Arrow'],
+          '#': () => [sprite('spider'), solid(), area(), scale(1), 'Spider'],
+        });
+
+        player.onCollide('Tunnel', (Tunnel) => {
+          go('thirdLevel');
+        });
+
+        onUpdate('Spider', (Spider) => {
+          Spider.move(-15, 0);
+        });
+
+        player.onCollide('Spider', (Spider) => {
+          shake(5);
+        });
+
+        player.onUpdate(() => {
+          camPos(player.pos);
+        });
+
+        onKeyDown('left', () => {
+          player.move(-playerMoveSpeed, 0);
+          camPos(player.pos);
+          player.flipX(true);
+        });
+
+        onKeyDown('right', () => {
+          player.move(playerMoveSpeed, 0);
+          camPos(player.pos);
+          player.flipX(false);
+        });
+
+        onKeyPress('space', () => {
+          if (player.isGrounded()) {
+            player.jump(playerJumpForce, 0);
+          }
+        });
+
+        onKeyPress('up', () => {
+          if (player.isGrounded()) {
+            player.jump(playerJumpForce, 0);
+          }
+        });
       });
 
-      // TODO: Make sure camera keeps following player
-      player.onUpdate(() => {
-        camPos(player.pos);
-      });
-
-      // TODO: Movement
-      onKeyDown('left', () => {
-        player.move(-playerMoveSpeed, 0);
-        camPos(player.pos);
-        player.flipX(true);
-      });
-
-      
-      onKeyDown('right', () => {
-        player.move(playerMoveSpeed, 0);
-        camPos(player.pos);
-        player.flipX(false);
-      });
-
-      // TODO: Jump
-      onKeyPress('space', () => {
-        if (player.isGrounded()) {
-          player.jump(playerJumpForce, 0);
-        }
-      });
-
-      onKeyPress('up', () => {
-        if (player.isGrounded()) {
-          player.jump(playerJumpForce, 0);
-        }
+      onLoad(() => {
+        go('firstLevel');
       });
     </script>
   </body>
