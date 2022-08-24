@@ -71,13 +71,18 @@
         [
           '£                                                                       £',
           '£                                                                       £',
-          '£                                      ==       ======                  £',
+          '£                                                                       £',
+          '£                                           ¤   ¤   ¤                   £',
           '£                                                                       £',
           '£                                                                       £',
-          '£           =====             ==                                   ===  £',
-          '£                                      ==                             ^ £',
+          '£                                                                       £',
+          '£                                       ===============                 £',
+          '£                                                                       £',
+          '£                   %   %   %                                           £',
+          '£    =====                        ==                         ===        £',
+          '£                                                                     ^ £',
           '£                                                                     + £',
-          '£  #                                                                    £',
+          '£  #                                 =                       #          £',
           '=========================================================================',
         ],
         [
@@ -242,7 +247,77 @@
           '+': () => [sprite('tunnel'), solid(), area(), scale(0.5), 'Tunnel'],
           '^': () => [sprite('arrow'), scale(0.4), 'Arrow'],
           '#': () => [sprite('spider'), solid(), area(), scale(1), 'Spider'],
+          '%': () => [sprite('suprise'), solid(), area(), scale(0.4), 'Vastaus3'],
+          '¤': () => [sprite('suprise'), solid(), area(), scale(0.4), 'Vastaus4'],
         });
+
+          // Kolmas kysymys
+        add([
+          text('Kysymys 3'),
+          pos(450, 128),
+          scale(0.20),
+        ])
+
+        // Kolmannen vastaus vaihtoehdot
+        add([
+          text('Vastaus 1'),
+          pos(383, 158),
+          scale(0.14),
+        ])
+
+        add([
+          text('Vastaus 2'),
+          pos(463, 158),
+          scale(0.14),
+        ])
+
+        add([
+          text('Vastaus 3'),
+          pos(543, 158),
+          scale(0.14),
+        ])
+        // Kolmannen kysymys vastaus
+        player.onCollide('Vastaus3', (v3) => {
+          let x = v3.pos.x;
+          let y = v3.pos.y;
+          destroyAll('Vastaus3')
+          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+        })
+
+        // Neljäs kysymys 
+        add([
+          text('Kysymys 4'),
+          pos(932, 10),
+          scale(0.20),
+        ])
+
+        // Neljännen vastaus vaihtoehdot
+        add([
+          text('Vastaus 1'),
+          pos(862, 40),
+          scale(0.14),
+        ])
+
+        add([
+          text('Vastaus 2'),
+          pos(942, 40),
+          scale(0.14),
+        ])
+
+        add([
+          text('Vastaus 3'),
+          pos(1022, 40),
+          scale(0.14),
+        ])
+
+        // Neljännen kysymys vastaus
+        player.onCollide('Vastaus4', (v4) => {
+          let x = v4.pos.x;
+          let y = v4.pos.y;
+          destroyAll('Vastaus4')
+          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+        })
+
 
         player.onCollide('Tunnel', (Tunnel) => {
           go('thirdLevel');
