@@ -19,12 +19,12 @@
       kaboom({
         global: true,
         fullscreen: true,
-        scale: 2,
+        scale: 2.5,
         debug: true,
         background: [51, 151, 255],
       });
 
-      let playerMoveSpeed = 200;
+      let playerMoveSpeed = 150;
       let playerJumpForce = 250;
       let playerPoints = 0;
 
@@ -53,6 +53,17 @@
           '£                                                   £',
           '£                                                   £',
           '£                                                   £',
+          '£                                                   £',
+          '£                                                   £',
+          '£                                                   £',
+          '£                                                   £',
+          '£                                                   £',
+          '£                                                   £',
+          '£                                                   £',
+          '£                                                   £',
+          '£                                                   £',
+          '£                                                   £',
+          '£                                                   £',
           '£                                ==   =====         £',
           '£    =====                                          £',
           '£                          ==                       £',
@@ -62,6 +73,17 @@
           '=====================================================',
         ],
         [
+          '£                                                                       £',
+          '£                                                                       £',
+          '£                                                                       £',
+          '£                                                                       £',
+          '£                                                                       £',
+          '£                                                                       £',
+          '£                                                                       £',
+          '£                                                                       £',
+          '£                                                                       £',
+          '£                                                                       £',
+          '£                                                                       £',
           '£                                                                       £',
           '£                                                                       £',
           '£                                      ==       ======                  £',
@@ -74,6 +96,17 @@
           '=========================================================================',
         ],
         [
+          '£                                                                       £',
+          '£                                                                       £',
+          '£                                                                       £',
+          '£                                                                       £',
+          '£                                                                       £',
+          '£                                                                       £',
+          '£                                                                       £',
+          '£                                                                       £',
+          '£                                                                       £',
+          '£                                                                       £',
+          '£                                                                       £',
           '£                                                                       £',
           '£                              %                                        £',
           '£                                                                       £',
@@ -113,7 +146,7 @@
           go('secondLevel');
         });
 
-        gravity(300)
+        gravity(300);
 
         onUpdate('Spider', (Spider) => {
           Spider.move(-15, 0);
@@ -160,9 +193,9 @@
         add([sprite('ground', { width: screen.width, height: screen.height }), pos(0, 250), fixed()]);
         // add([sprite('logo', { width: 150, height: 50 }), pos(0, 580), fixed()]);
 
-        let player = add([sprite('mariojumpoff'), solid(), pos(50, -200), body(), area(), scale(0.8)]);
-        
-        gravity(400)
+        let player = add([sprite('mariojumpoff'), solid(), pos(50, -70), body(), area(), scale(0.8)]);
+
+        gravity(200);
 
         addLevel(levels[1], {
           width: 20,
@@ -224,8 +257,8 @@
         // add([sprite('logo', { width: 150, height: 50 }), pos(0, 580), fixed()]);
 
         let player = add([sprite('mario'), solid(), pos(50, 0), body(), area(), scale(0.8)]);
-       
-        gravity(600)
+
+        gravity(600);
 
         addLevel(levels[2], {
           width: 20,
