@@ -47,6 +47,7 @@
       loadSprite('block', 'Kuvat/block.png');
       loadSprite('tunnel', 'Kuvat/ampari.png');
       loadSprite('arrow', 'Kuvat/nuoli.png');
+      loadSprite('reminder', 'Kuvat/teksti_nuoli.png');
 
       let levels = [
         [
@@ -67,10 +68,10 @@
           '£                                                   £',
           '£                         %  %  %                   £',
           '£    =====                                          £',
-          '£                                                   £',
+          '£                                              -    £',
           '£                                                 ^ £',
-          '£                        ==========               + £',
-          '£              # ==     ============    #           £',
+          '£                        =========                + £',
+          '£              # ==     ===========     #           £',
           '=====================================================',
         ],
         [
@@ -90,7 +91,7 @@
           '£                                      ==       ======                  £',
           '£                                                                       £',
           '£                                                                       £',
-          '£           =====             ==                                        £',
+          '£           =====             ==                                   -    £',
           '£                                      ==                             ^ £',
           '£                                                                     + £',
           '£  #                                                                    £',
@@ -113,7 +114,7 @@
           '£                                                                       £',
           '£                                                                       £',
           '£                                                                       £',
-          '£        @%@%%@              x x                                        £',
+          '£        @%@%%@              x x                                   -    £',
           '£                          x x x                                      ^ £',
           '£                        x x x x  x               x                   + £',
           '£           #           x x x x x  x               x           x        £',
@@ -142,6 +143,7 @@
           '^': () => [sprite('arrow'), scale(0.4), 'Arrow'],
           '#': () => [sprite('spider'), solid(), area(), scale(1), 'Spider'],
           '%': () => [sprite('suprise'), solid(), area(), scale(0.4), 'Suprise'],
+          '-': () => [sprite('reminder'), solid(), area(), scale(0.2), 'Reminder'],
         });
 
         add([text('Pidatko elaimista?'), pos(510, 275), scale(0.2)]);
@@ -152,7 +154,6 @@
         add([text('Vahan'), pos(574, 325), scale(0.14)]);
 
         add([text('En'), pos(642, 325), scale(0.14)]);
-
 
         player.onCollide('Tunnel', (Tunnel) => {
           go('secondLevel');
@@ -219,6 +220,7 @@
           '^': () => [sprite('arrow'), scale(0.4), 'Arrow'],
           '#': () => [sprite('spider'), solid(), area(), scale(1), 'Spider'],
           '%': () => [sprite('suprise'), solid(), area(), scale(0.4), 'Suprise'],
+          '-': () => [sprite('reminder'), solid(), area(), scale(0.2), 'Reminder'],
         });
 
         player.onCollide('Tunnel', (Tunnel) => {
@@ -284,6 +286,7 @@
           '#': () => [sprite('spider'), solid(), area(), scale(1), 'Spider'],
           '*': () => [sprite('arrow'), solid(), area(), scale(0.5), 'Death'],
           '%': () => [sprite('suprise'), solid(), area(), scale(0.4), 'Suprise'],
+          '-': () => [sprite('reminder'), solid(), area(), scale(0.2), 'Reminder'],
         });
 
         player.onCollide('Tunnel', (Tunnel) => {
