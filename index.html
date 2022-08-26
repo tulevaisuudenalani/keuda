@@ -51,6 +51,30 @@
 
       let levels = [
         [
+          '£                £',
+          '£                £',
+          '£                £',
+          '£                £',
+          '£                £',
+          '£                £',
+          '£                £',
+          '£                £',
+          '£                £',
+          '£                £',
+          '£                £',
+          '£                £',
+          '£                £',
+          '£                £',
+          '£                £',
+          '£                £',
+          '£                £',
+          '£     ==         £',
+          '£                £',
+          '£                £',
+          '£                £',
+          '==================',
+        ],
+        [
           '£                                                   £',
           '£                                                   £',
           '£                                                   £',
@@ -67,11 +91,11 @@
           '£                                                   £',
           '£                                                   £',
           '£                         %  %  %                   £',
-          '£                                                   £',
+          '£    =====                                          £',
           '£                                              -    £',
           '£                                                 ^ £',
           '£                        =========                + £',
-          '£               #       ===========     #           £',
+          '£              # ==     ===========     #           £',
           '=====================================================',
         ],
         [
@@ -83,15 +107,18 @@
           '£                                                                       £',
           '£                                                                       £',
           '£                                                                       £',
-          '£                                 =====         #                       £',
-          '£                    ==      ==            ======                       £',
-          '£                                                    ===========        £',
           '£                                                                       £',
           '£                                                                       £',
-          '£                ==      ==                                        -    £',
-          '£                                                           ==        ^ £',
+          '£                                                                       £',
+          '£                                                                       £',
+          '£                                                                       £',
+          '£                                      ==       ======                  £',
+          '£                                                                       £',
+          '£                                                                       £',
+          '£           =====             ==                                   -    £',
+          '£                                      ==                             ^ £',
           '£                                                                     + £',
-          '£                #                                          #           £',
+          '£  #                                                                    £',
           '=========================================================================',
         ],
         [
@@ -103,20 +130,24 @@
           '£                                                                       £',
           '£                                                                       £',
           '£                                                                       £',
-          '£                                               #                       £',
-          '£                                          ======                       £',
-          '£              =======          ==                                      £',
-          '£                                               #                       £',
-          '£                                          ======      =========        £',
-          '£        ==              ==                                        -    £',
-          '£                                                                     ^ £',
-          '£                                                                     + £',
-          '£                #                                          #           £',
-          '=========================================================================',
+          '£                                                                       £',
+          '£                                                                       £',
+          '£                                                                       £',
+          '£                                                                       £',
+          '£                              %                                        £',
+          '£                                                                       £',
+          '£                                                                       £',
+          '£                                                                       £',
+          '£        @%@%%@              x x                                   -    £',
+          '£                          x x x                                      ^ £',
+          '£                        x x x x  x               x                   + £',
+          '£           #           x x x x x  x               x           x        £',
+          '=========================================  ===============  =============',
+          '                                                                         ',
+          '                                         **               **             ',
         ],
       ];
-
-      // LEVEL: 1
+      //Aloitusruutu
       scene('firstLevel', () => {
         debug.log('LEVEL 1');
 
@@ -124,7 +155,7 @@
         add([sprite('ground', { width: screen.width, height: screen.height }), pos(0, 250), fixed()]);
         // add([sprite('logo', { width: 150, height: 50 }), pos(0, 580), fixed()]);
 
-        let player = add([sprite('mario'), solid(), pos(140, 360), body(), area(), scale(0.7)]);
+        let player = add([sprite('mario'), solid(), pos(50, 240), body(), area(), scale(0.7)]);
 
         addLevel(levels[0], {
           width: 20,
@@ -138,15 +169,7 @@
           '-': () => [sprite('reminder'), area(), scale(0.2), 'Reminder'],
         });
 
-        add([text('Pidatko elaimista?'), pos(510, 275), scale(0.2)]);
-
-        // Ykkös vastaukset
-        add([text('Kylla'), pos(516, 325), scale(0.14)]);
-
-        add([text('Vahan'), pos(574, 325), scale(0.14)]);
-
-        add([text('En'), pos(642, 325), scale(0.14)]);
-
+       
         player.onCollide('Tunnel', (Tunnel) => {
           go('secondLevel');
         });
@@ -189,22 +212,94 @@
           }
         });
       });
-
-      // LEVEL: 2
+      // LEVEL: 1
       scene('secondLevel', () => {
         debug.log('LEVEL 2');
 
         add([sprite('bg', { width: width(), height: height() }), pos(0, 0), fixed()]);
         add([sprite('ground', { width: screen.width, height: screen.height }), pos(0, 250), fixed()]);
-
         // add([sprite('logo', { width: 150, height: 50 }), pos(0, 580), fixed()]);
-        let player = add([sprite('mario'), solid(), pos(140, 250), body(), area(), scale(0.7)]);
 
-        // let player = add([sprite('mariojumpoff'), solid(), pos(140, 160), body(), area(), scale(0.8)]);
+        let player = add([sprite('mario'), solid(), pos(140, 240), body(), area(), scale(0.7)]);
+
+        addLevel(levels[1], {
+          width: 20,
+          height: 20,
+          '=': () => [sprite('block'), solid(), area(), scale(0.44), ''],
+          '£': () => [sprite('block'), solid(), area(), scale(0.44), ''],
+          '+': () => [sprite('tunnel'), solid(), area(), scale(0.5), 'Tunnel'],
+          '^': () => [sprite('arrow'), scale(0.4), 'Arrow'],
+          '#': () => [sprite('spider'), solid(), area(), scale(1), 'Spider'],
+          '%': () => [sprite('suprise'), solid(), area(), scale(0.4), 'Suprise'],
+          '-': () => [sprite('reminder'), area(), scale(0.2), 'Reminder'],
+        });
+
+        add([text('Pidatko elaimista?'), pos(510, 275), scale(0.2)]);
+
+        // Ykkös vastaukset
+        add([text('Kylla'), pos(516, 325), scale(0.14)]);
+
+        add([text('Vahan'), pos(574, 325), scale(0.14)]);
+
+        add([text('En'), pos(642, 325), scale(0.14)]);
+
+        player.onCollide('Tunnel', (Tunnel) => {
+          go('thirdLevel');
+        });
 
         gravity(660);
 
-        addLevel(levels[1], {
+        onUpdate('Spider', (Spider) => {
+          Spider.move(-15, 0);
+        });
+
+        player.onCollide('Spider', (Spider) => {
+          shake(10);
+        });
+
+        player.onUpdate(() => {
+          camPos(player.pos);
+        });
+
+        onKeyDown('left', () => {
+          player.move(-playerMoveSpeed, 0);
+          camPos(player.pos);
+          player.flipX(true);
+        });
+
+        onKeyDown('right', () => {
+          player.move(playerMoveSpeed, 0);
+          camPos(player.pos);
+          player.flipX(false);
+        });
+
+        onKeyPress('space', () => {
+          if (player.isGrounded()) {
+            player.jump(playerJumpForce, 0);
+          }
+        });
+
+        onKeyPress('up', () => {
+          if (player.isGrounded()) {
+            player.jump(playerJumpForce, 0);
+          }
+        });
+      });
+
+      // LEVEL: 2
+      scene('thirdLevel', () => {
+        debug.log('LEVEL 3');
+
+        add([sprite('bg', { width: width(), height: height() }), pos(0, 0), fixed()]);
+        add([sprite('ground', { width: screen.width, height: screen.height }), pos(0, 250), fixed()]);
+
+        // add([sprite('logo', { width: 150, height: 50 }), pos(0, 580), fixed()]);
+
+        let player = add([sprite('mariojumpoff'), solid(), pos(140, 160), body(), area(), scale(0.8)]);
+
+        gravity(660);
+
+        addLevel(levels[2], {
           width: 20,
           height: 20,
           '=': () => [sprite('block'), solid(), area(), scale(0.44), 'Block'],
@@ -213,11 +308,11 @@
           '^': () => [sprite('arrow'), scale(0.4), 'Arrow'],
           '#': () => [sprite('spider'), solid(), area(), scale(1), 'Spider'],
           '%': () => [sprite('suprise'), solid(), area(), scale(0.4), 'Suprise'],
-          '-': () => [sprite('reminder'), area(), scale(0.2), 'Reminder'],
+          '-': () => [sprite('reminder'), solid(), area(), scale(0.2), 'Reminder'],
         });
 
         player.onCollide('Tunnel', (Tunnel) => {
-          go('thirdLevel');
+          go('fourthLevel');
         });
 
         onUpdate('Spider', (Spider) => {
@@ -258,18 +353,18 @@
       });
 
       // LEVEL: 3
-      scene('thirdLevel', () => {
-        debug.log('LEVEL 3');
+      scene('fourthLevel', () => {
+        debug.log('LEVEL 4');
 
         add([sprite('bg', { width: width(), height: height() }), pos(0, 0), fixed()]);
         add([sprite('ground', { width: screen.width, height: screen.height }), pos(0, 250), fixed()]);
         // add([sprite('logo', { width: 150, height: 50 }), pos(0, 580), fixed()]);
 
-        let player = add([sprite('mario'), solid(), pos(140, 160), body(), area(), scale(0.7)]);
+        let player = add([sprite('mario'), solid(), pos(140, 280), body(), area(), scale(0.8)]);
 
         gravity(660);
 
-        addLevel(levels[2], {
+        addLevel(levels[3], {
           width: 20,
           height: 20,
           '=': () => [sprite('block'), solid(), area(), scale(0.44), ''],
@@ -279,7 +374,7 @@
           '#': () => [sprite('spider'), solid(), area(), scale(1), 'Spider'],
           '*': () => [sprite('arrow'), solid(), area(), scale(0.5), 'Death'],
           '%': () => [sprite('suprise'), solid(), area(), scale(0.4), 'Suprise'],
-          '-': () => [sprite('reminder'), area(), scale(0.2), 'Reminder'],
+          '-': () => [sprite('reminder'), solid(), area(), scale(0.2), 'Reminder'],
         });
 
         player.onCollide('Tunnel', (Tunnel) => {
