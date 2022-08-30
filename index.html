@@ -153,7 +153,7 @@
                 onHover("linkki1", () => {
                     cursor("pointer");
                     linkki_1.color = { r: 0, g: 0, b: 255 };
-                }); 
+                });
 
                 onClick("linkki1", () => {
                     window.open("https://keuda.fi", "_blank");
@@ -161,77 +161,79 @@
 
                 //------------------------------------------------------------------------------------------------------
 
-                const ylösNappi = add([
-                    sprite("ohjaus"),
-                    pos(width() - 50, height() - 50),
-                    fixed(),
-                    opacity(0.5),
-                    area(),
-                    scale(0.15),
+                if (isTouch()) {
+                    const ylosNappi = add([
+                        sprite("ohjaus"),
+                        pos(width() - 50, height() - 50),
+                        fixed(),
+                        opacity(0.5),
+                        area(),
+                        scale(0.15),
 
-                    "ylösNappi",
-                ]);
+                        "ylosNappi",
+                    ]);
 
-                const vasenNappi = add([
-                    sprite("ohjaus"),
-                    pos(30, height() - 30),
-                    fixed(),
-                    opacity(0.5),
-                    area(),
-                    scale(0.15),
-                    rotate(-90),
-                    origin("center"),
+                    const vasenNappi = add([
+                        sprite("ohjaus"),
+                        pos(30, height() - 30),
+                        fixed(),
+                        opacity(0.5),
+                        area(),
+                        scale(0.15),
+                        rotate(-90),
+                        origin("center"),
 
-                    "vasenNappi",
-                ]);
+                        "vasenNappi",
+                    ]);
 
-                const oikeaNappi = add([
-                    sprite("ohjaus"),
-                    pos(80, height() - 30),
-                    fixed(),
-                    opacity(0.5),
-                    area(),
-                    scale(0.15),
-                    rotate(90),
-                    origin("center"),
+                    const oikeaNappi = add([
+                        sprite("ohjaus"),
+                        pos(80, height() - 30),
+                        fixed(),
+                        opacity(0.5),
+                        area(),
+                        scale(0.15),
+                        rotate(90),
+                        origin("center"),
 
-                    "oikeaNappi",
-                ]);
+                        "oikeaNappi",
+                    ]);
 
-                const keysDown = {
-                    left: false,
-                    right: false,
-                };
-                
-                onTouchStart((id, pos) => {
-                    if (ylösNappi.hasPoint(pos)) {
-                        if (player.isGrounded()) {
-                            player.jump(playerJumpForce, 0);
+                    const keysDown = {
+                        left: false,
+                        right: false,
+                    };
+
+                    onTouchStart((id, pos) => {
+                        if (ylosNappi.hasPoint(pos)) {
+                            if (player.isGrounded()) {
+                                player.jump(playerJumpForce, 0);
+                            }
+                        } else if (vasenNappi.hasPoint(pos)) {
+                            keysDown.left = true;
+                        } else if (oikeaNappi.hasPoint(pos)) {
+                            keysDown.right = true;
                         }
-                    } else if (vasenNappi.hasPoint(pos)) {
-                        keysDown.left = true;
-                    } else if (oikeaNappi.hasPoint(pos)) {
-                        keysDown.right = true;
-                    }
-                });
+                    });
 
-                onUpdate(() => {
-                    if (keysDown.left) {
-                        player.move(-playerMoveSpeed, 0);
-                        camPos(player.pos);
-                        player.flipX(true);
-                    }
-                    if (keysDown.right) {
-                        player.move(playerMoveSpeed, 0);
-                        camPos(player.pos);
-                        player.flipX(false);
-                    }
-                });
+                    onUpdate(() => {
+                        if (keysDown.left) {
+                            player.move(-playerMoveSpeed, 0);
+                            camPos(player.pos);
+                            player.flipX(true);
+                        }
+                        if (keysDown.right) {
+                            player.move(playerMoveSpeed, 0);
+                            camPos(player.pos);
+                            player.flipX(false);
+                        }
+                    });
 
-                onTouchEnd(() => {
-                    keysDown.right = false;
-                    keysDown.left = false;
-                });
+                    onTouchEnd(() => {
+                        keysDown.right = false;
+                        keysDown.left = false;
+                    });
+                }
 
                 addLevel(levels[0], {
                     width: 20,
@@ -305,77 +307,79 @@
                 // add([sprite('logo', { width: 150, height: 50 }), pos(0, 580), fixed()]);
                 let player = add([sprite("mario"), solid(), pos(140, 250), body(), area(), scale(0.7)]);
 
-                const ylösNappi = add([
-                    sprite("ohjaus"),
-                    pos(width() - 50, height() - 50),
-                    fixed(),
-                    opacity(0.5),
-                    area(),
-                    scale(0.15),
+                if (isTouch()) {
+                    const ylosNappi = add([
+                        sprite("ohjaus"),
+                        pos(width() - 50, height() - 50),
+                        fixed(),
+                        opacity(0.5),
+                        area(),
+                        scale(0.15),
 
-                    "ylösNappi",
-                ]);
+                        "ylosNappi",
+                    ]);
 
-                const vasenNappi = add([
-                    sprite("ohjaus"),
-                    pos(30, height() - 30),
-                    fixed(),
-                    opacity(0.5),
-                    area(),
-                    scale(0.15),
-                    rotate(-90),
-                    origin("center"),
+                    const vasenNappi = add([
+                        sprite("ohjaus"),
+                        pos(30, height() - 30),
+                        fixed(),
+                        opacity(0.5),
+                        area(),
+                        scale(0.15),
+                        rotate(-90),
+                        origin("center"),
 
-                    "vasenNappi",
-                ]);
+                        "vasenNappi",
+                    ]);
 
-                const oikeaNappi = add([
-                    sprite("ohjaus"),
-                    pos(80, height() - 30),
-                    fixed(),
-                    opacity(0.5),
-                    area(),
-                    scale(0.15),
-                    rotate(90),
-                    origin("center"),
+                    const oikeaNappi = add([
+                        sprite("ohjaus"),
+                        pos(80, height() - 30),
+                        fixed(),
+                        opacity(0.5),
+                        area(),
+                        scale(0.15),
+                        rotate(90),
+                        origin("center"),
 
-                    "oikeaNappi",
-                ]);
+                        "oikeaNappi",
+                    ]);
 
-                const keysDown = {
-                    left: false,
-                    right: false,
-                };
+                    const keysDown = {
+                        left: false,
+                        right: false,
+                    };
 
-                onTouchStart((id, pos) => {
-                    if (ylösNappi.hasPoint(pos)) {
-                        if (player.isGrounded()) {
-                            player.jump(playerJumpForce, 0);
+                    onTouchStart((id, pos) => {
+                        if (ylosNappi.hasPoint(pos)) {
+                            if (player.isGrounded()) {
+                                player.jump(playerJumpForce, 0);
+                            }
+                        } else if (vasenNappi.hasPoint(pos)) {
+                            keysDown.left = true;
+                        } else if (oikeaNappi.hasPoint(pos)) {
+                            keysDown.right = true;
                         }
-                    } else if (vasenNappi.hasPoint(pos)) {
-                        keysDown.left = true;
-                    } else if (oikeaNappi.hasPoint(pos)) {
-                        keysDown.right = true;
-                    }
-                });
+                    });
 
-                onUpdate(() => {
-                    if (keysDown.left) {
-                        player.move(-playerMoveSpeed, 0);
-                        camPos(player.pos);
-                        player.flipX(true);
-                    }
-                    if (keysDown.right) {
-                        player.move(playerMoveSpeed, 0);
-                        camPos(player.pos);
-                        player.flipX(false);
-                    }
-                });
+                    onUpdate(() => {
+                        if (keysDown.left) {
+                            player.move(-playerMoveSpeed, 0);
+                            camPos(player.pos);
+                            player.flipX(true);
+                        }
+                        if (keysDown.right) {
+                            player.move(playerMoveSpeed, 0);
+                            camPos(player.pos);
+                            player.flipX(false);
+                        }
+                    });
 
-                onTouchEnd(() => {
-                    keysDown.right = false;
-                    keysDown.left = false;
-                });
+                    onTouchEnd(() => {
+                        keysDown.right = false;
+                        keysDown.left = false;
+                    });
+                }
 
                 // let player = add([sprite('mariojumpoff'), solid(), pos(140, 160), body(), area(), scale(0.8)]);
 
@@ -442,7 +446,7 @@
 
                 let player = add([sprite("mario"), solid(), pos(140, 160), body(), area(), scale(0.7)]);
 
-                const ylösNappi = add([
+                const ylosNappi = add([
                     sprite("ohjaus"),
                     pos(width() - 50, height() - 50),
                     fixed(),
@@ -450,7 +454,7 @@
                     area(),
                     scale(0.15),
 
-                    "ylösNappi",
+                    "ylosNappi",
                 ]);
 
                 const vasenNappi = add([
@@ -485,7 +489,7 @@
                 };
 
                 onTouchStart((id, pos) => {
-                    if (ylösNappi.hasPoint(pos)) {
+                    if (ylosNappi.hasPoint(pos)) {
                         if (player.isGrounded()) {
                             player.jump(playerJumpForce, 0);
                         }
@@ -513,6 +517,79 @@
                     keysDown.right = false;
                     keysDown.left = false;
                 });
+                if (isTouch()) {
+                    const ylosNappi = add([
+                        sprite("ohjaus"),
+                        pos(width() - 50, height() - 50),
+                        fixed(),
+                        opacity(0.5),
+                        area(),
+                        scale(0.15),
+
+                        "ylosNappi",
+                    ]);
+
+                    const vasenNappi = add([
+                        sprite("ohjaus"),
+                        pos(30, height() - 30),
+                        fixed(),
+                        opacity(0.5),
+                        area(),
+                        scale(0.15),
+                        rotate(-90),
+                        origin("center"),
+
+                        "vasenNappi",
+                    ]);
+
+                    const oikeaNappi = add([
+                        sprite("ohjaus"),
+                        pos(80, height() - 30),
+                        fixed(),
+                        opacity(0.5),
+                        area(),
+                        scale(0.15),
+                        rotate(90),
+                        origin("center"),
+
+                        "oikeaNappi",
+                    ]);
+
+                    const keysDown = {
+                        left: false,
+                        right: false,
+                    };
+
+                    onTouchStart((id, pos) => {
+                        if (ylosNappi.hasPoint(pos)) {
+                            if (player.isGrounded()) {
+                                player.jump(playerJumpForce, 0);
+                            }
+                        } else if (vasenNappi.hasPoint(pos)) {
+                            keysDown.left = true;
+                        } else if (oikeaNappi.hasPoint(pos)) {
+                            keysDown.right = true;
+                        }
+                    });
+
+                    onUpdate(() => {
+                        if (keysDown.left) {
+                            player.move(-playerMoveSpeed, 0);
+                            camPos(player.pos);
+                            player.flipX(true);
+                        }
+                        if (keysDown.right) {
+                            player.move(playerMoveSpeed, 0);
+                            camPos(player.pos);
+                            player.flipX(false);
+                        }
+                    });
+
+                    onTouchEnd(() => {
+                        keysDown.right = false;
+                        keysDown.left = false;
+                    });
+                }
 
                 gravity(660);
 
