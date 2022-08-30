@@ -114,6 +114,21 @@
           '£                #                                          #           £',
           '=========================================================================',
         ],
+        [
+          '                                                     ',
+          '                                                     ',
+          '                                                     ',
+          '                                                     ',
+          '                                                     ',
+          '                                                     ',
+          '                                                     ',
+          '                                                     ',
+          '                                                     ',
+          '                                                     ',
+          '                                                     ',
+          '                                                     ',
+          '                                                     ',
+        ],
       ];
 
       // LEVEL: 1
@@ -343,7 +358,7 @@
 
 
         player.onCollide('Tunnel', (Tunnel) => {
-          go('firstLevel');
+          go('fourthLevel');
         });
 
         player.onCollide('Death', (Death) => {
@@ -386,6 +401,36 @@
             player.jump(playerJumpForce, 0);
           }
         });
+      });
+
+      // EndScreen
+      scene('fourthLevel', () => {
+        debug.log('End Screen')
+
+        add([sprite('bg', { width: width(), height: height() }), pos(0, 0), fixed()]);
+
+        addLevel(levels[3], {
+          width: 20,
+          height: 20,
+        });
+
+        add([
+          text('Kiitos pelaamisesta'),
+          pos(123, 16),
+          scale(0.3),
+        ])
+
+        add([
+          text('Sinulle sopivat alat ovat:'),
+          pos(160, 40),
+          scale(0.15),
+        ])
+
+        add([
+          text('Tahan tulee suositellut alat'),
+          pos(165, 65),
+          scale(0.1),
+        ])
       });
 
       onLoad(() => {
