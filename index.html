@@ -1,336 +1,546 @@
 <!DOCTYPE html>
 <html lang="fi">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <style>
-      body {
-        background-color: black;
-        overflow: hidden;
-      }
-    </style>
-    <script type="module">
-      import kaboom from 'https://unpkg.com/kaboom/dist/kaboom.mjs';
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <style>
+            body {
+                background-color: black;
+                overflow: hidden;
+            }
+        </style>
+        <script type="module">
+            import kaboom from "https://unpkg.com/kaboom/dist/kaboom.mjs";
 
-      kaboom({
-        global: true,
-        fullscreen: true,
-        scale: 2.5,
-        debug: true,
-        background: [51, 151, 255],
-      });
+            const awwd = kaboom({
+                global: true,
+                fullscreen: true,
+                scale: 2.5,
+                debug: true,
+                background: [51, 151, 255],
+            });
+            let playerMoveSpeed = 150;
+            let playerJumpForce = 350;
+            let playerPoints = 0;
 
-      let playerMoveSpeed = 150;
-      let playerJumpForce = 350;
-      let playerPoints = 0;
+            let scopeA = 0;
+            let scopeB = 0;
+            let scopeC = 0;
+            let scopeD = 0;
+            let scopeE = 0;
+            let scopeF = 0;
+            let scopeG = 0;
+            let scopeH = 0;
 
-      let scopeA = 0;
-      let scopeB = 0;
-      let scopeC = 0;
-      let scopeD = 0;
-      let scopeE = 0;
-      let scopeF = 0;
-      let scopeG = 0;
-      let scopeH = 0;
+            loadSprite("logo", "Kuvat/keuda_logo.png");
+            loadSprite("bg", "Kuvat/tausta.png");
+            loadSprite("ground", "Kuvat/tausta_alareuna.png");
+            loadSprite("mario", "Kuvat/hahmo.png");
+            loadSprite("mariojumpoff", "Kuvat/hahmo_aloitus_tippuminen.png");
+            loadSprite("suprise", "Kuvat/block_kysymys.png");
+            loadSprite("spider", "Kuvat/örkki.png");
+            loadSprite("block", "Kuvat/block.png");
+            loadSprite("tunnel", "Kuvat/ampari.png");
+            loadSprite("arrow", "Kuvat/nuoli.png");
+            loadSprite("reminder", "Kuvat/teksti_nuoli.png");
+            loadSprite("ohjaus", "Kuvat/ohjausnuoli.png");
 
-      loadSprite('logo', 'Kuvat/keuda_logo.png');
-      loadSprite('bg', 'Kuvat/tausta.png');
-      loadSprite('ground', 'Kuvat/tausta_alareuna.png');
-      loadSprite('mario', 'Kuvat/hahmo.png');
-      loadSprite('mariojumpoff', 'Kuvat/hahmo_aloitus_tippuminen.png');
-      loadSprite('suprise', 'Kuvat/block_kysymys.png');
-      loadSprite('spider', 'Kuvat/örkki.png');
-      loadSprite('block', 'Kuvat/block.png');
-      loadSprite('tunnel', 'Kuvat/ampari.png');
-      loadSprite('arrow', 'Kuvat/nuoli.png');
-      loadSprite('reminder', 'Kuvat/teksti_nuoli.png');
+            let levels = [
+                [
+                    "£                                                   £",
+                    "£                                                   £",
+                    "£                                                   £",
+                    "£                                                   £",
+                    "£                                                   £",
+                    "£                                                   £",
+                    "£                                                   £",
+                    "£                                                   £",
+                    "£                                                   £",
+                    "£                                                   £",
+                    "£                                                   £",
+                    "£                                                   £",
+                    "£                                                   £",
+                    "£                                                   £",
+                    "£                                                   £",
+                    "£                         %  %  %                   £",
+                    "£                                                   £",
+                    "£                                              -    £",
+                    "£                                                 ^ £",
+                    "£                        =========                + £",
+                    "£               #       ===========     #           £",
+                    "=====================================================",
+                ],
+                [
+                    "£                                                                       £",
+                    "£                                                                       £",
+                    "£                                                                       £",
+                    "£                                                                       £",
+                    "£                                                                       £",
+                    "£                                                                       £",
+                    "£                                                                       £",
+                    "£                                                                       £",
+                    "£                                 =====         #                       £",
+                    "£                    ==      ==            ======                       £",
+                    "£                                                    ===========        £",
+                    "£                                                                       £",
+                    "£                                                                       £",
+                    "£                ==      ==                                        -    £",
+                    "£                                                           ==        ^ £",
+                    "£                                                                     + £",
+                    "£                #                                          #           £",
+                    "=========================================================================",
+                ],
+                [
+                    "£                                                                       £",
+                    "£                                                                       £",
+                    "£                                                                       £",
+                    "£                                                                       £",
+                    "£                                                                       £",
+                    "£                                                                       £",
+                    "£                                                                       £",
+                    "£                                                                       £",
+                    "£                                               #                       £",
+                    "£                                          ======                       £",
+                    "£              =======          ==                                      £",
+                    "£                                               #                       £",
+                    "£                                          ======      =========        £",
+                    "£        ==              ==                                        -    £",
+                    "£                                                                     ^ £",
+                    "£                                                                     + £",
+                    "£                #                                          #           £",
+                    "=========================================================================",
+                ],
+            ];
 
-      let levels = [
-        [
-          '£                                                   £',
-          '£                                                   £',
-          '£                                                   £',
-          '£                                                   £',
-          '£                                                   £',
-          '£                                                   £',
-          '£                                                   £',
-          '£                                                   £',
-          '£                                                   £',
-          '£                                                   £',
-          '£                                                   £',
-          '£                                                   £',
-          '£                                                   £',
-          '£                                                   £',
-          '£                                                   £',
-          '£                         %  %  %                   £',
-          '£                                                   £',
-          '£                                              -    £',
-          '£                                                 ^ £',
-          '£                        =========                + £',
-          '£               #       ===========     #           £',
-          '=====================================================',
-        ],
-        [
-          '£                                                                       £',
-          '£                                                                       £',
-          '£                                                                       £',
-          '£                                                                       £',
-          '£                                                                       £',
-          '£                                                                       £',
-          '£                                                                       £',
-          '£                                                                       £',
-          '£                                 =====         #                       £',
-          '£                    ==      ==            ======                       £',
-          '£                                                    ===========        £',
-          '£                                                                       £',
-          '£                                                                       £',
-          '£                ==      ==                                        -    £',
-          '£                                                           ==        ^ £',
-          '£                                                                     + £',
-          '£                #                                          #           £',
-          '=========================================================================',
-        ],
-        [
-          '£                                                                       £',
-          '£                                                                       £',
-          '£                                                                       £',
-          '£                                                                       £',
-          '£                                                                       £',
-          '£                                                                       £',
-          '£                                                                       £',
-          '£                                                                       £',
-          '£                                               #                       £',
-          '£                                          ======                       £',
-          '£              =======          ==                                      £',
-          '£                                               #                       £',
-          '£                                          ======      =========        £',
-          '£        ==              ==                                        -    £',
-          '£                                                                     ^ £',
-          '£                                                                     + £',
-          '£                #                                          #           £',
-          '=========================================================================',
-        ],
-      ];
+            // LEVEL: 1
+            scene("firstLevel", () => {
+                add([sprite("bg", { width: width(), height: height() }), pos(0, 0), fixed()]);
+                add([sprite("ground", { width: screen.width, height: screen.height }), pos(0, 250), fixed()]);
+                // add([sprite('logo', { width: 150, height: 50 }), pos(0, 580), fixed()]);
 
-      // LEVEL: 1
-      scene('firstLevel', () => {
-        debug.log('LEVEL 1');
+                let player = add([sprite("mario"), solid(), pos(140, 360), body(), area(), scale(0.7)]);
 
-        add([sprite('bg', { width: width(), height: height() }), pos(0, 0), fixed()]);
-        add([sprite('ground', { width: screen.width, height: screen.height }), pos(0, 250), fixed()]);
-        // add([sprite('logo', { width: 150, height: 50 }), pos(0, 580), fixed()]);
+                const ylösNappi = add([
+                    sprite("ohjaus"),
+                    pos(width() - 50, height() - 50),
+                    fixed(),
+                    opacity(0.5),
+                    area(),
+                    scale(0.15),
 
-        let player = add([sprite('mario'), solid(), pos(140, 360), body(), area(), scale(0.7)]);
+                    "ylösNappi",
+                ]);
 
-        addLevel(levels[0], {
-          width: 20,
-          height: 20,
-          '=': () => [sprite('block'), solid(), area(), scale(0.44), ''],
-          '£': () => [sprite('block'), solid(), area(), scale(0.44), ''],
-          '+': () => [sprite('tunnel'), solid(), area(), scale(0.5), 'Tunnel'],
-          '^': () => [sprite('arrow'), scale(0.4), 'Arrow'],
-          '#': () => [sprite('spider'), solid(), area(), scale(1), 'Spider'],
-          '%': () => [sprite('suprise'), solid(), area(), scale(0.4), 'Suprise'],
-          '-': () => [sprite('reminder'), area(), scale(0.2), 'Reminder'],
-        });
+                const vasenNappi = add([
+                    sprite("ohjaus"),
+                    pos(30, height() - 30),
+                    fixed(),
+                    opacity(0.5),
+                    area(),
+                    scale(0.15),
+                    rotate(-90),
+                    origin("center"),
 
-        add([text('Pidatko elaimista?'), pos(510, 275), scale(0.2)]);
+                    "vasenNappi",
+                ]);
 
-        // Ykkös vastaukset
-        add([text('Kylla'), pos(516, 325), scale(0.14)]);
+                const oikeaNappi = add([
+                    sprite("ohjaus"),
+                    pos(80, height() - 30),
+                    fixed(),
+                    opacity(0.5),
+                    area(),
+                    scale(0.15),
+                    rotate(90),
+                    origin("center"),
 
-        add([text('Vahan'), pos(574, 325), scale(0.14)]);
+                    "oikeaNappi",
+                ]);
 
-        add([text('En'), pos(642, 325), scale(0.14)]);
+                const keysDown = {
+                    left: false,
+                    right: false,
+                };
 
-        player.onCollide('Tunnel', (Tunnel) => {
-          go('secondLevel');
-        });
+                onTouchStart((id, pos) => {
+                    if (ylösNappi.hasPoint(pos)) {
+                        if (player.isGrounded()) {
+                            player.jump(playerJumpForce, 0);
+                        }
+                    } else if (vasenNappi.hasPoint(pos)) {
+                        keysDown.left = true;
+                    } else if (oikeaNappi.hasPoint(pos)) {
+                        keysDown.right = true;
+                    }
+                });
 
-        gravity(660);
+                onUpdate(() => {
+                    if (keysDown.left) {
+                        player.move(-playerMoveSpeed, 0);
+                        camPos(player.pos);
+                        player.flipX(true);
+                    }
+                    if (keysDown.right) {
+                        player.move(playerMoveSpeed, 0);
+                        camPos(player.pos);
+                        player.flipX(false);
+                    }
+                });
 
-        onUpdate('Spider', (Spider) => {
-          Spider.move(-15, 0);
-        });
+                onTouchEnd(() => {
+                    keysDown.right = false
+                    keysDown.left = false
+                })
 
-        player.onCollide('Spider', (Spider) => {
-          shake(10);
-        });
+                addLevel(levels[0], {
+                    width: 20,
+                    height: 20,
+                    "=": () => [sprite("block"), solid(), area(), scale(0.44), ""],
+                    "£": () => [sprite("block"), solid(), area(), scale(0.44), ""],
+                    "+": () => [sprite("tunnel"), solid(), area(), scale(0.5), "Tunnel"],
+                    "^": () => [sprite("arrow"), scale(0.4), "Arrow"],
+                    "#": () => [sprite("spider"), solid(), area(), scale(1), "Spider"],
+                    "%": () => [sprite("suprise"), solid(), area(), scale(0.4), "Suprise"],
+                    "-": () => [sprite("reminder"), area(), scale(0.2), "Reminder"],
+                });
 
-        player.onUpdate(() => {
-          camPos(player.pos);
-        });
+                add([text("Pidatko elaimista?"), pos(510, 275), scale(0.2)]);
 
-        onKeyDown('left', () => {
-          player.move(-playerMoveSpeed, 0);
-          camPos(player.pos);
-          player.flipX(true);
-        });
+                // Ykkös vastaukset
+                add([text("Kylla"), pos(516, 325), scale(0.14)]);
 
-        onKeyDown('right', () => {
-          player.move(playerMoveSpeed, 0);
-          camPos(player.pos);
-          player.flipX(false);
-        });
+                add([text("Vahan"), pos(574, 325), scale(0.14)]);
 
-        onKeyPress('space', () => {
-          if (player.isGrounded()) {
-            player.jump(playerJumpForce, 0);
-          }
-        });
+                add([text("En"), pos(642, 325), scale(0.14)]);
 
-        onKeyPress('up', () => {
-          if (player.isGrounded()) {
-            player.jump(playerJumpForce, 0);
-          }
-        });
-      });
+                player.onCollide("Tunnel", (Tunnel) => {
+                    go("secondLevel");
+                });
 
-      // LEVEL: 2
-      scene('secondLevel', () => {
-        debug.log('LEVEL 2');
+                gravity(660);
 
-        add([sprite('bg', { width: width(), height: height() }), pos(0, 0), fixed()]);
-        add([sprite('ground', { width: screen.width, height: screen.height }), pos(0, 250), fixed()]);
+                onUpdate("Spider", (Spider) => {
+                    Spider.move(-15, 0);
+                });
 
-        // add([sprite('logo', { width: 150, height: 50 }), pos(0, 580), fixed()]);
-        let player = add([sprite('mario'), solid(), pos(140, 250), body(), area(), scale(0.7)]);
+                player.onCollide("Spider", (Spider) => {
+                    shake(10);
+                });
 
-        // let player = add([sprite('mariojumpoff'), solid(), pos(140, 160), body(), area(), scale(0.8)]);
+                player.onUpdate(() => {
+                    camPos(player.pos);
+                });
 
-        gravity(660);
+                onKeyDown("left", () => {
+                    player.move(-playerMoveSpeed, 0);
+                    camPos(player.pos);
+                    player.flipX(true);
+                });
 
-        addLevel(levels[1], {
-          width: 20,
-          height: 20,
-          '=': () => [sprite('block'), solid(), area(), scale(0.44), 'Block'],
-          '£': () => [sprite('block'), solid(), area(), scale(0.44), 'Wall'],
-          '+': () => [sprite('tunnel'), solid(), area(), scale(0.5), 'Tunnel'],
-          '^': () => [sprite('arrow'), scale(0.4), 'Arrow'],
-          '#': () => [sprite('spider'), solid(), area(), scale(1), 'Spider'],
-          '%': () => [sprite('suprise'), solid(), area(), scale(0.4), 'Suprise'],
-          '-': () => [sprite('reminder'), area(), scale(0.2), 'Reminder'],
-        });
+                onKeyDown("right", () => {
+                    player.move(playerMoveSpeed, 0);
+                    camPos(player.pos);
+                    player.flipX(false);
+                });
 
-        player.onCollide('Tunnel', (Tunnel) => {
-          go('thirdLevel');
-        });
+                onKeyPress("space", () => {
+                    if (player.isGrounded()) {
+                        player.jump(playerJumpForce, 0);
+                    }
+                });
 
-        onUpdate('Spider', (Spider) => {
-          Spider.move(-15, 0);
-        });
+                onKeyPress("up", () => {
+                    if (player.isGrounded()) {
+                        player.jump(playerJumpForce, 0);
+                    }
+                });
+            });
 
-        player.onCollide('Spider', (Spider) => {
-          shake(10);
-        });
+            // LEVEL: 2
+            scene("secondLevel", () => {
+                add([sprite("bg", { width: width(), height: height() }), pos(0, 0), fixed()]);
+                add([sprite("ground", { width: screen.width, height: screen.height }), pos(0, 250), fixed()]);
 
-        player.onUpdate(() => {
-          camPos(player.pos);
-        });
+                // add([sprite('logo', { width: 150, height: 50 }), pos(0, 580), fixed()]);
+                let player = add([sprite("mario"), solid(), pos(140, 250), body(), area(), scale(0.7)]);
 
-        onKeyDown('left', () => {
-          player.move(-playerMoveSpeed, 0);
-          camPos(player.pos);
-          player.flipX(true);
-        });
+                const ylösNappi = add([
+                    sprite("ohjaus"),
+                    pos(width() - 50, height() - 50),
+                    fixed(),
+                    opacity(0.5),
+                    area(),
+                    scale(0.15),
 
-        onKeyDown('right', () => {
-          player.move(playerMoveSpeed, 0);
-          camPos(player.pos);
-          player.flipX(false);
-        });
+                    "ylösNappi",
+                ]);
 
-        onKeyPress('space', () => {
-          if (player.isGrounded()) {
-            player.jump(playerJumpForce, 0);
-          }
-        });
+                const vasenNappi = add([
+                    sprite("ohjaus"),
+                    pos(30, height() - 30),
+                    fixed(),
+                    opacity(0.5),
+                    area(),
+                    scale(0.15),
+                    rotate(-90),
+                    origin("center"),
 
-        onKeyPress('up', () => {
-          if (player.isGrounded()) {
-            player.jump(playerJumpForce, 0);
-          }
-        });
-      });
+                    "vasenNappi",
+                ]);
 
-      // LEVEL: 3
-      scene('thirdLevel', () => {
-        debug.log('LEVEL 3');
+                const oikeaNappi = add([
+                    sprite("ohjaus"),
+                    pos(80, height() - 30),
+                    fixed(),
+                    opacity(0.5),
+                    area(),
+                    scale(0.15),
+                    rotate(90),
+                    origin("center"),
 
-        add([sprite('bg', { width: width(), height: height() }), pos(0, 0), fixed()]);
-        add([sprite('ground', { width: screen.width, height: screen.height }), pos(0, 250), fixed()]);
-        // add([sprite('logo', { width: 150, height: 50 }), pos(0, 580), fixed()]);
+                    "oikeaNappi",
+                ]);
 
-        let player = add([sprite('mario'), solid(), pos(140, 160), body(), area(), scale(0.7)]);
+                const keysDown = {
+                    left: false,
+                    right: false,
+                };
 
-        gravity(660);
+                onTouchStart((id, pos) => {
+                    if (ylösNappi.hasPoint(pos)) {
+                        if (player.isGrounded()) {
+                            player.jump(playerJumpForce, 0);
+                        }
+                    } else if (vasenNappi.hasPoint(pos)) {
+                        keysDown.left = true;
+                    } else if (oikeaNappi.hasPoint(pos)) {
+                        keysDown.right = true;
+                    }
+                });
 
-        addLevel(levels[2], {
-          width: 20,
-          height: 20,
-          '=': () => [sprite('block'), solid(), area(), scale(0.44), ''],
-          '£': () => [sprite('block'), solid(), area(), scale(0.44), ''],
-          '+': () => [sprite('tunnel'), solid(), area(), scale(0.5), 'Tunnel'],
-          '^': () => [sprite('arrow'), scale(0.4), 'Arrow'],
-          '#': () => [sprite('spider'), solid(), area(), scale(1), 'Spider'],
-          '*': () => [sprite('arrow'), solid(), area(), scale(0.5), 'Death'],
-          '%': () => [sprite('suprise'), solid(), area(), scale(0.4), 'Suprise'],
-          '-': () => [sprite('reminder'), area(), scale(0.2), 'Reminder'],
-        });
+                onUpdate(() => {
+                    if (keysDown.left) {
+                        player.move(-playerMoveSpeed, 0);
+                        camPos(player.pos);
+                        player.flipX(true);
+                    }
+                    if (keysDown.right) {
+                        player.move(playerMoveSpeed, 0);
+                        camPos(player.pos);
+                        player.flipX(false);
+                    }
+                });
 
-        player.onCollide('Tunnel', (Tunnel) => {
-          go('firstLevel');
-        });
+                onTouchEnd(() => {
+                    keysDown.right = false
+                    keysDown.left = false
+                })
 
-        player.onCollide('Death', (Death) => {
-          shake(50);
-          go('thirdLevel');
-        });
+                // let player = add([sprite('mariojumpoff'), solid(), pos(140, 160), body(), area(), scale(0.8)]);
 
-        onUpdate('Spider', (Spider) => {
-          Spider.move(-15, 0);
-        });
+                gravity(660);
 
-        player.onCollide('Spider', (Spider) => {
-          shake(10);
-        });
+                addLevel(levels[1], {
+                    width: 20,
+                    height: 20,
+                    "=": () => [sprite("block"), solid(), area(), scale(0.44), "Block"],
+                    "£": () => [sprite("block"), solid(), area(), scale(0.44), "Wall"],
+                    "+": () => [sprite("tunnel"), solid(), area(), scale(0.5), "Tunnel"],
+                    "^": () => [sprite("arrow"), scale(0.4), "Arrow"],
+                    "#": () => [sprite("spider"), solid(), area(), scale(1), "Spider"],
+                    "%": () => [sprite("suprise"), solid(), area(), scale(0.4), "Suprise"],
+                    "-": () => [sprite("reminder"), area(), scale(0.2), "Reminder"],
+                });
 
-        player.onUpdate(() => {
-          camPos(player.pos);
-        });
+                player.onCollide("Tunnel", (Tunnel) => {
+                    go("thirdLevel");
+                });
 
-        onKeyDown('left', () => {
-          player.move(-playerMoveSpeed, 0);
-          camPos(player.pos);
-          player.flipX(true);
-        });
+                onUpdate("Spider", (Spider) => {
+                    Spider.move(-15, 0);
+                });
 
-        onKeyDown('right', () => {
-          player.move(playerMoveSpeed, 0);
-          camPos(player.pos);
-          player.flipX(false);
-        });
+                player.onCollide("Spider", (Spider) => {
+                    shake(10);
+                });
 
-        onKeyPress('space', () => {
-          if (player.isGrounded()) {
-            player.jump(playerJumpForce, 0);
-          }
-        });
+                player.onUpdate(() => {
+                    camPos(player.pos);
+                });
 
-        onKeyPress('up', () => {
-          if (player.isGrounded()) {
-            player.jump(playerJumpForce, 0);
-          }
-        });
-      });
+                onKeyDown("left", () => {
+                    player.move(-playerMoveSpeed, 0);
+                    camPos(player.pos);
+                    player.flipX(true);
+                });
 
-      onLoad(() => {
-        go('firstLevel');
-      });
-    </script>
-  </body>
+                onKeyDown("right", () => {
+                    player.move(playerMoveSpeed, 0);
+                    camPos(player.pos);
+                    player.flipX(false);
+                });
+
+                onKeyPress("space", () => {
+                    if (player.isGrounded()) {
+                        player.jump(playerJumpForce, 0);
+                    }
+                });
+
+                onKeyPress("up", () => {
+                    if (player.isGrounded()) {
+                        player.jump(playerJumpForce, 0);
+                    }
+                });
+            });
+
+            // LEVEL: 3
+            scene("thirdLevel", () => {
+                add([sprite("bg", { width: width(), height: height() }), pos(0, 0), fixed()]);
+                add([sprite("ground", { width: screen.width, height: screen.height }), pos(0, 250), fixed()]);
+                // add([sprite('logo', { width: 150, height: 50 }), pos(0, 580), fixed()]);
+
+                let player = add([sprite("mario"), solid(), pos(140, 160), body(), area(), scale(0.7)]);
+
+                const ylösNappi = add([
+                    sprite("ohjaus"),
+                    pos(width() - 50, height() - 50),
+                    fixed(),
+                    opacity(0.5),
+                    area(),
+                    scale(0.15),
+
+                    "ylösNappi",
+                ]);
+
+                const vasenNappi = add([
+                    sprite("ohjaus"),
+                    pos(30, height() - 30),
+                    fixed(),
+                    opacity(0.5),
+                    area(),
+                    scale(0.15),
+                    rotate(-90),
+                    origin("center"),
+
+                    "vasenNappi",
+                ]);
+
+                const oikeaNappi = add([
+                    sprite("ohjaus"),
+                    pos(80, height() - 30),
+                    fixed(),
+                    opacity(0.5),
+                    area(),
+                    scale(0.15),
+                    rotate(90),
+                    origin("center"),
+
+                    "oikeaNappi",
+                ]);
+
+                const keysDown = {
+                    left: false,
+                    right: false,
+                };
+
+                onTouchStart((id, pos) => {
+                    if (ylösNappi.hasPoint(pos)) {
+                        if (player.isGrounded()) {
+                            player.jump(playerJumpForce, 0);
+                        }
+                    } else if (vasenNappi.hasPoint(pos)) {
+                        keysDown.left = true;
+                    } else if (oikeaNappi.hasPoint(pos)) {
+                        keysDown.right = true;
+                    }
+                });
+
+                onUpdate(() => {
+                    if (keysDown.left) {
+                        player.move(-playerMoveSpeed, 0);
+                        camPos(player.pos);
+                        player.flipX(true);
+                    }
+                    if (keysDown.right) {
+                        player.move(playerMoveSpeed, 0);
+                        camPos(player.pos);
+                        player.flipX(false);
+                    }
+                });
+
+                onTouchEnd(() => {
+                    keysDown.right = false
+                    keysDown.left = false
+                })
+
+                gravity(660);
+
+                addLevel(levels[2], {
+                    width: 20,
+                    height: 20,
+                    "=": () => [sprite("block"), solid(), area(), scale(0.44), ""],
+                    "£": () => [sprite("block"), solid(), area(), scale(0.44), ""],
+                    "+": () => [sprite("tunnel"), solid(), area(), scale(0.5), "Tunnel"],
+                    "^": () => [sprite("arrow"), scale(0.4), "Arrow"],
+                    "#": () => [sprite("spider"), solid(), area(), scale(1), "Spider"],
+                    "*": () => [sprite("arrow"), solid(), area(), scale(0.5), "Death"],
+                    "%": () => [sprite("suprise"), solid(), area(), scale(0.4), "Suprise"],
+                    "-": () => [sprite("reminder"), area(), scale(0.2), "Reminder"],
+                });
+
+                player.onCollide("Tunnel", (Tunnel) => {
+                    go("firstLevel");
+                });
+
+                player.onCollide("Death", (Death) => {
+                    shake(50);
+                    go("thirdLevel");
+                });
+
+                onUpdate("Spider", (Spider) => {
+                    Spider.move(-15, 0);
+                });
+
+                player.onCollide("Spider", (Spider) => {
+                    shake(10);
+                });
+
+                player.onUpdate(() => {
+                    camPos(player.pos);
+                });
+
+                onKeyDown("left", () => {
+                    player.move(-playerMoveSpeed, 0);
+                    camPos(player.pos);
+                    player.flipX(true);
+                });
+
+                onKeyDown("right", () => {
+                    player.move(playerMoveSpeed, 0);
+                    camPos(player.pos);
+                    player.flipX(false);
+                });
+
+                onKeyPress("space", () => {
+                    if (player.isGrounded()) {
+                        player.jump(playerJumpForce, 0);
+                    }
+                });
+
+                onKeyPress("up", () => {
+                    if (player.isGrounded()) {
+                        player.jump(playerJumpForce, 0);
+                    }
+                });
+            });
+
+            onLoad(() => {
+                go("firstLevel");
+            });
+        </script>
+    </body>
 </html>
