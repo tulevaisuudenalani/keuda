@@ -88,7 +88,7 @@
           '£                                                    ===========        £',
           '£                                                                       £',
           '£                                                                       £',
-          '£             %  %  %      ==      ==                                   -    £',
+          '£            %  %  %       ==  %  %  %  ==       %  %  %           -    £',
           '£                                                           ==        ^ £',
           '£                                                                     + £',
           '£                #                                          #           £',
@@ -108,7 +108,7 @@
           '£              =======          ==                                      £',
           '£                                               #                       £',
           '£                                          ======      =========        £',
-          '£        ==              ==    % % %                               -    £',
+          '£        ==  %  %  %       ==  %  %  %                             -    £',
           '£                                                                     ^ £',
           '£                                                                     + £',
           '£                #                                          #           £',
@@ -139,7 +139,7 @@
         });
 
         //--------------------------------------------------------------------
-        
+
         // 1
         add([text('Pidatko jostain?'), pos(278, 310), scale(0.2)]);
 
@@ -154,7 +154,7 @@
         add([text('Vahan'), pos(574, 325), scale(0.14)]);
         add([text('En'), pos(642, 325), scale(0.14)]);
 
-        // 3 
+        // 3
         add([text('Pidatko jostain?'), pos(760, 310), scale(0.2)]);
 
         add([text('Kylla'), pos(754, 365), scale(0.14)]);
@@ -231,6 +231,31 @@
           '-': () => [sprite('reminder'), area(), scale(0.2), 'Reminder'],
         });
 
+        //--------------------------------------------------------------------
+
+        // 1
+        add([text('Pidatko jostain?'), pos(260, 230), scale(0.2)]);
+
+        add([text('Kylla'), pos(255, 286), scale(0.14)]);
+        add([text('Vahan'), pos(314, 286), scale(0.14)]);
+        add([text('En'), pos(382, 286), scale(0.14)]);
+
+        /// 2
+        add([text('Pidatko jostain?'), pos(620, 230), scale(0.2)]);
+
+        add([text('Kylla'), pos(610, 286), scale(0.14)]);
+        add([text('Vahan'), pos(675, 286), scale(0.14)]);
+        add([text('En'), pos(740, 286), scale(0.14)]);
+
+        // 3
+        add([text('Pidatko jostain?'), pos(980, 230), scale(0.2)]);
+
+        add([text('Kylla'), pos(975, 286), scale(0.14)]);
+        add([text('Vahan'), pos(1035, 286), scale(0.14)]);
+        add([text('En'), pos(1103, 286), scale(0.14)]);
+
+        //--------------------------------------------------------------------
+
         player.onCollide('Tunnel', (Tunnel) => {
           go('thirdLevel');
         });
@@ -296,6 +321,26 @@
           '%': () => [sprite('suprise'), solid(), area(), scale(0.4), 'Suprise'],
           '-': () => [sprite('reminder'), area(), scale(0.2), 'Reminder'],
         });
+
+        
+        //--------------------------------------------------------------------
+
+        // 1
+        add([text('Pidatko jostain?'), pos(260, 230), scale(0.2)]);
+
+        add([text('Kylla'), pos(255, 286), scale(0.14)]);
+        add([text('Vahan'), pos(314, 286), scale(0.14)]);
+        add([text('En'), pos(382, 286), scale(0.14)]);
+
+        /// 2
+        add([text('Pidatko jostain?'), pos(620, 230), scale(0.2)]);
+
+        add([text('Kylla'), pos(610, 286), scale(0.14)]);
+        add([text('Vahan'), pos(675, 286), scale(0.14)]);
+        add([text('En'), pos(740, 286), scale(0.14)]);
+
+        //--------------------------------------------------------------------
+
 
         player.onCollide('Tunnel', (Tunnel) => {
           go('firstLevel');
