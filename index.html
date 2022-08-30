@@ -25,7 +25,7 @@
       });
 
       let playerMoveSpeed = 150;
-      let playerJumpForce = 350;
+      let playerJumpForce = 250;
       let playerPoints = 0;
 
       let scopeA = 0;
@@ -68,10 +68,10 @@
           '£                                                   £',
           '£                         %  %  %                   £',
           '£                                                   £',
-          '£             %  %  %                 %  %  %    -  £',
-          '£                                                 ^ £',
+          '£             %  %  %                 %  %  %     ^ £',
+          '£                                                   £',
           '£                        =========                + £',
-          '£               #       ===========     #           £',
+          '£                      #===========             #   £',
           '=====================================================',
         ],
         [
@@ -132,10 +132,10 @@
           '=': () => [sprite('block'), solid(), area(), scale(0.44), ''],
           '£': () => [sprite('block'), solid(), area(), scale(0.44), ''],
           '+': () => [sprite('tunnel'), solid(), area(), scale(0.5), 'Tunnel'],
-          '^': () => [sprite('arrow'), scale(0.4), 'Arrow'],
+          '^': () => [sprite('arrow'), scale(0.5), 'Arrow'],
           '#': () => [sprite('spider'), solid(), area(), scale(1), 'Spider'],
           '%': () => [sprite('suprise'), solid(), area(), scale(0.4), 'Suprise'],
-          '-': () => [sprite('reminder'), area(), scale(0.2), 'Reminder'],
+          '-': () => [sprite('reminder'), area(), scale(0.25), 'Reminder'],
         });
 
         //--------------------------------------------------------------------
