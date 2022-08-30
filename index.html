@@ -87,9 +87,9 @@
           '£                    ==      ==            ======                       £',
           '£                                                    ===========        £',
           '£                                                                       £',
+          '£                                                                  -    £',
+          '£            %  %  %       ==  %  %  %  ==       %  %  %              ^ £',
           '£                                                                       £',
-          '£            %  %  %       ==  %  %  %  ==       %  %  %           -    £',
-          '£                                                           ==        ^ £',
           '£                                                                     + £',
           '£                #                                          #           £',
           '=========================================================================',
@@ -118,7 +118,7 @@
 
       // LEVEL: 1
       scene('firstLevel', () => {
-        debug.log('LEVEL 1');
+        debug.log('TASO 1');
 
         add([sprite('bg', { width: width(), height: height() }), pos(0, 0), fixed()]);
         add([sprite('ground', { width: screen.width, height: screen.height }), pos(0, 250), fixed()]);
@@ -139,6 +139,7 @@
         });
 
         //--------------------------------------------------------------------
+        add([text('TASO 1'), pos(125, 350), scale(0.2)]);
 
         // 1
         add([text('Kysymys 1'), pos(278, 310), scale(0.2)]);
@@ -228,7 +229,7 @@
 
       // LEVEL: 2
       scene('secondLevel', () => {
-        debug.log('LEVEL 2');
+        debug.log('TASO 2');
 
         add([sprite('bg', { width: width(), height: height() }), pos(0, 0), fixed()]);
         add([sprite('ground', { width: screen.width, height: screen.height }), pos(0, 250), fixed()]);
@@ -253,6 +254,8 @@
         });
 
         //--------------------------------------------------------------------
+        add([text('TASO 2'), pos(125, 275), scale(0.2)]);
+
 
         // 1
         add([text('Kysymys 4'), pos(260, 230), scale(0.2)]);
@@ -341,7 +344,7 @@
 
       // LEVEL: 3
       scene('thirdLevel', () => {
-        debug.log('LEVEL 3');
+        debug.log('TASO 3');
 
         add([sprite('bg', { width: width(), height: height() }), pos(0, 0), fixed()]);
         add([sprite('ground', { width: screen.width, height: screen.height }), pos(0, 250), fixed()]);
@@ -366,6 +369,7 @@
 
         
         //--------------------------------------------------------------------
+        add([text('TASO 3'), pos(125, 280), scale(0.2)]);
 
         // 1
         add([text('Kysymys 7'), pos(260, 230), scale(0.2)]);
