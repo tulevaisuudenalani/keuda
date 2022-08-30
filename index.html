@@ -268,18 +268,33 @@
           camPos(player.pos);
         });
 
+        //-------------------------------------------------------------------------
         onKeyDown('left', () => {
           player.move(-playerMoveSpeed, 0);
           camPos(player.pos);
           player.flipX(true);
         });
 
+        onKeyDown('a', () => {
+          player.move(-playerMoveSpeed, 0);
+          camPos(player.pos);
+          player.flipX(true);
+        });
+
+        //-------------------------------------------------------------------------
         onKeyDown('right', () => {
           player.move(playerMoveSpeed, 0);
           camPos(player.pos);
           player.flipX(false);
         });
 
+        onKeyDown('d', () => {
+          player.move(playerMoveSpeed, 0);
+          camPos(player.pos);
+          player.flipX(false);
+        });
+
+        //------------------------------------------------------------------------- 
         onKeyPress('space', () => {
           if (player.isGrounded()) {
             player.jump(playerJumpForce, 0);
@@ -287,6 +302,12 @@
         });
 
         onKeyPress('up', () => {
+          if (player.isGrounded()) {
+            player.jump(playerJumpForce, 0);
+          }
+        });
+
+        onKeyPress('w', () => {
           if (player.isGrounded()) {
             player.jump(playerJumpForce, 0);
           }
@@ -339,18 +360,33 @@
           camPos(player.pos);
         });
 
+        //-------------------------------------------------------------------------
         onKeyDown('left', () => {
           player.move(-playerMoveSpeed, 0);
           camPos(player.pos);
           player.flipX(true);
         });
 
+        onKeyDown('a', () => {
+          player.move(-playerMoveSpeed, 0);
+          camPos(player.pos);
+          player.flipX(true);
+        });
+
+        //-------------------------------------------------------------------------
         onKeyDown('right', () => {
           player.move(playerMoveSpeed, 0);
           camPos(player.pos);
           player.flipX(false);
         });
 
+        onKeyDown('d', () => {
+          player.move(playerMoveSpeed, 0);
+          camPos(player.pos);
+          player.flipX(false);
+        });
+
+        //------------------------------------------------------------------------- 
         onKeyPress('space', () => {
           if (player.isGrounded()) {
             player.jump(playerJumpForce, 0);
@@ -358,6 +394,12 @@
         });
 
         onKeyPress('up', () => {
+          if (player.isGrounded()) {
+            player.jump(playerJumpForce, 0);
+          }
+        });
+
+        onKeyPress('w', () => {
           if (player.isGrounded()) {
             player.jump(playerJumpForce, 0);
           }
