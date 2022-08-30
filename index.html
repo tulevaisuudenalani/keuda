@@ -48,6 +48,9 @@
       loadSprite('tunnel', 'Kuvat/ampari.png');
       loadSprite('arrow', 'Kuvat/nuoli.png');
       loadSprite('reminder', 'Kuvat/teksti_nuoli.png');
+      
+      loadSound('hyppy', './hyppy.mp3'); // Hyppy
+
 
       let levels = [
         [
@@ -211,12 +214,20 @@
         onKeyPress('space', () => {
           if (player.isGrounded()) {
             player.jump(playerJumpForce, 0);
+            const jumpSound = play('hyppy', {
+              volume: 0.5,
+              loop: false,
+            });
           }
         });
 
         onKeyPress('up', () => {
           if (player.isGrounded()) {
             player.jump(playerJumpForce, 0);
+            const jumpSound = play('hyppy', {
+              volume: 0.5,
+              loop: false,
+            });
           }
         });
 
@@ -326,12 +337,20 @@
         onKeyPress('space', () => {
           if (player.isGrounded()) {
             player.jump(playerJumpForce, 0);
+            const jumpSound = play('hyppy', {
+              volume: 0.5,
+              loop: false,
+            });
           }
         });
 
         onKeyPress('up', () => {
           if (player.isGrounded()) {
             player.jump(playerJumpForce, 0);
+            const jumpSound = play('hyppy', {
+              volume: 0.5,
+              loop: false,
+            });
           }
         });
 
@@ -438,13 +457,21 @@
         //------------------------------------------------------------------------- 
         onKeyPress('space', () => {
           if (player.isGrounded()) {
-            player.jump(playerJumpForce, 0);
+            player.jump(playerJumpForce, 0);'
+            const jumpSound = play('hyppy', {
+              volume: 0.5,
+              loop: false,
+            });
           }
         });
 
         onKeyPress('up', () => {
           if (player.isGrounded()) {
             player.jump(playerJumpForce, 0);
+            const jumpSound = play('hyppy', {
+              volume: 0.5,
+              loop: false,
+            });
           }
         });
 
