@@ -36,7 +36,7 @@
                 kaboom({
                     global: true,
                     fullscreen: true,
-                    scale: 1.5,
+                    scale: 1.3,
                     debug: true,
                     background: [51, 151, 255],
                 });
@@ -75,6 +75,8 @@
             loadSprite("arrow", "Kuvat/nuoli.png");
             loadSprite("reminder", "Kuvat/teksti_nuoli.png");
             loadSprite("ohjaus", "Kuvat/ohjausnuoli.png");
+
+            layers(["bg", "game", "ui"], "game");
 
             let levels = [
                 [
@@ -166,12 +168,14 @@
                 // Teksi, linkki, iha sama
                 const linkki_1 = add([
                     text("Keudan sivulle", {
-                        size: 18,
+                        size: 20,
                         font: "sink",
                     }),
 
                     color(0, 0, 0),
-                    pos(200, 400),
+                    origin("center"),
+                    pos(width() / 2 - 3, height() - 20),
+                    fixed(),
                     area(),
 
                     "linkki1",
@@ -186,6 +190,12 @@
                     window.open("https://keuda.fi", "_blank");
                 });
 
+                onTouchStart((id, pos) => {
+                    if (linkki_1.hasPoint(pos)) {
+                        window.open("https://keuda.fi", "_blank");
+                    }
+                });
+
                 //------------------------------------------------------------------------------------------------------
 
                 if (isTouch()) {
@@ -193,7 +203,7 @@
                         sprite("ohjaus"),
                         pos(width() - 70, height() - 70),
                         fixed(),
-                        opacity(0.5),
+                        opacity(0.8),
                         area(),
                         scale(0.25),
 
@@ -204,7 +214,7 @@
                         sprite("ohjaus"),
                         pos(40, height() - 40),
                         fixed(),
-                        opacity(0.5),
+                        opacity(0.8),
                         area(),
                         scale(0.25),
                         rotate(-90),
@@ -217,7 +227,7 @@
                         sprite("ohjaus"),
                         pos(110, height() - 40),
                         fixed(),
-                        opacity(0.5),
+                        opacity(0.8),
                         area(),
                         scale(0.25),
                         rotate(90),
@@ -226,20 +236,29 @@
                         "oikeaNappi",
                     ]);
 
-                    const keysDown = {
+                    let keysDown = {
                         left: false,
                         right: false,
                     };
 
+                    let jumpID = -1;
+                    let leftID = -1;
+                    let rightID = -1;
+
                     onTouchStart((id, pos) => {
                         if (ylosNappi.hasPoint(pos)) {
+                            jumpID = id;
                             if (player.isGrounded()) {
                                 player.jump(playerJumpForce, 0);
                             }
                         } else if (vasenNappi.hasPoint(pos)) {
                             keysDown.left = true;
+                            leftID = id;
                         } else if (oikeaNappi.hasPoint(pos)) {
                             keysDown.right = true;
+                            rightID = id;
+                        } else {
+                            return;
                         }
                     });
 
@@ -256,9 +275,17 @@
                         }
                     });
 
-                    onTouchEnd(() => {
-                        keysDown.right = false;
-                        keysDown.left = false;
+                    onTouchEnd((id, pos) => {
+                        if (id == jumpID) {
+                            jumpID = -1;
+                            return;
+                        } else if (id == rightID) {
+                            rightID = -1;
+                            keysDown.right = false;
+                        } else if (id == leftID) {
+                            leftID = -1;
+                            keysDown.left = false;
+                        }
                     });
                 }
 
@@ -339,7 +366,7 @@
                         sprite("ohjaus"),
                         pos(width() - 70, height() - 70),
                         fixed(),
-                        opacity(0.5),
+                        opacity(0.8),
                         area(),
                         scale(0.25),
 
@@ -350,7 +377,7 @@
                         sprite("ohjaus"),
                         pos(40, height() - 40),
                         fixed(),
-                        opacity(0.5),
+                        opacity(0.8),
                         area(),
                         scale(0.25),
                         rotate(-90),
@@ -363,7 +390,7 @@
                         sprite("ohjaus"),
                         pos(110, height() - 40),
                         fixed(),
-                        opacity(0.5),
+                        opacity(0.8),
                         area(),
                         scale(0.25),
                         rotate(90),
@@ -372,20 +399,29 @@
                         "oikeaNappi",
                     ]);
 
-                    const keysDown = {
+                    let keysDown = {
                         left: false,
                         right: false,
                     };
 
+                    let jumpID = -1;
+                    let leftID = -1;
+                    let rightID = -1;
+
                     onTouchStart((id, pos) => {
                         if (ylosNappi.hasPoint(pos)) {
+                            jumpID = id;
                             if (player.isGrounded()) {
                                 player.jump(playerJumpForce, 0);
                             }
                         } else if (vasenNappi.hasPoint(pos)) {
                             keysDown.left = true;
+                            leftID = id;
                         } else if (oikeaNappi.hasPoint(pos)) {
                             keysDown.right = true;
+                            rightID = id;
+                        } else {
+                            return;
                         }
                     });
 
@@ -402,9 +438,17 @@
                         }
                     });
 
-                    onTouchEnd(() => {
-                        keysDown.right = false;
-                        keysDown.left = false;
+                    onTouchEnd((id, pos) => {
+                        if (id == jumpID) {
+                            jumpID = -1;
+                            return;
+                        } else if (id == rightID) {
+                            rightID = -1;
+                            keysDown.right = false;
+                        } else if (id == leftID) {
+                            leftID = -1;
+                            keysDown.left = false;
+                        }
                     });
                 }
 
@@ -478,7 +522,7 @@
                         sprite("ohjaus"),
                         pos(width() - 70, height() - 70),
                         fixed(),
-                        opacity(0.5),
+                        opacity(0.8),
                         area(),
                         scale(0.25),
 
@@ -489,7 +533,7 @@
                         sprite("ohjaus"),
                         pos(40, height() - 40),
                         fixed(),
-                        opacity(0.5),
+                        opacity(0.8),
                         area(),
                         scale(0.25),
                         rotate(-90),
@@ -502,7 +546,7 @@
                         sprite("ohjaus"),
                         pos(110, height() - 40),
                         fixed(),
-                        opacity(0.5),
+                        opacity(0.8),
                         area(),
                         scale(0.25),
                         rotate(90),
@@ -511,20 +555,29 @@
                         "oikeaNappi",
                     ]);
 
-                    const keysDown = {
+                    let keysDown = {
                         left: false,
                         right: false,
                     };
 
+                    let jumpID = -1;
+                    let leftID = -1;
+                    let rightID = -1;
+
                     onTouchStart((id, pos) => {
                         if (ylosNappi.hasPoint(pos)) {
+                            jumpID = id;
                             if (player.isGrounded()) {
                                 player.jump(playerJumpForce, 0);
                             }
                         } else if (vasenNappi.hasPoint(pos)) {
                             keysDown.left = true;
+                            leftID = id;
                         } else if (oikeaNappi.hasPoint(pos)) {
                             keysDown.right = true;
+                            rightID = id;
+                        } else {
+                            return;
                         }
                     });
 
@@ -541,9 +594,21 @@
                         }
                     });
 
-                    onTouchEnd(() => {
-                        keysDown.right = false;
-                        keysDown.left = false;
+                    onTouchEnd((id, pos) => {
+                        if (id == jumpID) {
+                            jumpID = -1;
+                            return;
+                        } else if (id == rightID) {
+                            rightID = -1;
+                            keysDown.right = false;
+                        } else if (id == leftID) {
+                            leftID = -1;
+                            keysDown.left = false;
+                        } else {
+                            jumpID = -1
+                            rightID = -1
+                            leftID = -1
+                        }
                     });
                 }
 
