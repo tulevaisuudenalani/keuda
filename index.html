@@ -48,7 +48,7 @@
       loadSprite('tunnel', 'Kuvat/ampari.png');
       loadSprite('arrow', 'Kuvat/nuoli.png');
       loadSprite('reminder', 'Kuvat/teksti_nuoli.png');
-      loadSprite('start', 'Kuvat/start_kuva.png');
+      loadSprite('start', 'Kuvat/start.png');
 
       let levels = [
         [
@@ -69,7 +69,7 @@
           '£                £',
           '£                £',
           '£                £',
-          '£       (        £',
+          '£      (         £',
           '£                £',
           '£                £',
           '£                £',
@@ -168,7 +168,7 @@
           '#': () => [sprite('spider'), solid(), area(), scale(1), 'Spider'],
           '%': () => [sprite('suprise'), solid(), area(), scale(0.4), 'Suprise'],
           '-': () => [sprite('reminder'), area(), scale(0.2), 'Reminder'],
-          '(': () => [sprite('start'), area(), scale(0.4), 'Start'],
+          '(': () => [sprite('start'), area(), scale(0.5), 'Start'],
         });
 
        
