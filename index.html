@@ -48,6 +48,7 @@
       loadSprite('tunnel', 'Kuvat/ampari.png');
       loadSprite('arrow', 'Kuvat/nuoli.png');
       loadSprite('reminder', 'Kuvat/teksti_nuoli.png');
+      loadSprite('flagfinish', 'Kuvat/maali_tausta_levelille.png');
       
       loadSound('hyppy', './hyppy.mp3'); // Hyppy
 
@@ -108,7 +109,7 @@
           '£                                                                       £',
           '£                                               #                       £',
           '£                                          ======                       £',
-          '£              =======          ==                                      £',
+          '£              =======          ==                                   !  £',
           '£                                               #                       £',
           '£                                          ======                       £',
           '£            %  %  %       ==  %  %  %                             -    £',
@@ -384,6 +385,7 @@
           '*': () => [sprite('arrow'), solid(), area(), scale(0.5), 'Death'],
           '%': () => [sprite('suprise'), solid(), area(), scale(0.4), 'Suprise'],
           '-': () => [sprite('reminder'), area(), scale(0.2), 'Reminder'],
+          '!': () => [sprite('flagfinish'), solid(), area(), scale(0.5), 'flagfinish'],
         });
 
         
