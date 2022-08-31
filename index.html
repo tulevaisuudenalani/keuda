@@ -166,6 +166,24 @@
           add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
         })
 
+        player.onCollide('B', (B) => {
+          let x = B.pos.x;
+          let y = B.pos.y;
+          destroyAll('A')
+          destroyAll('B')
+          destroyAll('C')
+          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+        })
+
+        player.onCollide('C', (C) => {
+          let x = C.pos.x;
+          let y = C.pos.y;
+          destroyAll('A')
+          destroyAll('B')
+          destroyAll('C')
+          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+        })
+
         /// 2
         add([text('Kysymys 2'), pos(510, 275), scale(0.2)]);
 
@@ -173,12 +191,65 @@
         add([text('Vahan'), pos(574, 325), scale(0.14)]);
         add([text('En'), pos(642, 325), scale(0.14)]);
 
+        player.onCollide('D', (D) => {
+          let x = D.pos.x;
+          let y = D.pos.y;
+          destroyAll('D')
+          destroyAll('E')
+          destroyAll('F')
+          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+        })
+
+        player.onCollide('E', (E) => {
+          let x = E.pos.x;
+          let y = E.pos.y;
+          destroyAll('D')
+          destroyAll('E')
+          destroyAll('F')
+          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+        })
+
+        player.onCollide('F', (F) => {
+          let x = F.pos.x;
+          let y = F.pos.y;
+          destroyAll('D')
+          destroyAll('E')
+          destroyAll('F')
+          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+        })
         // 3
         add([text('Kysymys 3'), pos(760, 310), scale(0.2)]);
 
         add([text('Kylla'), pos(754, 365), scale(0.14)]);
         add([text('Vahan'), pos(815, 365), scale(0.14)]);
         add([text('En'), pos(882, 365), scale(0.14)]);
+
+        player.onCollide('G', (G) => {
+          let x = G.pos.x;
+          let y = G.pos.y;
+          destroyAll('G')
+          destroyAll('H')
+          destroyAll('I')
+          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+        })
+
+        player.onCollide('H', (H) => {
+          let x = H.pos.x;
+          let y = H.pos.y;
+          destroyAll('G')
+          destroyAll('H')
+          destroyAll('I')
+          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+        })
+
+        player.onCollide('I', (I) => {
+          let x = I.pos.x;
+          let y = I.pos.y;
+          destroyAll('G')
+          destroyAll('H')
+          destroyAll('I')
+          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+        })
 
         //--------------------------------------------------------------------
         player.onCollide('Tunnel', (Tunnel) => {
