@@ -151,11 +151,11 @@
         add([text('TASO 1'), pos(125, 350), scale(0.2)]);
 
         // 1
-        add([text('Kysymys 1'), pos(278, 310), scale(0.2)]);
+        add([text('Kiinnostaako sinua enemman tyoskentely: \n ulkona, sisalla vai molemmissa'), pos(245, 310), scale(0.13)]);
 
-        add([text('Kylla'), pos(275, 365), scale(0.14)]);
-        add([text('Vahan'), pos(335, 365), scale(0.14)]);
-        add([text('En'), pos(403, 365), scale(0.14)]);
+        add([text('Ulkona'), pos(275, 365), scale(0.1)]);
+        add([text('Sisalla'), pos(335, 365), scale(0.1)]);
+        add([text('Molemmissa'), pos(385, 365), scale(0.1)]);
 
         player.onCollide('A', (A) => {
           let x = A.pos.x;
@@ -164,6 +164,8 @@
           destroyAll('B')
           destroyAll('C')
           add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+          scopeC++;
+          debug.log(scopeC);
         })
 
         player.onCollide('B', (B) => {
@@ -173,6 +175,8 @@
           destroyAll('B')
           destroyAll('C')
           add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+          scopeD++;
+          debug.log(scopeD);
         })
 
         player.onCollide('C', (C) => {
@@ -182,6 +186,9 @@
           destroyAll('B')
           destroyAll('C')
           add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+          scopeE++;
+          debug.log(scopeE);
+
         })
 
         /// 2
@@ -198,6 +205,7 @@
           destroyAll('E')
           destroyAll('F')
           add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+          
         })
 
         player.onCollide('E', (E) => {
