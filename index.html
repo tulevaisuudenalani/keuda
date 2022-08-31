@@ -247,8 +247,8 @@
 
                     onTouchStart((id, pos) => {
                         if (ylosNappi.hasPoint(pos)) {
-                            jumpID = id;
                             if (player.isGrounded()) {
+                                jumpID = id;
                                 player.jump(playerJumpForce, 0);
                             }
                         } else if (vasenNappi.hasPoint(pos)) {
@@ -257,8 +257,6 @@
                         } else if (oikeaNappi.hasPoint(pos)) {
                             keysDown.right = true;
                             rightID = id;
-                        } else {
-                            return;
                         }
                     });
 
@@ -420,8 +418,6 @@
                         } else if (oikeaNappi.hasPoint(pos)) {
                             keysDown.right = true;
                             rightID = id;
-                        } else {
-                            return;
                         }
                     });
 
@@ -576,8 +572,6 @@
                         } else if (oikeaNappi.hasPoint(pos)) {
                             keysDown.right = true;
                             rightID = id;
-                        } else {
-                            return;
                         }
                     });
 
@@ -604,10 +598,6 @@
                         } else if (id == leftID) {
                             leftID = -1;
                             keysDown.left = false;
-                        } else {
-                            jumpID = -1
-                            rightID = -1
-                            leftID = -1
                         }
                     });
                 }
