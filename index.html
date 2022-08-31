@@ -28,14 +28,14 @@
       let playerJumpForce = 250;
       let playerPoints = 0;
 
-      let scopeA = 0;
-      let scopeB = 0;
-      let scopeC = 0;
-      let scopeD = 0;
-      let scopeE = 0;
-      let scopeF = 0;
-      let scopeG = 0;
-      let scopeH = 0;
+      let scopeA = 0;  // Humanistiset ja taidealat
+      let scopeB = 0;  // Kauppa, hallinto ja oikeustieteet
+      let scopeC = 0;  // Luonnontieteet
+      let scopeD = 0;  // Maa- ja metsätalous
+      let scopeE = 0;  // Palvelualat
+      let scopeF = 0;  // Tekniikan alat
+      let scopeG = 0;  // Terveys ja hyvinvointialat
+      let scopeH = 0;  // Tietojenkäsittely ja tietoliikenne
 
       loadSprite('logo', 'Kuvat/keuda_logo.png');
       loadSprite('bg', 'Kuvat/tausta.png');
@@ -48,6 +48,7 @@
       loadSprite('tunnel', 'Kuvat/ampari.png');
       loadSprite('arrow', 'Kuvat/nuoli.png');
       loadSprite('reminder', 'Kuvat/teksti_nuoli.png');
+      loadSprite('empty', 'Kuvat/block_tyhjä.png');
 
       let levels = [
         [
@@ -66,9 +67,9 @@
           '£                                                   £',
           '£                                                   £',
           '£                                                   £',
-          '£                         %  %  %             -     £',
+          '£                         D  E  F             -     £',
           '£                                                   £',
-          '£             %  %  %                 %  %  %     ^ £',
+          '£             A  B  C                 G  H  I     ^ £',
           '£                                                   £',
           '£                        =========                + £',
           '£                       ===========                 £',
@@ -134,8 +135,16 @@
           '+': () => [sprite('tunnel'), solid(), area(), scale(0.5), 'Tunnel'],
           '^': () => [sprite('arrow'), scale(0.5), 'Arrow'],
           '#': () => [sprite('spider'), solid(), area(), scale(1), 'Spider'],
-          '%': () => [sprite('suprise'), solid(), area(), scale(0.4), 'Suprise'],
           '-': () => [sprite('reminder'), area(), scale(0.25), 'Reminder'],
+          'A': () => [sprite('suprise'), solid(), area(), scale(0.4), 'A'],
+          'B': () => [sprite('suprise'), solid(), area(), scale(0.4), 'B'],
+          'C': () => [sprite('suprise'), solid(), area(), scale(0.4), 'C'],
+          'D': () => [sprite('suprise'), solid(), area(), scale(0.4), 'D'],
+          'E': () => [sprite('suprise'), solid(), area(), scale(0.4), 'E'],
+          'F': () => [sprite('suprise'), solid(), area(), scale(0.4), 'F'],
+          'G': () => [sprite('suprise'), solid(), area(), scale(0.4), 'G'],
+          'H': () => [sprite('suprise'), solid(), area(), scale(0.4), 'H'],
+          'I': () => [sprite('suprise'), solid(), area(), scale(0.4), 'I'],
         });
 
         //--------------------------------------------------------------------
@@ -147,6 +156,15 @@
         add([text('Kylla'), pos(275, 365), scale(0.14)]);
         add([text('Vahan'), pos(335, 365), scale(0.14)]);
         add([text('En'), pos(403, 365), scale(0.14)]);
+
+        player.onCollide('A', (A) => {
+          let x = A.pos.x;
+          let y = A.pos.y;
+          destroyAll('A')
+          destroyAll('B')
+          destroyAll('C')
+          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+        })
 
         /// 2
         add([text('Kysymys 2'), pos(510, 275), scale(0.2)]);
