@@ -362,19 +362,6 @@
                         }
                     });
 
-                    onUpdate(() => {
-                        if (keysDown.left) {
-                            player.move(-playerMoveSpeed, 0);
-                            camPos(player.pos);
-                            player.flipX(true);
-                        }
-                        if (keysDown.right) {
-                            player.move(playerMoveSpeed, 0);
-                            camPos(player.pos);
-                            player.flipX(false);
-                        }
-                    });
-
                     onTouchEnd(() => {
                         keysDown.right = false;
                         keysDown.left = false;
@@ -500,23 +487,11 @@
                     }
                 });
 
-                onUpdate(() => {
-                    if (keysDown.left) {
-                        player.move(-playerMoveSpeed, 0);
-                        camPos(player.pos);
-                        player.flipX(true);
-                    }
-                    if (keysDown.right) {
-                        player.move(playerMoveSpeed, 0);
-                        camPos(player.pos);
-                        player.flipX(false);
-                    }
-                });
-
                 onTouchEnd(() => {
                     keysDown.right = false;
                     keysDown.left = false;
                 });
+
                 if (isTouch()) {
                     const ylosNappi = add([
                         sprite("ohjaus"),
@@ -569,19 +544,6 @@
                             keysDown.left = true;
                         } else if (oikeaNappi.hasPoint(pos)) {
                             keysDown.right = true;
-                        }
-                    });
-
-                    onUpdate(() => {
-                        if (keysDown.left) {
-                            player.move(-playerMoveSpeed, 0);
-                            camPos(player.pos);
-                            player.flipX(true);
-                        }
-                        if (keysDown.right) {
-                            player.move(playerMoveSpeed, 0);
-                            camPos(player.pos);
-                            player.flipX(false);
                         }
                     });
 
