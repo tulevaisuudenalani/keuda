@@ -25,7 +25,7 @@
       });
 
       let playerMoveSpeed = 150;
-      let playerJumpForce = 350;
+      let playerJumpForce = 250;
       let playerPoints = 0;
 
       let scopeA = 0;
@@ -48,10 +48,14 @@
       loadSprite('tunnel', 'Kuvat/ampari.png');
       loadSprite('arrow', 'Kuvat/nuoli.png');
       loadSprite('reminder', 'Kuvat/teksti_nuoli.png');
+      loadSprite('flagfinish', 'Kuvat/maali_tausta_levelille.png');
       loadSprite('start', 'Kuvat/start.png');
+      
+      loadSound('hyppy', './hyppy.mp3'); // Hyppy
+
 
       let levels = [
-        [
+      [
           '£                £',
           '£                £',
           '£                £',
@@ -91,12 +95,12 @@
           '£                                                   £',
           '£                                                   £',
           '£                                                   £',
-          '£                         %  %  %                   £',
-          '£    =====                                          £',
-          '£                                              -    £',
-          '£                                                 ^ £',
+          '£                         %  %  %             -     £',
+          '£                                                   £',
+          '£             %  %  %                 %  %  %     ^ £',
+          '£                                                   £',
           '£                        =========                + £',
-          '£              # ==     ===========     #           £',
+          '£                       ===========                 £',
           '=====================================================',
         ],
         [
@@ -108,18 +112,15 @@
           '£                                                                       £',
           '£                                                                       £',
           '£                                                                       £',
+          '£                                 =====                                 £',
+          '£                    ==      ==            ======                       £',
+          '£                                                    ===========        £',
           '£                                                                       £',
+          '£                                                                  -    £',
+          '£            %  %  %       ==  %  %  %  ==       %  %  %              ^ £',
           '£                                                                       £',
-          '£                                                                       £',
-          '£                                                                       £',
-          '£                                                                       £',
-          '£                                      ==       ======                  £',
-          '£                                                                       £',
-          '£                                                                       £',
-          '£           =====             ==                                   -    £',
-          '£                                      ==                             ^ £',
           '£                                                                     + £',
-          '£  #                                                                    £',
+          '£                #                                          #           £',
           '=========================================================================',
         ],
         [
@@ -131,26 +132,21 @@
           '£                                                                       £',
           '£                                                                       £',
           '£                                                                       £',
-          '£                                                                       £',
-          '£                                                                       £',
-          '£                                                                       £',
-          '£                                                                       £',
-          '£                              %                                        £',
-          '£                                                                       £',
-          '£                                                                       £',
-          '£                                                                       £',
-          '£        @%@%%@              x x                                   -    £',
-          '£                          x x x                                      ^ £',
-          '£                        x x x x  x               x                   + £',
-          '£           #           x x x x x  x               x           x        £',
-          '=========================================  ===============  =============',
-          '                                                                         ',
-          '                                         **               **             ',
+          '£                                               #                       £',
+          '£                                          ======                       £',
+          '£              =======          ==                                   !  £',
+          '£                                               #                       £',
+          '£                                          ======                       £',
+          '£            %  %  %       ==  %  %  %                             -    £',
+          '£                                                                     ^ £',
+          '£                                                                     + £',
+          '£                #                                          #           £',
+          '=========================================================================',
         ],
       ];
       //Aloitusruutu
-      scene('firstLevel', () => {
-        debug.log('LEVEL 1');
+      scene('aloitusLevel', () => {
+        debug.log('aloituslevel ');
 
         add([sprite('bg', { width: width(), height: height() }), pos(0, 0), fixed()]);
         add([sprite('ground', { width: screen.width, height: screen.height }), pos(0, 250), fixed()]);
@@ -173,6 +169,96 @@
 
        
         player.onCollide('Start', (Start) => {
+          go('firstLevel');
+        });
+
+        gravity(660);
+
+        onUpdate('Spider', (Spider) => {
+          Spider.move(-15, 0);
+        });
+
+        player.onCollide('Spider', (Spider) => {
+          shake(10);
+        });
+
+        player.onUpdate(() => {
+          camPos(player.pos);
+        });
+
+        onKeyDown('left', () => {
+          player.move(-playerMoveSpeed, 0);
+          camPos(player.pos);
+          player.flipX(true);
+        });
+
+        onKeyDown('right', () => {
+          player.move(playerMoveSpeed, 0);
+          camPos(player.pos);
+          player.flipX(false);
+        });
+
+        onKeyPress('space', () => {
+          if (player.isGrounded()) {
+            player.jump(playerJumpForce, 0);
+          }
+        });
+
+        onKeyPress('up', () => {
+          if (player.isGrounded()) {
+            player.jump(playerJumpForce, 0);
+          }
+        });
+      });
+
+      // LEVEL: 1
+      scene('firstLevel', () => {
+        debug.log('TASO 1');
+
+        add([sprite('bg', { width: width(), height: height() }), pos(0, 0), fixed()]);
+        add([sprite('ground', { width: screen.width, height: screen.height }), pos(0, 250), fixed()]);
+        // add([sprite('logo', { width: 150, height: 50 }), pos(0, 580), fixed()]);
+
+        let player = add([sprite('mario'), solid(), pos(140, 360), body(), area(), scale(0.7)]);
+
+        addLevel(levels[0], {
+          width: 20,
+          height: 20,
+          '=': () => [sprite('block'), solid(), area(), scale(0.44), ''],
+          '£': () => [sprite('block'), solid(), area(), scale(0.44), ''],
+          '+': () => [sprite('tunnel'), solid(), area(), scale(0.5), 'Tunnel'],
+          '^': () => [sprite('arrow'), scale(0.5), 'Arrow'],
+          '#': () => [sprite('spider'), solid(), area(), scale(1), 'Spider'],
+          '%': () => [sprite('suprise'), solid(), area(), scale(0.4), 'Suprise'],
+          '-': () => [sprite('reminder'), area(), scale(0.25), 'Reminder'],
+        });
+
+        //--------------------------------------------------------------------
+        add([text('TASO 1'), pos(125, 350), scale(0.2)]);
+
+        // 1
+        add([text('Kysymys 1'), pos(278, 310), scale(0.2)]);
+
+        add([text('Kylla'), pos(275, 365), scale(0.14)]);
+        add([text('Vahan'), pos(335, 365), scale(0.14)]);
+        add([text('En'), pos(403, 365), scale(0.14)]);
+
+        /// 2
+        add([text('Kysymys 2'), pos(510, 275), scale(0.2)]);
+
+        add([text('Kylla'), pos(516, 325), scale(0.14)]);
+        add([text('Vahan'), pos(574, 325), scale(0.14)]);
+        add([text('En'), pos(642, 325), scale(0.14)]);
+
+        // 3
+        add([text('Kysymys 3'), pos(760, 310), scale(0.2)]);
+
+        add([text('Kylla'), pos(754, 365), scale(0.14)]);
+        add([text('Vahan'), pos(815, 365), scale(0.14)]);
+        add([text('En'), pos(882, 365), scale(0.14)]);
+
+        //--------------------------------------------------------------------
+        player.onCollide('Tunnel', (Tunnel) => {
           go('secondLevel');
         });
 
@@ -190,98 +276,54 @@
           camPos(player.pos);
         });
 
+        //-------------------------------------------------------------------------
         onKeyDown('left', () => {
           player.move(-playerMoveSpeed, 0);
           camPos(player.pos);
           player.flipX(true);
         });
 
-        onKeyDown('right', () => {
-          player.move(playerMoveSpeed, 0);
-          camPos(player.pos);
-          player.flipX(false);
-        });
-
-        onKeyPress('space', () => {
-          if (player.isGrounded()) {
-            player.jump(playerJumpForce, 0);
-          }
-        });
-
-        onKeyPress('up', () => {
-          if (player.isGrounded()) {
-            player.jump(playerJumpForce, 0);
-          }
-        });
-      });
-      // LEVEL: 1
-      scene('secondLevel', () => {
-        debug.log('LEVEL 2');
-
-        add([sprite('bg', { width: width(), height: height() }), pos(0, 0), fixed()]);
-        add([sprite('ground', { width: screen.width, height: screen.height }), pos(0, 250), fixed()]);
-        // add([sprite('logo', { width: 150, height: 50 }), pos(0, 580), fixed()]);
-
-        let player = add([sprite('mario'), solid(), pos(140, 240), body(), area(), scale(0.7)]);
-
-        addLevel(levels[1], {
-          width: 20,
-          height: 20,
-          '=': () => [sprite('block'), solid(), area(), scale(0.44), ''],
-          '£': () => [sprite('block'), solid(), area(), scale(0.44), ''],
-          '+': () => [sprite('tunnel'), solid(), area(), scale(0.5), 'Tunnel'],
-          '^': () => [sprite('arrow'), scale(0.4), 'Arrow'],
-          '#': () => [sprite('spider'), solid(), area(), scale(1), 'Spider'],
-          '%': () => [sprite('suprise'), solid(), area(), scale(0.4), 'Suprise'],
-          '-': () => [sprite('reminder'), area(), scale(0.2), 'Reminder'],
-        });
-
-        add([text('Pidatko elaimista?'), pos(510, 275), scale(0.2)]);
-
-        // Ykkös vastaukset
-        add([text('Kylla'), pos(516, 325), scale(0.14)]);
-
-        add([text('Vahan'), pos(574, 325), scale(0.14)]);
-
-        add([text('En'), pos(642, 325), scale(0.14)]);
-
-        player.onCollide('Tunnel', (Tunnel) => {
-          go('thirdLevel');
-        });
-
-        gravity(660);
-
-        onUpdate('Spider', (Spider) => {
-          Spider.move(-15, 0);
-        });
-
-        player.onCollide('Spider', (Spider) => {
-          shake(10);
-        });
-
-        player.onUpdate(() => {
-          camPos(player.pos);
-        });
-
-        onKeyDown('left', () => {
+        onKeyDown('a', () => {
           player.move(-playerMoveSpeed, 0);
           camPos(player.pos);
           player.flipX(true);
         });
 
+        //-------------------------------------------------------------------------
         onKeyDown('right', () => {
           player.move(playerMoveSpeed, 0);
           camPos(player.pos);
           player.flipX(false);
         });
 
+        onKeyDown('d', () => {
+          player.move(playerMoveSpeed, 0);
+          camPos(player.pos);
+          player.flipX(false);
+        });
+
+        //------------------------------------------------------------------------- 
         onKeyPress('space', () => {
           if (player.isGrounded()) {
             player.jump(playerJumpForce, 0);
+            const jumpSound = play('hyppy', {
+              volume: 0.5,
+              loop: false,
+            });
           }
         });
 
         onKeyPress('up', () => {
+          if (player.isGrounded()) {
+            player.jump(playerJumpForce, 0);
+            const jumpSound = play('hyppy', {
+              volume: 0.5,
+              loop: false,
+            });
+          }
+        });
+
+        onKeyPress('w', () => {
           if (player.isGrounded()) {
             player.jump(playerJumpForce, 0);
           }
@@ -289,19 +331,20 @@
       });
 
       // LEVEL: 2
-      scene('thirdLevel', () => {
-        debug.log('LEVEL 3');
+      scene('secondLevel', () => {
+        debug.log('TASO 2');
 
         add([sprite('bg', { width: width(), height: height() }), pos(0, 0), fixed()]);
         add([sprite('ground', { width: screen.width, height: screen.height }), pos(0, 250), fixed()]);
 
         // add([sprite('logo', { width: 150, height: 50 }), pos(0, 580), fixed()]);
+        let player = add([sprite('mario'), solid(), pos(140, 250), body(), area(), scale(0.7)]);
 
-        let player = add([sprite('mariojumpoff'), solid(), pos(140, 160), body(), area(), scale(0.8)]);
+        // let player = add([sprite('mariojumpoff'), solid(), pos(140, 160), body(), area(), scale(0.8)]);
 
         gravity(660);
 
-        addLevel(levels[2], {
+        addLevel(levels[1], {
           width: 20,
           height: 20,
           '=': () => [sprite('block'), solid(), area(), scale(0.44), 'Block'],
@@ -310,11 +353,38 @@
           '^': () => [sprite('arrow'), scale(0.4), 'Arrow'],
           '#': () => [sprite('spider'), solid(), area(), scale(1), 'Spider'],
           '%': () => [sprite('suprise'), solid(), area(), scale(0.4), 'Suprise'],
-          '-': () => [sprite('reminder'), solid(), area(), scale(0.2), 'Reminder'],
+          '-': () => [sprite('reminder'), area(), scale(0.2), 'Reminder'],
         });
 
+        //--------------------------------------------------------------------
+        add([text('TASO 2'), pos(125, 275), scale(0.2)]);
+
+
+        // 1
+        add([text('Kysymys 4'), pos(260, 230), scale(0.2)]);
+
+        add([text('Kylla'), pos(255, 286), scale(0.14)]);
+        add([text('Vahan'), pos(314, 286), scale(0.14)]);
+        add([text('En'), pos(382, 286), scale(0.14)]);
+
+        /// 2
+        add([text('Kysymys 5'), pos(620, 230), scale(0.2)]);
+
+        add([text('Kylla'), pos(610, 286), scale(0.14)]);
+        add([text('Vahan'), pos(675, 286), scale(0.14)]);
+        add([text('En'), pos(740, 286), scale(0.14)]);
+
+        // 3
+        add([text('Kysymys 6'), pos(980, 230), scale(0.2)]);
+
+        add([text('Kylla'), pos(975, 286), scale(0.14)]);
+        add([text('Vahan'), pos(1035, 286), scale(0.14)]);
+        add([text('En'), pos(1103, 286), scale(0.14)]);
+
+        //--------------------------------------------------------------------
+
         player.onCollide('Tunnel', (Tunnel) => {
-          go('fourthLevel');
+          go('thirdLevel');
         });
 
         onUpdate('Spider', (Spider) => {
@@ -329,25 +399,54 @@
           camPos(player.pos);
         });
 
+        //-------------------------------------------------------------------------
         onKeyDown('left', () => {
           player.move(-playerMoveSpeed, 0);
           camPos(player.pos);
           player.flipX(true);
         });
 
+        onKeyDown('a', () => {
+          player.move(-playerMoveSpeed, 0);
+          camPos(player.pos);
+          player.flipX(true);
+        });
+
+        //-------------------------------------------------------------------------
         onKeyDown('right', () => {
           player.move(playerMoveSpeed, 0);
           camPos(player.pos);
           player.flipX(false);
         });
 
+        onKeyDown('d', () => {
+          player.move(playerMoveSpeed, 0);
+          camPos(player.pos);
+          player.flipX(false);
+        });
+
+        //------------------------------------------------------------------------- 
         onKeyPress('space', () => {
           if (player.isGrounded()) {
             player.jump(playerJumpForce, 0);
+            const jumpSound = play('hyppy', {
+              volume: 0.5,
+              loop: false,
+            });
           }
         });
 
         onKeyPress('up', () => {
+          if (player.isGrounded()) {
+            player.jump(playerJumpForce, 0);
+            const jumpSound = play('hyppy', {
+              volume: 0.5,
+              loop: false,
+            });
+          }
+        });
+
+        onKeyPress('w', () => {
           if (player.isGrounded()) {
             player.jump(playerJumpForce, 0);
           }
@@ -355,18 +454,18 @@
       });
 
       // LEVEL: 3
-      scene('fourthLevel', () => {
-        debug.log('LEVEL 4');
+      scene('thirdLevel', () => {
+        debug.log('TASO 3');
 
         add([sprite('bg', { width: width(), height: height() }), pos(0, 0), fixed()]);
         add([sprite('ground', { width: screen.width, height: screen.height }), pos(0, 250), fixed()]);
         // add([sprite('logo', { width: 150, height: 50 }), pos(0, 580), fixed()]);
 
-        let player = add([sprite('mario'), solid(), pos(140, 280), body(), area(), scale(0.8)]);
+        let player = add([sprite('mario'), solid(), pos(140, 160), body(), area(), scale(0.7)]);
 
         gravity(660);
 
-        addLevel(levels[3], {
+        addLevel(levels[2], {
           width: 20,
           height: 20,
           '=': () => [sprite('block'), solid(), area(), scale(0.44), ''],
@@ -376,8 +475,30 @@
           '#': () => [sprite('spider'), solid(), area(), scale(1), 'Spider'],
           '*': () => [sprite('arrow'), solid(), area(), scale(0.5), 'Death'],
           '%': () => [sprite('suprise'), solid(), area(), scale(0.4), 'Suprise'],
-          '-': () => [sprite('reminder'), solid(), area(), scale(0.2), 'Reminder'],
+          '-': () => [sprite('reminder'), area(), scale(0.2), 'Reminder'],
+          '!': () => [sprite('flagfinish'), solid(), area(), scale(0.5), 'flagfinish'],
         });
+
+        
+        //--------------------------------------------------------------------
+        add([text('TASO 3'), pos(125, 280), scale(0.2)]);
+
+        // 1
+        add([text('Kysymys 7'), pos(260, 230), scale(0.2)]);
+
+        add([text('Kylla'), pos(255, 286), scale(0.14)]);
+        add([text('Vahan'), pos(314, 286), scale(0.14)]);
+        add([text('En'), pos(382, 286), scale(0.14)]);
+
+        /// 2
+        add([text('Kysymys 8'), pos(620, 230), scale(0.2)]);
+
+        add([text('Kylla'), pos(610, 286), scale(0.14)]);
+        add([text('Vahan'), pos(675, 286), scale(0.14)]);
+        add([text('En'), pos(740, 286), scale(0.14)]);
+
+        //--------------------------------------------------------------------
+
 
         player.onCollide('Tunnel', (Tunnel) => {
           go('firstLevel');
@@ -400,25 +521,54 @@
           camPos(player.pos);
         });
 
+        //-------------------------------------------------------------------------
         onKeyDown('left', () => {
           player.move(-playerMoveSpeed, 0);
           camPos(player.pos);
           player.flipX(true);
         });
 
+        onKeyDown('a', () => {
+          player.move(-playerMoveSpeed, 0);
+          camPos(player.pos);
+          player.flipX(true);
+        });
+
+        //-------------------------------------------------------------------------
         onKeyDown('right', () => {
           player.move(playerMoveSpeed, 0);
           camPos(player.pos);
           player.flipX(false);
         });
 
+        onKeyDown('d', () => {
+          player.move(playerMoveSpeed, 0);
+          camPos(player.pos);
+          player.flipX(false);
+        });
+
+        //------------------------------------------------------------------------- 
         onKeyPress('space', () => {
           if (player.isGrounded()) {
             player.jump(playerJumpForce, 0);
+            const jumpSound = play('hyppy', {
+              volume: 0.5,
+              loop: false,
+            });
           }
         });
 
         onKeyPress('up', () => {
+          if (player.isGrounded()) {
+            player.jump(playerJumpForce, 0);
+            const jumpSound = play('hyppy', {
+              volume: 0.5,
+              loop: false,
+            });
+          }
+        });
+
+        onKeyPress('w', () => {
           if (player.isGrounded()) {
             player.jump(playerJumpForce, 0);
           }
@@ -426,7 +576,7 @@
       });
 
       onLoad(() => {
-        go('firstLevel');
+        go('aloitusLevel');
       });
     </script>
   </body>
