@@ -49,11 +49,36 @@
       loadSprite('arrow', 'Kuvat/nuoli.png');
       loadSprite('reminder', 'Kuvat/teksti_nuoli.png');
       loadSprite('flagfinish', 'Kuvat/maali_tausta_levelille.png');
+      loadSprite('start', 'Kuvat/start.png');
       
       loadSound('hyppy', './hyppy.mp3'); // Hyppy
 
 
       let levels = [
+      [
+          '£                £',
+          '£                £',
+          '£                £',
+          '£                £',
+          '£                £',
+          '£                £',
+          '£                £',
+          '£                £',
+          '£                £',
+          '£                £',
+          '£                £',
+          '£                £',
+          '£                £',
+          '£                £',
+          '£                £',
+          '£                £',
+          '£                £',
+          '£      (         £',
+          '£                £',
+          '£                £',
+          '£                £',
+          '==================',
+        ],
         [
           '£                                                   £',
           '£                                                   £',
@@ -119,9 +144,75 @@
           '=========================================================================',
         ],
       ];
+      //Aloitusruutu
+      scene('firstLevel', () => {
+        debug.log('Aloitus ');
+
+        add([sprite('bg', { width: width(), height: height() }), pos(0, 0), fixed()]);
+        add([sprite('ground', { width: screen.width, height: screen.height }), pos(0, 250), fixed()]);
+        // add([sprite('logo', { width: 150, height: 50 }), pos(0, 580), fixed()]);
+
+        let player = add([sprite('mario'), solid(), pos(50, 240), body(), area(), scale(0.7)]);
+
+        addLevel(levels[0], {
+          width: 20,
+          height: 20,
+          '=': () => [sprite('block'), solid(), area(), scale(0.44), ''],
+          '£': () => [sprite('block'), solid(), area(), scale(0.44), ''],
+          '+': () => [sprite('tunnel'), solid(), area(), scale(0.5), 'Tunnel'],
+          '^': () => [sprite('arrow'), scale(0.4), 'Arrow'],
+          '#': () => [sprite('spider'), solid(), area(), scale(1), 'Spider'],
+          '%': () => [sprite('suprise'), solid(), area(), scale(0.4), 'Suprise'],
+          '-': () => [sprite('reminder'), area(), scale(0.2), 'Reminder'],
+          '(': () => [sprite('start'), area(), scale(0.5), 'Start'],
+        });
+
+       
+        player.onCollide('Start', (Start) => {
+          go('secondLevel');
+        });
+
+        gravity(660);
+
+        onUpdate('Spider', (Spider) => {
+          Spider.move(-15, 0);
+        });
+
+        player.onCollide('Spider', (Spider) => {
+          shake(10);
+        });
+
+        player.onUpdate(() => {
+          camPos(player.pos);
+        });
+
+        onKeyDown('left', () => {
+          player.move(-playerMoveSpeed, 0);
+          camPos(player.pos);
+          player.flipX(true);
+        });
+
+        onKeyDown('right', () => {
+          player.move(playerMoveSpeed, 0);
+          camPos(player.pos);
+          player.flipX(false);
+        });
+
+        onKeyPress('space', () => {
+          if (player.isGrounded()) {
+            player.jump(playerJumpForce, 0);
+          }
+        });
+
+        onKeyPress('up', () => {
+          if (player.isGrounded()) {
+            player.jump(playerJumpForce, 0);
+          }
+        });
+      });
 
       // LEVEL: 1
-      scene('firstLevel', () => {
+      scene('secondLevel', () => {
         debug.log('TASO 1');
 
         add([sprite('bg', { width: width(), height: height() }), pos(0, 0), fixed()]);
@@ -130,7 +221,7 @@
 
         let player = add([sprite('mario'), solid(), pos(140, 360), body(), area(), scale(0.7)]);
 
-        addLevel(levels[0], {
+        addLevel(levels[1], {
           width: 20,
           height: 20,
           '=': () => [sprite('block'), solid(), area(), scale(0.44), ''],
@@ -168,7 +259,7 @@
 
         //--------------------------------------------------------------------
         player.onCollide('Tunnel', (Tunnel) => {
-          go('secondLevel');
+          go('thirdLevel');
         });
 
         gravity(660);
@@ -240,7 +331,7 @@
       });
 
       // LEVEL: 2
-      scene('secondLevel', () => {
+      scene('thirdLevel', () => {
         debug.log('TASO 2');
 
         add([sprite('bg', { width: width(), height: height() }), pos(0, 0), fixed()]);
@@ -253,7 +344,7 @@
 
         gravity(660);
 
-        addLevel(levels[1], {
+        addLevel(levels[2], {
           width: 20,
           height: 20,
           '=': () => [sprite('block'), solid(), area(), scale(0.44), 'Block'],
@@ -293,7 +384,7 @@
         //--------------------------------------------------------------------
 
         player.onCollide('Tunnel', (Tunnel) => {
-          go('thirdLevel');
+          go('fourthLevel');
         });
 
         onUpdate('Spider', (Spider) => {
@@ -363,7 +454,7 @@
       });
 
       // LEVEL: 3
-      scene('thirdLevel', () => {
+      scene('fourthLevel', () => {
         debug.log('TASO 3');
 
         add([sprite('bg', { width: width(), height: height() }), pos(0, 0), fixed()]);
@@ -374,7 +465,7 @@
 
         gravity(660);
 
-        addLevel(levels[2], {
+         addLevel(levels[3], {
           width: 20,
           height: 20,
           '=': () => [sprite('block'), solid(), area(), scale(0.44), ''],
@@ -415,7 +506,7 @@
 
         player.onCollide('Death', (Death) => {
           shake(50);
-          go('thirdLevel');
+          go('fourthLevel');
         });
 
         onUpdate('Spider', (Spider) => {
