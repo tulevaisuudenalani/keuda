@@ -82,7 +82,7 @@
           '£                                                   £',
           '£                         D  E  F             -     £',
           '£                                                   £',
-          '£             A  B  C                 G  H  I     ^ £',
+          '£             A  B  C                 G     I     ^ £',
           '£                                                   £',
           '£                        =========                + £',
           '£                       ===========                 £',
@@ -102,7 +102,7 @@
           '£                                                    ===========        £',
           '£                                                                       £',
           '£                                                                  -    £',
-          '£           A   B   C      ==  D  E  F  ==       G  H  I              ^ £',
+          '£           A   B   C          D    E    F         G   H   I          ^ £',
           '£                                                                       £',
           '£                                                                     + £',
           '£                #                                          #           £',
@@ -156,7 +156,6 @@
           'E': () => [sprite('suprise'), solid(), area(), scale(0.4), 'E'],
           'F': () => [sprite('suprise'), solid(), area(), scale(0.4), 'F'],
           'G': () => [sprite('suprise'), solid(), area(), scale(0.4), 'G'],
-          'H': () => [sprite('suprise'), solid(), area(), scale(0.4), 'H'],
           'I': () => [sprite('suprise'), solid(), area(), scale(0.4), 'I'],
         });
 
@@ -164,7 +163,7 @@
         add([text('TASO 1'), pos(125, 350), scale(0.2)]);
 
         // 1
-        add([text('Kiinnostaako sinua enemman tyoskentely: \n ulkona, sisalla vai molemmissa'), pos(245, 310), scale(0.13)]);
+        add([text('Kiinnostaako sinua enemman tyoskentely: \nulkona, sisalla vai molemmissa?'), pos(245, 310), scale(0.13)]);
 
         add([text('Ulkona'), pos(275, 365), scale(0.1)]);
         add([text('Sisalla'), pos(335, 365), scale(0.1)]);
@@ -210,11 +209,11 @@
         })
 
         /// 2
-        add([text('Tyoskenteletko mieluiten koneiden, \n ihmisten vaiko elainten parissa'), pos(505, 275), scale(0.13)]);
+        add([text('Tyoskenteletko mieluiten koneiden, \nihmisten vaiko elainten parissa?'), pos(505, 275), scale(0.13)]);
 
-        add([text('Koneiden'), pos(516, 325), scale(0.1)]);
+        add([text('Koneiden'), pos(513, 325), scale(0.1)]);
         add([text('Ihmisten'), pos(574, 325), scale(0.1)]);
-        add([text('Elainten'), pos(642, 325), scale(0.1)]);
+        add([text('Elainten'), pos(633, 325), scale(0.1)]);
 
         player.onCollide('D', (D) => {
           let x = D.pos.x;
@@ -252,17 +251,15 @@
           scopeD++;
         })
         // 3
-        add([text('Tyoskenteletko mielellasi tietokneella'), pos(760, 310), scale(0.13)]);
+        add([text('Mika naista kuvaa sinua parhaiten?'), pos(740, 310), scale(0.13)]);
 
-        add([text('En'), pos(765, 365), scale(0.1)]);
-        add([text('Valilla'), pos(815, 365), scale(0.1)]);
-        add([text('Kylla'), pos(882, 365), scale(0.1)]);
+        add([text('Olen sosiaalinen ja \nviihdyn porukassa'), pos(730, 365), scale(0.1)]);
+        add([text('Viihdyn parhaiten yksikseni'), pos(840, 365), scale(0.1)]);
 
         player.onCollide('G', (G) => {
           let x = G.pos.x;
           let y = G.pos.y;
           destroyAll('G')
-          destroyAll('H')
           destroyAll('I')
           add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
           scopeC++;
@@ -270,23 +267,10 @@
           scopeG++;
         })
 
-        player.onCollide('H', (H) => {
-          let x = H.pos.x;
-          let y = H.pos.y;
-          destroyAll('G')
-          destroyAll('H')
-          destroyAll('I')
-          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
-          scopeF++;
-          scopeA++;
-
-        })
-
         player.onCollide('I', (I) => {
           let x = I.pos.x;
           let y = I.pos.y;
           destroyAll('G')
-          destroyAll('H')
           destroyAll('I')
           add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
           scopeH++;
@@ -399,11 +383,11 @@
 
 
         // 1
-        add([text('Mika motivoi sinua eniten'), pos(260, 230), scale(0.13)]);
+        add([text('Mita naista teet mieluiten vapaa-ajallasi?'), pos(215, 230), scale(0.13)]);
 
-        add([text('Ymparisto'), pos(230, 286), scale(0.1)]);
-        add([text('Ongelman ratkaisu'), pos(285, 286), scale(0.1)]);
-        add([text('Muiden auttaminen'), pos(373, 286), scale(0.1)]);
+        add([text('Teen taidetta'), pos(223, 286), scale(0.1)]);
+        add([text('Rakentelen ja\n nikkaroin'), pos(300, 286), scale(0.1)]);
+        add([text('Viihdyn luonnossa'), pos(380, 286), scale(0.1)]);
 
         player.onCollide('A', (A) => {
           let x = A.pos.x;
@@ -441,11 +425,11 @@
         })
 
         /// 2
-        add([text('Kysymys 5'), pos(620, 230), scale(0.2)]);
+        add([text('Mita toivot tulevalta ammatiltasi?'), pos(620, 230), scale(0.13)]);
 
-        add([text('Kylla'), pos(610, 286), scale(0.14)]);
-        add([text('Vahan'), pos(675, 286), scale(0.14)]);
-        add([text('En'), pos(740, 286), scale(0.14)]);
+        add([text('Autan ja \npalvelen muita'), pos(600, 286), scale(0.1)]);
+        add([text('Suunnittelua ja \njarjestelmallisyytta'), pos(690, 286), scale(0.1)]);
+        add([text('Luovuutta ja \nkasilla tekemista'), pos(800, 286), scale(0.1)]);
 
         player.onCollide('D', (D) => {
           let x = D.pos.x;
@@ -473,11 +457,11 @@
         })
 
         // 3
-        add([text('Kysymys 6'), pos(980, 230), scale(0.2)]);
+        add([text('Kuinka toimit paineen alla?'), pos(1030, 230), scale(0.13)]);
 
-        add([text('Kylla'), pos(975, 286), scale(0.14)]);
-        add([text('Vahan'), pos(1035, 286), scale(0.14)]);
-        add([text('En'), pos(1103, 286), scale(0.14)]);
+        add([text('Hyvin, tykkaan \nhaasteista'), pos(1005, 286), scale(0.1)]);
+        add([text('Huonosti, \nmenen lukkoon'), pos(1089, 286), scale(0.1)]);
+        add([text('Tukeudun \nryhmalaisiini'), pos(1170, 286), scale(0.1)]);
 
         player.onCollide('G', (G) => {
           let x = G.pos.x;
