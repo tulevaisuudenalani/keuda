@@ -122,7 +122,7 @@
           '£              =======          ==                                      £',
           '£                                               #                       £',
           '£                                          ======                       £',
-          '£            A  B  C       ==  D  E  F                             -    £',
+          '£            A     B       ==  D  E  F                             -    £',
           '£                                                                     ^ £',
           '£                                                                     + £',
           '£                #                                          #           £',
@@ -607,18 +607,16 @@
         add([text('TASO 3'), pos(125, 280), scale(0.2)]);
 
         // 1
-        add([text('Kysymys 7'), pos(260, 230), scale(0.2)]);
+        add([text('Haluatko tehda tyosi:'), pos(260, 230), scale(0.2)]);
 
-        add([text('Kylla'), pos(255, 286), scale(0.14)]);
-        add([text('Vahan'), pos(314, 286), scale(0.14)]);
-        add([text('En'), pos(382, 286), scale(0.14)]);
+        add([text('Aikataulua \nnoudattaen?'), pos(245, 286), scale(0.14)]);
+        add([text('Joustavasti, \ntilanteen mukaan?'), pos(350, 286), scale(0.14)]);
 
         player.onCollide('A', (A) => {
           let x = A.pos.x;
           let y = A.pos.y;
           destroyAll('A')
           destroyAll('B')
-          destroyAll('C')
           add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
         })
 
@@ -627,16 +625,6 @@
           let y = B.pos.y;
           destroyAll('A')
           destroyAll('B')
-          destroyAll('C')
-          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
-        })
-
-        player.onCollide('C', (C) => {
-          let x = C.pos.x;
-          let y = C.pos.y;
-          destroyAll('A')
-          destroyAll('B')
-          destroyAll('C')
           add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
         })
 
