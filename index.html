@@ -28,6 +28,17 @@
       let playerJumpForce = 250;
       let playerPoints = 0;
 
+
+      //KOULUTUS ALA LINKIT
+      var linkki1 = 'https://www.keuda.fi/ala/humanistiset-taidealat/';
+      var linkki2 ='https://www.keuda.fi/ala/kauppa-hallinto-oikeustieteet/';
+      var linkki3 ='https://www.keuda.fi/ala/luonnontieteet/';
+      var linkki4 ='https://www.keuda.fi/ala/maa-ja-metsatalousala-myos-puutarha-ala/';
+      var linkki5 ='https://www.keuda.fi/ala/palvelualat/';
+      var linkki6 ='https://www.keuda.fi/ala/tekniikan-alat/';
+      var linkki7 ='https://www.keuda.fi/ala/terveys-hyvinvointialat/';
+      var linkki8 ='https://www.keuda.fi/ala/tietojenkasittely-tietoliikenne-ict/';
+
       let scopeA = 0;
       let scopeB = 0;
       let scopeC = 0;
@@ -37,7 +48,10 @@
       let scopeG = 0;
       let scopeH = 0;
 
-      var ala1 = 
+      var ala1 = '';
+      var ala2 = '';
+      var ala3 = '';
+
 
       loadSprite('logo', 'Kuvat/keuda_logo.png');
       loadSprite('bg', 'Kuvat/tausta.png');
@@ -407,6 +421,12 @@
         });
       });
 
+
+
+      //listataan muuttujat, joisssa on tallennettuna pisteet aloihin
+      
+
+
       // EndScreen
       scene('fourthLevel', () => {
         debug.log('End Screen')
@@ -432,9 +452,22 @@
           scale(0.15),
         ])
 
+        //Näytettävät ala vaihtoehdot
         add([
           text(ala1),
-          pos(width() / 2 - 160, 140),
+          pos(width() / 2 - 160, 200),
+          scale(0.15),
+        ])
+
+        add([
+          text(ala2),
+          pos(width() / 2 - 160, 260),
+          scale(0.15),
+        ])
+
+        add([
+          text(ala3),
+          pos(width() / 2 - 160, 320),
           scale(0.15),
         ])
       });
