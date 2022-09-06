@@ -225,12 +225,20 @@
         onKeyPress("space", () => {
           if (player.isGrounded()) {
             player.jump(playerJumpForce, 0);
+            const jumpSound = play("hyppy", {
+              volume: 0.5,
+              loop: false,
+            });
           }
         });
 
         onKeyPress("up", () => {
           if (player.isGrounded()) {
             player.jump(playerJumpForce, 0);
+            const jumpSound = play("hyppy", {
+              volume: 0.5,
+              loop: false,
+            });
           }
         });
       });
