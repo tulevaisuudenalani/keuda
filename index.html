@@ -48,6 +48,8 @@
       loadSprite('tunnel', 'Kuvat/ampari.png');
       loadSprite('arrow', 'Kuvat/nuoli.png');
       loadSprite('reminder', 'Kuvat/teksti_nuoli.png');
+      loadSprite('end', 'Kuvat/maali_tausta.png');
+      loadSprite('endback', 'Kuvat/maali_tausta_ala.png');
 
       let levels = [
         [
@@ -115,8 +117,8 @@
           '=========================================================================',
         ],
         [
-          '                                                     ',
-          '                                                     ',
+          '     ~                                               ',
+          '          |                                          ',
           '                                                     ',
           '                                                     ',
           '                                                     ',
@@ -412,24 +414,20 @@
         addLevel(levels[3], {
           width: 20,
           height: 20,
+          '~': () => [sprite('endback'), area(), scale(0.15), 'endback'],
+          '|': () => [sprite('end'), area(), scale(0.1), 'end'],
         });
 
         add([
           text('Kiitos pelaamisesta'),
-          pos(123, 16),
+          pos(width() / 2 - 123, 110),
           scale(0.3),
         ])
 
         add([
-          text('Sinulle sopivat alat ovat:'),
-          pos(160, 40),
+          text('Sinulle sopivia aloja testin mukaan voivat olla:'),
+          pos(width() / 2 - 160, 140),
           scale(0.15),
-        ])
-
-        add([
-          text('Tahan tulee suositellut alat'),
-          pos(165, 65),
-          scale(0.1),
         ])
       });
 
