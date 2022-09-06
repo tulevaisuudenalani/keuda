@@ -128,6 +128,20 @@
           '£                #                                          #           £',
           '=========================================================================',
         ],
+        [
+          '                                           ',
+          '                                           ',
+          '                                           ',
+          '                                           ',
+          '                                           ',
+          '                                           ',
+          '                                           ',
+          '                                           ',
+          '                                           ',
+          '                                           ',
+          '                                           ',
+          '                                           ',
+        ]
       ];
 
       // LEVEL: 1
@@ -650,7 +664,7 @@
 
 
         player.onCollide('Tunnel', (Tunnel) => {
-          go('firstLevel');
+          go('fourthLevel');
         });
 
         player.onCollide('Death', (Death) => {
@@ -714,6 +728,30 @@
             player.jump(playerJumpForce, 0);
           }
         });
+      });
+
+        // EndScreen
+      scene('fourthLevel', () => {
+        debug.log('End Screen')
+
+        add([sprite('bg', { width: width(), height: height() }), pos(0, 0), fixed()]);
+
+        addLevel(levels[3], {
+          width: 20,
+          height: 20,
+        });
+
+        add([
+          text('Kiitos pelaamisesta'),
+          pos(width() / 2 - 123, height() / 2 - 115),
+          scale(0.3),
+        ])
+
+        add([
+          text('Sinulle sopivia aloja voisivat olla:'),
+          pos(width() / 2 - 115, height() /2 - 90),
+          scale(0.15),
+        ])
       });
 
       onLoad(() => {
