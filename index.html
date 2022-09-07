@@ -43,16 +43,13 @@
       let scopeG = 0; // Terveys ja hyvinvointialat
       let scopeH = 0; // Tietojenkäsittely ja tietoliikenne
 
-      let enimText = null;
-      let toinText = null;
-      let kolmText = null;
-
       // Load graphics
       loadSprite("logo", "Kuvat/keuda_logo.png");
       loadSprite("bg", "Kuvat/tausta.png");
+      loadSprite("bg2", "Kuvat/tausta_shade.png");
       loadSprite("ground", "Kuvat/tausta_alareuna.png");
       loadSprite("mario", "Kuvat/hahmo.png");
-      loadSprite("suprise", "Kuvat/block_kysymys.png");
+      loadSprite("suprise", "Kuvat/block_tyhja_kysymys.png");
       loadSprite("spider", "Kuvat/örkki.png");
       loadSprite("block", "Kuvat/block.png");
       loadSprite("tunnel", "Kuvat/ampari.png");
@@ -64,6 +61,14 @@
       loadSprite('end', 'Kuvat/maali_tausta.png');
       loadSprite('endback', 'Kuvat/maali_tausta_ala.png');
       loadSprite('endbox', 'Kuvat/loppu_solu.png');
+      loadSprite('ala1', 'Kuvat/ala1.png');
+      loadSprite('ala2', 'Kuvat/ala2.png');
+      loadSprite('ala3', 'Kuvat/ala3.png');
+      loadSprite('ala4', 'Kuvat/ala4.png');
+      loadSprite('ala5', 'Kuvat/ala5.png');
+      loadSprite('ala6', 'Kuvat/ala6.png');
+      loadSprite('ala7', 'Kuvat/ala7.png');
+      loadSprite('ala8', 'Kuvat/ala8.png');
 
       loadSprite("k1", "Kuvat/kysymykset/k_1.png");
       loadSprite("k2", "Kuvat/kysymykset/k_2.png");
@@ -235,6 +240,12 @@
           scale(0.7),
         ]);
 
+        add([
+          sprite("bg2", { width: width(), height: height() }),
+          pos(0, 0),
+          fixed(),
+        ]);
+
         addLevel(levels[0], {
           width: 20,
           height: 20,
@@ -342,6 +353,12 @@
           body(),
           area(),
           scale(0.7),
+        ]);
+
+        add([
+          sprite("bg2", { width: width(), height: height() }),
+          pos(0, 0),
+          fixed(),
         ]);
 
         addLevel(levels[1], {
@@ -558,6 +575,12 @@
         add([
           sprite("ground", { width: screen.width, height: screen.height }),
           pos(0, 250),
+          fixed(),
+        ]);
+
+        add([
+          sprite("bg2", { width: width(), height: height() }),
+          pos(0, 0),
           fixed(),
         ]);
 
@@ -809,6 +832,12 @@
           scale(0.7),
         ]);
 
+        add([
+          sprite("bg2", { width: width(), height: height() }),
+          pos(0, 0),
+          fixed(),
+        ]);
+
         gravity(660);
 
         addLevel(levels[3], {
@@ -1003,6 +1032,12 @@
           fixed(),
         ]);
 
+        add([
+          sprite("bg2", { width: width(), height: height() }),
+          pos(0, 0),
+          fixed(),
+        ]);
+
         addLevel(levels[3], {
           width: 20,
           height: 20,
@@ -1024,11 +1059,9 @@
           fixed(),
         ]);
         
-
-        //laatikko ensimmäistä vaihtoehtoa varten-----------------------------------------
-        let endbox1 = add([
+        let endbox = add([
           sprite("endbox"),
-          pos(width() / 2, 180),
+          pos(width() / 2, 260),
           origin("center"),
           scale(0.1172),
           fixed()
@@ -1041,32 +1074,12 @@
           scale(0.5),
         ])
 
-
-        //laatikko toista vaihtoehtoa varten----------------------------------------------
-        let endbox2 = add([
-          sprite("endbox"),
-          pos(width() / 2, 260),
-          origin("center"),
-          scale(0.1172),
-          fixed()
-        ]);
-
         //teksti kenttä toista laatikkoa varten-------------------------------------------
         add([
           text('2:'),
           pos(width() / 2 - 200, height() / 2 + 50),
           scale(0.5),
         ])
-
-
-        //laatikko kolmatta vaihtoehtoa varten--------------------------------------------
-        let endbox3 = add([
-          sprite("endbox"),
-          pos(width() / 2, 340),
-          origin("center"),
-          scale(0.1172),
-          fixed()
-        ]);
 
         //teksti kenttä kolmatta laatikkoa varten-----------------------------------------
         add([
@@ -1091,110 +1104,106 @@
         if(ensimmainen == scopeA)
         {
           scopeA = 0;
-          enimText = 'Humanistiset ja taidealat'
+          add([sprite("ala1"), pos(width() / 2 - 115, height() /2 - 10), scale(0.3)]);
         } else if(ensimmainen == scopeB)
         {
           scopeB = 0;
-          enimText = 'Kauppa, hallinto ja oikeustieteet'
+          add([sprite("ala2"), pos(width() / 2 - 115, height() /2 - 10), scale(0.3)]);
         } else if(ensimmainen == scopeC)
         {
           scopeC = 0;
-          enimText = 'Luonnontieteet'          
+          add([sprite("ala3"), pos(width() / 2 - 115, height() /2 - 10), scale(0.3)]);         
         } else if(ensimmainen == scopeD)
         {
           scopeD = 0;
-          enimText = 'Maa- ja metsätalous'
+          add([sprite("ala4"), pos(width() / 2 - 115, height() /2 - 10), scale(0.3)]);
         } else if(ensimmainen == scopeE)
         {
           scopeE = 0;
-          enimText = 'Palvelualat'
+          add([sprite("ala5"), pos(width() / 2 - 115, height() /2 - 10), scale(0.3)]);
         } else if(ensimmainen == scopeF)
         {
           scopeF = 0;
-          enimText = 'Tekniikan alat'
+          add([sprite("ala6"), pos(width() / 2 - 115, height() /2 - 10), scale(0.3)]);
         } else if(ensimmainen == scopeG)
         {
           scopeG = 0;
-          enimText = 'Terveys- ja hyvinvointialat'
+          add([sprite("ala7"), pos(width() / 2 - 115, height() /2 - 10), scale(0.3)]);
         } else if(ensimmainen == scopeH)
         {
           scopeH = 0;
-          enimText = 'Tietojenkäsittely ja tietoliikenne'
+          add([sprite("ala8"), pos(width() / 2 - 115, height() /2 - 10), scale(0.3)]);
         }
 
         const toinen = Math.max(scopeA, scopeB, scopeC, scopeD, scopeE, scopeF, scopeG, scopeH);
         if(toinen == scopeA)
         {
           scopeA = 0;
-          toinText = 'Humanistiset ja taidealat'
+          add([sprite("ala1"), pos(width() / 2 - 115, height() /2 - -10), scale(0.3)]);
         } else if(toinen == scopeB)
         {
           scopeB = 0;
-          toinText = 'Kauppa, hallinto ja oikeustieteet'
+          add([sprite("ala2"), pos(width() / 2 - 115, height() /2 - -10), scale(0.3)]);
         } else if(toinen == scopeC)
         {
           scopeC = 0;   
-          toinText = 'Luonnontieteet'       
+          add([sprite("ala3"), pos(width() / 2 - 115, height() /2 - -10), scale(0.3)]);       
         } else if(toinen == scopeD)
         {
           scopeD = 0;
-          toinText = 'Maa- ja metsätalous'
+          add([sprite("ala4"), pos(width() / 2 - 115, height() /2 - -10), scale(0.3)]);
         } else if(toinen == scopeE)
         {
           scopeE = 0;
-          toinText = 'palvelualat'
+          add([sprite("ala5"), pos(width() / 2 - 115, height() /2 - -10), scale(0.3)]);
         } else if(toinen == scopeF)
         {
           scopeF = 0;
-          toinText = 'Tekniikan alat'
+          add([sprite("ala6"), pos(width() / 2 - 115, height() /2 - -10), scale(0.3)]);
         } else if(toinen == scopeG)
         {
           scopeG = 0;
-          toinText = 'Terveys ja hyvinvointialat'
+          add([sprite("ala7"), pos(width() / 2 - 115, height() /2 - -10), scale(0.3)]);
         } else if(toinen == scopeH)
         {
           scopeH = 0;
-          toinText = 'Tietojenkäsittely ja tietoliikenne'
+          add([sprite("ala8"), pos(width() / 2 - 115, height() /2 - -10), scale(0.3)]);
         }
 
         const kolmas = Math.max(scopeA, scopeB, scopeC, scopeD, scopeE, scopeF, scopeG, scopeH);
         if(kolmas == scopeA)
         {
           scopeA = 0;
-          kolmText = 'Humanistiset ja taidealat'
+          add([sprite("ala1"), pos(width() / 2 - 115, height() /2 - -30), scale(0.3)]);  
         } else if(kolmas == scopeB)
         {
           scopeB = 0;
-          kolmText = 'Kauppa, hallinto ja oikeustieteet'
+          add([sprite("ala2"), pos(width() / 2 - 115, height() /2 - -30), scale(0.3)]);  
         } else if(kolmas == scopeC)
         {
           scopeC = 0;
-          kolmText = 'Luonnontieteet'            
+          add([sprite("ala3"), pos(width() / 2 - 115, height() /2 - -30), scale(0.3)]);         
         } else if(kolmas == scopeD)
         {
           scopeD = 0;
-          kolmText = 'Maa- ja metsätalous'
+          add([sprite("ala4"), pos(width() / 2 - 115, height() /2 - -30), scale(0.3)]);  
         } else if(kolmas == scopeE)
         {
           scopeE = 0;
-          kolmText = 'palvelualat'
+          add([sprite("ala5"), pos(width() / 2 - 115, height() /2 - -30), scale(0.3)]);  
         } else if(kolmas == scopeF)
         {
           scopeF = 0;
-          kolmText = 'Tekniikan alat'
+          add([sprite("ala6"), pos(width() / 2 - 115, height() /2 - -30), scale(0.3)]);  
         } else if(kolmas == scopeG)
         {
           scopeG = 0;
-          kolmText = 'Terveys ja hyvinvointialat'
+          add([sprite("ala7"), pos(width() / 2 - 115, height() /2 - -30), scale(0.3)]);  
         } else if(kolmas == scopeH)
         {
           scopeH = 0;
-          kolmText = 'Tietojenkäsittely ja tietoliikenne'
+          add([sprite("ala8"), pos(width() / 2 - 115, height() /2 - -30), scale(0.3)]);  
         }
-
-        debug.log(enimText + toinText + kolmText)
-
-        
       });
 
       onLoad(() => {
