@@ -43,6 +43,10 @@
       let scopeG = 0;  // Terveys ja hyvinvointialat
       let scopeH = 0;  // Tietojenkäsittely ja tietoliikenne
 
+      let enimText = null;
+      let toinText = null;
+      let kolmText = null;
+
       // Load graphics
       loadSprite("logo", "Kuvat/keuda_logo.png");
       loadSprite("bg", "Kuvat/tausta.png");
@@ -1043,6 +1047,115 @@
           pos(width() / 2 - 115, height() /2 - 60),
           scale(0.15),
         ])
+
+        const ensimmainen = Math.max(scopeA, scopeB, scopeC, scopeD, scopeE, scopeF, scopeG, scopeH);
+        if(ensimmainen == scopeA)
+        {
+          scopeA = 0;
+          enimText = 'Humanistiset ja taidealat'
+        } else if(ensimmainen == scopeB)
+        {
+          scopeB = 0;
+          enimText = 'Kauppa, hallinto ja oikeustieteet'
+        } else if(ensimmainen == scopeC)
+        {
+          scopeC = 0;
+          enimText = 'Luonnontieteet'          
+        } else if(ensimmainen == scopeD)
+        {
+          scopeD = 0;
+          enimText = 'Maa- ja metsätalous'
+        } else if(ensimmainen == scopeE)
+        {
+          scopeE = 0;
+          enimText = 'Palvelualat'
+        } else if(ensimmainen == scopeF)
+        {
+          scopeF = 0;
+          enimText = 'Tekniikan alat'
+        } else if(ensimmainen == scopeG)
+        {
+          scopeG = 0;
+          enimText = 'Terveys- ja hyvinvointialat'
+        } else if(ensimmainen == scopeH)
+        {
+          scopeH = 0;
+          enimText = 'Tietojenkäsittely ja tietoliikenne'
+        }
+
+        const toinen = Math.max(scopeA, scopeB, scopeC, scopeD, scopeE, scopeF, scopeG, scopeH);
+        if(toinen == scopeA)
+        {
+          scopeA = 0;
+          toinText = 'Humanistiset ja taidealat'
+        } else if(toinen == scopeB)
+        {
+          scopeB = 0;
+          toinText = 'Kauppa, hallinto ja oikeustieteet'
+        } else if(toinen == scopeC)
+        {
+          scopeC = 0;   
+          toinText = 'Luonnontieteet'       
+        } else if(toinen == scopeD)
+        {
+          scopeD = 0;
+          toinText = 'Maa- ja metsätalous'
+        } else if(toinen == scopeE)
+        {
+          scopeE = 0;
+          toinText = 'palvelualat'
+        } else if(toinen == scopeF)
+        {
+          scopeF = 0;
+          toinText = 'Tekniikan alat'
+        } else if(toinen == scopeG)
+        {
+          scopeG = 0;
+          toinText = 'Terveys ja hyvinvointialat'
+        } else if(toinen == scopeH)
+        {
+          scopeH = 0;
+          toinText = 'Tietojenkäsittely ja tietoliikenne'
+        }
+
+        const kolmas = Math.max(scopeA, scopeB, scopeC, scopeD, scopeE, scopeF, scopeG, scopeH);
+        if(kolmas == scopeA)
+        {
+          scopeA = 0;
+          kolmText = 'Humanistiset ja taidealat'
+        } else if(kolmas == scopeB)
+        {
+          scopeB = 0;
+          kolmText = 'Kauppa, hallinto ja oikeustieteet'
+        } else if(kolmas == scopeC)
+        {
+          scopeC = 0;
+          kolmText = 'Luonnontieteet'            
+        } else if(kolmas == scopeD)
+        {
+          scopeD = 0;
+          kolmText = 'Maa- ja metsätalous'
+        } else if(kolmas == scopeE)
+        {
+          scopeE = 0;
+          kolmText = 'palvelualat'
+        } else if(kolmas == scopeF)
+        {
+          scopeF = 0;
+          kolmText = 'Tekniikan alat'
+        } else if(kolmas == scopeG)
+        {
+          scopeG = 0;
+          kolmText = 'Terveys ja hyvinvointialat'
+        } else if(kolmas == scopeH)
+        {
+          scopeH = 0;
+          kolmText = 'Tietojenkäsittely ja tietoliikenne'
+        }
+
+        debug.log(enimText + toinText + kolmText)
+
+        
       });
 
       onLoad(() => {
