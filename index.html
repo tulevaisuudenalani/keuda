@@ -48,6 +48,8 @@
       loadSprite("flagfinish", "Kuvat/maali_tausta_levelille.png");
       loadSprite("start", "Kuvat/start.png");
       loadSprite('empty', 'Kuvat/block_vastaus.png');
+      loadSprite('end', 'Kuvat/maali_tausta.png');
+      loadSprite('endback', 'Kuvat/maali_tausta_ala.png');
 
 
       // Load sounds
@@ -908,6 +910,22 @@
           width: 20,
           height: 20,
         });
+
+        let endback = add([
+          sprite("endback"),
+          pos(width() / 2, 200),
+          origin("center"),
+          scale(0.12),
+          fixed()
+        ]);
+
+        let end = add([
+          sprite("end"),
+          pos(width() / 2, 55),
+          origin("center"),
+          scale(0.1),
+          fixed()
+        ]);
 
         add([
           text('Kiitos pelaamisesta'),
