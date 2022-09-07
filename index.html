@@ -7,12 +7,33 @@
         <title>Document</title>
     </head>
     <body>
+        <div style="display: grid; height: 100vh; width: 100vw" class="puhelin">
+            <h1 id="puhelin">Käännä puhelin</h1>
+        </div>
+
         <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
             body {
                 background-color: black;
                 overflow: hidden;
             }
+
+            .puhelin {
+                position: absolute;
+            }
+
+            h1 {
+                color: white;
+                position: absolute;
+                display: none;
+                place-self: center;
+
+            }
         </style>
+
         <script type="module">
             import kaboom from "https://unpkg.com/kaboom/dist/kaboom.mjs";
 
@@ -32,11 +53,30 @@
                 return check;
             };
 
-            console.log(window.mobileCheck());
+            const mobile = window.mobileCheck();
 
-            const mobile = window.mobileCheck()
+            function timeout(ms) {
+                return new Promise((resolve) => setTimeout(resolve, ms));
+            }
 
+            let lsm = false;
+
+            async function checkOR() {
+                if (screen.orientation.type == "landscape-primary" ||screen.orientation.type == "landscape-secondary") {
+                    lsm = true;
+                    document.getElementById("puhelin").style.display = "none";
+                } else {
+                    document.getElementById("puhelin").style.display = "block";
+                }
+            }
+            
             if (mobile) {
+                
+                while (!lsm) {
+                    checkOR();
+                    await timeout(200);
+                }
+
                 kaboom({
                     global: true,
                     fullscreen: true,
@@ -80,33 +120,35 @@
             loadSprite("reminder", "Kuvat/teksti_nuoli.png");
             loadSprite("flagfinish", "Kuvat/maali_tausta_levelille.png");
             loadSprite("start", "Kuvat/start.png");
+            loadSprite("aloitus1", "Kuvat/aloitus otsikko_ala.png");
+            loadSprite("aloitus2", "Kuvat/aloitus otsikko_alin.png");
+            loadSprite("aloitus3", "Kuvat/aloitus_otsikko.png");
 
             loadSound("hyppy", "./hyppy.mp3"); // Hyppy
 
             let levels = [
                 [
-                    "£                £",
-                    "£                £",
-                    "£                £",
-                    "£                £",
-                    "£                £",
-                    "£                £",
-                    "£                £",
-                    "£                £",
-                    "£                £",
-                    "£                £",
-                    "£                £",
-                    "£                £",
-                    "£                £",
-                    "£                £",
-                    "£                £",
-                    "£                £",
-                    "£                £",
-                    "£        (       £",
-                    "£                £",
-                    "£                £",
-                    "£                £",
-                    "==================",
+                    "£                                    £",
+                    "£                                    £",
+                    "£                                    £",
+                    "£                                    £",
+                    "£                                    £",
+                    "£                                    £",
+                    "£                                    £",
+                    "£                                    £",
+                    "£                                    £",
+                    "£                                    £",
+                    "£                                    £",
+                    "£                                    £",
+                    "£                                    £",
+                    "£                                    £",
+                    "£                                    £",
+                    "£                                    £",
+                    "£                                    £",
+                    "£                                    £",
+                    "£                  (                 £",
+                    "£                                    £",
+                    "======================================",
                 ],
                 [
                     "£                                                   £",
@@ -181,7 +223,7 @@
                 add([sprite("ground", { width: screen.width, height: screen.height }), pos(0, 250), fixed()]);
                 // add([sprite('logo', { width: 150, height: 50 }), pos(0, 580), fixed()]);
 
-                let player = add([sprite("mario"), solid(), pos(50, 240), body(), area(), scale(0.7)]);
+                let player = add([sprite("mario"), solid(), pos(370, 380), body(), area(), scale(0.7)]);
 
                 addLevel(levels[0], {
                     width: 20,
@@ -196,18 +238,22 @@
                     "(": () => [sprite("start"), area(), scale(0.5), origin("center"), "Start"],
                 });
 
-                console.log(mobile);
-                const alkuteksti = !mobile ? "Tervetuloa Tulevaisuuden alani -peliin! Vastaa kysymyksiin ja saat pelin lopussa vaihtoehdot Keudan koulutusaloista, jotka voisivat sopia sinulle! Liikuttele hahmoa nuolinäppäimillä. Aloita peli hyppäämällä Starttiin."
-                                : "Tervetuloa Tulevaisuuden alani -peliin! Vastaa kysymyksiin ja saat pelin lopussa vaihtoehdot Keudan koulutusaloista, jotka voisivat sopia sinulle! Aloita peli hyppäämällä Starttiin."
-
-
                 add([
-                    pos(180, 280),
+                    pos(380, 290),
                     // Render text with the text() component
-                    text(alkuteksti, {
-                        size: 14,
-                        width: 500,
-                    }),
+                    sprite("aloitus3"),
+                    origin("center"),
+                ]);
+                add([
+                    pos(380, 310),
+                    // Render text with the text() component
+                    sprite("aloitus1"),
+                    origin("center"),
+                ]);
+                add([
+                    pos(380, 330),
+                    // Render text with the text() component
+                    sprite("aloitus2"),
                     origin("center"),
                 ]);
 
