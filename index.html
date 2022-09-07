@@ -36,21 +36,20 @@
       let playerJumpForce = 250;
       let playerPoints = 0;
 
-      let scopeA = 0;  // Humanistiset ja taidealat
-      let scopeB = 0;  // Kauppa, hallinto ja oikeustieteet
-      let scopeC = 0;  // Luonnontieteet
-      let scopeD = 0;  // Maa- ja metsätalous
-      let scopeE = 0;  // Palvelualat
-      let scopeF = 0;  // Tekniikan alat
-      let scopeG = 0;  // Terveys ja hyvinvointialat
-      let scopeH = 0;  // Tietojenkäsittely ja tietoliikenne
+      let scopeA = 0; // Humanistiset ja taidealat
+      let scopeB = 0; // Kauppa, hallinto ja oikeustieteet
+      let scopeC = 0; // Luonnontieteet
+      let scopeD = 0; // Maa- ja metsätalous
+      let scopeE = 0; // Palvelualat
+      let scopeF = 0; // Tekniikan alat
+      let scopeG = 0; // Terveys ja hyvinvointialat
+      let scopeH = 0; // Tietojenkäsittely ja tietoliikenne
 
       // Load graphics
       loadSprite("logo", "Kuvat/keuda_logo.png");
       loadSprite("bg", "Kuvat/tausta.png");
       loadSprite("ground", "Kuvat/tausta_alareuna.png");
       loadSprite("mario", "Kuvat/hahmo.png");
-      loadSprite("mariojumpoff", "Kuvat/hahmo_aloitus_tippuminen.png");
       loadSprite("suprise", "Kuvat/block_kysymys.png");
       loadSprite("spider", "Kuvat/örkki.png");
       loadSprite("block", "Kuvat/block.png");
@@ -59,10 +58,20 @@
       loadSprite("reminder", "Kuvat/teksti_nuoli.png");
       loadSprite("flagfinish", "Kuvat/maali_tausta_levelille.png");
       loadSprite("start", "Kuvat/start.png");
-      loadSprite('empty', 'Kuvat/block_vastaus.png');
-      loadSprite('end', 'Kuvat/maali_tausta.png');
-      loadSprite('endback', 'Kuvat/maali_tausta_ala.png');
+      loadSprite("empty", "Kuvat/block_vastaus.png");
+      loadSprite("end", "Kuvat/maali_tausta.png");
+      loadSprite("endback", "Kuvat/maali_tausta_ala.png");
 
+      loadSprite("k1", "Kuvat/kysymykset/k_1.png");
+      loadSprite("k2", "Kuvat/kysymykset/k_2.png");
+      loadSprite("k3", "Kuvat/kysymykset/k_3.png");
+
+      loadSprite("k4", "Kuvat/kysymykset/k_4.png");
+      loadSprite("k5", "Kuvat/kysymykset/k_5.png");
+      loadSprite("k6", "Kuvat/kysymykset/k_6.png");
+
+      loadSprite("k7", "Kuvat/kysymykset/k_7.png");
+      loadSprite("k8", "Kuvat/kysymykset/k_8.png");
 
       // Load sounds
       loadSound("block", "./audio/block.wav");
@@ -96,82 +105,82 @@
           "====================",
         ],
         [
-          '£                                                   £',
-          '£                                                   £',
-          '£                                                   £',
-          '£                                                   £',
-          '£                                                   £',
-          '£                                                   £',
-          '£                                                   £',
-          '£                                                   £',
-          '£                                                   £',
-          '£                                                   £',
-          '£                                                   £',
-          '£                                                   £',
-          '£                                                   £',
-          '£                                                   £',
-          '£                                                   £',
-          '£                         D  E  F             -     £',
-          '£                                                   £',
-          '£             A  B  C                 G     I     ^ £',
-          '£                                                   £',
-          '£                        =========                + £',
-          '£                       ===========                 £',
-          '=====================================================',
+          "£                                                   £",
+          "£                                                   £",
+          "£                                                   £",
+          "£                                                   £",
+          "£                                                   £",
+          "£                                                   £",
+          "£                                                   £",
+          "£                                                   £",
+          "£                                                   £",
+          "£                                                   £",
+          "£                                                   £",
+          "£                                                   £",
+          "£                                                   £",
+          "£                         `                         £",
+          "£                                                   £",
+          "£             /           D  E  F     ¤       -     £",
+          "£                                                   £",
+          "£             A  B  C                 G     I     ^ £",
+          "£                                                   £",
+          "£                        =========                + £",
+          "£                       ===========                 £",
+          "=====================================================",
         ],
         [
-          '£                                                                       £',
-          '£                                                                       £',
-          '£                                                                       £',
-          '£                                                                       £',
-          '£                                                                       £',
-          '£                                                                       £',
-          '£                                                                       £',
-          '£                                                                       £',
-          '£                                 =====                                 £',
-          '£                    ==      ==            ======                       £',
-          '£                                                    ===========        £',
-          '£                                                                       £',
-          '£                                                                  -    £',
-          '£           A   B   C          D    E    F         G   H   I          ^ £',
-          '£                                                                       £',
-          '£                                                                     + £',
-          '£                #                                          #           £',
-          '=========================================================================',
+          "£                                                                       £",
+          "£                                                                       £",
+          "£                                                                       £",
+          "£                                                                       £",
+          "£                                                                       £",
+          "£                                                                       £",
+          "£                                                                       £",
+          "£                                                                       £",
+          "£                                                                       £",
+          "£                                                                       £",
+          "£                                                                       £",
+          "£           /                  `                   ¤                    £",
+          "£                                                                  -    £",
+          "£           A   B   C          D    E    F         G   H   I          ^ £",
+          "£                                                                       £",
+          "£                                                                     + £",
+          "£                                              #                        £",
+          "=========================================================================",
         ],
         [
-          '£                                                                       £',
-          '£                                                                       £',
-          '£                                                                       £',
-          '£                                                                       £',
-          '£                                                                       £',
-          '£                                                                       £',
-          '£                                                                       £',
-          '£                                                                       £',
-          '£                                               #                       £',
-          '£                                          ======                       £',
-          '£              =======          ==                                      £',
-          '£                                               #                       £',
-          '£                                          ======                       £',
-          '£            A     B       ==  D  E  F                             -    £',
-          '£                                                                     ^ £',
-          '£                                                                     + £',
-          '£                #                                          #           £',
-          '=========================================================================',
+          "£                                                                       £",
+          "£                                                                       £",
+          "£                                                                       £",
+          "£                                                                       £",
+          "£                                                                       £",
+          "£                                                                       £",
+          "£                                                                       £",
+          "£                                                                       £",
+          "£                                                                       £",
+          "£                                                                       £",
+          "£                                                                       £",
+          "£            /                 `                                        £",
+          "£                                                                       £",
+          "£            A     B           D  E  F                             -    £",
+          "£                                                                     ^ £",
+          "£                                                                     + £",
+          "£                                                           #           £",
+          "=========================================================================",
         ],
         [
-          '                                           ',
-          '                                           ',
-          '                                           ',
-          '                                           ',
-          '                                           ',
-          '                                           ',
-          '                                           ',
-          '                                           ',
-          '                                           ',
-          '                                           ',
-          '                                           ',
-          '                                           ',
+          "                                           ",
+          "                                           ",
+          "                                           ",
+          "                                           ",
+          "                                           ",
+          "                                           ",
+          "                                           ",
+          "                                           ",
+          "                                           ",
+          "                                           ",
+          "                                           ",
+          "                                           ",
         ],
       ];
 
@@ -316,131 +325,130 @@
           "+": () => [sprite("tunnel"), solid(), area(), scale(0.5), "Tunnel"],
           "^": () => [sprite("arrow"), scale(0.5), "Arrow"],
           "#": () => [sprite("spider"), solid(), area(), scale(1), "Spider"],
-          'A': () => [sprite('suprise'), solid(), area(), scale(0.4), 'A'],
-          'B': () => [sprite('suprise'), solid(), area(), scale(0.4), 'B'],
-          'C': () => [sprite('suprise'), solid(), area(), scale(0.4), 'C'],
-          'D': () => [sprite('suprise'), solid(), area(), scale(0.4), 'D'],
-          'E': () => [sprite('suprise'), solid(), area(), scale(0.4), 'E'],
-          'F': () => [sprite('suprise'), solid(), area(), scale(0.4), 'F'],
-          'G': () => [sprite('suprise'), solid(), area(), scale(0.4), 'G'],
-          'I': () => [sprite('suprise'), solid(), area(), scale(0.4), 'I'],
+          A: () => [sprite("suprise"), solid(), area(), scale(0.4), "A"],
+          B: () => [sprite("suprise"), solid(), area(), scale(0.4), "B"],
+          C: () => [sprite("suprise"), solid(), area(), scale(0.4), "C"],
+          D: () => [sprite("suprise"), solid(), area(), scale(0.4), "D"],
+          E: () => [sprite("suprise"), solid(), area(), scale(0.4), "E"],
+          F: () => [sprite("suprise"), solid(), area(), scale(0.4), "F"],
+          G: () => [sprite("suprise"), solid(), area(), scale(0.4), "G"],
+          I: () => [sprite("suprise"), solid(), area(), scale(0.4), "I"],
           "-": () => [sprite("reminder"), area(), scale(0.25), "Reminder"],
+
+          "/": () => [sprite("k1"), area(), scale(0.2), "K1"],
+          "`": () => [sprite("k2"), area(), scale(0.2), "K2"],
+          "¤": () => [sprite("k3"), area(), scale(0.2), "K3"],
         });
 
-        // Kysymys 1
-        add([text('Kiinnostaako sinua enemman tyoskentely: \nulkona, sisalla vai molemmissa?'), pos(245, 310), scale(0.13)]);
+        add([text("Ulkona"), pos(275, 365), scale(0.1)]);
+        add([text("Sisalla"), pos(335, 365), scale(0.1)]);
+        add([text("Molemmissa"), pos(385, 365), scale(0.1)]);
 
-        add([text('Ulkona'), pos(275, 365), scale(0.1)]);
-        add([text('Sisalla'), pos(335, 365), scale(0.1)]);
-        add([text('Molemmissa'), pos(385, 365), scale(0.1)]);
-
-        player.onCollide('A', (A) => {
+        player.onCollide("A", (A) => {
           let x = A.pos.x;
           let y = A.pos.y;
-          destroyAll('A')
-          destroyAll('B')
-          destroyAll('C')
-          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+          destroyAll("A");
+          destroyAll("B");
+          destroyAll("C");
+          add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
           scopeC++;
           scopeD++;
           scopeE++;
-        })
+        });
 
-        player.onCollide('B', (B) => {
+        player.onCollide("B", (B) => {
           let x = B.pos.x;
           let y = B.pos.y;
-          destroyAll('A')
-          destroyAll('B')
-          destroyAll('C')
-          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+          destroyAll("A");
+          destroyAll("B");
+          destroyAll("C");
+          add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
           scopeA++;
           scopeB++;
           scopeE++;
           scopeH++;
-        })
+        });
 
-        player.onCollide('C', (C) => {
+        player.onCollide("C", (C) => {
           let x = C.pos.x;
           let y = C.pos.y;
-          destroyAll('A')
-          destroyAll('B')
-          destroyAll('C')
-          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+          destroyAll("A");
+          destroyAll("B");
+          destroyAll("C");
+          add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
           scopeF++;
           scopeG++;
-        })
+        });
 
-        // 2
-        add([text('Tyoskenteletko mieluiten koneiden, \nihmisten vaiko elainten parissa?'), pos(505, 275), scale(0.13)]);
+        add([text("Koneiden"), pos(513, 325), scale(0.1)]);
+        add([text("Ihmisten"), pos(574, 325), scale(0.1)]);
+        add([text("Elainten"), pos(633, 325), scale(0.1)]);
 
-        add([text('Koneiden'), pos(513, 325), scale(0.1)]);
-        add([text('Ihmisten'), pos(574, 325), scale(0.1)]);
-        add([text('Elainten'), pos(633, 325), scale(0.1)]);
-
-        player.onCollide('D', (D) => {
+        player.onCollide("D", (D) => {
           let x = D.pos.x;
           let y = D.pos.y;
-          destroyAll('D')
-          destroyAll('E')
-          destroyAll('F')
-          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+          destroyAll("D");
+          destroyAll("E");
+          destroyAll("F");
+          add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
           scopeA++;
           scopeB++;
           scopeF++;
           scopeH++;
-        })
+        });
 
-        player.onCollide('E', (E) => {
+        player.onCollide("E", (E) => {
           let x = E.pos.x;
           let y = E.pos.y;
-          destroyAll('D')
-          destroyAll('E')
-          destroyAll('F')
-          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+          destroyAll("D");
+          destroyAll("E");
+          destroyAll("F");
+          add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
           scopeC++;
           scopeE++;
           scopeG++;
-        })
+        });
 
-        player.onCollide('F', (F) => {
+        player.onCollide("F", (F) => {
           let x = F.pos.x;
           let y = F.pos.y;
-          destroyAll('D')
-          destroyAll('E')
-          destroyAll('F')
-          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+          destroyAll("D");
+          destroyAll("E");
+          destroyAll("F");
+          add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
           scopeD++;
-        })
+        });
 
-        // 3
-        add([text('Mika naista kuvaa sinua parhaiten?'), pos(740, 310), scale(0.13)]);
+        add([
+          text("Olen sosiaalinen ja \nviihdyn porukassa"),
+          pos(730, 365),
+          scale(0.1),
+        ]);
+        add([text("Viihdyn parhaiten yksikseni"), pos(840, 365), scale(0.1)]);
 
-        add([text('Olen sosiaalinen ja \nviihdyn porukassa'), pos(730, 365), scale(0.1)]);
-        add([text('Viihdyn parhaiten yksikseni'), pos(840, 365), scale(0.1)]);
-
-        player.onCollide('G', (G) => {
+        player.onCollide("G", (G) => {
           let x = G.pos.x;
           let y = G.pos.y;
-          destroyAll('G')
-          destroyAll('I')
-          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+          destroyAll("G");
+          destroyAll("I");
+          add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
           scopeC++;
           scopeE++;
           scopeF++;
           scopeG++;
-        })
+        });
 
-        player.onCollide('I', (I) => {
+        player.onCollide("I", (I) => {
           let x = I.pos.x;
           let y = I.pos.y;
-          destroyAll('G')
-          destroyAll('I')
-          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+          destroyAll("G");
+          destroyAll("I");
+          add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
           scopeA++;
           scopeB++;
           scopeD++;
           scopeH++;
-        })
+        });
 
         player.onCollide("Tunnel", (Tunnel) => {
           go("thirdLevel");
@@ -549,120 +557,122 @@
           "+": () => [sprite("tunnel"), solid(), area(), scale(0.5), "Tunnel"],
           "^": () => [sprite("arrow"), scale(0.4), "Arrow"],
           "#": () => [sprite("spider"), solid(), area(), scale(1), "Spider"],
-          'A': () => [sprite('suprise'), solid(), area(), scale(0.4), 'A'],
-          'B': () => [sprite('suprise'), solid(), area(), scale(0.4), 'B'],
-          'C': () => [sprite('suprise'), solid(), area(), scale(0.4), 'C'],
-          'D': () => [sprite('suprise'), solid(), area(), scale(0.4), 'D'],
-          'E': () => [sprite('suprise'), solid(), area(), scale(0.4), 'E'],
-          'F': () => [sprite('suprise'), solid(), area(), scale(0.4), 'F'],
-          'G': () => [sprite('suprise'), solid(), area(), scale(0.4), 'G'],
-          'H': () => [sprite('suprise'), solid(), area(), scale(0.4), 'H'],
-          'I': () => [sprite('suprise'), solid(), area(), scale(0.4), 'I'],
+          A: () => [sprite("suprise"), solid(), area(), scale(0.4), "A"],
+          B: () => [sprite("suprise"), solid(), area(), scale(0.4), "B"],
+          C: () => [sprite("suprise"), solid(), area(), scale(0.4), "C"],
+          D: () => [sprite("suprise"), solid(), area(), scale(0.4), "D"],
+          E: () => [sprite("suprise"), solid(), area(), scale(0.4), "E"],
+          F: () => [sprite("suprise"), solid(), area(), scale(0.4), "F"],
+          G: () => [sprite("suprise"), solid(), area(), scale(0.4), "G"],
+          H: () => [sprite("suprise"), solid(), area(), scale(0.4), "H"],
+          I: () => [sprite("suprise"), solid(), area(), scale(0.4), "I"],
           "-": () => [sprite("reminder"), area(), scale(0.2), "Reminder"],
+
+          "/": () => [sprite("k4"), area(), scale(0.2), "K4"],
+          "`": () => [sprite("k5"), area(), scale(0.2), "K5"],
+          "¤": () => [sprite("k6"), area(), scale(0.2), "K6"],
         });
 
         add([text("TASO 2"), pos(125, 275), scale(0.2)]);
 
-        // 1
-        add([text('Mita naista teet mieluiten vapaa-ajallasi?'), pos(215, 230), scale(0.13)]);
+        add([text("Teen taidetta"), pos(223, 286), scale(0.1)]);
+        add([text("Rakentelen ja\n nikkaroin"), pos(300, 286), scale(0.1)]);
+        add([text("Viihdyn luonnossa"), pos(380, 286), scale(0.1)]);
 
-        add([text('Teen taidetta'), pos(223, 286), scale(0.1)]);
-        add([text('Rakentelen ja\n nikkaroin'), pos(300, 286), scale(0.1)]);
-        add([text('Viihdyn luonnossa'), pos(380, 286), scale(0.1)]);
-
-        player.onCollide('A', (A) => {
+        player.onCollide("A", (A) => {
           let x = A.pos.x;
           let y = A.pos.y;
-          destroyAll('A')
-          destroyAll('B')
-          destroyAll('C')
-          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+          destroyAll("A");
+          destroyAll("B");
+          destroyAll("C");
+          add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
           scopeA++;
-        })
-        player.onCollide('B', (B) => {
+        });
+        player.onCollide("B", (B) => {
           let x = B.pos.x;
           let y = B.pos.y;
-          destroyAll('A')
-          destroyAll('B')
-          destroyAll('C')
-          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+          destroyAll("A");
+          destroyAll("B");
+          destroyAll("C");
+          add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
           scopeF++;
-
-        })
-        player.onCollide('C', (C) => {
+        });
+        player.onCollide("C", (C) => {
           let x = C.pos.x;
           let y = C.pos.y;
-          destroyAll('A')
-          destroyAll('B')
-          destroyAll('C')
-          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+          destroyAll("A");
+          destroyAll("B");
+          destroyAll("C");
+          add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
           scopeC++;
           scopeD++;
-        })
+        });
 
-        /// 2
-        add([text('Mita toivot tulevalta ammatiltasi?'), pos(620, 230), scale(0.13)]);
+        add([text("Autan ja \npalvelen muita"), pos(600, 286), scale(0.1)]);
+        add([
+          text("Suunnittelua ja \njarjestelmallisyytta"),
+          pos(690, 286),
+          scale(0.1),
+        ]);
+        add([
+          text("Luovuutta ja \nkasilla tekemista"),
+          pos(800, 286),
+          scale(0.1),
+        ]);
 
-        add([text('Autan ja \npalvelen muita'), pos(600, 286), scale(0.1)]);
-        add([text('Suunnittelua ja \njarjestelmallisyytta'), pos(690, 286), scale(0.1)]);
-        add([text('Luovuutta ja \nkasilla tekemista'), pos(800, 286), scale(0.1)]);
-
-        player.onCollide('D', (D) => {
+        player.onCollide("D", (D) => {
           let x = D.pos.x;
           let y = D.pos.y;
-          destroyAll('D')
-          destroyAll('E')
-          destroyAll('F')
-          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
-        })
-        player.onCollide('E', (E) => {
+          destroyAll("D");
+          destroyAll("E");
+          destroyAll("F");
+          add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
+        });
+        player.onCollide("E", (E) => {
           let x = E.pos.x;
           let y = E.pos.y;
-          destroyAll('D')
-          destroyAll('E')
-          destroyAll('F')
-          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
-        })
-        player.onCollide('F', (F) => {
+          destroyAll("D");
+          destroyAll("E");
+          destroyAll("F");
+          add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
+        });
+        player.onCollide("F", (F) => {
           let x = F.pos.x;
           let y = F.pos.y;
-          destroyAll('D')
-          destroyAll('E')
-          destroyAll('F')
-          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
-        })
+          destroyAll("D");
+          destroyAll("E");
+          destroyAll("F");
+          add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
+        });
 
-        // 3
-        add([text('Kuinka toimit paineen alla?'), pos(1030, 230), scale(0.13)]);
+        add([text("Hyvin, tykkaan \nhaasteista"), pos(1005, 286), scale(0.1)]);
+        add([text("Huonosti, \nmenen lukkoon"), pos(1089, 286), scale(0.1)]);
+        add([text("Tukeudun \nryhmalaisiini"), pos(1170, 286), scale(0.1)]);
 
-        add([text('Hyvin, tykkaan \nhaasteista'), pos(1005, 286), scale(0.1)]);
-        add([text('Huonosti, \nmenen lukkoon'), pos(1089, 286), scale(0.1)]);
-        add([text('Tukeudun \nryhmalaisiini'), pos(1170, 286), scale(0.1)]);
-
-        player.onCollide('G', (G) => {
+        player.onCollide("G", (G) => {
           let x = G.pos.x;
           let y = G.pos.y;
-          destroyAll('G')
-          destroyAll('H')
-          destroyAll('I')
-          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
-        })
-        player.onCollide('H', (H) => {
+          destroyAll("G");
+          destroyAll("H");
+          destroyAll("I");
+          add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
+        });
+        player.onCollide("H", (H) => {
           let x = H.pos.x;
           let y = H.pos.y;
-          destroyAll('G')
-          destroyAll('H')
-          destroyAll('I')
-          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
-        })
-        player.onCollide('I', (I) => {
+          destroyAll("G");
+          destroyAll("H");
+          destroyAll("I");
+          add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
+        });
+        player.onCollide("I", (I) => {
           let x = I.pos.x;
           let y = I.pos.y;
-          destroyAll('G')
-          destroyAll('H')
-          destroyAll('I')
-          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
-        })
+          destroyAll("G");
+          destroyAll("H");
+          destroyAll("I");
+          add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
+        });
 
         player.onCollide("Tunnel", (Tunnel) => {
           go("fourthLevel");
@@ -770,15 +780,15 @@
           "^": () => [sprite("arrow"), scale(0.4), "Arrow"],
           "#": () => [sprite("spider"), solid(), area(), scale(1), "Spider"],
           "*": () => [sprite("arrow"), solid(), area(), scale(0.5), "Death"],
-          'A': () => [sprite('suprise'), solid(), area(), scale(0.4), 'A'],
-          'B': () => [sprite('suprise'), solid(), area(), scale(0.4), 'B'],
-          'C': () => [sprite('suprise'), solid(), area(), scale(0.4), 'C'],
-          'D': () => [sprite('suprise'), solid(), area(), scale(0.4), 'D'],
-          'E': () => [sprite('suprise'), solid(), area(), scale(0.4), 'E'],
-          'F': () => [sprite('suprise'), solid(), area(), scale(0.4), 'F'],
-          'G': () => [sprite('suprise'), solid(), area(), scale(0.4), 'G'],
-          'H': () => [sprite('suprise'), solid(), area(), scale(0.4), 'H'],
-          'I': () => [sprite('suprise'), solid(), area(), scale(0.4), 'I'],
+          A: () => [sprite("suprise"), solid(), area(), scale(0.4), "A"],
+          B: () => [sprite("suprise"), solid(), area(), scale(0.4), "B"],
+          C: () => [sprite("suprise"), solid(), area(), scale(0.4), "C"],
+          D: () => [sprite("suprise"), solid(), area(), scale(0.4), "D"],
+          E: () => [sprite("suprise"), solid(), area(), scale(0.4), "E"],
+          F: () => [sprite("suprise"), solid(), area(), scale(0.4), "F"],
+          G: () => [sprite("suprise"), solid(), area(), scale(0.4), "G"],
+          H: () => [sprite("suprise"), solid(), area(), scale(0.4), "H"],
+          I: () => [sprite("suprise"), solid(), area(), scale(0.4), "I"],
           "-": () => [sprite("reminder"), area(), scale(0.2), "Reminder"],
           "!": () => [
             sprite("flagfinish"),
@@ -787,65 +797,69 @@
             scale(0.5),
             "flagfinish",
           ],
+
+          "/": () => [sprite("k7"), area(), scale(0.2), "K7"],
+          "`": () => [sprite("k8"), area(), scale(0.2), "K8"],
         });
 
         add([text("TASO 3"), pos(125, 280), scale(0.2)]);
 
         // 1
-        add([text('Haluatko tehda tyosi:'), pos(270, 230), scale(0.13)]);
+        add([text("Aikataulua \nnoudattaen?"), pos(245, 286), scale(0.1)]);
+        add([
+          text("Joustavasti, \ntilanteen mukaan?"),
+          pos(350, 286),
+          scale(0.1),
+        ]);
 
-        add([text('Aikataulua \nnoudattaen?'), pos(245, 286), scale(0.1)]);
-        add([text('Joustavasti, \ntilanteen mukaan?'), pos(350, 286), scale(0.1)]);
-
-        player.onCollide('A', (A) => {
+        player.onCollide("A", (A) => {
           let x = A.pos.x;
           let y = A.pos.y;
-          destroyAll('A')
-          destroyAll('B')
-          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
-        })
+          destroyAll("A");
+          destroyAll("B");
+          add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
+        });
 
-        player.onCollide('B', (B) => {
+        player.onCollide("B", (B) => {
           let x = B.pos.x;
           let y = B.pos.y;
-          destroyAll('A')
-          destroyAll('B')
-          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
-        })
+          destroyAll("A");
+          destroyAll("B");
+          add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
+        });
 
         /// 2
-        add([text('Haluatko tyon sisaltavan kirjoittamista'), pos(575, 230), scale(0.13)]);
 
-        add([text('Kylla'), pos(610, 286), scale(0.1)]);
-        add([text('Vahan'), pos(675, 286), scale(0.1)]);
-        add([text('En'), pos(740, 286), scale(0.1)]);
+        add([text("Kylla"), pos(610, 286), scale(0.1)]);
+        add([text("Vahan"), pos(675, 286), scale(0.1)]);
+        add([text("En"), pos(740, 286), scale(0.1)]);
 
-        player.onCollide('D', (D) => {
+        player.onCollide("D", (D) => {
           let x = D.pos.x;
           let y = D.pos.y;
-          destroyAll('D')
-          destroyAll('E')
-          destroyAll('F')
-          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
-        })
+          destroyAll("D");
+          destroyAll("E");
+          destroyAll("F");
+          add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
+        });
 
-        player.onCollide('E', (E) => {
+        player.onCollide("E", (E) => {
           let x = E.pos.x;
           let y = E.pos.y;
-          destroyAll('D')
-          destroyAll('E')
-          destroyAll('F')
-          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
-        })
+          destroyAll("D");
+          destroyAll("E");
+          destroyAll("F");
+          add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
+        });
 
-        player.onCollide('F', (F) => {
+        player.onCollide("F", (F) => {
           let x = F.pos.x;
           let y = F.pos.y;
-          destroyAll('D')
-          destroyAll('E')
-          destroyAll('F')
-          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
-        })
+          destroyAll("D");
+          destroyAll("E");
+          destroyAll("F");
+          add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
+        });
 
         player.onCollide("Tunnel", (Tunnel) => {
           go("fifthlevel");
@@ -924,10 +938,14 @@
       });
 
       // EndScreen
-      scene('fifthlevel', () => {
-        debug.log('End Screen')
+      scene("fifthlevel", () => {
+        debug.log("End Screen");
 
-        add([sprite('bg', { width: width(), height: height() }), pos(0, 0), fixed()]);
+        add([
+          sprite("bg", { width: width(), height: height() }),
+          pos(0, 0),
+          fixed(),
+        ]);
 
         addLevel(levels[3], {
           width: 20,
@@ -939,7 +957,7 @@
           pos(width() / 2, 190),
           origin("center"),
           scale(0.1216),
-          fixed()
+          fixed(),
         ]);
 
         let end = add([
@@ -947,20 +965,20 @@
           pos(width() / 2, 65),
           origin("center"),
           scale(0.109),
-          fixed()
+          fixed(),
         ]);
 
         add([
-          text('Kiitos pelaamisesta'),
+          text("Kiitos pelaamisesta"),
           pos(width() / 2 - 123, height() / 2 - 115),
           scale(0.3),
-        ])
+        ]);
 
         add([
-          text('Sinulle sopivia aloja voisivat olla:'),
-          pos(width() / 2 - 115, height() /2 - 90),
+          text("Sinulle sopivia aloja voisivat olla:"),
+          pos(width() / 2 - 115, height() / 2 - 90),
           scale(0.15),
-        ])
+        ]);
       });
 
       onLoad(() => {
