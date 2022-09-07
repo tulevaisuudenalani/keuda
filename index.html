@@ -29,8 +29,6 @@
       //https://www.keuda.fi/ala/tekniikan-alat/
       //https://www.keuda.fi/ala/terveys-hyvinvointialat/
       //https://www.keuda.fi/ala/tietojenkasittely-tietoliikenne-ict/
-      //https://www.keuda.fi/ala/valmistava-yleissivistava-koulutus/
-      //https://www.keuda.fi/ala/yhteiskunnallisetalat/
 
       let playerMoveSpeed = 150;
       let playerJumpForce = 250;
@@ -45,6 +43,10 @@
       let scopeG = 0; // Terveys ja hyvinvointialat
       let scopeH = 0; // Tietojenkäsittely ja tietoliikenne
 
+      let enimText = null;
+      let toinText = null;
+      let kolmText = null;
+
       // Load graphics
       loadSprite("logo", "Kuvat/keuda_logo.png");
       loadSprite("bg", "Kuvat/tausta.png");
@@ -58,9 +60,10 @@
       loadSprite("reminder", "Kuvat/teksti_nuoli.png");
       loadSprite("flagfinish", "Kuvat/maali_tausta_levelille.png");
       loadSprite("start", "Kuvat/start.png");
-      loadSprite("empty", "Kuvat/block_vastaus.png");
-      loadSprite("end", "Kuvat/maali_tausta.png");
-      loadSprite("endback", "Kuvat/maali_tausta_ala.png");
+      loadSprite('empty', 'Kuvat/block_vastaus.png');
+      loadSprite('end', 'Kuvat/maali_tausta.png');
+      loadSprite('endback', 'Kuvat/maali_tausta_ala.png');
+      loadSprite('endbox', 'Kuvat/loppu_solu.png');
 
       loadSprite("k1", "Kuvat/kysymykset/k_1.png");
       loadSprite("k2", "Kuvat/kysymykset/k_2.png");
@@ -623,56 +626,75 @@
         player.onCollide("D", (D) => {
           let x = D.pos.x;
           let y = D.pos.y;
-          destroyAll("D");
-          destroyAll("E");
-          destroyAll("F");
-          add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
-        });
-        player.onCollide("E", (E) => {
+          destroyAll('D')
+          destroyAll('E')
+          destroyAll('F')
+          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+          scopeE++;
+          scopeG++;
+        })
+        player.onCollide('E', (E) => {
           let x = E.pos.x;
           let y = E.pos.y;
-          destroyAll("D");
-          destroyAll("E");
-          destroyAll("F");
-          add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
-        });
-        player.onCollide("F", (F) => {
+          destroyAll('D')
+          destroyAll('E')
+          destroyAll('F')
+          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+          scopeB++;
+          scopeD++;
+          scopeF++;
+          scopeH++;
+        })
+        player.onCollide('F', (F) => {
           let x = F.pos.x;
           let y = F.pos.y;
-          destroyAll("D");
-          destroyAll("E");
-          destroyAll("F");
-          add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
-        });
+          destroyAll('D')
+          destroyAll('E')
+          destroyAll('F')
+          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+          scopeA++;
+          scopeC++;
+        })
 
-        add([text("Hyvin, tykkaan \nhaasteista"), pos(1005, 286), scale(0.1)]);
-        add([text("Huonosti, \nmenen lukkoon"), pos(1089, 286), scale(0.1)]);
-        add([text("Tukeudun \nryhmalaisiini"), pos(1170, 286), scale(0.1)]);
+        // 3
+        add([text('Tyoskenteletko mieluiten'), pos(1030, 230), scale(0.13)]);
 
-        player.onCollide("G", (G) => {
+        add([text('Tietokoneella naputtaen'), pos(1005, 286), scale(0.1)]);
+        add([text('Jakoavaimella muttereita vaannellen'), pos(1089, 286), scale(0.1)]);
+        add([text('Puhumalla'), pos(1170, 286), scale(0.1)]);
+
+        player.onCollide('G', (G) => {
           let x = G.pos.x;
           let y = G.pos.y;
-          destroyAll("G");
-          destroyAll("H");
-          destroyAll("I");
-          add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
-        });
-        player.onCollide("H", (H) => {
+          destroyAll('G')
+          destroyAll('H')
+          destroyAll('I')
+          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+          scopeA++;
+          scopeB++;
+          scopeH++;
+        })
+        player.onCollide('H', (H) => {
           let x = H.pos.x;
           let y = H.pos.y;
-          destroyAll("G");
-          destroyAll("H");
-          destroyAll("I");
-          add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
-        });
-        player.onCollide("I", (I) => {
+          destroyAll('G')
+          destroyAll('H')
+          destroyAll('I')
+          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+          scopeD++;
+          scopeF++;
+        })
+        player.onCollide('I', (I) => {
           let x = I.pos.x;
           let y = I.pos.y;
-          destroyAll("G");
-          destroyAll("H");
-          destroyAll("I");
-          add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
-        });
+          destroyAll('G')
+          destroyAll('H')
+          destroyAll('I')
+          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+          scopeC++;
+          scopeE++;
+          scopeG++;
+        })
 
         player.onCollide("Tunnel", (Tunnel) => {
           go("fourthLevel");
@@ -815,18 +837,26 @@
         player.onCollide("A", (A) => {
           let x = A.pos.x;
           let y = A.pos.y;
-          destroyAll("A");
-          destroyAll("B");
-          add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
-        });
+          destroyAll('A')
+          destroyAll('B')
+          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+          scopeB++;
+          scopeD++;
+          scopeE++;
+          scopeF++;
+        })
 
         player.onCollide("B", (B) => {
           let x = B.pos.x;
           let y = B.pos.y;
-          destroyAll("A");
-          destroyAll("B");
-          add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
-        });
+          destroyAll('A')
+          destroyAll('B')
+          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+          scopeA++;
+          scopeC++;
+          scopeG++;
+          scopeH++;
+        })
 
         /// 2
 
@@ -837,29 +867,37 @@
         player.onCollide("D", (D) => {
           let x = D.pos.x;
           let y = D.pos.y;
-          destroyAll("D");
-          destroyAll("E");
-          destroyAll("F");
-          add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
-        });
+          destroyAll('D')
+          destroyAll('E')
+          destroyAll('F')
+          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+          scopeA++;
+          scopeB++;
+          scopeH++;
+        })
 
         player.onCollide("E", (E) => {
           let x = E.pos.x;
           let y = E.pos.y;
-          destroyAll("D");
-          destroyAll("E");
-          destroyAll("F");
-          add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
-        });
+          destroyAll('D')
+          destroyAll('E')
+          destroyAll('F')
+          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+          scopeF++;
+          scopeG++;
+        })
 
         player.onCollide("F", (F) => {
           let x = F.pos.x;
           let y = F.pos.y;
-          destroyAll("D");
-          destroyAll("E");
-          destroyAll("F");
-          add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
-        });
+          destroyAll('D')
+          destroyAll('E')
+          destroyAll('F')
+          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+          scopeC++;
+          scopeD++;
+          scopeE++;
+        })
 
         player.onCollide("Tunnel", (Tunnel) => {
           go("fifthlevel");
@@ -967,18 +1005,178 @@
           scale(0.109),
           fixed(),
         ]);
+        
+
+        //laatikko ensimmäistä vaihtoehtoa varten-----------------------------------------
+        let endbox1 = add([
+          sprite("endbox"),
+          pos(width() / 2, 180),
+          origin("center"),
+          scale(0.1172),
+          fixed()
+        ]);
+
+        //teksti kenttä ensimmäistä laatikkoa varten--------------------------------------
+        add([
+          text('1:'),
+          pos(width() / 2 - 200, height() / 2 - 35),
+          scale(0.5),
+        ])
+
+
+        //laatikko toista vaihtoehtoa varten----------------------------------------------
+        let endbox2 = add([
+          sprite("endbox"),
+          pos(width() / 2, 260),
+          origin("center"),
+          scale(0.1172),
+          fixed()
+        ]);
+
+        //teksti kenttä toista laatikkoa varten-------------------------------------------
+        add([
+          text('2:'),
+          pos(width() / 2 - 200, height() / 2 + 50),
+          scale(0.5),
+        ])
+
+
+        //laatikko kolmatta vaihtoehtoa varten--------------------------------------------
+        let endbox3 = add([
+          sprite("endbox"),
+          pos(width() / 2, 340),
+          origin("center"),
+          scale(0.1172),
+          fixed()
+        ]);
+
+        //teksti kenttä kolmatta laatikkoa varten-----------------------------------------
+        add([
+          text('3:'),
+          pos(width() / 2 - 200, height() / 2 + 135),
+          scale(0.5),
+        ])
 
         add([
-          text("Kiitos pelaamisesta"),
-          pos(width() / 2 - 123, height() / 2 - 115),
+          text('Kiitos pelaamisesta'),
+          pos(width() / 2 - 123, height() / 2 - 90),
           scale(0.3),
         ]);
 
         add([
-          text("Sinulle sopivia aloja voisivat olla:"),
-          pos(width() / 2 - 115, height() / 2 - 90),
+          text('Sinulle sopivia aloja voisivat olla:'),
+          pos(width() / 2 - 115, height() /2 - 60),
           scale(0.15),
-        ]);
+        ])
+
+        const ensimmainen = Math.max(scopeA, scopeB, scopeC, scopeD, scopeE, scopeF, scopeG, scopeH);
+        if(ensimmainen == scopeA)
+        {
+          scopeA = 0;
+          enimText = 'Humanistiset ja taidealat'
+        } else if(ensimmainen == scopeB)
+        {
+          scopeB = 0;
+          enimText = 'Kauppa, hallinto ja oikeustieteet'
+        } else if(ensimmainen == scopeC)
+        {
+          scopeC = 0;
+          enimText = 'Luonnontieteet'          
+        } else if(ensimmainen == scopeD)
+        {
+          scopeD = 0;
+          enimText = 'Maa- ja metsätalous'
+        } else if(ensimmainen == scopeE)
+        {
+          scopeE = 0;
+          enimText = 'Palvelualat'
+        } else if(ensimmainen == scopeF)
+        {
+          scopeF = 0;
+          enimText = 'Tekniikan alat'
+        } else if(ensimmainen == scopeG)
+        {
+          scopeG = 0;
+          enimText = 'Terveys- ja hyvinvointialat'
+        } else if(ensimmainen == scopeH)
+        {
+          scopeH = 0;
+          enimText = 'Tietojenkäsittely ja tietoliikenne'
+        }
+
+        const toinen = Math.max(scopeA, scopeB, scopeC, scopeD, scopeE, scopeF, scopeG, scopeH);
+        if(toinen == scopeA)
+        {
+          scopeA = 0;
+          toinText = 'Humanistiset ja taidealat'
+        } else if(toinen == scopeB)
+        {
+          scopeB = 0;
+          toinText = 'Kauppa, hallinto ja oikeustieteet'
+        } else if(toinen == scopeC)
+        {
+          scopeC = 0;   
+          toinText = 'Luonnontieteet'       
+        } else if(toinen == scopeD)
+        {
+          scopeD = 0;
+          toinText = 'Maa- ja metsätalous'
+        } else if(toinen == scopeE)
+        {
+          scopeE = 0;
+          toinText = 'palvelualat'
+        } else if(toinen == scopeF)
+        {
+          scopeF = 0;
+          toinText = 'Tekniikan alat'
+        } else if(toinen == scopeG)
+        {
+          scopeG = 0;
+          toinText = 'Terveys ja hyvinvointialat'
+        } else if(toinen == scopeH)
+        {
+          scopeH = 0;
+          toinText = 'Tietojenkäsittely ja tietoliikenne'
+        }
+
+        const kolmas = Math.max(scopeA, scopeB, scopeC, scopeD, scopeE, scopeF, scopeG, scopeH);
+        if(kolmas == scopeA)
+        {
+          scopeA = 0;
+          kolmText = 'Humanistiset ja taidealat'
+        } else if(kolmas == scopeB)
+        {
+          scopeB = 0;
+          kolmText = 'Kauppa, hallinto ja oikeustieteet'
+        } else if(kolmas == scopeC)
+        {
+          scopeC = 0;
+          kolmText = 'Luonnontieteet'            
+        } else if(kolmas == scopeD)
+        {
+          scopeD = 0;
+          kolmText = 'Maa- ja metsätalous'
+        } else if(kolmas == scopeE)
+        {
+          scopeE = 0;
+          kolmText = 'palvelualat'
+        } else if(kolmas == scopeF)
+        {
+          scopeF = 0;
+          kolmText = 'Tekniikan alat'
+        } else if(kolmas == scopeG)
+        {
+          scopeG = 0;
+          kolmText = 'Terveys ja hyvinvointialat'
+        } else if(kolmas == scopeH)
+        {
+          scopeH = 0;
+          kolmText = 'Tietojenkäsittely ja tietoliikenne'
+        }
+
+        debug.log(enimText + toinText + kolmText)
+
+        
       });
 
       onLoad(() => {
