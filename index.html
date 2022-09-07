@@ -50,6 +50,7 @@
       // Load graphics
       loadSprite("logo", "Kuvat/keuda_logo.png");
       loadSprite("bg", "Kuvat/tausta.png");
+      loadSprite("bg2", "Kuvat/tausta_shade.png");
       loadSprite("ground", "Kuvat/tausta_alareuna.png");
       loadSprite("mario", "Kuvat/hahmo.png");
       loadSprite("suprise", "Kuvat/block_tyhja_kysymys.png");
@@ -211,6 +212,12 @@
           scale(0.7),
         ]);
 
+        add([
+          sprite("bg2", { width: width(), height: height() }),
+          pos(0, 0),
+          fixed(),
+        ]);
+
         addLevel(levels[0], {
           width: 20,
           height: 20,
@@ -318,6 +325,12 @@
           body(),
           area(),
           scale(0.7),
+        ]);
+
+        add([
+          sprite("bg2", { width: width(), height: height() }),
+          pos(0, 0),
+          fixed(),
         ]);
 
         addLevel(levels[1], {
@@ -538,6 +551,12 @@
         add([
           sprite("ground", { width: screen.width, height: screen.height }),
           pos(0, 250),
+          fixed(),
+        ]);
+
+        add([
+          sprite("bg2", { width: width(), height: height() }),
+          pos(0, 0),
           fixed(),
         ]);
 
@@ -789,6 +808,12 @@
           scale(0.7),
         ]);
 
+        add([
+          sprite("bg2", { width: width(), height: height() }),
+          pos(0, 0),
+          fixed(),
+        ]);
+
         gravity(660);
 
         addLevel(levels[3], {
@@ -979,6 +1004,12 @@
 
         add([
           sprite("bg", { width: width(), height: height() }),
+          pos(0, 0),
+          fixed(),
+        ]);
+
+        add([
+          sprite("bg2", { width: width(), height: height() }),
           pos(0, 0),
           fixed(),
         ]);
