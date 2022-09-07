@@ -29,8 +29,6 @@
       //https://www.keuda.fi/ala/tekniikan-alat/
       //https://www.keuda.fi/ala/terveys-hyvinvointialat/
       //https://www.keuda.fi/ala/tietojenkasittely-tietoliikenne-ict/
-      //https://www.keuda.fi/ala/valmistava-yleissivistava-koulutus/
-      //https://www.keuda.fi/ala/yhteiskunnallisetalat/
 
       let playerMoveSpeed = 150;
       let playerJumpForce = 250;
@@ -62,6 +60,7 @@
       loadSprite('empty', 'Kuvat/block_vastaus.png');
       loadSprite('end', 'Kuvat/maali_tausta.png');
       loadSprite('endback', 'Kuvat/maali_tausta_ala.png');
+      loadSprite('endbox', 'Kuvat/loppu_solu.png');
 
 
       // Load sounds
@@ -981,16 +980,67 @@
           scale(0.109),
           fixed()
         ]);
+        
+
+        //laatikko ensimmäistä vaihtoehtoa varten-----------------------------------------
+        let endbox1 = add([
+          sprite("endbox"),
+          pos(width() / 2, 180),
+          origin("center"),
+          scale(0.1172),
+          fixed()
+        ]);
+
+        //teksti kenttä ensimmäistä laatikkoa varten--------------------------------------
+        add([
+          text('1:'),
+          pos(width() / 2 - 200, height() / 2 - 35),
+          scale(0.5),
+        ])
+
+
+        //laatikko toista vaihtoehtoa varten----------------------------------------------
+        let endbox2 = add([
+          sprite("endbox"),
+          pos(width() / 2, 260),
+          origin("center"),
+          scale(0.1172),
+          fixed()
+        ]);
+
+        //teksti kenttä toista laatikkoa varten-------------------------------------------
+        add([
+          text('2:'),
+          pos(width() / 2 - 200, height() / 2 + 50),
+          scale(0.5),
+        ])
+
+
+        //laatikko kolmatta vaihtoehtoa varten--------------------------------------------
+        let endbox3 = add([
+          sprite("endbox"),
+          pos(width() / 2, 340),
+          origin("center"),
+          scale(0.1172),
+          fixed()
+        ]);
+
+        //teksti kenttä kolmatta laatikkoa varten-----------------------------------------
+        add([
+          text('3:'),
+          pos(width() / 2 - 200, height() / 2 + 135),
+          scale(0.5),
+        ])
 
         add([
           text('Kiitos pelaamisesta'),
-          pos(width() / 2 - 123, height() / 2 - 115),
+          pos(width() / 2 - 123, height() / 2 - 90),
           scale(0.3),
         ])
 
         add([
           text('Sinulle sopivia aloja voisivat olla:'),
-          pos(width() / 2 - 115, height() /2 - 90),
+          pos(width() / 2 - 115, height() /2 - 60),
           scale(0.15),
         ])
       });
