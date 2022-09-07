@@ -654,6 +654,9 @@
           destroyAll('H')
           destroyAll('I')
           add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+          scopeA++;
+          scopeB++;
+          scopeH++;
         })
         player.onCollide('H', (H) => {
           let x = H.pos.x;
@@ -662,6 +665,8 @@
           destroyAll('H')
           destroyAll('I')
           add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+          scopeD++;
+          scopeF++;
         })
         player.onCollide('I', (I) => {
           let x = I.pos.x;
@@ -670,6 +675,9 @@
           destroyAll('H')
           destroyAll('I')
           add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+          scopeC++;
+          scopeE++;
+          scopeG++;
         })
 
         player.onCollide("Tunnel", (Tunnel) => {
@@ -843,6 +851,9 @@
           destroyAll('E')
           destroyAll('F')
           add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+          scopeA++;
+          scopeB++;
+          scopeH++;
         })
 
         player.onCollide('E', (E) => {
@@ -852,6 +863,8 @@
           destroyAll('E')
           destroyAll('F')
           add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+          scopeF++;
+          scopeG++;
         })
 
         player.onCollide('F', (F) => {
@@ -861,6 +874,9 @@
           destroyAll('E')
           destroyAll('F')
           add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+          scopeC++;
+          scopeD++;
+          scopeE++;
         })
 
         player.onCollide("Tunnel", (Tunnel) => {
