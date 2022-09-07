@@ -614,6 +614,8 @@
           destroyAll('E')
           destroyAll('F')
           add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+          scopeE++;
+          scopeG++;
         })
         player.onCollide('E', (E) => {
           let x = E.pos.x;
@@ -622,6 +624,10 @@
           destroyAll('E')
           destroyAll('F')
           add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+          scopeB++;
+          scopeD++;
+          scopeF++;
+          scopeH++;
         })
         player.onCollide('F', (F) => {
           let x = F.pos.x;
@@ -630,14 +636,16 @@
           destroyAll('E')
           destroyAll('F')
           add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+          scopeA++;
+          scopeC++;
         })
 
         // 3
-        add([text('Kuinka toimit paineen alla?'), pos(1030, 230), scale(0.13)]);
+        add([text('Tyoskenteletko mieluiten'), pos(1030, 230), scale(0.13)]);
 
-        add([text('Hyvin, tykkaan \nhaasteista'), pos(1005, 286), scale(0.1)]);
-        add([text('Huonosti, \nmenen lukkoon'), pos(1089, 286), scale(0.1)]);
-        add([text('Tukeudun \nryhmalaisiini'), pos(1170, 286), scale(0.1)]);
+        add([text('Tietokoneella naputtaen'), pos(1005, 286), scale(0.1)]);
+        add([text('Jakoavaimella muttereita vaannellen'), pos(1089, 286), scale(0.1)]);
+        add([text('Puhumalla'), pos(1170, 286), scale(0.1)]);
 
         player.onCollide('G', (G) => {
           let x = G.pos.x;
@@ -803,6 +811,10 @@
           destroyAll('A')
           destroyAll('B')
           add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+          scopeB++;
+          scopeD++;
+          scopeE++;
+          scopeF++;
         })
 
         player.onCollide('B', (B) => {
@@ -811,6 +823,10 @@
           destroyAll('A')
           destroyAll('B')
           add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+          scopeA++;
+          scopeC++;
+          scopeG++;
+          scopeH++;
         })
 
         /// 2
