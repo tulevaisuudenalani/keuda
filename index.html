@@ -43,10 +43,6 @@
       let scopeG = 0; // Terveys ja hyvinvointialat
       let scopeH = 0; // Tietojenkäsittely ja tietoliikenne
 
-      let enimText = null;
-      let toinText = null;
-      let kolmText = null;
-
       // Load graphics
       loadSprite("logo", "Kuvat/keuda_logo.png");
       loadSprite("bg", "Kuvat/tausta.png");
@@ -65,6 +61,14 @@
       loadSprite('end', 'Kuvat/maali_tausta.png');
       loadSprite('endback', 'Kuvat/maali_tausta_ala.png');
       loadSprite('endbox', 'Kuvat/loppu_solu.png');
+      loadSprite('ala1', 'Kuvat/ala1.png');
+      loadSprite('ala2', 'Kuvat/ala2.png');
+      loadSprite('ala3', 'Kuvat/ala3.png');
+      loadSprite('ala4', 'Kuvat/ala4.png');
+      loadSprite('ala5', 'Kuvat/ala5.png');
+      loadSprite('ala6', 'Kuvat/ala6.png');
+      loadSprite('ala7', 'Kuvat/ala7.png');
+      loadSprite('ala8', 'Kuvat/ala8.png');
 
       loadSprite("k1", "Kuvat/kysymykset/k_1.png");
       loadSprite("k2", "Kuvat/kysymykset/k_2.png");
@@ -1080,110 +1084,106 @@
         if(ensimmainen == scopeA)
         {
           scopeA = 0;
-          enimText = 'Humanistiset ja taidealat'
+          add([sprite("ala1"), pos(width() / 2 - 115, height() /2 - 10), scale(0.3)]);
         } else if(ensimmainen == scopeB)
         {
           scopeB = 0;
-          enimText = 'Kauppa, hallinto ja oikeustieteet'
+          add([sprite("ala2"), pos(width() / 2 - 115, height() /2 - 10), scale(0.3)]);
         } else if(ensimmainen == scopeC)
         {
           scopeC = 0;
-          enimText = 'Luonnontieteet'          
+          add([sprite("ala3"), pos(width() / 2 - 115, height() /2 - 10), scale(0.3)]);         
         } else if(ensimmainen == scopeD)
         {
           scopeD = 0;
-          enimText = 'Maa- ja metsätalous'
+          add([sprite("ala4"), pos(width() / 2 - 115, height() /2 - 10), scale(0.3)]);
         } else if(ensimmainen == scopeE)
         {
           scopeE = 0;
-          enimText = 'Palvelualat'
+          add([sprite("ala5"), pos(width() / 2 - 115, height() /2 - 10), scale(0.3)]);
         } else if(ensimmainen == scopeF)
         {
           scopeF = 0;
-          enimText = 'Tekniikan alat'
+          add([sprite("ala6"), pos(width() / 2 - 115, height() /2 - 10), scale(0.3)]);
         } else if(ensimmainen == scopeG)
         {
           scopeG = 0;
-          enimText = 'Terveys- ja hyvinvointialat'
+          add([sprite("ala7"), pos(width() / 2 - 115, height() /2 - 10), scale(0.3)]);
         } else if(ensimmainen == scopeH)
         {
           scopeH = 0;
-          enimText = 'Tietojenkäsittely ja tietoliikenne'
+          add([sprite("ala8"), pos(width() / 2 - 115, height() /2 - 10), scale(0.3)]);
         }
 
         const toinen = Math.max(scopeA, scopeB, scopeC, scopeD, scopeE, scopeF, scopeG, scopeH);
         if(toinen == scopeA)
         {
           scopeA = 0;
-          toinText = 'Humanistiset ja taidealat'
+          add([sprite("ala1"), pos(width() / 2 - 115, height() /2 - -10), scale(0.3)]);
         } else if(toinen == scopeB)
         {
           scopeB = 0;
-          toinText = 'Kauppa, hallinto ja oikeustieteet'
+          add([sprite("ala2"), pos(width() / 2 - 115, height() /2 - -10), scale(0.3)]);
         } else if(toinen == scopeC)
         {
           scopeC = 0;   
-          toinText = 'Luonnontieteet'       
+          add([sprite("ala3"), pos(width() / 2 - 115, height() /2 - -10), scale(0.3)]);       
         } else if(toinen == scopeD)
         {
           scopeD = 0;
-          toinText = 'Maa- ja metsätalous'
+          add([sprite("ala4"), pos(width() / 2 - 115, height() /2 - -10), scale(0.3)]);
         } else if(toinen == scopeE)
         {
           scopeE = 0;
-          toinText = 'palvelualat'
+          add([sprite("ala5"), pos(width() / 2 - 115, height() /2 - -10), scale(0.3)]);
         } else if(toinen == scopeF)
         {
           scopeF = 0;
-          toinText = 'Tekniikan alat'
+          add([sprite("ala6"), pos(width() / 2 - 115, height() /2 - -10), scale(0.3)]);
         } else if(toinen == scopeG)
         {
           scopeG = 0;
-          toinText = 'Terveys ja hyvinvointialat'
+          add([sprite("ala7"), pos(width() / 2 - 115, height() /2 - -10), scale(0.3)]);
         } else if(toinen == scopeH)
         {
           scopeH = 0;
-          toinText = 'Tietojenkäsittely ja tietoliikenne'
+          add([sprite("ala8"), pos(width() / 2 - 115, height() /2 - -10), scale(0.3)]);
         }
 
         const kolmas = Math.max(scopeA, scopeB, scopeC, scopeD, scopeE, scopeF, scopeG, scopeH);
         if(kolmas == scopeA)
         {
           scopeA = 0;
-          kolmText = 'Humanistiset ja taidealat'
+          add([sprite("ala1"), pos(width() / 2 - 115, height() /2 - -30), scale(0.3)]);  
         } else if(kolmas == scopeB)
         {
           scopeB = 0;
-          kolmText = 'Kauppa, hallinto ja oikeustieteet'
+          add([sprite("ala2"), pos(width() / 2 - 115, height() /2 - -30), scale(0.3)]);  
         } else if(kolmas == scopeC)
         {
           scopeC = 0;
-          kolmText = 'Luonnontieteet'            
+          add([sprite("ala3"), pos(width() / 2 - 115, height() /2 - -30), scale(0.3)]);         
         } else if(kolmas == scopeD)
         {
           scopeD = 0;
-          kolmText = 'Maa- ja metsätalous'
+          add([sprite("ala4"), pos(width() / 2 - 115, height() /2 - -30), scale(0.3)]);  
         } else if(kolmas == scopeE)
         {
           scopeE = 0;
-          kolmText = 'palvelualat'
+          add([sprite("ala5"), pos(width() / 2 - 115, height() /2 - -30), scale(0.3)]);  
         } else if(kolmas == scopeF)
         {
           scopeF = 0;
-          kolmText = 'Tekniikan alat'
+          add([sprite("ala6"), pos(width() / 2 - 115, height() /2 - -30), scale(0.3)]);  
         } else if(kolmas == scopeG)
         {
           scopeG = 0;
-          kolmText = 'Terveys ja hyvinvointialat'
+          add([sprite("ala7"), pos(width() / 2 - 115, height() /2 - -30), scale(0.3)]);  
         } else if(kolmas == scopeH)
         {
           scopeH = 0;
-          kolmText = 'Tietojenkäsittely ja tietoliikenne'
+          add([sprite("ala8"), pos(width() / 2 - 115, height() /2 - -30), scale(0.3)]);  
         }
-
-        debug.log(enimText + toinText + kolmText)
-
-        
       });
 
       onLoad(() => {
