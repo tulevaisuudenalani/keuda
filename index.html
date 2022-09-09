@@ -6,12 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="style.css" />
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
   </head>
   <body>
+    <iframe 
+      src="https://forms.office.com/Pages/ResponsePage.aspx?id=vRxhusw1LUG1L0yyGYtmRS1wLbgaPDRBv4L-zj1ZHNVUOElXRVhSNjBKRFI1NUhNNTdXV1M1STdOMS4u" 
+      width="350" 
+      height="500" 
+      allowtransparency="true" 
+      frameborder="0" 
+      sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
+    </iframe>
+
     <script type="module">
       import kaboom from "https://unpkg.com/kaboom/dist/kaboom.mjs";
 
-      // Config
+      // Kaboom config
       kaboom({
         global: true,
         fullscreen: true,
@@ -1025,6 +1035,8 @@
       // EndScreen
       scene("fifthlevel", () => {
         debug.log("End Screen");
+
+        $('iframe').css('display', 'flex')
 
         add([
           sprite("bg", { width: width(), height: height() }),
