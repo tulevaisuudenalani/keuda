@@ -6,8 +6,8 @@ body {
 }
 
 iframe {
-    display: none;
-    margin: 3rem;
     position: fixed;
-    
+    display: none;
+    margin: 1rem;
+    right: 10rem;
 }
