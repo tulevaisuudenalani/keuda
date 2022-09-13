@@ -588,12 +588,6 @@
           fixed(),
         ]);
 
-        add([
-          sprite("bg2", { width: width(), height: height() }),
-          pos(0, 0),
-          fixed(),
-        ]);
-
         let player = add([
           sprite("mario"),
           solid(),
@@ -601,6 +595,13 @@
           body(),
           area(),
           scale(0.7),
+        ]);
+
+
+        add([
+          sprite("bg2", { width: width(), height: height() }),
+          pos(0, 0),
+          fixed(),
         ]);
 
         gravity(660);
