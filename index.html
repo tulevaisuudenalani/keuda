@@ -296,23 +296,38 @@
       let player = add([sprite("mario"), solid(), pos(380, 380), body(), area(), scale(0.7)]);
 
       add([
-        pos(380, 290),
+        pos(380, 270),
         sprite("aloitus3"),
         origin("center"),
         scale(0.05)
       ]);
 
       add([
-        pos(380, 310),
+        pos(380, 300),
         sprite("aloitus1"),
         origin("center"),
         scale(0.05)
       ]);
+
       add([
-        pos(380, 330),
+        pos(380, 320),
         sprite("aloitus2"),
         origin("center"),
         scale(0.05)
+      ]);
+
+      add([
+        pos(380, 440),
+        text("Ellet pysty liikkumaan klikkaa peliruutua"),
+        origin("center"),
+        scale(0.2)
+      ]);
+
+      add([
+        pos(10, 10),
+        sprite("logo"),
+        scale(0.16),
+        fixed()
       ]);
 
 
