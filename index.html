@@ -54,16 +54,16 @@
       let scopeG = 0; // Terveys ja hyvinvointialat
       let scopeH = 0; // Tietojenkäsittely ja tietoliikenne
 
-      // Load graphics
+      loadSprite("player", "Kuvat/hahmo.png");
+      loadSprite("background", "Kuvat/tausta.png");
+      loadSprite("line", "Kuvat/tausta_alareuna.png");
+      loadSprite("teleport", "Kuvat/ampari.png");
+
       loadSprite("logo", "Kuvat/keuda_logo.png");
-      loadSprite("bg", "Kuvat/tausta.png");
       loadSprite("bg2", "Kuvat/tausta_shade.png");
-      loadSprite("ground", "Kuvat/tausta_alareuna.png");
-      loadSprite("mario", "Kuvat/hahmo.png");
       loadSprite("suprise", "Kuvat/block_tyhja_kysymys.png");
       loadSprite("spider", "Kuvat/örkki.png");
       loadSprite("block", "Kuvat/block.png");
-      loadSprite("tunnel", "Kuvat/ampari.png");
       loadSprite("arrow", "Kuvat/nuoli.png");
       loadSprite("reminder", "Kuvat/teksti_nuoli.png");
       loadSprite("flagfinish", "Kuvat/maali_tausta_levelille.png");
@@ -226,33 +226,16 @@
         ],
       ];
 
-      scene("firstLevel", () => {
-        debug.log("Aloitus ");
-
+      scene("start", () => {
         add([
-          sprite("bg", { width: width(), height: height() }),
+          sprite("background", { width: width(), height: height() }),
           pos(0, 0),
           fixed(),
         ]);
 
         add([
-          sprite("ground", { width: screen.width, height: screen.height }),
+          sprite("line", { width: screen.width, height: screen.height }),
           pos(0, 250),
-          fixed(),
-        ]);
-
-        let player = add([
-          sprite("mario"),
-          solid(),
-          pos(50, 240),
-          body(),
-          area(),
-          scale(0.7),
-        ]);
-
-        add([
-          sprite("bg2", { width: width(), height: height() }),
-          pos(0, 0),
           fixed(),
         ]);
 
@@ -261,29 +244,21 @@
           height: 20,
           "=": () => [sprite("block"), solid(), area(), scale(0.44), ""],
           "£": () => [sprite("block"), solid(), area(), scale(0.44), ""],
-          "+": () => [sprite("tunnel"), solid(), area(), scale(0.5), "Tunnel"],
-          "^": () => [sprite("arrow"), scale(0.4), "Arrow"],
-          "#": () => [sprite("spider"), solid(), area(), scale(1), "Spider"],
-          "-": () => [sprite("reminder"), area(), scale(0.2), "Reminder"],
           "(": () => [sprite("start"), area(), scale(0.5), "Start"],
         });
 
+        const player = add([
+          sprite("player"),
+          pos(80, 400),
+          body(),
+          area(),
+          scale(0.7),
+        ]);
+
+        gravity(700);
+
         player.onCollide("Start", (Start) => {
-          go("secondLevel");
-        });
-
-        gravity(660);
-
-        onUpdate("Spider", (Spider) => {
-          Spider.move(-15, 0);
-        });
-
-        player.onCollide("Spider", (Spider) => {
-          shake(10);
-          const hitSound = play("hit", {
-            volume: 0.01,
-            loop: false,
-          });
+          go("levelONE");
         });
 
         player.onUpdate(() => {
@@ -296,32 +271,10 @@
           player.flipX(true);
         });
 
-        onKeyDown("a", () => {
-          player.move(-playerMoveSpeed, 0);
-          camPos(player.pos);
-          player.flipX(true);
-        });
-
         onKeyDown("right", () => {
           player.move(playerMoveSpeed, 0);
           camPos(player.pos);
           player.flipX(false);
-        });
-
-        onKeyDown("d", () => {
-          player.move(playerMoveSpeed, 0);
-          camPos(player.pos);
-          player.flipX(false);
-        });
-
-        onKeyPress("space", () => {
-          if (player.isGrounded()) {
-            player.jump(playerJumpForce, 0);
-            const jumpSound = play("hyppy", {
-              volume: 0.5,
-              loop: false,
-            });
-          }
         });
 
         onKeyPress("up", () => {
@@ -334,51 +287,72 @@
           }
         });
 
+        onKeyPress("space", () => {
+          if (player.isGrounded()) {
+            player.jump(playerJumpForce, 0);
+            const jumpSound = play("hyppy", {
+              volume: 0.5,
+              loop: false,
+            });
+          }
+        });
+
         onKeyPress("w", () => {
           if (player.isGrounded()) {
             player.jump(playerJumpForce, 0);
+            const jumpSound = play("hyppy", {
+              volume: 0.5,
+              loop: false,
+            });
           }
+        });
+
+        onKeyDown("a", () => {
+          player.move(-playerMoveSpeed, 0);
+          camPos(player.pos);
+          player.flipX(true);
+        });
+
+        onKeyDown("d", () => {
+          player.move(playerMoveSpeed, 0);
+          camPos(player.pos);
+          player.flipX(false);
         });
       });
 
-      scene("secondLevel", () => {
-        debug.log("TASO 1");
+      onLoad(() => {
+        go("start");
+      });
 
+      scene("levelONE", () => {
         add([
-          sprite("bg", { width: width(), height: height() }),
+          sprite("background", { width: width(), height: height() }),
           pos(0, 0),
           fixed(),
         ]);
 
         add([
-          sprite("ground", { width: screen.width, height: screen.height }),
+          sprite("line", { width: screen.width, height: screen.height }),
           pos(0, 250),
           fixed(),
         ]);
 
-        let player = add([
-          sprite("mario"),
-          solid(),
-          pos(140, 360),
-          body(),
-          area(),
-          scale(0.7),
-        ]);
-
-        add([
-          sprite("bg2", { width: width(), height: height() }),
-          pos(0, 0),
-          fixed(),
-        ]);
+        add([text("TASO: 1"), pos(150, 370), scale(0.2)]);
 
         addLevel(levels[1], {
           width: 20,
           height: 20,
           "=": () => [sprite("block"), solid(), area(), scale(0.44), ""],
           "£": () => [sprite("block"), solid(), area(), scale(0.44), ""],
-          "+": () => [sprite("tunnel"), solid(), area(), scale(0.5), "Tunnel"],
+          "+": () => [
+            sprite("teleport"),
+            solid(),
+            area(),
+            scale(0.5),
+            "Teleport",
+          ],
           "^": () => [sprite("arrow"), scale(0.5), "Arrow"],
-          "#": () => [sprite("spider"), solid(), area(), scale(1), "Spider"],
+          "-": () => [sprite("reminder"), area(), scale(0.25), "Reminder"],
           A: () => [sprite("suprise"), solid(), area(), scale(0.4), "A"],
           B: () => [sprite("suprise"), solid(), area(), scale(0.4), "B"],
           C: () => [sprite("suprise"), solid(), area(), scale(0.4), "C"],
@@ -387,8 +361,6 @@
           F: () => [sprite("suprise"), solid(), area(), scale(0.4), "F"],
           G: () => [sprite("suprise"), solid(), area(), scale(0.4), "G"],
           I: () => [sprite("suprise"), solid(), area(), scale(0.4), "I"],
-          "-": () => [sprite("reminder"), area(), scale(0.25), "Reminder"],
-
           "/": () => [sprite("k1"), area(), scale(0.2), "K1"],
           "`": () => [sprite("k2"), area(), scale(0.2), "K2"],
           "¤": () => [sprite("k3"), area(), scale(0.2), "K3"],
@@ -402,7 +374,19 @@
           Q: () => [sprite("k3b"), pos(-20, 1), area(), scale(0.12), "K3B"],
           R: () => [sprite(""), pos(0, 1), area(), scale(0.12), "K1A"],
         });
-        //kysymys 1
+
+        const player = add([
+          sprite("player"),
+          solid(),
+          pos(80, 400),
+          body(),
+          area(),
+          scale(0.7),
+        ]);
+
+        gravity(660);
+
+        // Question: 1 ------ //
         player.onCollide("A", (A) => {
           let x = A.pos.x;
           let y = A.pos.y;
@@ -439,7 +423,7 @@
           scopeG++;
         });
 
-        //kysymys 2
+        // Question: 2 ------ //
         player.onCollide("D", (D) => {
           let x = D.pos.x;
           let y = D.pos.y;
@@ -475,7 +459,7 @@
           scopeD++;
         });
 
-        //kysymys 3
+        // Question: 3 ------ //
         player.onCollide("G", (G) => {
           let x = G.pos.x;
           let y = G.pos.y;
@@ -500,22 +484,8 @@
           scopeH++;
         });
 
-        player.onCollide("Tunnel", (Tunnel) => {
-          go("thirdLevel");
-        });
-
-        gravity(660);
-
-        onUpdate("Spider", (Spider) => {
-          Spider.move(-15, 0);
-        });
-
-        player.onCollide("Spider", (Spider) => {
-          shake(10);
-          const hitSound = play("hit", {
-            volume: 0.01,
-            loop: false,
-          });
+        player.onCollide("Teleport", (Teleport) => {
+          go("levelTWO");
         });
 
         player.onUpdate(() => {
@@ -528,22 +498,19 @@
           player.flipX(true);
         });
 
-        onKeyDown("a", () => {
-          player.move(-playerMoveSpeed, 0);
-          camPos(player.pos);
-          player.flipX(true);
-        });
-
         onKeyDown("right", () => {
           player.move(playerMoveSpeed, 0);
           camPos(player.pos);
           player.flipX(false);
         });
-
-        onKeyDown("d", () => {
-          player.move(playerMoveSpeed, 0);
-          camPos(player.pos);
-          player.flipX(false);
+        onKeyPress("up", () => {
+          if (player.isGrounded()) {
+            player.jump(playerJumpForce, 0);
+            const jumpSound = play("hyppy", {
+              volume: 0.5,
+              loop: false,
+            });
+          }
         });
 
         onKeyPress("space", () => {
@@ -556,7 +523,7 @@
           }
         });
 
-        onKeyPress("up", () => {
+        onKeyPress("w", () => {
           if (player.isGrounded()) {
             player.jump(playerJumpForce, 0);
             const jumpSound = play("hyppy", {
@@ -566,53 +533,49 @@
           }
         });
 
-        onKeyPress("w", () => {
-          if (player.isGrounded()) {
-            player.jump(playerJumpForce, 0);
-          }
+        onKeyDown("a", () => {
+          player.move(-playerMoveSpeed, 0);
+          camPos(player.pos);
+          player.flipX(true);
+        });
+
+        onKeyDown("d", () => {
+          player.move(playerMoveSpeed, 0);
+          camPos(player.pos);
+          player.flipX(false);
         });
       });
 
-      scene("thirdLevel", () => {
-        debug.log("TASO 2");
-
+      scene("levelTWO", () => {
         add([
-          sprite("bg", { width: width(), height: height() }),
+          sprite("background", { width: width(), height: height() }),
           pos(0, 0),
           fixed(),
         ]);
 
         add([
-          sprite("ground", { width: screen.width, height: screen.height }),
+          sprite("line", { width: screen.width, height: screen.height }),
           pos(0, 250),
           fixed(),
         ]);
 
-        add([
-          sprite("bg2", { width: width(), height: height() }),
-          pos(0, 0),
-          fixed(),
-        ]);
-
-        let player = add([
-          sprite("mario"),
-          solid(),
-          pos(140, 250),
-          body(),
-          area(),
-          scale(0.7),
-        ]);
-
-        gravity(660);
+        add([text("TASO: 2"), pos(125, 280), scale(0.2)]);
 
         addLevel(levels[2], {
           width: 20,
           height: 20,
           "=": () => [sprite("block"), solid(), area(), scale(0.44), "Block"],
           "£": () => [sprite("block"), solid(), area(), scale(0.44), "Wall"],
-          "+": () => [sprite("tunnel"), solid(), area(), scale(0.5), "Tunnel"],
+          "+": () => [
+            sprite("teleport"),
+            solid(),
+            area(),
+            scale(0.5),
+            "Teleport",
+          ],
           "^": () => [sprite("arrow"), scale(0.4), "Arrow"],
           "#": () => [sprite("spider"), solid(), area(), scale(1), "Spider"],
+          "-": () => [sprite("reminder"), area(), scale(0.2), "Reminder"],
           A: () => [sprite("suprise"), solid(), area(), scale(0.4), "A"],
           B: () => [sprite("suprise"), solid(), area(), scale(0.4), "B"],
           C: () => [sprite("suprise"), solid(), area(), scale(0.4), "C"],
@@ -622,19 +585,27 @@
           G: () => [sprite("suprise"), solid(), area(), scale(0.4), "G"],
           H: () => [sprite("suprise"), solid(), area(), scale(0.4), "H"],
           I: () => [sprite("suprise"), solid(), area(), scale(0.4), "I"],
-          "-": () => [sprite("reminder"), area(), scale(0.2), "Reminder"],
-
           "/": () => [sprite("k4"), area(), scale(0.2), "K4"],
           "`": () => [sprite("k5"), area(), scale(0.15), "K5"],
           "¤": () => [sprite("k6"), area(), scale(0.2), "K6"],
         });
 
-        add([text("TASO 2"), pos(125, 275), scale(0.2)]);
-
         add([text("Teen taidetta"), pos(223, 286), scale(0.1)]);
         add([text("Rakentelen ja\n nikkaroin"), pos(300, 286), scale(0.1)]);
         add([text("Viihdyn luonnossa"), pos(380, 286), scale(0.1)]);
 
+        const player = add([
+          sprite("player"),
+          solid(),
+          pos(140, 250),
+          body(),
+          area(),
+          scale(0.7),
+        ]);
+
+        gravity(660);
+
+        // Question: 1 ------ //
         player.onCollide("A", (A) => {
           let x = A.pos.x;
           let y = A.pos.y;
@@ -644,6 +615,7 @@
           add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
           scopeA++;
         });
+
         player.onCollide("B", (B) => {
           let x = B.pos.x;
           let y = B.pos.y;
@@ -751,8 +723,8 @@
           scopeG++;
         });
 
-        player.onCollide("Tunnel", (Tunnel) => {
-          go("fourthLevel");
+        player.onCollide("Teleport", (Teleport) => {
+          go("levelTHREE");
         });
 
         onUpdate("Spider", (Spider) => {
@@ -818,51 +790,41 @@
         onKeyPress("w", () => {
           if (player.isGrounded()) {
             player.jump(playerJumpForce, 0);
+            const jumpSound = play("hyppy", {
+              volume: 0.5,
+              loop: false,
+            });
           }
         });
       });
 
-      scene("fourthLevel", () => {
-        debug.log("TASO 3");
-
+      scene("levelTHREE", () => {
         add([
-          sprite("bg", { width: width(), height: height() }),
+          sprite("background", { width: width(), height: height() }),
           pos(0, 0),
           fixed(),
         ]);
 
         add([
-          sprite("ground", { width: screen.width, height: screen.height }),
+          sprite("line", { width: screen.width, height: screen.height }),
           pos(0, 250),
           fixed(),
         ]);
-
-        let player = add([
-          sprite("mario"),
-          solid(),
-          pos(140, 160),
-          body(),
-          area(),
-          scale(0.7),
-        ]);
-
-        add([
-          sprite("bg2", { width: width(), height: height() }),
-          pos(0, 0),
-          fixed(),
-        ]);
-
-        gravity(660);
 
         addLevel(levels[3], {
           width: 20,
           height: 20,
           "=": () => [sprite("block"), solid(), area(), scale(0.44), ""],
           "£": () => [sprite("block"), solid(), area(), scale(0.44), ""],
-          "+": () => [sprite("tunnel"), solid(), area(), scale(0.5), "Tunnel"],
+          "+": () => [
+            sprite("teleport"),
+            solid(),
+            area(),
+            scale(0.5),
+            "Teleport",
+          ],
           "^": () => [sprite("arrow"), scale(0.4), "Arrow"],
           "#": () => [sprite("spider"), solid(), area(), scale(1), "Spider"],
-          "*": () => [sprite("arrow"), solid(), area(), scale(0.5), "Death"],
           A: () => [sprite("suprise"), solid(), area(), scale(0.4), "A"],
           B: () => [sprite("suprise"), solid(), area(), scale(0.4), "B"],
           C: () => [sprite("suprise"), solid(), area(), scale(0.4), "C"],
@@ -885,7 +847,18 @@
           "`": () => [sprite("k8"), area(), scale(0.2), "K8"],
         });
 
-        add([text("TASO 3"), pos(125, 280), scale(0.2)]);
+        const player = add([
+          sprite("player"),
+          solid(),
+          pos(140, 160),
+          body(),
+          area(),
+          scale(0.7),
+        ]);
+
+        gravity(660);
+
+        add([text("TASO: 3"), pos(125, 280), scale(0.2)]);
 
         // 1
         add([text("Aikataulua \nnoudattaen?"), pos(245, 286), scale(0.1)]);
@@ -960,7 +933,7 @@
           scopeE++;
         });
 
-        player.onCollide("Tunnel", (Tunnel) => {
+        player.onCollide("Teleport", (Teleport) => {
           go("fifthlevel");
         });
 
@@ -1032,6 +1005,10 @@
         onKeyPress("w", () => {
           if (player.isGrounded()) {
             player.jump(playerJumpForce, 0);
+            const jumpSound = play("hyppy", {
+              volume: 0.5,
+              loop: false,
+            });
           }
         });
       });
@@ -1043,14 +1020,14 @@
         $("iframe").css("display", "flex");
 
         add([
-          sprite("bg", { width: width(), height: height() }),
+          sprite("background", { width: width(), height: height() }),
           pos(0, 0),
           fixed(),
         ]);
 
         add([
-          sprite("bg2", { width: width(), height: height() }),
-          pos(0, 0),
+          sprite("line", { width: screen.width, height: screen.height }),
+          pos(0, 250),
           fixed(),
         ]);
 
@@ -1319,10 +1296,6 @@
             scale(0.3),
           ]);
         }
-      });
-
-      onLoad(() => {
-        go("firstLevel");
       });
     </script>
   </body>
