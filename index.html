@@ -71,6 +71,8 @@
       loadSprite('end', 'Kuvat/maali_tausta.png');
       loadSprite('endback', 'Kuvat/maali_tausta_ala.png');
       loadSprite('endbox', 'Kuvat/loppu_solu.png');
+      loadSprite('endtxt', 'Kuvat/loppu_teksti.png');
+
       loadSprite('ala1', 'Kuvat/ala1.png');
       loadSprite('ala2', 'Kuvat/ala2.png');
       loadSprite('ala3', 'Kuvat/ala3.png');
@@ -1079,38 +1081,13 @@
           fixed()
         ]);
 
-        //teksti kenttä ensimmäistä laatikkoa varten--------------------------------------
-        add([
-          text('1:'),
-          pos(width() / 2 - 200, height() / 2 - 35),
-          scale(0.5),
-        ])
-
-        //teksti kenttä toista laatikkoa varten-------------------------------------------
-        add([
-          text('2:'),
-          pos(width() / 2 - 200, height() / 2 + 50),
-          scale(0.5),
-        ])
-
-        //teksti kenttä kolmatta laatikkoa varten-----------------------------------------
-        add([
-          text('3:'),
-          pos(width() / 2 - 200, height() / 2 + 135),
-          scale(0.5),
-        ])
-
-        add([
-          text('Kiitos pelaamisesta'),
-          pos(width() / 2 - 123, height() / 2 - 90),
-          scale(0.3),
+        let endtxt = add([
+          sprite("endtxt"),
+          pos(width() / 2, 130),
+          origin("center"),
+          scale(0.09),
+          fixed()
         ]);
-
-        add([
-          text('Sinulle sopivia aloja voisivat olla:'),
-          pos(width() / 2 - 115, height() /2 - 60),
-          scale(0.15),
-        ])
 
         const ensimmainen = Math.max(scopeA, scopeB, scopeC, scopeD, scopeE, scopeF, scopeG, scopeH);
         if(ensimmainen == scopeA)
