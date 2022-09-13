@@ -55,6 +55,22 @@
       let scopeG = 0; // Terveys ja hyvinvointialat
       let scopeH = 0; // Tietojenkäsittely ja tietoliikenne
 
+      // Kysymys tehty
+      // Ensimmäinen taso
+      let kys11 = false;
+      let kys12 = false;
+      let kys13 = false;
+
+      // Toinen taso
+      let kys21 = false;
+      let kys22 = false;
+      let kys23 = false;
+
+      // Kolmas taso
+      let kys31 = false;
+      let kys32 = false;
+      
+
       loadSprite("player", "Kuvat/hahmo.png");
       loadSprite("background", "Kuvat/tausta.png");
       loadSprite("line", "Kuvat/tausta_alareuna.png");
@@ -399,6 +415,7 @@
           scopeC++;
           scopeD++;
           scopeE++;
+          kys11 = true;
         });
 
         player.onCollide("B", (B) => {
@@ -412,6 +429,7 @@
           scopeB++;
           scopeE++;
           scopeH++;
+          kys11 = true;
         });
 
         player.onCollide("C", (C) => {
@@ -423,6 +441,7 @@
           add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
           scopeF++;
           scopeG++;
+          kys11 = true;
         });
 
         // Question: 2 ------ //
@@ -437,6 +456,7 @@
           scopeB++;
           scopeF++;
           scopeH++;
+          kys12 = true;
         });
 
         player.onCollide("E", (E) => {
@@ -449,6 +469,7 @@
           scopeC++;
           scopeE++;
           scopeG++;
+          kys12 = true;
         });
 
         player.onCollide("F", (F) => {
@@ -459,6 +480,7 @@
           destroyAll("F");
           add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
           scopeD++;
+          kys12 = true;
         });
 
         // Question: 3 ------ //
@@ -472,6 +494,7 @@
           scopeE++;
           scopeF++;
           scopeG++;
+          kys13 = true;
         });
 
         player.onCollide("I", (I) => {
@@ -484,10 +507,14 @@
           scopeB++;
           scopeD++;
           scopeH++;
+          kys13 = true;
         });
 
         player.onCollide("Teleport", (Teleport) => {
-          go("levelTWO");
+          if(kys11 == true && kys12 == true && kys13 == true)
+          {
+            go("levelTWO");
+          }
         });
 
         player.onUpdate(() => {
@@ -621,6 +648,7 @@
           destroyAll("C");
           add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
           scopeA++;
+          kys21 = true;
         });
 
         player.onCollide("B", (B) => {
@@ -631,6 +659,7 @@
           destroyAll("C");
           add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
           scopeF++;
+          kys21 = true;
         });
         player.onCollide("C", (C) => {
           let x = C.pos.x;
@@ -641,6 +670,7 @@
           add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
           scopeC++;
           scopeD++;
+          kys21 = true;
         });
 
         player.onCollide("D", (D) => {
@@ -652,6 +682,7 @@
           add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
           scopeE++;
           scopeG++;
+          kys22 = true;
         });
         player.onCollide("E", (E) => {
           let x = E.pos.x;
@@ -664,6 +695,7 @@
           scopeD++;
           scopeF++;
           scopeH++;
+          kys22 = true;
         });
         player.onCollide("F", (F) => {
           let x = F.pos.x;
@@ -674,6 +706,7 @@
           add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
           scopeA++;
           scopeC++;
+          kys22 = true;
         });
 
         // kysymys 5
@@ -688,6 +721,7 @@
           scopeA++;
           scopeB++;
           scopeH++;
+          kys23 = true;
         });
         player.onCollide("H", (H) => {
           let x = H.pos.x;
@@ -698,6 +732,7 @@
           add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
           scopeD++;
           scopeF++;
+          kys23 = true;
         });
         player.onCollide("I", (I) => {
           let x = I.pos.x;
@@ -709,10 +744,14 @@
           scopeC++;
           scopeE++;
           scopeG++;
+          kys23 = true;
         });
 
         player.onCollide("Teleport", (Teleport) => {
-          go("levelTHREE");
+          if(kys21 == true && kys22 == true && kys23 == true)
+          {
+            go("levelTHREE");
+          }
         });
 
         onUpdate("Spider", (Spider) => {
@@ -866,6 +905,7 @@
           scopeD++;
           scopeE++;
           scopeF++;
+          kys31 = true;
         });
 
         player.onCollide("B", (B) => {
@@ -878,6 +918,7 @@
           scopeC++;
           scopeG++;
           scopeH++;
+          kys31 = true;
         });
 
         /// 2
@@ -893,6 +934,7 @@
           scopeA++;
           scopeB++;
           scopeH++;
+          kys32 = true;
         });
 
         player.onCollide("E", (E) => {
@@ -904,6 +946,7 @@
           add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
           scopeF++;
           scopeG++;
+          kys32 = true;
         });
 
         player.onCollide("F", (F) => {
@@ -916,10 +959,14 @@
           scopeC++;
           scopeD++;
           scopeE++;
+          kys32 = true;
         });
 
         player.onCollide("Teleport", (Teleport) => {
-          go("fifthlevel");
+          if(kys31 == true && kys32 == true)
+          {
+            go("fifthlevel");
+          }
         });
 
         player.onCollide("Death", (Death) => {
