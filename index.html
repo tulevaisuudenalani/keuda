@@ -187,7 +187,7 @@
           "£           /                  `                   ¤                    £",
           "£                                                                  -    £",
           "£           A   B   C          D    E    F         G   H   I          ^ £",
-          "£                                                                       £",
+          "£           J   K   L          M    N    O         P   Q   R            £",
           "£                        £                                            + £",
           "£                        £                     #                        £",
           "=========================================================================",
@@ -207,7 +207,7 @@
           "£            /                 `                                        £",
           "£                                                                       £",
           "£            A     B           D  E  F                             -    £",
-          "£                                                                     ^ £",
+          "£            J     K           L  M  N                                ^ £",
           "£                        £                                            + £",
           "£                        £                                  #           £",
           "=========================================================================",
@@ -394,14 +394,14 @@
           "/": () => [sprite("k1"), area(), scale(0.2), "K1"],
           "`": () => [sprite("k2"), area(), scale(0.2), "K2"],
           "¤": () => [sprite("k3"), area(), scale(0.2), "K3"],
-          J: () => [sprite("k1a"), pos(0, 1), area(), scale(0.12), "K1A"],
+          J: () => [sprite("k1a"), pos(-1, 1), area(), scale(0.12), "K1A"],
           K: () => [sprite("k1b"), pos(0, 1), area(), scale(0.12), "K1B"],
           L: () => [sprite("k1c"), pos(-10, 1), area(), scale(0.12), "K1C"],
           M: () => [sprite("k2a"), pos(-5, 1), area(), scale(0.12), "K2A"],
-          N: () => [sprite("k2b"), pos(-5, 1), area(), scale(0.12), "K2B"],
-          O: () => [sprite("k2c"), pos(0, 1), area(), scale(0.12), "K2C"],
-          P: () => [sprite("k3a"), pos(-10, 1), area(), scale(0.12), "K3A"],
-          Q: () => [sprite("k3b"), pos(-20, 1), area(), scale(0.12), "K3B"],
+          N: () => [sprite("k2b"), pos(-4, 1), area(), scale(0.12), "K2B"],
+          O: () => [sprite("k2c"), pos(-3, 1), area(), scale(0.12), "K2C"],
+          P: () => [sprite("k3a"), pos(-17, 1), area(), scale(0.18), "K3A"],
+          Q: () => [sprite("k3b"), pos(-34, 1), area(), scale(0.16), "K3B"],
           R: () => [sprite(""), pos(0, 1), area(), scale(0.12), "K1A"],
         });
         //kysymys 1
@@ -574,7 +574,7 @@
           }
         });
       });
-
+      //kolmas taso
       scene("thirdLevel", () => {
         debug.log("TASO 2");
 
@@ -630,14 +630,19 @@
           "/": () => [sprite("k4"), area(), scale(0.2), "K4"],
           "`": () => [sprite("k5"), area(), scale(0.15), "K5"],
           "¤": () => [sprite("k6"), area(), scale(0.2), "K6"],
+          J: () => [sprite("k4a"), pos(-14, 1), area(), scale(0.13), "K4A"],
+          K: () => [sprite("k4b"), pos(-11, 1), area(), scale(0.17), "K4B"],
+          L: () => [sprite("k4c"), pos(-19, 1), area(), scale(0.17), "K4C"],
+          M: () => [sprite("k5a"), pos(-12,  1), area(), scale(0.18), "K5A"],
+          N: () => [sprite("k5b"), pos(-14, 1), area(), scale(0.18), "K5B"],
+          O: () => [sprite("k5c"), pos(-12, 1), area(), scale(0.17), "K5C"],
+          P: () => [sprite("k6a"), pos(-11, 1), area(), scale(0.18), "K6A"],
+          Q: () => [sprite("k6b"), pos(-15, 1), area(), scale(0.19), "K6B"],
+          R: () => [sprite("k6c"), pos(-9, 1), area(), scale(0.13), "K6C"],
         });
 
         add([text("TASO 2"), pos(125, 275), scale(0.2)]);
-
-        add([text("Teen taidetta"), pos(223, 286), scale(0.1)]);
-        add([text("Rakentelen ja\n nikkaroin"), pos(300, 286), scale(0.1)]);
-        add([text("Viihdyn luonnossa"), pos(380, 286), scale(0.1)]);
-
+        //kysymys 4
         player.onCollide("A", (A) => {
           let x = A.pos.x;
           let y = A.pos.y;
@@ -666,19 +671,7 @@
           scopeC++;
           scopeD++;
         });
-
-        add([text("Autan ja \npalvelen muita"), pos(600, 286), scale(0.1)]);
-        add([
-          text("Suunnittelua ja \njarjestelmallisyytta"),
-          pos(690, 286),
-          scale(0.1),
-        ]);
-        add([
-          text("Luovuutta ja \nkasilla tekemista"),
-          pos(800, 286),
-          scale(0.1),
-        ]);
-
+          //kysymys 5
         player.onCollide("D", (D) => {
           let x = D.pos.x;
           let y = D.pos.y;
@@ -712,6 +705,10 @@
           scopeC++;
         });
 
+<<<<<<< HEAD
+        //kysymys 6
+        player.onCollide('G', (G) => {
+=======
         // 3
         add([text("Tietokoneella naputtaen"), pos(1005, 286), scale(0.1)]);
         add([
@@ -722,6 +719,7 @@
         add([text("Puhumalla"), pos(1170, 286), scale(0.1)]);
 
         player.onCollide("G", (G) => {
+>>>>>>> de3d2c2024f4fdf2dad43ac6aca8db61f787ea33
           let x = G.pos.x;
           let y = G.pos.y;
           destroyAll("G");
@@ -886,17 +884,17 @@
 
           "/": () => [sprite("k7"), area(), scale(0.2), "K7"],
           "`": () => [sprite("k8"), area(), scale(0.2), "K8"],
+
+          J: () => [sprite("k7a"), pos(-10, 1), area(), scale(0.18), "K7A"],
+          K: () => [sprite("k7b"), pos(-12, 1), area(), scale(0.18), "K7B"],
+          L: () => [sprite("k8a"), pos(1, 1), area(), scale(0.17), "K8A"],
+          M: () => [sprite("k8b"), pos(-1, 1), area(), scale(0.12), "K8B"],
+          N: () => [sprite("k8c"), pos(5, 1), area(), scale(0.12), "K8C"],
         });
 
         add([text("TASO 3"), pos(125, 280), scale(0.2)]);
 
-        // 1
-        add([text("Aikataulua \nnoudattaen?"), pos(245, 286), scale(0.1)]);
-        add([
-          text("Joustavasti, \ntilanteen mukaan?"),
-          pos(350, 286),
-          scale(0.1),
-        ]);
+        // kysymys 7
 
         player.onCollide("A", (A) => {
           let x = A.pos.x;
@@ -922,11 +920,7 @@
           scopeH++;
         });
 
-        /// 2
-
-        add([text("Kylla"), pos(610, 286), scale(0.1)]);
-        add([text("Vahan"), pos(675, 286), scale(0.1)]);
-        add([text("En"), pos(740, 286), scale(0.1)]);
+        /// Kysymys 8
 
         player.onCollide("D", (D) => {
           let x = D.pos.x;
