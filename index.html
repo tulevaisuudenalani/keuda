@@ -1065,17 +1065,17 @@
 
         let end = add([
           sprite("end"),
-          pos(width() / 2, 65),
+          pos(width() / 2, height() / 2 - 85),
           origin("center"),
-          scale(0.109),
+          scale(0.070),
           fixed(),
         ]);
         
         let endbox = add([
           sprite("endbox"),
-          pos(width() / 2, 260),
+          pos(width() / 2 , height() / 2 - -35),
           origin("center"),
-          scale(0.1172),
+          scale(0.0700),
           fixed()
         ]);
 
@@ -1101,14 +1101,8 @@
         ])
 
         add([
-          text('Kiitos pelaamisesta'),
-          pos(width() / 2 - 123, height() / 2 - 90),
-          scale(0.3),
-        ]);
-
-        add([
           text('Sinulle sopivia aloja voisivat olla:'),
-          pos(width() / 2 - 115, height() /2 - 60),
+          pos(width() / 2 - 115, height() /2 - 55),
           scale(0.15),
         ])
 
@@ -1116,105 +1110,105 @@
         if(ensimmainen == scopeA)
         {
           scopeA = 0;
-          add([sprite("ala1"), pos(width() / 2 - 115, height() /2 - 10), scale(0.3)]);
+          add([sprite("ala1"), pos(width() / 2 - 110, height() /2 - 20), scale(0.3)]);
         } else if(ensimmainen == scopeB)
         {
           scopeB = 0;
-          add([sprite("ala2"), pos(width() / 2 - 115, height() /2 - 10), scale(0.3)]);
+          add([sprite("ala2"), pos(width() / 2 - 110, height() /2 - 20), scale(0.3)]);
         } else if(ensimmainen == scopeC)
         {
           scopeC = 0;
-          add([sprite("ala3"), pos(width() / 2 - 115, height() /2 - 10), scale(0.3)]);         
+          add([sprite("ala3"), pos(width() / 2 - 110, height() /2 - 20), scale(0.3)]);         
         } else if(ensimmainen == scopeD)
         {
           scopeD = 0;
-          add([sprite("ala4"), pos(width() / 2 - 115, height() /2 - 10), scale(0.3)]);
+          add([sprite("ala4"), pos(width() / 2 - 110, height() /2 - 20), scale(0.3)]);
         } else if(ensimmainen == scopeE)
         {
           scopeE = 0;
-          add([sprite("ala5"), pos(width() / 2 - 115, height() /2 - 10), scale(0.3)]);
+          add([sprite("ala5"), pos(width() / 2 - 110, height() /2 - 20), scale(0.3)]);
         } else if(ensimmainen == scopeF)
         {
           scopeF = 0;
-          add([sprite("ala6"), pos(width() / 2 - 115, height() /2 - 10), scale(0.3)]);
+          add([sprite("ala6"), pos(width() / 2 - 110, height() /2 - 20), scale(0.3)]);
         } else if(ensimmainen == scopeG)
         {
           scopeG = 0;
-          add([sprite("ala7"), pos(width() / 2 - 115, height() /2 - 10), scale(0.3)]);
+          add([sprite("ala7"), pos(width() / 2 - 110, height() /2 - 20), scale(0.3)]);
         } else if(ensimmainen == scopeH)
         {
           scopeH = 0;
-          add([sprite("ala8"), pos(width() / 2 - 115, height() /2 - 10), scale(0.3)]);
+          add([sprite("ala8"), pos(width() / 2 - 110, height() /2 - 20), scale(0.3)]);
         }
 
         const toinen = Math.max(scopeA, scopeB, scopeC, scopeD, scopeE, scopeF, scopeG, scopeH);
         if(toinen == scopeA)
         {
           scopeA = 0;
-          add([sprite("ala1"), pos(width() / 2 - 115, height() /2 - -10), scale(0.3)]);
+          add([sprite("ala1"), pos(width() / 2 - 110, height() /2 - -30), scale(0.3)]);
         } else if(toinen == scopeB)
         {
           scopeB = 0;
-          add([sprite("ala2"), pos(width() / 2 - 115, height() /2 - -10), scale(0.3)]);
+          add([sprite("ala2"), pos(width() / 2 - 110, height() /2 - -30), scale(0.3)]);
         } else if(toinen == scopeC)
         {
           scopeC = 0;   
-          add([sprite("ala3"), pos(width() / 2 - 115, height() /2 - -10), scale(0.3)]);       
+          add([sprite("ala3"), pos(width() / 2 - 110, height() /2 - -30), scale(0.3)]);       
         } else if(toinen == scopeD)
         {
           scopeD = 0;
-          add([sprite("ala4"), pos(width() / 2 - 115, height() /2 - -10), scale(0.3)]);
+          add([sprite("ala4"), pos(width() / 2 - 110, height() /2 - -30), scale(0.3)]);
         } else if(toinen == scopeE)
         {
           scopeE = 0;
-          add([sprite("ala5"), pos(width() / 2 - 115, height() /2 - -10), scale(0.3)]);
+          add([sprite("ala5"), pos(width() / 2 - 110, height() /2 - -30), scale(0.3)]);
         } else if(toinen == scopeF)
         {
           scopeF = 0;
-          add([sprite("ala6"), pos(width() / 2 - 115, height() /2 - -10), scale(0.3)]);
+          add([sprite("ala6"), pos(width() / 2 - 110, height() /2 - -30), scale(0.3)]);
         } else if(toinen == scopeG)
         {
           scopeG = 0;
-          add([sprite("ala7"), pos(width() / 2 - 115, height() /2 - -10), scale(0.3)]);
+          add([sprite("ala7"), pos(width() / 2 - 110, height() /2 - -30), scale(0.3)]);
         } else if(toinen == scopeH)
         {
           scopeH = 0;
-          add([sprite("ala8"), pos(width() / 2 - 115, height() /2 - -10), scale(0.3)]);
+          add([sprite("ala8"), pos(width() / 2 - 110, height() /2 - -30), scale(0.3)]);
         }
 
         const kolmas = Math.max(scopeA, scopeB, scopeC, scopeD, scopeE, scopeF, scopeG, scopeH);
         if(kolmas == scopeA)
         {
           scopeA = 0;
-          add([sprite("ala1"), pos(width() / 2 - 115, height() /2 - -30), scale(0.3)]);  
+          add([sprite("ala1"), pos(width() / 2 - 110, height() /2 - -75), scale(0.3)]);  
         } else if(kolmas == scopeB)
         {
           scopeB = 0;
-          add([sprite("ala2"), pos(width() / 2 - 115, height() /2 - -30), scale(0.3)]);  
+          add([sprite("ala2"), pos(width() / 2 - 110, height() /2 - -75), scale(0.3)]);  
         } else if(kolmas == scopeC)
         {
           scopeC = 0;
-          add([sprite("ala3"), pos(width() / 2 - 115, height() /2 - -30), scale(0.3)]);         
+          add([sprite("ala3"), pos(width() / 2 - 110, height() /2 - -75), scale(0.3)]);         
         } else if(kolmas == scopeD)
         {
           scopeD = 0;
-          add([sprite("ala4"), pos(width() / 2 - 115, height() /2 - -30), scale(0.3)]);  
+          add([sprite("ala4"), pos(width() / 2 - 110, height() /2 - -75), scale(0.3)]);  
         } else if(kolmas == scopeE)
         {
           scopeE = 0;
-          add([sprite("ala5"), pos(width() / 2 - 115, height() /2 - -30), scale(0.3)]);  
+          add([sprite("ala5"), pos(width() / 2 - 110, height() /2 - -75), scale(0.3)]);  
         } else if(kolmas == scopeF)
         {
           scopeF = 0;
-          add([sprite("ala6"), pos(width() / 2 - 115, height() /2 - -30), scale(0.3)]);  
+          add([sprite("ala6"), pos(width() / 2 - 110, height() /2 - -75), scale(0.3)]);  
         } else if(kolmas == scopeG)
         {
           scopeG = 0;
-          add([sprite("ala7"), pos(width() / 2 - 115, height() /2 - -30), scale(0.3)]);  
+          add([sprite("ala7"), pos(width() / 2 - 110, height() /2 - -75), scale(0.3)]);  
         } else if(kolmas == scopeH)
         {
           scopeH = 0;
-          add([sprite("ala8"), pos(width() / 2 - 115, height() /2 - -30), scale(0.3)]);  
+          add([sprite("ala8"), pos(width() / 2 - 110, height() /2 - -75), scale(0.3)]);  
         }
       });
 
