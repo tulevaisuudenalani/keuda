@@ -707,6 +707,16 @@
 
         //kysymys 6
         player.onCollide('G', (G) => {
+        // 3
+        add([text("Tietokoneella naputtaen"), pos(1005, 286), scale(0.1)]);
+        add([
+          text("Jakoavaimella muttereita vaannellen"),
+          pos(1089, 286),
+          scale(0.1),
+        ]);
+        add([text("Puhumalla"), pos(1170, 286), scale(0.1)]);
+
+        player.onCollide("G", (G) => {
           let x = G.pos.x;
           let y = G.pos.y;
           destroyAll("G");
