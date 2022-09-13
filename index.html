@@ -9,13 +9,14 @@
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
   </head>
   <body>
-    <iframe 
-      src="https://forms.office.com/Pages/ResponsePage.aspx?id=vRxhusw1LUG1L0yyGYtmRS1wLbgaPDRBv4L-zj1ZHNVUOElXRVhSNjBKRFI1NUhNNTdXV1M1STdOMS4u" 
-      width="350" 
-      height="500" 
-      allowtransparency="true" 
-      frameborder="0" 
-      sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
+    <iframe
+      src="https://forms.office.com/Pages/ResponsePage.aspx?id=vRxhusw1LUG1L0yyGYtmRS1wLbgaPDRBv4L-zj1ZHNVUOElXRVhSNjBKRFI1NUhNNTdXV1M1STdOMS4u"
+      width="350"
+      height="500"
+      allowtransparency="true"
+      frameborder="0"
+      sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
+    >
     </iframe>
 
     <script type="module">
@@ -67,18 +68,20 @@
       loadSprite("reminder", "Kuvat/teksti_nuoli.png");
       loadSprite("flagfinish", "Kuvat/maali_tausta_levelille.png");
       loadSprite("start", "Kuvat/start.png");
-      loadSprite('empty', 'Kuvat/block_vastaus.png');
-      loadSprite('end', 'Kuvat/maali_tausta.png');
-      loadSprite('endback', 'Kuvat/maali_tausta_ala.png');
-      loadSprite('endbox', 'Kuvat/loppu_solu.png');
-      loadSprite('ala1', 'Kuvat/ala1.png');
-      loadSprite('ala2', 'Kuvat/ala2.png');
-      loadSprite('ala3', 'Kuvat/ala3.png');
-      loadSprite('ala4', 'Kuvat/ala4.png');
-      loadSprite('ala5', 'Kuvat/ala5.png');
-      loadSprite('ala6', 'Kuvat/ala6.png');
-      loadSprite('ala7', 'Kuvat/ala7.png');
-      loadSprite('ala8', 'Kuvat/ala8.png');
+      loadSprite("empty", "Kuvat/block_vastaus.png");
+      loadSprite("end", "Kuvat/maali_tausta.png");
+      loadSprite("endback", "Kuvat/maali_tausta_ala.png");
+      loadSprite("endbox", "Kuvat/loppu_solu.png");
+      loadSprite("endtxt", "Kuvat/loppu_teksti.png");
+
+      loadSprite("ala1", "Kuvat/ala1.png");
+      loadSprite("ala2", "Kuvat/ala2.png");
+      loadSprite("ala3", "Kuvat/ala3.png");
+      loadSprite("ala4", "Kuvat/ala4.png");
+      loadSprite("ala5", "Kuvat/ala5.png");
+      loadSprite("ala6", "Kuvat/ala6.png");
+      loadSprite("ala7", "Kuvat/ala7.png");
+      loadSprite("ala8", "Kuvat/ala8.png");
 
       loadSprite("k1", "Kuvat/kysymykset/k_1.png");
       loadSprite("k2", "Kuvat/kysymykset/k_2.png");
@@ -90,7 +93,6 @@
 
       loadSprite("k7", "Kuvat/kysymykset/k_7.png");
       loadSprite("k8", "Kuvat/kysymykset/k_8.png");
-
 
       loadSprite("k1a", "Kuvat/kysymykset/k_1_a.png");
       loadSprite("k1b", "Kuvat/kysymykset/k_1_b.png");
@@ -281,7 +283,7 @@
         player.onCollide("Spider", (Spider) => {
           shake(10);
           const hitSound = play("hit", {
-            volume: 0.2,
+            volume: 0.01,
             loop: false,
           });
         });
@@ -513,7 +515,7 @@
         player.onCollide("Spider", (Spider) => {
           shake(10);
           const hitSound = play("hit", {
-            volume: 0.2,
+            volume: 0.01,
             loop: false,
           });
         });
@@ -588,12 +590,6 @@
           fixed(),
         ]);
 
-        add([
-          sprite("bg2", { width: width(), height: height() }),
-          pos(0, 0),
-          fixed(),
-        ]);
-
         let player = add([
           sprite("mario"),
           solid(),
@@ -601,6 +597,13 @@
           body(),
           area(),
           scale(0.7),
+        ]);
+
+
+        add([
+          sprite("bg2", { width: width(), height: height() }),
+          pos(0, 0),
+          fixed(),
         ]);
 
         gravity(660);
@@ -672,69 +675,82 @@
         player.onCollide("D", (D) => {
           let x = D.pos.x;
           let y = D.pos.y;
-          destroyAll('D')
-          destroyAll('E')
-          destroyAll('F')
-          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+          destroyAll("D");
+          destroyAll("E");
+          destroyAll("F");
+          add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
           scopeE++;
           scopeG++;
-        })
-        player.onCollide('E', (E) => {
+        });
+        player.onCollide("E", (E) => {
           let x = E.pos.x;
           let y = E.pos.y;
-          destroyAll('D')
-          destroyAll('E')
-          destroyAll('F')
-          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+          destroyAll("D");
+          destroyAll("E");
+          destroyAll("F");
+          add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
           scopeB++;
           scopeD++;
           scopeF++;
           scopeH++;
-        })
-        player.onCollide('F', (F) => {
+        });
+        player.onCollide("F", (F) => {
           let x = F.pos.x;
           let y = F.pos.y;
-          destroyAll('D')
-          destroyAll('E')
-          destroyAll('F')
-          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+          destroyAll("D");
+          destroyAll("E");
+          destroyAll("F");
+          add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
           scopeA++;
           scopeC++;
-        })
+        });
 
+<<<<<<< HEAD
         //kysymys 6
         player.onCollide('G', (G) => {
+=======
+        // 3
+        add([text("Tietokoneella naputtaen"), pos(1005, 286), scale(0.1)]);
+        add([
+          text("Jakoavaimella muttereita vaannellen"),
+          pos(1089, 286),
+          scale(0.1),
+        ]);
+        add([text("Puhumalla"), pos(1170, 286), scale(0.1)]);
+
+        player.onCollide("G", (G) => {
+>>>>>>> de3d2c2024f4fdf2dad43ac6aca8db61f787ea33
           let x = G.pos.x;
           let y = G.pos.y;
-          destroyAll('G')
-          destroyAll('H')
-          destroyAll('I')
-          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+          destroyAll("G");
+          destroyAll("H");
+          destroyAll("I");
+          add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
           scopeA++;
           scopeB++;
           scopeH++;
-        })
-        player.onCollide('H', (H) => {
+        });
+        player.onCollide("H", (H) => {
           let x = H.pos.x;
           let y = H.pos.y;
-          destroyAll('G')
-          destroyAll('H')
-          destroyAll('I')
-          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+          destroyAll("G");
+          destroyAll("H");
+          destroyAll("I");
+          add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
           scopeD++;
           scopeF++;
-        })
-        player.onCollide('I', (I) => {
+        });
+        player.onCollide("I", (I) => {
           let x = I.pos.x;
           let y = I.pos.y;
-          destroyAll('G')
-          destroyAll('H')
-          destroyAll('I')
-          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+          destroyAll("G");
+          destroyAll("H");
+          destroyAll("I");
+          add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
           scopeC++;
           scopeE++;
           scopeG++;
-        })
+        });
 
         player.onCollide("Tunnel", (Tunnel) => {
           go("fourthLevel");
@@ -747,7 +763,7 @@
         player.onCollide("Spider", (Spider) => {
           shake(10);
           const hitSound = play("hit", {
-            volume: 0.2,
+            volume: 0.01,
             loop: false,
           });
         });
@@ -883,63 +899,63 @@
         player.onCollide("A", (A) => {
           let x = A.pos.x;
           let y = A.pos.y;
-          destroyAll('A')
-          destroyAll('B')
-          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+          destroyAll("A");
+          destroyAll("B");
+          add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
           scopeB++;
           scopeD++;
           scopeE++;
           scopeF++;
-        })
+        });
 
         player.onCollide("B", (B) => {
           let x = B.pos.x;
           let y = B.pos.y;
-          destroyAll('A')
-          destroyAll('B')
-          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+          destroyAll("A");
+          destroyAll("B");
+          add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
           scopeA++;
           scopeC++;
           scopeG++;
           scopeH++;
-        })
+        });
 
         /// Kysymys 8
 
         player.onCollide("D", (D) => {
           let x = D.pos.x;
           let y = D.pos.y;
-          destroyAll('D')
-          destroyAll('E')
-          destroyAll('F')
-          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+          destroyAll("D");
+          destroyAll("E");
+          destroyAll("F");
+          add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
           scopeA++;
           scopeB++;
           scopeH++;
-        })
+        });
 
         player.onCollide("E", (E) => {
           let x = E.pos.x;
           let y = E.pos.y;
-          destroyAll('D')
-          destroyAll('E')
-          destroyAll('F')
-          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+          destroyAll("D");
+          destroyAll("E");
+          destroyAll("F");
+          add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
           scopeF++;
           scopeG++;
-        })
+        });
 
         player.onCollide("F", (F) => {
           let x = F.pos.x;
           let y = F.pos.y;
-          destroyAll('D')
-          destroyAll('E')
-          destroyAll('F')
-          add([pos(x, y), sprite('empty'), area(), solid(), scale(0.4)]);
+          destroyAll("D");
+          destroyAll("E");
+          destroyAll("F");
+          add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
           scopeC++;
           scopeD++;
           scopeE++;
-        })
+        });
 
         player.onCollide("Tunnel", (Tunnel) => {
           go("fifthlevel");
@@ -957,7 +973,7 @@
         player.onCollide("Spider", (Spider) => {
           shake(10);
           const hitSound = play("hit", {
-            volume: 0.2,
+            volume: 0.01,
             loop: false,
           });
         });
@@ -1021,7 +1037,7 @@
       scene("fifthlevel", () => {
         debug.log("End Screen");
 
-        $('iframe').css('display', 'flex')
+        $("iframe").css("display", "flex");
 
         add([
           sprite("bg", { width: width(), height: height() }),
@@ -1050,156 +1066,158 @@
 
         let end = add([
           sprite("end"),
-          pos(width() / 2, 65),
+          pos(width() / 2, height() / 2 - 85),
           origin("center"),
-          scale(0.109),
+          scale(0.070),
           fixed(),
         ]);
-        
+
         let endbox = add([
           sprite("endbox"),
-          pos(width() / 2, 260),
+          pos(width() / 2 , height() / 2 - -35),
           origin("center"),
-          scale(0.1172),
+          scale(0.0700),
           fixed()
         ]);
 
-        //teksti kenttä ensimmäistä laatikkoa varten--------------------------------------
-        add([
-          text('1:'),
-          pos(width() / 2 - 200, height() / 2 - 35),
-          scale(0.5),
-        ])
-
-        //teksti kenttä toista laatikkoa varten-------------------------------------------
-        add([
-          text('2:'),
-          pos(width() / 2 - 200, height() / 2 + 50),
-          scale(0.5),
-        ])
-
-        //teksti kenttä kolmatta laatikkoa varten-----------------------------------------
-        add([
-          text('3:'),
-          pos(width() / 2 - 200, height() / 2 + 135),
-          scale(0.5),
-        ])
-
-        add([
-          text('Kiitos pelaamisesta'),
-          pos(width() / 2 - 123, height() / 2 - 90),
-          scale(0.3),
+        let endtxt = add([
+          sprite("endtxt"),
+          pos(width() / 2, 130),
+          origin("center"),
+          scale(0.09),
+          fixed()
         ]);
 
-        add([
-          text('Sinulle sopivia aloja voisivat olla:'),
-          pos(width() / 2 - 115, height() /2 - 60),
-          scale(0.15),
-        ])
-
-        const ensimmainen = Math.max(scopeA, scopeB, scopeC, scopeD, scopeE, scopeF, scopeG, scopeH);
+        const ensimmainen = Math.max(
+          scopeA,
+          scopeB,
+          scopeC,
+          scopeD,
+          scopeE,
+          scopeF,
+          scopeG,
+          scopeH
+        );
         if(ensimmainen == scopeA)
         {
           scopeA = 0;
-          add([sprite("ala1"), pos(width() / 2 - 115, height() /2 - 10), scale(0.3)]);
+          add([sprite("ala1"), pos(width() / 2 - 110, height() /2 - 20), scale(0.3)]);
         } else if(ensimmainen == scopeB)
         {
           scopeB = 0;
-          add([sprite("ala2"), pos(width() / 2 - 115, height() /2 - 10), scale(0.3)]);
+          add([sprite("ala2"), pos(width() / 2 - 110, height() /2 - 20), scale(0.3)]);
         } else if(ensimmainen == scopeC)
         {
           scopeC = 0;
-          add([sprite("ala3"), pos(width() / 2 - 115, height() /2 - 10), scale(0.3)]);         
+          add([sprite("ala3"), pos(width() / 2 - 110, height() /2 - 20), scale(0.3)]);         
         } else if(ensimmainen == scopeD)
         {
           scopeD = 0;
-          add([sprite("ala4"), pos(width() / 2 - 115, height() /2 - 10), scale(0.3)]);
+          add([sprite("ala4"), pos(width() / 2 - 110, height() /2 - 20), scale(0.3)]);
         } else if(ensimmainen == scopeE)
         {
           scopeE = 0;
-          add([sprite("ala5"), pos(width() / 2 - 115, height() /2 - 10), scale(0.3)]);
+          add([sprite("ala5"), pos(width() / 2 - 110, height() /2 - 20), scale(0.3)]);
         } else if(ensimmainen == scopeF)
         {
           scopeF = 0;
-          add([sprite("ala6"), pos(width() / 2 - 115, height() /2 - 10), scale(0.3)]);
+          add([sprite("ala6"), pos(width() / 2 - 110, height() /2 - 20), scale(0.3)]);
         } else if(ensimmainen == scopeG)
         {
           scopeG = 0;
-          add([sprite("ala7"), pos(width() / 2 - 115, height() /2 - 10), scale(0.3)]);
+          add([sprite("ala7"), pos(width() / 2 - 110, height() /2 - 20), scale(0.3)]);
         } else if(ensimmainen == scopeH)
         {
           scopeH = 0;
-          add([sprite("ala8"), pos(width() / 2 - 115, height() /2 - 10), scale(0.3)]);
+          add([sprite("ala8"), pos(width() / 2 - 110, height() /2 - 20), scale(0.3)]);
         }
 
-        const toinen = Math.max(scopeA, scopeB, scopeC, scopeD, scopeE, scopeF, scopeG, scopeH);
+        const toinen = Math.max(
+          scopeA,
+          scopeB,
+          scopeC,
+          scopeD,
+          scopeE,
+          scopeF,
+          scopeG,
+          scopeH
+        );
         if(toinen == scopeA)
         {
           scopeA = 0;
-          add([sprite("ala1"), pos(width() / 2 - 115, height() /2 - -10), scale(0.3)]);
+          add([sprite("ala1"), pos(width() / 2 - 110, height() /2 - -30), scale(0.3)]);
         } else if(toinen == scopeB)
         {
           scopeB = 0;
-          add([sprite("ala2"), pos(width() / 2 - 115, height() /2 - -10), scale(0.3)]);
+          add([sprite("ala2"), pos(width() / 2 - 110, height() /2 - -30), scale(0.3)]);
         } else if(toinen == scopeC)
         {
           scopeC = 0;   
-          add([sprite("ala3"), pos(width() / 2 - 115, height() /2 - -10), scale(0.3)]);       
+          add([sprite("ala3"), pos(width() / 2 - 110, height() /2 - -30), scale(0.3)]);       
         } else if(toinen == scopeD)
         {
           scopeD = 0;
-          add([sprite("ala4"), pos(width() / 2 - 115, height() /2 - -10), scale(0.3)]);
+          add([sprite("ala4"), pos(width() / 2 - 110, height() /2 - -30), scale(0.3)]);
         } else if(toinen == scopeE)
         {
           scopeE = 0;
-          add([sprite("ala5"), pos(width() / 2 - 115, height() /2 - -10), scale(0.3)]);
+          add([sprite("ala5"), pos(width() / 2 - 110, height() /2 - -30), scale(0.3)]);
         } else if(toinen == scopeF)
         {
           scopeF = 0;
-          add([sprite("ala6"), pos(width() / 2 - 115, height() /2 - -10), scale(0.3)]);
+          add([sprite("ala6"), pos(width() / 2 - 110, height() /2 - -30), scale(0.3)]);
         } else if(toinen == scopeG)
         {
           scopeG = 0;
-          add([sprite("ala7"), pos(width() / 2 - 115, height() /2 - -10), scale(0.3)]);
+          add([sprite("ala7"), pos(width() / 2 - 110, height() /2 - -30), scale(0.3)]);
         } else if(toinen == scopeH)
         {
           scopeH = 0;
-          add([sprite("ala8"), pos(width() / 2 - 115, height() /2 - -10), scale(0.3)]);
+          add([sprite("ala8"), pos(width() / 2 - 110, height() /2 - -30), scale(0.3)]);
         }
 
-        const kolmas = Math.max(scopeA, scopeB, scopeC, scopeD, scopeE, scopeF, scopeG, scopeH);
+        const kolmas = Math.max(
+          scopeA,
+          scopeB,
+          scopeC,
+          scopeD,
+          scopeE,
+          scopeF,
+          scopeG,
+          scopeH
+        );
         if(kolmas == scopeA)
         {
           scopeA = 0;
-          add([sprite("ala1"), pos(width() / 2 - 115, height() /2 - -30), scale(0.3)]);  
+          add([sprite("ala1"), pos(width() / 2 - 110, height() /2 - -75), scale(0.3)]);  
         } else if(kolmas == scopeB)
         {
           scopeB = 0;
-          add([sprite("ala2"), pos(width() / 2 - 115, height() /2 - -30), scale(0.3)]);  
+          add([sprite("ala2"), pos(width() / 2 - 110, height() /2 - -75), scale(0.3)]);  
         } else if(kolmas == scopeC)
         {
           scopeC = 0;
-          add([sprite("ala3"), pos(width() / 2 - 115, height() /2 - -30), scale(0.3)]);         
+          add([sprite("ala3"), pos(width() / 2 - 110, height() /2 - -75), scale(0.3)]);         
         } else if(kolmas == scopeD)
         {
           scopeD = 0;
-          add([sprite("ala4"), pos(width() / 2 - 115, height() /2 - -30), scale(0.3)]);  
+          add([sprite("ala4"), pos(width() / 2 - 110, height() /2 - -75), scale(0.3)]);  
         } else if(kolmas == scopeE)
         {
           scopeE = 0;
-          add([sprite("ala5"), pos(width() / 2 - 115, height() /2 - -30), scale(0.3)]);  
+          add([sprite("ala5"), pos(width() / 2 - 110, height() /2 - -75), scale(0.3)]);  
         } else if(kolmas == scopeF)
         {
           scopeF = 0;
-          add([sprite("ala6"), pos(width() / 2 - 115, height() /2 - -30), scale(0.3)]);  
+          add([sprite("ala6"), pos(width() / 2 - 110, height() /2 - -75), scale(0.3)]);  
         } else if(kolmas == scopeG)
         {
           scopeG = 0;
-          add([sprite("ala7"), pos(width() / 2 - 115, height() /2 - -30), scale(0.3)]);  
+          add([sprite("ala7"), pos(width() / 2 - 110, height() /2 - -75), scale(0.3)]);  
         } else if(kolmas == scopeH)
         {
           scopeH = 0;
-          add([sprite("ala8"), pos(width() / 2 - 115, height() /2 - -30), scale(0.3)]);  
+          add([sprite("ala8"), pos(width() / 2 - 110, height() /2 - -75), scale(0.3)]);  
         }
       });
 
