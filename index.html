@@ -6,12 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="style.css" />
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
   </head>
   <body>
+    <iframe 
+      src="https://forms.office.com/Pages/ResponsePage.aspx?id=vRxhusw1LUG1L0yyGYtmRS1wLbgaPDRBv4L-zj1ZHNVUOElXRVhSNjBKRFI1NUhNNTdXV1M1STdOMS4u" 
+      width="350" 
+      height="500" 
+      allowtransparency="true" 
+      frameborder="0" 
+      sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
+    </iframe>
+
     <script type="module">
       import kaboom from "https://unpkg.com/kaboom/dist/kaboom.mjs";
 
-      // Config
+      // Kaboom config
       kaboom({
         global: true,
         fullscreen: true,
@@ -81,6 +91,30 @@
       loadSprite("k7", "Kuvat/kysymykset/k_7.png");
       loadSprite("k8", "Kuvat/kysymykset/k_8.png");
 
+
+      loadSprite("k1a", "Kuvat/kysymykset/k_1_a.png");
+      loadSprite("k1b", "Kuvat/kysymykset/k_1_b.png");
+      loadSprite("k1c", "Kuvat/kysymykset/k_1_c.png");
+      loadSprite("k2a", "Kuvat/kysymykset/k_2_a.png");
+      loadSprite("k2b", "Kuvat/kysymykset/k_2_b.png");
+      loadSprite("k2c", "Kuvat/kysymykset/k_2_c.png");
+      loadSprite("k3a", "Kuvat/kysymykset/k_3_a.png");
+      loadSprite("k3b", "Kuvat/kysymykset/k_3_b.png");
+      loadSprite("k4a", "Kuvat/kysymykset/k_4_a.png");
+      loadSprite("k4b", "Kuvat/kysymykset/k_4_b.png");
+      loadSprite("k4c", "Kuvat/kysymykset/k_4_c.png");
+      loadSprite("k5a", "Kuvat/kysymykset/k_5_a.png");
+      loadSprite("k5b", "Kuvat/kysymykset/k_5_b.png");
+      loadSprite("k5c", "Kuvat/kysymykset/k_5_c.png");
+      loadSprite("k6a", "Kuvat/kysymykset/k_6_a.png");
+      loadSprite("k6b", "Kuvat/kysymykset/k_6_b.png");
+      loadSprite("k6c", "Kuvat/kysymykset/k_6_c.png");
+      loadSprite("k7a", "Kuvat/kysymykset/k_7_a.png");
+      loadSprite("k7b", "Kuvat/kysymykset/k_7_b.png");
+      loadSprite("k8a", "Kuvat/kysymykset/k_8_a.png");
+      loadSprite("k8b", "Kuvat/kysymykset/k_8_b.png");
+      loadSprite("k8c", "Kuvat/kysymykset/k_8_c.png");
+
       // Load sounds
       loadSound("block", "./audio/block.wav");
       loadSound("hit", "./audio/hit.wav");
@@ -129,9 +163,9 @@
           "£                         `                         £",
           "£                                                   £",
           "£             /           D  E  F     ¤       -     £",
-          "£                                                   £",
+          "£                         M  N  O                   £",
           "£             A  B  C                 G     I     ^ £",
-          "£                                                   £",
+          "£             J  K  L                 P     Q       £",
           "£                        =========                + £",
           "£                       ===========                 £",
           "=====================================================",
@@ -152,8 +186,8 @@
           "£                                                                  -    £",
           "£           A   B   C          D    E    F         G   H   I          ^ £",
           "£                                                                       £",
-          "£                                                                     + £",
-          "£                                              #                        £",
+          "£                        £                                            + £",
+          "£                        £                     #                        £",
           "=========================================================================",
         ],
         [
@@ -172,8 +206,8 @@
           "£                                                                       £",
           "£            A     B           D  E  F                             -    £",
           "£                                                                     ^ £",
-          "£                                                                     + £",
-          "£                                                           #           £",
+          "£                        £                                            + £",
+          "£                        £                                  #           £",
           "=========================================================================",
         ],
         [
@@ -358,12 +392,17 @@
           "/": () => [sprite("k1"), area(), scale(0.2), "K1"],
           "`": () => [sprite("k2"), area(), scale(0.2), "K2"],
           "¤": () => [sprite("k3"), area(), scale(0.2), "K3"],
+          J: () => [sprite("k1a"), pos(0, 1), area(), scale(0.12), "K1A"],
+          K: () => [sprite("k1b"), pos(0, 1), area(), scale(0.12), "K1B"],
+          L: () => [sprite("k1c"), pos(-10, 1), area(), scale(0.12), "K1C"],
+          M: () => [sprite("k2a"), pos(-5, 1), area(), scale(0.12), "K2A"],
+          N: () => [sprite("k2b"), pos(-5, 1), area(), scale(0.12), "K2B"],
+          O: () => [sprite("k2c"), pos(0, 1), area(), scale(0.12), "K2C"],
+          P: () => [sprite("k3a"), pos(-10, 1), area(), scale(0.12), "K3A"],
+          Q: () => [sprite("k3b"), pos(-20, 1), area(), scale(0.12), "K3B"],
+          R: () => [sprite(""), pos(0, 1), area(), scale(0.12), "K1A"],
         });
-
-        add([text("Ulkona"), pos(275, 365), scale(0.1)]);
-        add([text("Sisalla"), pos(335, 365), scale(0.1)]);
-        add([text("Molemmissa"), pos(385, 365), scale(0.1)]);
-
+        //kysymys 1
         player.onCollide("A", (A) => {
           let x = A.pos.x;
           let y = A.pos.y;
@@ -400,10 +439,7 @@
           scopeG++;
         });
 
-        add([text("Koneiden"), pos(513, 325), scale(0.1)]);
-        add([text("Ihmisten"), pos(574, 325), scale(0.1)]);
-        add([text("Elainten"), pos(633, 325), scale(0.1)]);
-
+        //kysymys 2
         player.onCollide("D", (D) => {
           let x = D.pos.x;
           let y = D.pos.y;
@@ -439,13 +475,7 @@
           scopeD++;
         });
 
-        add([
-          text("Olen sosiaalinen ja \nviihdyn porukassa"),
-          pos(730, 365),
-          scale(0.1),
-        ]);
-        add([text("Viihdyn parhaiten yksikseni"), pos(840, 365), scale(0.1)]);
-
+        //kysymys 3
         player.onCollide("G", (G) => {
           let x = G.pos.x;
           let y = G.pos.y;
@@ -1005,6 +1035,8 @@
       // EndScreen
       scene("fifthlevel", () => {
         debug.log("End Screen");
+
+        $('iframe').css('display', 'flex')
 
         add([
           sprite("bg", { width: width(), height: height() }),
