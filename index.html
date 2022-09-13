@@ -72,6 +72,7 @@
       loadSprite("end", "Kuvat/maali_tausta.png");
       loadSprite("endback", "Kuvat/maali_tausta_ala.png");
       loadSprite("endbox", "Kuvat/loppu_solu.png");
+      loadSprite("endtext", "Kuvat/loppu_teksti.png");
       loadSprite("ala1", "Kuvat/ala1.png");
       loadSprite("ala2", "Kuvat/ala2.png");
       loadSprite("ala3", "Kuvat/ala3.png");
@@ -1044,51 +1045,26 @@
 
         let end = add([
           sprite("end"),
-          pos(width() / 2, 65),
+          pos(width() / 2, height() / 2 - 85),
           origin("center"),
-          scale(0.109),
+          scale(0.070),
           fixed(),
         ]);
 
         let endbox = add([
           sprite("endbox"),
-          pos(width() / 2, 260),
+          pos(width() / 2 , height() / 2 - -35),
           origin("center"),
-          scale(0.1172),
-          fixed(),
+          scale(0.0700),
+          fixed()
         ]);
 
-        //teksti kenttä ensimmäistä laatikkoa varten--------------------------------------
-        add([
-          text("1:"),
-          pos(width() / 2 - 200, height() / 2 - 35),
-          scale(0.5),
-        ]);
-
-        //teksti kenttä toista laatikkoa varten-------------------------------------------
-        add([
-          text("2:"),
-          pos(width() / 2 - 200, height() / 2 + 50),
-          scale(0.5),
-        ]);
-
-        //teksti kenttä kolmatta laatikkoa varten-----------------------------------------
-        add([
-          text("3:"),
-          pos(width() / 2 - 200, height() / 2 + 135),
-          scale(0.5),
-        ]);
-
-        add([
-          text("Kiitos pelaamisesta"),
-          pos(width() / 2 - 123, height() / 2 - 90),
-          scale(0.3),
-        ]);
-
-        add([
-          text("Sinulle sopivia aloja voisivat olla:"),
-          pos(width() / 2 - 115, height() / 2 - 60),
-          scale(0.15),
+        let endtext = add([
+          sprite("endtext"),
+          pos(width() / 2, height() / 2 - 43),
+          origin("center"),
+          scale(0.05),
+          fixed()
         ]);
 
         const ensimmainen = Math.max(
@@ -1101,62 +1077,38 @@
           scopeG,
           scopeH
         );
-        if (ensimmainen == scopeA) {
+        if(ensimmainen == scopeA)
+        {
           scopeA = 0;
-          add([
-            sprite("ala1"),
-            pos(width() / 2 - 115, height() / 2 - 10),
-            scale(0.3),
-          ]);
-        } else if (ensimmainen == scopeB) {
+          add([sprite("ala1"), pos(width() / 2 - 110, height() /2 - 20), scale(0.3)]);
+        } else if(ensimmainen == scopeB)
+        {
           scopeB = 0;
-          add([
-            sprite("ala2"),
-            pos(width() / 2 - 115, height() / 2 - 10),
-            scale(0.3),
-          ]);
-        } else if (ensimmainen == scopeC) {
+          add([sprite("ala2"), pos(width() / 2 - 110, height() /2 - 20), scale(0.3)]);
+        } else if(ensimmainen == scopeC)
+        {
           scopeC = 0;
-          add([
-            sprite("ala3"),
-            pos(width() / 2 - 115, height() / 2 - 10),
-            scale(0.3),
-          ]);
-        } else if (ensimmainen == scopeD) {
+          add([sprite("ala3"), pos(width() / 2 - 110, height() /2 - 20), scale(0.3)]);         
+        } else if(ensimmainen == scopeD)
+        {
           scopeD = 0;
-          add([
-            sprite("ala4"),
-            pos(width() / 2 - 115, height() / 2 - 10),
-            scale(0.3),
-          ]);
-        } else if (ensimmainen == scopeE) {
+          add([sprite("ala4"), pos(width() / 2 - 110, height() /2 - 20), scale(0.3)]);
+        } else if(ensimmainen == scopeE)
+        {
           scopeE = 0;
-          add([
-            sprite("ala5"),
-            pos(width() / 2 - 115, height() / 2 - 10),
-            scale(0.3),
-          ]);
-        } else if (ensimmainen == scopeF) {
+          add([sprite("ala5"), pos(width() / 2 - 110, height() /2 - 20), scale(0.3)]);
+        } else if(ensimmainen == scopeF)
+        {
           scopeF = 0;
-          add([
-            sprite("ala6"),
-            pos(width() / 2 - 115, height() / 2 - 10),
-            scale(0.3),
-          ]);
-        } else if (ensimmainen == scopeG) {
+          add([sprite("ala6"), pos(width() / 2 - 110, height() /2 - 20), scale(0.3)]);
+        } else if(ensimmainen == scopeG)
+        {
           scopeG = 0;
-          add([
-            sprite("ala7"),
-            pos(width() / 2 - 115, height() / 2 - 10),
-            scale(0.3),
-          ]);
-        } else if (ensimmainen == scopeH) {
+          add([sprite("ala7"), pos(width() / 2 - 110, height() /2 - 20), scale(0.3)]);
+        } else if(ensimmainen == scopeH)
+        {
           scopeH = 0;
-          add([
-            sprite("ala8"),
-            pos(width() / 2 - 115, height() / 2 - 10),
-            scale(0.3),
-          ]);
+          add([sprite("ala8"), pos(width() / 2 - 110, height() /2 - 20), scale(0.3)]);
         }
 
         const toinen = Math.max(
@@ -1169,62 +1121,38 @@
           scopeG,
           scopeH
         );
-        if (toinen == scopeA) {
+        if(toinen == scopeA)
+        {
           scopeA = 0;
-          add([
-            sprite("ala1"),
-            pos(width() / 2 - 115, height() / 2 - -10),
-            scale(0.3),
-          ]);
-        } else if (toinen == scopeB) {
+          add([sprite("ala1"), pos(width() / 2 - 110, height() /2 - -30), scale(0.3)]);
+        } else if(toinen == scopeB)
+        {
           scopeB = 0;
-          add([
-            sprite("ala2"),
-            pos(width() / 2 - 115, height() / 2 - -10),
-            scale(0.3),
-          ]);
-        } else if (toinen == scopeC) {
-          scopeC = 0;
-          add([
-            sprite("ala3"),
-            pos(width() / 2 - 115, height() / 2 - -10),
-            scale(0.3),
-          ]);
-        } else if (toinen == scopeD) {
+          add([sprite("ala2"), pos(width() / 2 - 110, height() /2 - -30), scale(0.3)]);
+        } else if(toinen == scopeC)
+        {
+          scopeC = 0;   
+          add([sprite("ala3"), pos(width() / 2 - 110, height() /2 - -30), scale(0.3)]);       
+        } else if(toinen == scopeD)
+        {
           scopeD = 0;
-          add([
-            sprite("ala4"),
-            pos(width() / 2 - 115, height() / 2 - -10),
-            scale(0.3),
-          ]);
-        } else if (toinen == scopeE) {
+          add([sprite("ala4"), pos(width() / 2 - 110, height() /2 - -30), scale(0.3)]);
+        } else if(toinen == scopeE)
+        {
           scopeE = 0;
-          add([
-            sprite("ala5"),
-            pos(width() / 2 - 115, height() / 2 - -10),
-            scale(0.3),
-          ]);
-        } else if (toinen == scopeF) {
+          add([sprite("ala5"), pos(width() / 2 - 110, height() /2 - -30), scale(0.3)]);
+        } else if(toinen == scopeF)
+        {
           scopeF = 0;
-          add([
-            sprite("ala6"),
-            pos(width() / 2 - 115, height() / 2 - -10),
-            scale(0.3),
-          ]);
-        } else if (toinen == scopeG) {
+          add([sprite("ala6"), pos(width() / 2 - 110, height() /2 - -30), scale(0.3)]);
+        } else if(toinen == scopeG)
+        {
           scopeG = 0;
-          add([
-            sprite("ala7"),
-            pos(width() / 2 - 115, height() / 2 - -10),
-            scale(0.3),
-          ]);
-        } else if (toinen == scopeH) {
+          add([sprite("ala7"), pos(width() / 2 - 110, height() /2 - -30), scale(0.3)]);
+        } else if(toinen == scopeH)
+        {
           scopeH = 0;
-          add([
-            sprite("ala8"),
-            pos(width() / 2 - 115, height() / 2 - -10),
-            scale(0.3),
-          ]);
+          add([sprite("ala8"), pos(width() / 2 - 110, height() /2 - -30), scale(0.3)]);
         }
 
         const kolmas = Math.max(
@@ -1237,62 +1165,38 @@
           scopeG,
           scopeH
         );
-        if (kolmas == scopeA) {
+        if(kolmas == scopeA)
+        {
           scopeA = 0;
-          add([
-            sprite("ala1"),
-            pos(width() / 2 - 115, height() / 2 - -30),
-            scale(0.3),
-          ]);
-        } else if (kolmas == scopeB) {
+          add([sprite("ala1"), pos(width() / 2 - 110, height() /2 - -75), scale(0.3)]);  
+        } else if(kolmas == scopeB)
+        {
           scopeB = 0;
-          add([
-            sprite("ala2"),
-            pos(width() / 2 - 115, height() / 2 - -30),
-            scale(0.3),
-          ]);
-        } else if (kolmas == scopeC) {
+          add([sprite("ala2"), pos(width() / 2 - 110, height() /2 - -75), scale(0.3)]);  
+        } else if(kolmas == scopeC)
+        {
           scopeC = 0;
-          add([
-            sprite("ala3"),
-            pos(width() / 2 - 115, height() / 2 - -30),
-            scale(0.3),
-          ]);
-        } else if (kolmas == scopeD) {
+          add([sprite("ala3"), pos(width() / 2 - 110, height() /2 - -75), scale(0.3)]);         
+        } else if(kolmas == scopeD)
+        {
           scopeD = 0;
-          add([
-            sprite("ala4"),
-            pos(width() / 2 - 115, height() / 2 - -30),
-            scale(0.3),
-          ]);
-        } else if (kolmas == scopeE) {
+          add([sprite("ala4"), pos(width() / 2 - 110, height() /2 - -75), scale(0.3)]);  
+        } else if(kolmas == scopeE)
+        {
           scopeE = 0;
-          add([
-            sprite("ala5"),
-            pos(width() / 2 - 115, height() / 2 - -30),
-            scale(0.3),
-          ]);
-        } else if (kolmas == scopeF) {
+          add([sprite("ala5"), pos(width() / 2 - 110, height() /2 - -75), scale(0.3)]);  
+        } else if(kolmas == scopeF)
+        {
           scopeF = 0;
-          add([
-            sprite("ala6"),
-            pos(width() / 2 - 115, height() / 2 - -30),
-            scale(0.3),
-          ]);
-        } else if (kolmas == scopeG) {
+          add([sprite("ala6"), pos(width() / 2 - 110, height() /2 - -75), scale(0.3)]);  
+        } else if(kolmas == scopeG)
+        {
           scopeG = 0;
-          add([
-            sprite("ala7"),
-            pos(width() / 2 - 115, height() / 2 - -30),
-            scale(0.3),
-          ]);
-        } else if (kolmas == scopeH) {
+          add([sprite("ala7"), pos(width() / 2 - 110, height() /2 - -75), scale(0.3)]);  
+        } else if(kolmas == scopeH)
+        {
           scopeH = 0;
-          add([
-            sprite("ala8"),
-            pos(width() / 2 - 115, height() / 2 - -30),
-            scale(0.3),
-          ]);
+          add([sprite("ala8"), pos(width() / 2 - 110, height() /2 - -75), scale(0.3)]);  
         }
       });
     </script>
