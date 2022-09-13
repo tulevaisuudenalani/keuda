@@ -54,16 +54,16 @@
       let scopeG = 0; // Terveys ja hyvinvointialat
       let scopeH = 0; // Tietojenkäsittely ja tietoliikenne
 
-      // Load graphics
+      loadSprite("player", "Kuvat/hahmo.png");
+      loadSprite("background", "Kuvat/tausta.png");
+      loadSprite("line", "Kuvat/tausta_alareuna.png");
+      loadSprite("teleport", "Kuvat/ampari.png");
+
       loadSprite("logo", "Kuvat/keuda_logo.png");
-      loadSprite("bg", "Kuvat/tausta.png");
       loadSprite("bg2", "Kuvat/tausta_shade.png");
-      loadSprite("ground", "Kuvat/tausta_alareuna.png");
-      loadSprite("mario", "Kuvat/hahmo.png");
       loadSprite("suprise", "Kuvat/block_tyhja_kysymys.png");
       loadSprite("spider", "Kuvat/örkki.png");
       loadSprite("block", "Kuvat/block.png");
-      loadSprite("tunnel", "Kuvat/ampari.png");
       loadSprite("arrow", "Kuvat/nuoli.png");
       loadSprite("reminder", "Kuvat/teksti_nuoli.png");
       loadSprite("flagfinish", "Kuvat/maali_tausta_levelille.png");
@@ -72,8 +72,6 @@
       loadSprite("end", "Kuvat/maali_tausta.png");
       loadSprite("endback", "Kuvat/maali_tausta_ala.png");
       loadSprite("endbox", "Kuvat/loppu_solu.png");
-      loadSprite("endtxt", "Kuvat/loppu_teksti.png");
-
       loadSprite("ala1", "Kuvat/ala1.png");
       loadSprite("ala2", "Kuvat/ala2.png");
       loadSprite("ala3", "Kuvat/ala3.png");
@@ -187,7 +185,7 @@
           "£           /                  `                   ¤                    £",
           "£                                                                  -    £",
           "£           A   B   C          D    E    F         G   H   I          ^ £",
-          "£           J   K   L          M    N    O         P   Q   R            £",
+          "£                                                                       £",
           "£                        £                                            + £",
           "£                        £                     #                        £",
           "=========================================================================",
@@ -207,7 +205,7 @@
           "£            /                 `                                        £",
           "£                                                                       £",
           "£            A     B           D  E  F                             -    £",
-          "£            J     K           L  M  N                                ^ £",
+          "£                                                                     ^ £",
           "£                        £                                            + £",
           "£                        £                                  #           £",
           "=========================================================================",
@@ -228,33 +226,16 @@
         ],
       ];
 
-      scene("firstLevel", () => {
-        debug.log("Aloitus ");
-
+      scene("start", () => {
         add([
-          sprite("bg", { width: width(), height: height() }),
+          sprite("background", { width: width(), height: height() }),
           pos(0, 0),
           fixed(),
         ]);
 
         add([
-          sprite("ground", { width: screen.width, height: screen.height }),
+          sprite("line", { width: screen.width, height: screen.height }),
           pos(0, 250),
-          fixed(),
-        ]);
-
-        let player = add([
-          sprite("mario"),
-          solid(),
-          pos(50, 240),
-          body(),
-          area(),
-          scale(0.7),
-        ]);
-
-        add([
-          sprite("bg2", { width: width(), height: height() }),
-          pos(0, 0),
           fixed(),
         ]);
 
@@ -263,29 +244,21 @@
           height: 20,
           "=": () => [sprite("block"), solid(), area(), scale(0.44), ""],
           "£": () => [sprite("block"), solid(), area(), scale(0.44), ""],
-          "+": () => [sprite("tunnel"), solid(), area(), scale(0.5), "Tunnel"],
-          "^": () => [sprite("arrow"), scale(0.4), "Arrow"],
-          "#": () => [sprite("spider"), solid(), area(), scale(1), "Spider"],
-          "-": () => [sprite("reminder"), area(), scale(0.2), "Reminder"],
           "(": () => [sprite("start"), area(), scale(0.5), "Start"],
         });
 
+        const player = add([
+          sprite("player"),
+          pos(80, 400),
+          body(),
+          area(),
+          scale(0.7),
+        ]);
+
+        gravity(700);
+
         player.onCollide("Start", (Start) => {
-          go("secondLevel");
-        });
-
-        gravity(660);
-
-        onUpdate("Spider", (Spider) => {
-          Spider.move(-15, 0);
-        });
-
-        player.onCollide("Spider", (Spider) => {
-          shake(10);
-          const hitSound = play("hit", {
-            volume: 0.01,
-            loop: false,
-          });
+          go("levelONE");
         });
 
         player.onUpdate(() => {
@@ -298,32 +271,10 @@
           player.flipX(true);
         });
 
-        onKeyDown("a", () => {
-          player.move(-playerMoveSpeed, 0);
-          camPos(player.pos);
-          player.flipX(true);
-        });
-
         onKeyDown("right", () => {
           player.move(playerMoveSpeed, 0);
           camPos(player.pos);
           player.flipX(false);
-        });
-
-        onKeyDown("d", () => {
-          player.move(playerMoveSpeed, 0);
-          camPos(player.pos);
-          player.flipX(false);
-        });
-
-        onKeyPress("space", () => {
-          if (player.isGrounded()) {
-            player.jump(playerJumpForce, 0);
-            const jumpSound = play("hyppy", {
-              volume: 0.5,
-              loop: false,
-            });
-          }
         });
 
         onKeyPress("up", () => {
@@ -336,51 +287,72 @@
           }
         });
 
+        onKeyPress("space", () => {
+          if (player.isGrounded()) {
+            player.jump(playerJumpForce, 0);
+            const jumpSound = play("hyppy", {
+              volume: 0.5,
+              loop: false,
+            });
+          }
+        });
+
         onKeyPress("w", () => {
           if (player.isGrounded()) {
             player.jump(playerJumpForce, 0);
+            const jumpSound = play("hyppy", {
+              volume: 0.5,
+              loop: false,
+            });
           }
+        });
+
+        onKeyDown("a", () => {
+          player.move(-playerMoveSpeed, 0);
+          camPos(player.pos);
+          player.flipX(true);
+        });
+
+        onKeyDown("d", () => {
+          player.move(playerMoveSpeed, 0);
+          camPos(player.pos);
+          player.flipX(false);
         });
       });
 
-      scene("secondLevel", () => {
-        debug.log("TASO 1");
+      onLoad(() => {
+        go("start");
+      });
 
+      scene("levelONE", () => {
         add([
-          sprite("bg", { width: width(), height: height() }),
+          sprite("background", { width: width(), height: height() }),
           pos(0, 0),
           fixed(),
         ]);
 
         add([
-          sprite("ground", { width: screen.width, height: screen.height }),
+          sprite("line", { width: screen.width, height: screen.height }),
           pos(0, 250),
           fixed(),
         ]);
 
-        let player = add([
-          sprite("mario"),
-          solid(),
-          pos(140, 360),
-          body(),
-          area(),
-          scale(0.7),
-        ]);
-
-        add([
-          sprite("bg2", { width: width(), height: height() }),
-          pos(0, 0),
-          fixed(),
-        ]);
+        add([text("TASO: 1"), pos(150, 370), scale(0.2)]);
 
         addLevel(levels[1], {
           width: 20,
           height: 20,
           "=": () => [sprite("block"), solid(), area(), scale(0.44), ""],
           "£": () => [sprite("block"), solid(), area(), scale(0.44), ""],
-          "+": () => [sprite("tunnel"), solid(), area(), scale(0.5), "Tunnel"],
+          "+": () => [
+            sprite("teleport"),
+            solid(),
+            area(),
+            scale(0.5),
+            "Teleport",
+          ],
           "^": () => [sprite("arrow"), scale(0.5), "Arrow"],
-          "#": () => [sprite("spider"), solid(), area(), scale(1), "Spider"],
+          "-": () => [sprite("reminder"), area(), scale(0.25), "Reminder"],
           A: () => [sprite("suprise"), solid(), area(), scale(0.4), "A"],
           B: () => [sprite("suprise"), solid(), area(), scale(0.4), "B"],
           C: () => [sprite("suprise"), solid(), area(), scale(0.4), "C"],
@@ -389,22 +361,32 @@
           F: () => [sprite("suprise"), solid(), area(), scale(0.4), "F"],
           G: () => [sprite("suprise"), solid(), area(), scale(0.4), "G"],
           I: () => [sprite("suprise"), solid(), area(), scale(0.4), "I"],
-          "-": () => [sprite("reminder"), area(), scale(0.25), "Reminder"],
-
           "/": () => [sprite("k1"), area(), scale(0.2), "K1"],
           "`": () => [sprite("k2"), area(), scale(0.2), "K2"],
           "¤": () => [sprite("k3"), area(), scale(0.2), "K3"],
-          J: () => [sprite("k1a"), pos(-1, 1), area(), scale(0.12), "K1A"],
+          J: () => [sprite("k1a"), pos(0, 1), area(), scale(0.12), "K1A"],
           K: () => [sprite("k1b"), pos(0, 1), area(), scale(0.12), "K1B"],
           L: () => [sprite("k1c"), pos(-10, 1), area(), scale(0.12), "K1C"],
           M: () => [sprite("k2a"), pos(-5, 1), area(), scale(0.12), "K2A"],
-          N: () => [sprite("k2b"), pos(-4, 1), area(), scale(0.12), "K2B"],
-          O: () => [sprite("k2c"), pos(-3, 1), area(), scale(0.12), "K2C"],
-          P: () => [sprite("k3a"), pos(-17, 1), area(), scale(0.18), "K3A"],
-          Q: () => [sprite("k3b"), pos(-34, 1), area(), scale(0.16), "K3B"],
+          N: () => [sprite("k2b"), pos(-5, 1), area(), scale(0.12), "K2B"],
+          O: () => [sprite("k2c"), pos(0, 1), area(), scale(0.12), "K2C"],
+          P: () => [sprite("k3a"), pos(-10, 1), area(), scale(0.12), "K3A"],
+          Q: () => [sprite("k3b"), pos(-20, 1), area(), scale(0.12), "K3B"],
           R: () => [sprite(""), pos(0, 1), area(), scale(0.12), "K1A"],
         });
-        //kysymys 1
+
+        const player = add([
+          sprite("player"),
+          solid(),
+          pos(80, 400),
+          body(),
+          area(),
+          scale(0.7),
+        ]);
+
+        gravity(660);
+
+        // Question: 1 ------ //
         player.onCollide("A", (A) => {
           let x = A.pos.x;
           let y = A.pos.y;
@@ -441,7 +423,7 @@
           scopeG++;
         });
 
-        //kysymys 2
+        // Question: 2 ------ //
         player.onCollide("D", (D) => {
           let x = D.pos.x;
           let y = D.pos.y;
@@ -477,7 +459,7 @@
           scopeD++;
         });
 
-        //kysymys 3
+        // Question: 3 ------ //
         player.onCollide("G", (G) => {
           let x = G.pos.x;
           let y = G.pos.y;
@@ -502,22 +484,8 @@
           scopeH++;
         });
 
-        player.onCollide("Tunnel", (Tunnel) => {
-          go("thirdLevel");
-        });
-
-        gravity(660);
-
-        onUpdate("Spider", (Spider) => {
-          Spider.move(-15, 0);
-        });
-
-        player.onCollide("Spider", (Spider) => {
-          shake(10);
-          const hitSound = play("hit", {
-            volume: 0.01,
-            loop: false,
-          });
+        player.onCollide("Teleport", (Teleport) => {
+          go("levelTWO");
         });
 
         player.onUpdate(() => {
@@ -530,22 +498,19 @@
           player.flipX(true);
         });
 
-        onKeyDown("a", () => {
-          player.move(-playerMoveSpeed, 0);
-          camPos(player.pos);
-          player.flipX(true);
-        });
-
         onKeyDown("right", () => {
           player.move(playerMoveSpeed, 0);
           camPos(player.pos);
           player.flipX(false);
         });
-
-        onKeyDown("d", () => {
-          player.move(playerMoveSpeed, 0);
-          camPos(player.pos);
-          player.flipX(false);
+        onKeyPress("up", () => {
+          if (player.isGrounded()) {
+            player.jump(playerJumpForce, 0);
+            const jumpSound = play("hyppy", {
+              volume: 0.5,
+              loop: false,
+            });
+          }
         });
 
         onKeyPress("space", () => {
@@ -558,7 +523,7 @@
           }
         });
 
-        onKeyPress("up", () => {
+        onKeyPress("w", () => {
           if (player.isGrounded()) {
             player.jump(playerJumpForce, 0);
             const jumpSound = play("hyppy", {
@@ -568,54 +533,49 @@
           }
         });
 
-        onKeyPress("w", () => {
-          if (player.isGrounded()) {
-            player.jump(playerJumpForce, 0);
-          }
+        onKeyDown("a", () => {
+          player.move(-playerMoveSpeed, 0);
+          camPos(player.pos);
+          player.flipX(true);
+        });
+
+        onKeyDown("d", () => {
+          player.move(playerMoveSpeed, 0);
+          camPos(player.pos);
+          player.flipX(false);
         });
       });
-      //kolmas taso
-      scene("thirdLevel", () => {
-        debug.log("TASO 2");
 
+      scene("levelTWO", () => {
         add([
-          sprite("bg", { width: width(), height: height() }),
+          sprite("background", { width: width(), height: height() }),
           pos(0, 0),
           fixed(),
         ]);
 
         add([
-          sprite("ground", { width: screen.width, height: screen.height }),
+          sprite("line", { width: screen.width, height: screen.height }),
           pos(0, 250),
           fixed(),
         ]);
 
-        let player = add([
-          sprite("mario"),
-          solid(),
-          pos(140, 250),
-          body(),
-          area(),
-          scale(0.7),
-        ]);
-
-
-        add([
-          sprite("bg2", { width: width(), height: height() }),
-          pos(0, 0),
-          fixed(),
-        ]);
-
-        gravity(660);
+        add([text("TASO: 2"), pos(125, 280), scale(0.2)]);
 
         addLevel(levels[2], {
           width: 20,
           height: 20,
           "=": () => [sprite("block"), solid(), area(), scale(0.44), "Block"],
           "£": () => [sprite("block"), solid(), area(), scale(0.44), "Wall"],
-          "+": () => [sprite("tunnel"), solid(), area(), scale(0.5), "Tunnel"],
+          "+": () => [
+            sprite("teleport"),
+            solid(),
+            area(),
+            scale(0.5),
+            "Teleport",
+          ],
           "^": () => [sprite("arrow"), scale(0.4), "Arrow"],
           "#": () => [sprite("spider"), solid(), area(), scale(1), "Spider"],
+          "-": () => [sprite("reminder"), area(), scale(0.2), "Reminder"],
           A: () => [sprite("suprise"), solid(), area(), scale(0.4), "A"],
           B: () => [sprite("suprise"), solid(), area(), scale(0.4), "B"],
           C: () => [sprite("suprise"), solid(), area(), scale(0.4), "C"],
@@ -625,24 +585,27 @@
           G: () => [sprite("suprise"), solid(), area(), scale(0.4), "G"],
           H: () => [sprite("suprise"), solid(), area(), scale(0.4), "H"],
           I: () => [sprite("suprise"), solid(), area(), scale(0.4), "I"],
-          "-": () => [sprite("reminder"), area(), scale(0.2), "Reminder"],
-
           "/": () => [sprite("k4"), area(), scale(0.2), "K4"],
           "`": () => [sprite("k5"), area(), scale(0.15), "K5"],
           "¤": () => [sprite("k6"), area(), scale(0.2), "K6"],
-          J: () => [sprite("k4a"), pos(-14, 1), area(), scale(0.13), "K4A"],
-          K: () => [sprite("k4b"), pos(-11, 1), area(), scale(0.17), "K4B"],
-          L: () => [sprite("k4c"), pos(-19, 1), area(), scale(0.17), "K4C"],
-          M: () => [sprite("k5a"), pos(-12,  1), area(), scale(0.18), "K5A"],
-          N: () => [sprite("k5b"), pos(-14, 1), area(), scale(0.18), "K5B"],
-          O: () => [sprite("k5c"), pos(-12, 1), area(), scale(0.17), "K5C"],
-          P: () => [sprite("k6a"), pos(-11, 1), area(), scale(0.18), "K6A"],
-          Q: () => [sprite("k6b"), pos(-15, 1), area(), scale(0.19), "K6B"],
-          R: () => [sprite("k6c"), pos(-9, 1), area(), scale(0.13), "K6C"],
         });
 
-        add([text("TASO 2"), pos(125, 275), scale(0.2)]);
-        //kysymys 4
+        add([text("Teen taidetta"), pos(223, 286), scale(0.1)]);
+        add([text("Rakentelen ja\n nikkaroin"), pos(300, 286), scale(0.1)]);
+        add([text("Viihdyn luonnossa"), pos(380, 286), scale(0.1)]);
+
+        const player = add([
+          sprite("player"),
+          solid(),
+          pos(140, 250),
+          body(),
+          area(),
+          scale(0.7),
+        ]);
+
+        gravity(660);
+
+        // Question: 1 ------ //
         player.onCollide("A", (A) => {
           let x = A.pos.x;
           let y = A.pos.y;
@@ -652,6 +615,7 @@
           add([pos(x, y), sprite("empty"), area(), solid(), scale(0.4)]);
           scopeA++;
         });
+
         player.onCollide("B", (B) => {
           let x = B.pos.x;
           let y = B.pos.y;
@@ -671,7 +635,19 @@
           scopeC++;
           scopeD++;
         });
-          //kysymys 5
+
+        add([text("Autan ja \npalvelen muita"), pos(600, 286), scale(0.1)]);
+        add([
+          text("Suunnittelua ja \njarjestelmallisyytta"),
+          pos(690, 286),
+          scale(0.1),
+        ]);
+        add([
+          text("Luovuutta ja \nkasilla tekemista"),
+          pos(800, 286),
+          scale(0.1),
+        ]);
+
         player.onCollide("D", (D) => {
           let x = D.pos.x;
           let y = D.pos.y;
@@ -705,8 +681,6 @@
           scopeC++;
         });
 
-        //kysymys 6
-        player.onCollide('G', (G) => {
         // 3
         add([text("Tietokoneella naputtaen"), pos(1005, 286), scale(0.1)]);
         add([
@@ -749,8 +723,8 @@
           scopeG++;
         });
 
-        player.onCollide("Tunnel", (Tunnel) => {
-          go("fourthLevel");
+        player.onCollide("Teleport", (Teleport) => {
+          go("levelTHREE");
         });
 
         onUpdate("Spider", (Spider) => {
@@ -816,51 +790,41 @@
         onKeyPress("w", () => {
           if (player.isGrounded()) {
             player.jump(playerJumpForce, 0);
+            const jumpSound = play("hyppy", {
+              volume: 0.5,
+              loop: false,
+            });
           }
         });
       });
 
-      scene("fourthLevel", () => {
-        debug.log("TASO 3");
-
+      scene("levelTHREE", () => {
         add([
-          sprite("bg", { width: width(), height: height() }),
+          sprite("background", { width: width(), height: height() }),
           pos(0, 0),
           fixed(),
         ]);
 
         add([
-          sprite("ground", { width: screen.width, height: screen.height }),
+          sprite("line", { width: screen.width, height: screen.height }),
           pos(0, 250),
           fixed(),
         ]);
-
-        let player = add([
-          sprite("mario"),
-          solid(),
-          pos(140, 160),
-          body(),
-          area(),
-          scale(0.7),
-        ]);
-
-        add([
-          sprite("bg2", { width: width(), height: height() }),
-          pos(0, 0),
-          fixed(),
-        ]);
-
-        gravity(660);
 
         addLevel(levels[3], {
           width: 20,
           height: 20,
           "=": () => [sprite("block"), solid(), area(), scale(0.44), ""],
           "£": () => [sprite("block"), solid(), area(), scale(0.44), ""],
-          "+": () => [sprite("tunnel"), solid(), area(), scale(0.5), "Tunnel"],
+          "+": () => [
+            sprite("teleport"),
+            solid(),
+            area(),
+            scale(0.5),
+            "Teleport",
+          ],
           "^": () => [sprite("arrow"), scale(0.4), "Arrow"],
           "#": () => [sprite("spider"), solid(), area(), scale(1), "Spider"],
-          "*": () => [sprite("arrow"), solid(), area(), scale(0.5), "Death"],
           A: () => [sprite("suprise"), solid(), area(), scale(0.4), "A"],
           B: () => [sprite("suprise"), solid(), area(), scale(0.4), "B"],
           C: () => [sprite("suprise"), solid(), area(), scale(0.4), "C"],
@@ -881,17 +845,28 @@
 
           "/": () => [sprite("k7"), area(), scale(0.2), "K7"],
           "`": () => [sprite("k8"), area(), scale(0.2), "K8"],
-
-          J: () => [sprite("k7a"), pos(-10, 1), area(), scale(0.18), "K7A"],
-          K: () => [sprite("k7b"), pos(-12, 1), area(), scale(0.18), "K7B"],
-          L: () => [sprite("k8a"), pos(1, 1), area(), scale(0.17), "K8A"],
-          M: () => [sprite("k8b"), pos(-1, 1), area(), scale(0.12), "K8B"],
-          N: () => [sprite("k8c"), pos(5, 1), area(), scale(0.12), "K8C"],
         });
 
-        add([text("TASO 3"), pos(125, 280), scale(0.2)]);
+        const player = add([
+          sprite("player"),
+          solid(),
+          pos(140, 160),
+          body(),
+          area(),
+          scale(0.7),
+        ]);
 
-        // kysymys 7
+        gravity(660);
+
+        add([text("TASO: 3"), pos(125, 280), scale(0.2)]);
+
+        // 1
+        add([text("Aikataulua \nnoudattaen?"), pos(245, 286), scale(0.1)]);
+        add([
+          text("Joustavasti, \ntilanteen mukaan?"),
+          pos(350, 286),
+          scale(0.1),
+        ]);
 
         player.onCollide("A", (A) => {
           let x = A.pos.x;
@@ -917,7 +892,11 @@
           scopeH++;
         });
 
-        /// Kysymys 8
+        /// 2
+
+        add([text("Kylla"), pos(610, 286), scale(0.1)]);
+        add([text("Vahan"), pos(675, 286), scale(0.1)]);
+        add([text("En"), pos(740, 286), scale(0.1)]);
 
         player.onCollide("D", (D) => {
           let x = D.pos.x;
@@ -954,7 +933,7 @@
           scopeE++;
         });
 
-        player.onCollide("Tunnel", (Tunnel) => {
+        player.onCollide("Teleport", (Teleport) => {
           go("fifthlevel");
         });
 
@@ -1026,6 +1005,10 @@
         onKeyPress("w", () => {
           if (player.isGrounded()) {
             player.jump(playerJumpForce, 0);
+            const jumpSound = play("hyppy", {
+              volume: 0.5,
+              loop: false,
+            });
           }
         });
       });
@@ -1037,14 +1020,14 @@
         $("iframe").css("display", "flex");
 
         add([
-          sprite("bg", { width: width(), height: height() }),
+          sprite("background", { width: width(), height: height() }),
           pos(0, 0),
           fixed(),
         ]);
 
         add([
-          sprite("bg2", { width: width(), height: height() }),
-          pos(0, 0),
+          sprite("line", { width: screen.width, height: screen.height }),
+          pos(0, 250),
           fixed(),
         ]);
 
@@ -1063,26 +1046,51 @@
 
         let end = add([
           sprite("end"),
-          pos(width() / 2, height() / 2 - 85),
+          pos(width() / 2, 65),
           origin("center"),
-          scale(0.070),
+          scale(0.109),
           fixed(),
         ]);
 
         let endbox = add([
           sprite("endbox"),
-          pos(width() / 2 , height() / 2 - -35),
+          pos(width() / 2, 260),
           origin("center"),
-          scale(0.0700),
-          fixed()
+          scale(0.1172),
+          fixed(),
         ]);
 
-        let endtxt = add([
-          sprite("endtxt"),
-          pos(width() / 2, 130),
-          origin("center"),
-          scale(0.09),
-          fixed()
+        //teksti kenttä ensimmäistä laatikkoa varten--------------------------------------
+        add([
+          text("1:"),
+          pos(width() / 2 - 200, height() / 2 - 35),
+          scale(0.5),
+        ]);
+
+        //teksti kenttä toista laatikkoa varten-------------------------------------------
+        add([
+          text("2:"),
+          pos(width() / 2 - 200, height() / 2 + 50),
+          scale(0.5),
+        ]);
+
+        //teksti kenttä kolmatta laatikkoa varten-----------------------------------------
+        add([
+          text("3:"),
+          pos(width() / 2 - 200, height() / 2 + 135),
+          scale(0.5),
+        ]);
+
+        add([
+          text("Kiitos pelaamisesta"),
+          pos(width() / 2 - 123, height() / 2 - 90),
+          scale(0.3),
+        ]);
+
+        add([
+          text("Sinulle sopivia aloja voisivat olla:"),
+          pos(width() / 2 - 115, height() / 2 - 60),
+          scale(0.15),
         ]);
 
         const ensimmainen = Math.max(
@@ -1095,38 +1103,62 @@
           scopeG,
           scopeH
         );
-        if(ensimmainen == scopeA)
-        {
+        if (ensimmainen == scopeA) {
           scopeA = 0;
-          add([sprite("ala1"), pos(width() / 2 - 110, height() /2 - 20), scale(0.3)]);
-        } else if(ensimmainen == scopeB)
-        {
+          add([
+            sprite("ala1"),
+            pos(width() / 2 - 115, height() / 2 - 10),
+            scale(0.3),
+          ]);
+        } else if (ensimmainen == scopeB) {
           scopeB = 0;
-          add([sprite("ala2"), pos(width() / 2 - 110, height() /2 - 20), scale(0.3)]);
-        } else if(ensimmainen == scopeC)
-        {
+          add([
+            sprite("ala2"),
+            pos(width() / 2 - 115, height() / 2 - 10),
+            scale(0.3),
+          ]);
+        } else if (ensimmainen == scopeC) {
           scopeC = 0;
-          add([sprite("ala3"), pos(width() / 2 - 110, height() /2 - 20), scale(0.3)]);         
-        } else if(ensimmainen == scopeD)
-        {
+          add([
+            sprite("ala3"),
+            pos(width() / 2 - 115, height() / 2 - 10),
+            scale(0.3),
+          ]);
+        } else if (ensimmainen == scopeD) {
           scopeD = 0;
-          add([sprite("ala4"), pos(width() / 2 - 110, height() /2 - 20), scale(0.3)]);
-        } else if(ensimmainen == scopeE)
-        {
+          add([
+            sprite("ala4"),
+            pos(width() / 2 - 115, height() / 2 - 10),
+            scale(0.3),
+          ]);
+        } else if (ensimmainen == scopeE) {
           scopeE = 0;
-          add([sprite("ala5"), pos(width() / 2 - 110, height() /2 - 20), scale(0.3)]);
-        } else if(ensimmainen == scopeF)
-        {
+          add([
+            sprite("ala5"),
+            pos(width() / 2 - 115, height() / 2 - 10),
+            scale(0.3),
+          ]);
+        } else if (ensimmainen == scopeF) {
           scopeF = 0;
-          add([sprite("ala6"), pos(width() / 2 - 110, height() /2 - 20), scale(0.3)]);
-        } else if(ensimmainen == scopeG)
-        {
+          add([
+            sprite("ala6"),
+            pos(width() / 2 - 115, height() / 2 - 10),
+            scale(0.3),
+          ]);
+        } else if (ensimmainen == scopeG) {
           scopeG = 0;
-          add([sprite("ala7"), pos(width() / 2 - 110, height() /2 - 20), scale(0.3)]);
-        } else if(ensimmainen == scopeH)
-        {
+          add([
+            sprite("ala7"),
+            pos(width() / 2 - 115, height() / 2 - 10),
+            scale(0.3),
+          ]);
+        } else if (ensimmainen == scopeH) {
           scopeH = 0;
-          add([sprite("ala8"), pos(width() / 2 - 110, height() /2 - 20), scale(0.3)]);
+          add([
+            sprite("ala8"),
+            pos(width() / 2 - 115, height() / 2 - 10),
+            scale(0.3),
+          ]);
         }
 
         const toinen = Math.max(
@@ -1139,38 +1171,62 @@
           scopeG,
           scopeH
         );
-        if(toinen == scopeA)
-        {
+        if (toinen == scopeA) {
           scopeA = 0;
-          add([sprite("ala1"), pos(width() / 2 - 110, height() /2 - -30), scale(0.3)]);
-        } else if(toinen == scopeB)
-        {
+          add([
+            sprite("ala1"),
+            pos(width() / 2 - 115, height() / 2 - -10),
+            scale(0.3),
+          ]);
+        } else if (toinen == scopeB) {
           scopeB = 0;
-          add([sprite("ala2"), pos(width() / 2 - 110, height() /2 - -30), scale(0.3)]);
-        } else if(toinen == scopeC)
-        {
-          scopeC = 0;   
-          add([sprite("ala3"), pos(width() / 2 - 110, height() /2 - -30), scale(0.3)]);       
-        } else if(toinen == scopeD)
-        {
+          add([
+            sprite("ala2"),
+            pos(width() / 2 - 115, height() / 2 - -10),
+            scale(0.3),
+          ]);
+        } else if (toinen == scopeC) {
+          scopeC = 0;
+          add([
+            sprite("ala3"),
+            pos(width() / 2 - 115, height() / 2 - -10),
+            scale(0.3),
+          ]);
+        } else if (toinen == scopeD) {
           scopeD = 0;
-          add([sprite("ala4"), pos(width() / 2 - 110, height() /2 - -30), scale(0.3)]);
-        } else if(toinen == scopeE)
-        {
+          add([
+            sprite("ala4"),
+            pos(width() / 2 - 115, height() / 2 - -10),
+            scale(0.3),
+          ]);
+        } else if (toinen == scopeE) {
           scopeE = 0;
-          add([sprite("ala5"), pos(width() / 2 - 110, height() /2 - -30), scale(0.3)]);
-        } else if(toinen == scopeF)
-        {
+          add([
+            sprite("ala5"),
+            pos(width() / 2 - 115, height() / 2 - -10),
+            scale(0.3),
+          ]);
+        } else if (toinen == scopeF) {
           scopeF = 0;
-          add([sprite("ala6"), pos(width() / 2 - 110, height() /2 - -30), scale(0.3)]);
-        } else if(toinen == scopeG)
-        {
+          add([
+            sprite("ala6"),
+            pos(width() / 2 - 115, height() / 2 - -10),
+            scale(0.3),
+          ]);
+        } else if (toinen == scopeG) {
           scopeG = 0;
-          add([sprite("ala7"), pos(width() / 2 - 110, height() /2 - -30), scale(0.3)]);
-        } else if(toinen == scopeH)
-        {
+          add([
+            sprite("ala7"),
+            pos(width() / 2 - 115, height() / 2 - -10),
+            scale(0.3),
+          ]);
+        } else if (toinen == scopeH) {
           scopeH = 0;
-          add([sprite("ala8"), pos(width() / 2 - 110, height() /2 - -30), scale(0.3)]);
+          add([
+            sprite("ala8"),
+            pos(width() / 2 - 115, height() / 2 - -10),
+            scale(0.3),
+          ]);
         }
 
         const kolmas = Math.max(
@@ -1183,43 +1239,63 @@
           scopeG,
           scopeH
         );
-        if(kolmas == scopeA)
-        {
+        if (kolmas == scopeA) {
           scopeA = 0;
-          add([sprite("ala1"), pos(width() / 2 - 110, height() /2 - -75), scale(0.3)]);  
-        } else if(kolmas == scopeB)
-        {
+          add([
+            sprite("ala1"),
+            pos(width() / 2 - 115, height() / 2 - -30),
+            scale(0.3),
+          ]);
+        } else if (kolmas == scopeB) {
           scopeB = 0;
-          add([sprite("ala2"), pos(width() / 2 - 110, height() /2 - -75), scale(0.3)]);  
-        } else if(kolmas == scopeC)
-        {
+          add([
+            sprite("ala2"),
+            pos(width() / 2 - 115, height() / 2 - -30),
+            scale(0.3),
+          ]);
+        } else if (kolmas == scopeC) {
           scopeC = 0;
-          add([sprite("ala3"), pos(width() / 2 - 110, height() /2 - -75), scale(0.3)]);         
-        } else if(kolmas == scopeD)
-        {
+          add([
+            sprite("ala3"),
+            pos(width() / 2 - 115, height() / 2 - -30),
+            scale(0.3),
+          ]);
+        } else if (kolmas == scopeD) {
           scopeD = 0;
-          add([sprite("ala4"), pos(width() / 2 - 110, height() /2 - -75), scale(0.3)]);  
-        } else if(kolmas == scopeE)
-        {
+          add([
+            sprite("ala4"),
+            pos(width() / 2 - 115, height() / 2 - -30),
+            scale(0.3),
+          ]);
+        } else if (kolmas == scopeE) {
           scopeE = 0;
-          add([sprite("ala5"), pos(width() / 2 - 110, height() /2 - -75), scale(0.3)]);  
-        } else if(kolmas == scopeF)
-        {
+          add([
+            sprite("ala5"),
+            pos(width() / 2 - 115, height() / 2 - -30),
+            scale(0.3),
+          ]);
+        } else if (kolmas == scopeF) {
           scopeF = 0;
-          add([sprite("ala6"), pos(width() / 2 - 110, height() /2 - -75), scale(0.3)]);  
-        } else if(kolmas == scopeG)
-        {
+          add([
+            sprite("ala6"),
+            pos(width() / 2 - 115, height() / 2 - -30),
+            scale(0.3),
+          ]);
+        } else if (kolmas == scopeG) {
           scopeG = 0;
-          add([sprite("ala7"), pos(width() / 2 - 110, height() /2 - -75), scale(0.3)]);  
-        } else if(kolmas == scopeH)
-        {
+          add([
+            sprite("ala7"),
+            pos(width() / 2 - 115, height() / 2 - -30),
+            scale(0.3),
+          ]);
+        } else if (kolmas == scopeH) {
           scopeH = 0;
-          add([sprite("ala8"), pos(width() / 2 - 110, height() /2 - -75), scale(0.3)]);  
+          add([
+            sprite("ala8"),
+            pos(width() / 2 - 115, height() / 2 - -30),
+            scale(0.3),
+          ]);
         }
-      });
-
-      onLoad(() => {
-        go("firstLevel");
       });
     </script>
   </body>
