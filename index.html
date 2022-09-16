@@ -124,7 +124,7 @@
       let kys31 = false;
       let kys32 = false;
       
-
+      //Kuvat
       loadSprite("player", "Kuvat/hahmo.png");
       loadSprite("background", "Kuvat/tausta.png");
       loadSprite("line", "Kuvat/tausta_alareuna.png");
@@ -305,7 +305,7 @@
       onLoad(() => {
         go("start");
       })
-        
+        //Aloitustaso
       scene("start", () => {
       add([
         sprite("background", { width: width(), height: height() }),
@@ -374,7 +374,7 @@
       });
 
       gravity(660);
-
+      //Liikkuminen
       player.onUpdate(() => {
         camPos(player.pos);
       });
@@ -429,7 +429,7 @@
         }
       });
     });
-
+      //Ensimmäinen taso
       scene("levelONE", () => {
         add([
           sprite("background", { width: width(), height: height() }),
@@ -604,7 +604,7 @@
             go("levelTWO");
           }
         });
-
+          //Liikkuminen
         player.onUpdate(() => {
           camPos(player.pos);
         });
@@ -662,7 +662,7 @@
           player.flipX(false);
         });
       });
-
+        //Toinen taso
       scene("levelTWO", () => {
         add([
           sprite("background", { width: width(), height: height() }),
@@ -760,7 +760,7 @@
           scopeD++;
           kys21 = true;
         });
-
+          //Question 5
         player.onCollide("D", (D) => {
           let x = D.pos.x;
           let y = D.pos.y;
@@ -797,7 +797,7 @@
           kys22 = true;
         });
 
-        // kysymys 5
+        // Question 6
 
         player.onCollide("G", (G) => {
           let x = G.pos.x;
@@ -853,7 +853,7 @@
             loop: false,
           });
         });
-
+          //Liikkuminen
         player.onUpdate(() => {
           camPos(player.pos);
         });
@@ -912,7 +912,7 @@
           }
         });
       });
-
+        //Taso kolme
       scene("levelTHREE", () => {
         add([
           sprite("background", { width: width(), height: height() }),
@@ -980,7 +980,7 @@
 
         add([text("TASO: 3"), pos(125, 280), scale(0.2)]);
 
-        // 1
+        // Kysymys 7
 
 
         player.onCollide("A", (A) => {
@@ -1009,7 +1009,7 @@
           kys31 = true;
         });
 
-        /// 2
+        //Kysymys 8
 
 
         player.onCollide("D", (D) => {
@@ -1186,6 +1186,7 @@
           fixed()
         ]);
 
+        // Pisteiden keräys
         const ensimmainen = Math.max(
           scopeA,
           scopeB,
