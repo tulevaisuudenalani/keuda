@@ -156,6 +156,7 @@
       loadSprite("ala7", "Kuvat/ala7.png");
       loadSprite("ala8", "Kuvat/ala8.png");
 
+      // Questions
       loadSprite("k1", "Kuvat/kysymykset/k_1.png");
       loadSprite("k2", "Kuvat/kysymykset/k_2.png");
       loadSprite("k3", "Kuvat/kysymykset/k_3.png");
@@ -167,6 +168,7 @@
       loadSprite("k7", "Kuvat/kysymykset/k_7.png");
       loadSprite("k8", "Kuvat/kysymykset/k_8.png");
 
+      // Answers
       loadSprite("k1a", "Kuvat/kysymykset/k_1_a.png");
       loadSprite("k1b", "Kuvat/kysymykset/k_1_b.png");
       loadSprite("k1c", "Kuvat/kysymykset/k_1_c.png");
@@ -429,7 +431,7 @@
         }
       });
     });
-      //Ensimmäinen taso
+      // First level
       scene("levelONE", () => {
         add([
           sprite("background", { width: width(), height: height() }),
@@ -604,7 +606,7 @@
             go("levelTWO");
           }
         });
-          //Liikkuminen
+          // Movement
         player.onUpdate(() => {
           camPos(player.pos);
         });
@@ -662,7 +664,7 @@
           player.flipX(false);
         });
       });
-        //Toinen taso
+        // Second level
       scene("levelTWO", () => {
         add([
           sprite("background", { width: width(), height: height() }),
@@ -853,7 +855,7 @@
             loop: false,
           });
         });
-          //Liikkuminen
+          // Movement
         player.onUpdate(() => {
           camPos(player.pos);
         });
@@ -912,7 +914,7 @@
           }
         });
       });
-        //Taso kolme
+        // Third level
       scene("levelTHREE", () => {
         add([
           sprite("background", { width: width(), height: height() }),
@@ -980,7 +982,7 @@
 
         add([text("TASO: 3"), pos(125, 280), scale(0.2)]);
 
-        // Kysymys 7
+        // Question 7
 
 
         player.onCollide("A", (A) => {
@@ -1009,7 +1011,7 @@
           kys31 = true;
         });
 
-        //Kysymys 8
+        // Question 8
 
 
         player.onCollide("D", (D) => {
@@ -1077,6 +1079,8 @@
         player.onUpdate(() => {
           camPos(player.pos);
         });
+
+        // Movement
 
         onKeyDown("left", () => {
           player.move(-playerMoveSpeed, 0);
@@ -1186,7 +1190,7 @@
           fixed()
         ]);
 
-        // Pisteiden keräys
+        // Lets find first suitable field
         const ensimmainen = Math.max(
           scopeA,
           scopeB,
@@ -1231,6 +1235,7 @@
           add([sprite("ala8"), pos(width() / 2 - 110, height() /2 - 20), scale(0.3)]);
         }
 
+        // Lets find second suitable field
         const toinen = Math.max(
           scopeA,
           scopeB,
@@ -1275,6 +1280,7 @@
           add([sprite("ala8"), pos(width() / 2 - 110, height() /2 - -30), scale(0.3)]);
         }
 
+        // Lets find third suitable field
         const kolmas = Math.max(
           scopeA,
           scopeB,
