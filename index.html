@@ -129,6 +129,7 @@
       loadSprite("background", "Kuvat/tausta.png");
       loadSprite("line", "Kuvat/tausta_alareuna.png");
       loadSprite("teleport", "Kuvat/ampari.png");
+      loadSprite("ohjaus", "Kuvat/ohjausnuoli.png");
 
       loadSprite("logo", "Kuvat/keuda_logo.png");
       loadSprite("bg2", "Kuvat/tausta_shade.png");
@@ -376,6 +377,96 @@
       });
 
       gravity(660);
+
+      if (mobile) {
+          const ylosNappi = add([
+          sprite("ohjaus"),
+          pos(width() - 70, height() - 70),
+          fixed(),
+          opacity(0.8),
+          area(),
+          scale(0.25),
+
+          "ylosNappi",
+        ]);
+
+        const vasenNappi = add([
+          sprite("ohjaus"),
+          pos(40, height() - 40),
+          fixed(),
+          opacity(0.8),
+          area(),
+          scale(0.25),
+          rotate(-90),
+          origin("center"),
+
+          "vasenNappi",
+        ]);
+
+        const oikeaNappi = add([
+          sprite("ohjaus"),
+          pos(110, height() - 40),
+          fixed(),
+          opacity(0.8),
+          area(),
+          scale(0.25),
+          rotate(90),
+          origin("center"),
+
+          "oikeaNappi",
+        ]);
+
+        let keysDown = {
+          left: false,
+          right: false,
+        };
+
+        let jumpID = -1;
+        let leftID = -1;
+        let rightID = -1;
+
+        onTouchStart((id, pos) => {
+          if (ylosNappi.hasPoint(pos)) {
+            if (player.isGrounded()) {
+              jumpID = id;
+              player.jump(playerJumpForce, 0);
+            }
+          } else if (vasenNappi.hasPoint(pos)) {
+            keysDown.left = true;
+            leftID = id;
+          } else if (oikeaNappi.hasPoint(pos)) {
+            keysDown.right = true;
+            rightID = id;
+          }
+        });
+
+        onUpdate(() => {
+          if (keysDown.left) {
+            player.move(-playerMoveSpeed, 0);
+            camPos(player.pos);
+            player.flipX(true);
+          }
+          if (keysDown.right) {
+            player.move(playerMoveSpeed, 0);
+            camPos(player.pos);
+            player.flipX(false);
+          }
+        });
+
+        onTouchEnd((id, pos) => {
+          if (id == jumpID) {
+            jumpID = -1;
+            return;
+          } else if (id == rightID) {
+            rightID = -1;
+            keysDown.right = false;
+          } else if (id == leftID) {
+            leftID = -1;
+            keysDown.left = false;
+          }
+        });
+      }
+      
       // Movement
       player.onUpdate(() => {
         camPos(player.pos);
@@ -493,6 +584,95 @@
         ]);
 
         gravity(660);
+
+        if (mobile) {
+          const ylosNappi = add([
+          sprite("ohjaus"),
+          pos(width() - 70, height() - 70),
+          fixed(),
+          opacity(0.8),
+          area(),
+          scale(0.25),
+
+          "ylosNappi",
+        ]);
+
+        const vasenNappi = add([
+          sprite("ohjaus"),
+          pos(40, height() - 40),
+          fixed(),
+          opacity(0.8),
+          area(),
+          scale(0.25),
+          rotate(-90),
+          origin("center"),
+
+          "vasenNappi",
+        ]);
+
+        const oikeaNappi = add([
+          sprite("ohjaus"),
+          pos(110, height() - 40),
+          fixed(),
+          opacity(0.8),
+          area(),
+          scale(0.25),
+          rotate(90),
+          origin("center"),
+
+          "oikeaNappi",
+        ]);
+
+        let keysDown = {
+          left: false,
+          right: false,
+        };
+
+        let jumpID = -1;
+        let leftID = -1;
+        let rightID = -1;
+
+        onTouchStart((id, pos) => {
+          if (ylosNappi.hasPoint(pos)) {
+            if (player.isGrounded()) {
+              jumpID = id;
+              player.jump(playerJumpForce, 0);
+            }
+          } else if (vasenNappi.hasPoint(pos)) {
+            keysDown.left = true;
+            leftID = id;
+          } else if (oikeaNappi.hasPoint(pos)) {
+            keysDown.right = true;
+            rightID = id;
+          }
+        });
+
+        onUpdate(() => {
+          if (keysDown.left) {
+            player.move(-playerMoveSpeed, 0);
+            camPos(player.pos);
+            player.flipX(true);
+          }
+          if (keysDown.right) {
+            player.move(playerMoveSpeed, 0);
+            camPos(player.pos);
+            player.flipX(false);
+          }
+        });
+
+        onTouchEnd((id, pos) => {
+          if (id == jumpID) {
+            jumpID = -1;
+            return;
+          } else if (id == rightID) {
+            rightID = -1;
+            keysDown.right = false;
+          } else if (id == leftID) {
+            leftID = -1;
+            keysDown.left = false;
+          }
+        });
+      }
 
         // Question: 1 ------ //
         player.onCollide("A", (A) => {
@@ -728,6 +908,95 @@
         ]);
 
         gravity(660);
+
+        if (mobile) {
+          const ylosNappi = add([
+          sprite("ohjaus"),
+          pos(width() - 70, height() - 70),
+          fixed(),
+          opacity(0.8),
+          area(),
+          scale(0.25),
+
+          "ylosNappi",
+        ]);
+
+        const vasenNappi = add([
+          sprite("ohjaus"),
+          pos(40, height() - 40),
+          fixed(),
+          opacity(0.8),
+          area(),
+          scale(0.25),
+          rotate(-90),
+          origin("center"),
+
+          "vasenNappi",
+        ]);
+
+        const oikeaNappi = add([
+          sprite("ohjaus"),
+          pos(110, height() - 40),
+          fixed(),
+          opacity(0.8),
+          area(),
+          scale(0.25),
+          rotate(90),
+          origin("center"),
+
+          "oikeaNappi",
+        ]);
+
+        let keysDown = {
+          left: false,
+          right: false,
+        };
+
+        let jumpID = -1;
+        let leftID = -1;
+        let rightID = -1;
+
+        onTouchStart((id, pos) => {
+          if (ylosNappi.hasPoint(pos)) {
+            if (player.isGrounded()) {
+              jumpID = id;
+              player.jump(playerJumpForce, 0);
+            }
+          } else if (vasenNappi.hasPoint(pos)) {
+            keysDown.left = true;
+            leftID = id;
+          } else if (oikeaNappi.hasPoint(pos)) {
+            keysDown.right = true;
+            rightID = id;
+          }
+        });
+
+        onUpdate(() => {
+          if (keysDown.left) {
+            player.move(-playerMoveSpeed, 0);
+            camPos(player.pos);
+            player.flipX(true);
+          }
+          if (keysDown.right) {
+            player.move(playerMoveSpeed, 0);
+            camPos(player.pos);
+            player.flipX(false);
+          }
+        });
+
+        onTouchEnd((id, pos) => {
+          if (id == jumpID) {
+            jumpID = -1;
+            return;
+          } else if (id == rightID) {
+            rightID = -1;
+            keysDown.right = false;
+          } else if (id == leftID) {
+            leftID = -1;
+            keysDown.left = false;
+          }
+        });
+      }
 
         // Question: 4 ------ //
         player.onCollide("A", (A) => {
@@ -979,6 +1248,95 @@
         ]);
 
         gravity(660);
+
+        if (mobile) {
+          const ylosNappi = add([
+          sprite("ohjaus"),
+          pos(width() - 70, height() - 70),
+          fixed(),
+          opacity(0.8),
+          area(),
+          scale(0.25),
+
+          "ylosNappi",
+        ]);
+
+        const vasenNappi = add([
+          sprite("ohjaus"),
+          pos(40, height() - 40),
+          fixed(),
+          opacity(0.8),
+          area(),
+          scale(0.25),
+          rotate(-90),
+          origin("center"),
+
+          "vasenNappi",
+        ]);
+
+        const oikeaNappi = add([
+          sprite("ohjaus"),
+          pos(110, height() - 40),
+          fixed(),
+          opacity(0.8),
+          area(),
+          scale(0.25),
+          rotate(90),
+          origin("center"),
+
+          "oikeaNappi",
+        ]);
+
+        let keysDown = {
+          left: false,
+          right: false,
+        };
+
+        let jumpID = -1;
+        let leftID = -1;
+        let rightID = -1;
+
+        onTouchStart((id, pos) => {
+          if (ylosNappi.hasPoint(pos)) {
+            if (player.isGrounded()) {
+              jumpID = id;
+              player.jump(playerJumpForce, 0);
+            }
+          } else if (vasenNappi.hasPoint(pos)) {
+            keysDown.left = true;
+            leftID = id;
+          } else if (oikeaNappi.hasPoint(pos)) {
+            keysDown.right = true;
+            rightID = id;
+          }
+        });
+
+        onUpdate(() => {
+          if (keysDown.left) {
+            player.move(-playerMoveSpeed, 0);
+            camPos(player.pos);
+            player.flipX(true);
+          }
+          if (keysDown.right) {
+            player.move(playerMoveSpeed, 0);
+            camPos(player.pos);
+            player.flipX(false);
+          }
+        });
+
+        onTouchEnd((id, pos) => {
+          if (id == jumpID) {
+            jumpID = -1;
+            return;
+          } else if (id == rightID) {
+            rightID = -1;
+            keysDown.right = false;
+          } else if (id == leftID) {
+            leftID = -1;
+            keysDown.left = false;
+          }
+        });
+      }
 
         add([text("TASO: 3"), pos(125, 280), scale(0.2)]);
 
