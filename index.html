@@ -12,16 +12,6 @@
     <div class="puhelin" id="puhelinDiv">
       <h1 id="puhelin">Käännä puhelin</h1>
     </div>
-    <iframe
-      src="https://forms.office.com/Pages/ResponsePage.aspx?id=vRxhusw1LUG1L0yyGYtmRS1wLbgaPDRBv4L-zj1ZHNVUOElXRVhSNjBKRFI1NUhNNTdXV1M1STdOMS4u"
-      width="250"
-      height="300"
-      allowtransparency="true"
-      allowfullscreen="false"
-      frameborder="0"
-      sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
-    >
-    </iframe>
 
     <script type="module" defer>
       import kaboom from "https://unpkg.com/kaboom/dist/kaboom.mjs";
@@ -1498,6 +1488,7 @@
       // EndScreen
       scene("fifthlevel", () => {
         $("iframe").css("display", "flex");
+        $(".linkit").css("display", "flex");
 
         add([
           sprite("background", { width: width(), height: height() }),
@@ -1563,34 +1554,54 @@
         {
           scopeA = 0;
           add([sprite("ala1"), pos(width() / 2 - 110, height() /2 - 20), scale(0.3)]);
+          onClick(() => {
+            window.open("https://www.keuda.fi/ala/humanistiset-taidealat/",'_blank');
+            console.log('Humanistiset ja taidealat');
+          }, false);
         } else if(ensimmainen == scopeB)
         {
           scopeB = 0;
           add([sprite("ala2"), pos(width() / 2 - 110, height() /2 - 20), scale(0.3)]);
+          onClick(() => {
+            window.open("https://www.keuda.fi/ala/kauppa-hallinto-oikeustieteet/",'_blank');
+            console.log('Kauppa, hallinto ja oikeustieteet');
+          }, false);
         } else if(ensimmainen == scopeC)
         {
           scopeC = 0;
           add([sprite("ala3"), pos(width() / 2 - 110, height() /2 - 20), scale(0.25)]);         
+          onClick(() => {
+            window.open("https://www.keuda.fi/ala/luonnontieteet/",'_blank');
+            console.log('Luonnontieteet');
+          }, false);
         } else if(ensimmainen == scopeD)
         {
           scopeD = 0;
           add([sprite("ala4"), pos(width() / 2 - 110, height() /2 - 20), scale(0.3)]);
+          onClick(() => {
+            window.open("https://www.keuda.fi/ala/maa-ja-metsatalousala-myos-puutarha-ala/",'_blank');
+            console.log('Maa- ja metsätalous');
+          }, false);
         } else if(ensimmainen == scopeE)
         {
           scopeE = 0;
           add([sprite("ala5"), pos(width() / 2 - 110, height() /2 - 20), scale(0.25)]);
+          onClick(() => window.open("https://www.keuda.fi/ala/palvelualat/",'_blank'))
         } else if(ensimmainen == scopeF)
         {
           scopeF = 0;
           add([sprite("ala6"), pos(width() / 2 - 110, height() /2 - 20), scale(0.25)]);
+          onClick(() => window.open("https://www.keuda.fi/ala/tekniikan-alat/",'_blank'))
         } else if(ensimmainen == scopeG)
         {
           scopeG = 0;
           add([sprite("ala7"), pos(width() / 2 - 110, height() /2 - 20), scale(0.3)]);
+          onClick(() => window.open("https://www.keuda.fi/ala/terveys-hyvinvointialat/",'_blank'))
         } else if(ensimmainen == scopeH)
         {
           scopeH = 0;
           add([sprite("ala8"), pos(width() / 2 - 110, height() /2 - 20), scale(0.3)]);
+          onClick(() => window.open("https://www.keuda.fi/ala/tietojenkasittely-tietoliikenne-ict/",'_blank'))
         }
 
         // Lets find second suitable field
@@ -1608,34 +1619,42 @@
         {
           scopeA = 0;
           add([sprite("ala1"), pos(width() / 2 - 110, height() /2 - -30), scale(0.3)]);
+          onClick(() => window.open("https://www.keuda.fi/ala/humanistiset-taidealat/",'_blank'))
         } else if(toinen == scopeB)
         {
           scopeB = 0;
           add([sprite("ala2"), pos(width() / 2 - 110, height() /2 - -30), scale(0.3)]);
+          onClick(() => window.open("https://www.keuda.fi/ala/kauppa-hallinto-oikeustieteet/",'_blank'))
         } else if(toinen == scopeC)
         {
           scopeC = 0;   
-          add([sprite("ala3"), pos(width() / 2 - 110, height() /2 - -30), scale(0.25)]);       
+          add([sprite("ala3"), pos(width() / 2 - 110, height() /2 - -30), scale(0.25)]);    
+          onClick(() => window.open("https://www.keuda.fi/ala/luonnontieteet/",'_blank'))
         } else if(toinen == scopeD)
         {
           scopeD = 0;
           add([sprite("ala4"), pos(width() / 2 - 110, height() /2 - -30), scale(0.3)]);
+          onClick(() => window.open("https://www.keuda.fi/ala/maa-ja-metsatalousala-myos-puutarha-ala/",'_blank'))
         } else if(toinen == scopeE)
         {
           scopeE = 0;
           add([sprite("ala5"), pos(width() / 2 - 110, height() /2 - -30), scale(0.25)]);
+          onClick(() => window.open("https://www.keuda.fi/ala/palvelualat/",'_blank'))
         } else if(toinen == scopeF)
         {
           scopeF = 0;
           add([sprite("ala6"), pos(width() / 2 - 110, height() /2 - -30), scale(0.25)]);
+          onClick(() => window.open("https://www.keuda.fi/ala/tekniikan-alat/",'_blank'))
         } else if(toinen == scopeG)
         {
           scopeG = 0;
           add([sprite("ala7"), pos(width() / 2 - 110, height() /2 - -30), scale(0.3)]);
+          onClick(() => window.open("https://www.keuda.fi/ala/terveys-hyvinvointialat/",'_blank'))
         } else if(toinen == scopeH)
         {
           scopeH = 0;
           add([sprite("ala8"), pos(width() / 2 - 110, height() /2 - -30), scale(0.3)]);
+          onClick(() => window.open("https://www.keuda.fi/ala/tietojenkasittely-tietoliikenne-ict/",'_blank'))
         }
 
         // Lets find third suitable field
@@ -1653,34 +1672,42 @@
         {
           scopeA = 0;
           add([sprite("ala1"), pos(width() / 2 - 110, height() /2 - -75), scale(0.3)]);  
+          onClick(() => window.open("https://www.keuda.fi/ala/humanistiset-taidealat/",'_blank'))
         } else if(kolmas == scopeB)
         {
           scopeB = 0;
           add([sprite("ala2"), pos(width() / 2 - 110, height() /2 - -75), scale(0.3)]);  
+          onClick(() => window.open("https://www.keuda.fi/ala/kauppa-hallinto-oikeustieteet/",'_blank'))
         } else if(kolmas == scopeC)
         {
           scopeC = 0;
-          add([sprite("ala3"), pos(width() / 2 - 110, height() /2 - -75), scale(0.25)]);         
+          add([sprite("ala3"), pos(width() / 2 - 110, height() /2 - -75), scale(0.25)]);   
+          onClick(() => window.open("https://www.keuda.fi/ala/luonnontieteet/",'_blank'))      
         } else if(kolmas == scopeD)
         {
           scopeD = 0;
           add([sprite("ala4"), pos(width() / 2 - 110, height() /2 - -75), scale(0.3)]);  
+          onClick(() => window.open("https://www.keuda.fi/ala/maa-ja-metsatalousala-myos-puutarha-ala/",'_blank'))
         } else if(kolmas == scopeE)
         {
           scopeE = 0;
           add([sprite("ala5"), pos(width() / 2 - 110, height() /2 - -75), scale(0.25)]);  
+          onClick(() => window.open("https://www.keuda.fi/ala/palvelualat/",'_blank'))
         } else if(kolmas == scopeF)
         {
           scopeF = 0;
           add([sprite("ala6"), pos(width() / 2 - 110, height() /2 - -75), scale(0.25)]);  
+          onClick(() => window.open("https://www.keuda.fi/ala/tekniikan-alat/",'_blank'))
         } else if(kolmas == scopeG)
         {
           scopeG = 0;
           add([sprite("ala7"), pos(width() / 2 - 110, height() /2 - -75), scale(0.3)]);  
+          onClick(() => window.open("https://www.keuda.fi/ala/terveys-hyvinvointialat/",'_blank'))
         } else if(kolmas == scopeH)
         {
           scopeH = 0;
           add([sprite("ala8"), pos(width() / 2 - 110, height() /2 - -75), scale(0.3)]);  
+          onClick(() => window.open("https://www.keuda.fi/ala/tietojenkasittely-tietoliikenne-ict/",'_blank'))
         }
       });
     </script>

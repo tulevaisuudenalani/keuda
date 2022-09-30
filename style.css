@@ -11,6 +11,19 @@ iframe {
   position: fixed;
 }
 
+.linkit {
+  display: flex;
+  flex-direction: column;
+  margin: 10rem;
+  position: fixed;
+  gap: 1rem;
+}
+
+.linkit a {
+  font-size: 2em;
+  color: blue;
+}
+
 * {
   margin: 0;
   padding: 0;
