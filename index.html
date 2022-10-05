@@ -138,6 +138,8 @@
       loadSprite("aloitus1", "Kuvat/aloitus otsikko_ala.png");
       loadSprite("aloitus2", "Kuvat/aloitus otsikko_alin.png");
       loadSprite("aloitus3", "Kuvat/aloitus_otsikko.png");
+      loadSprite("aloitus2puh", "Kuvat/aloitus otsikko_mobile.png");
+      loadSprite("ict", "Kuvat/teksti_alku.png");
       loadSprite("ala1", "Kuvat/ala1.png");
       loadSprite("ala2", "Kuvat/ala2.png");
       loadSprite("ala3", "Kuvat/ala3.png");
@@ -208,9 +210,9 @@
         "£                                    £",
         "£                                    £",
         "£                                    £",
-        "£                (                   £",
         "£                                    £",
         "£                                    £",
+        "£                        (           £",
         "======================================",
       ],
         [
@@ -294,58 +296,13 @@
       ];
 
 
-
       onLoad(() => {
         go("start");
       })
         // Start level
-      scene("start", () => {
+        scene("start", () => {
       add([
         sprite("background", { width: width(), height: height() }),
-        pos(0, 0),
-        fixed(),
-      ]);
-
-      let player = add([sprite("player"), solid(), pos(380, 380), body(), area(), scale(0.7)]);
-
-      add([
-        pos(380, 270),
-        sprite("aloitus3"),
-        origin("center"),
-        scale(0.05)
-      ]);
-
-      add([
-        pos(380, 300),
-        sprite("aloitus1"),
-        origin("center"),
-        scale(0.048)
-      ]);
-
-      add([
-        pos(380, 320),
-        sprite("aloitus2"),
-        origin("center"),
-        scale(0.05)
-      ]);
-
-      add([
-        pos(380, 440),
-        text("Ellet pysty liikkumaan klikkaa peliruutua"),
-        origin("center"),
-        scale(0.2)
-      ]);
-
-      add([
-        pos(10, 10),
-        sprite("logo"),
-        scale(0.3),
-        fixed()
-      ]);
-
-
-      add([
-        sprite("bg2", { width: width(), height: height() }),
         pos(0, 0),
         fixed(),
       ]);
@@ -359,8 +316,70 @@
         "^": () => [sprite("arrow"), scale(0.4), "Arrow"],
         "#": () => [sprite("spider"), solid(), area(), scale(1), "Spider"],
         "-": () => [sprite("reminder"), area(), scale(0.2), "Reminder"],
-        "(": () => [sprite("start"), area(), scale(0.5), "Start"],
+        "(": () => [sprite("start"), area(), scale(0.4), origin("center"), "Start"],
       });
+      
+      
+        add([
+          pos(380, 300),
+          sprite("aloitus3"),
+          origin("center"),
+          scale(0.07)
+        ]);
+
+        if (!mobile) {
+          add([
+            pos(380, 330),
+            sprite("aloitus1"),
+            origin("center"),
+            scale(0.05  )
+          ]);
+
+          add([
+          pos(380, 470),
+          text("Ellet pysty liikkumaan klikkaa peliruutua"),
+          origin("center"),
+          scale(0.2)
+        ]);
+          add([
+            pos(380, 350),
+            sprite("aloitus2"),
+            origin("center"),
+            scale(0.05)
+          ]);
+        } else {
+          add([
+            pos(380, 345),
+            sprite("aloitus2puh"),
+            origin("center"),
+            scale(0.7)
+          ]);
+
+        }
+      
+ 
+      add([
+        pos(390, 440),
+        sprite("ict"),
+        scale(0.5),
+        origin("center")
+      ]);
+
+      add([
+        pos(10, 10),
+        sprite("logo"),
+        scale(0.3),
+        fixed()
+      ]);
+
+      add([
+        sprite("bg2", { width: width(), height: height() }),
+        pos(0, 0),
+        fixed(),
+      ]);
+
+
+      let player = add([sprite("player"), solid(), pos(380, 380), body(), area(), scale(0.7)]);
 
       player.onCollide("Start", (Start) => {
         go("levelONE");
