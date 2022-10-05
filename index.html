@@ -297,7 +297,7 @@
 
 
       onLoad(() => {
-        go("start");
+        go("fifthlevel");
       })
         // Start level
         scene("start", () => {
@@ -1555,8 +1555,33 @@
           pos(width() / 2, height() / 2 - 43),
           origin("center"),
           scale(0.05),
-          fixed()
+          fixed(),
+          area()  
         ]);
+
+        add([
+          pos(10, 10),
+          sprite("logo"),
+          scale(0.3),
+          fixed(),
+        ]);
+
+        if (!mobile) {
+          add([
+            pos(width() / 2, height() - 20),
+            origin("center"),
+            sprite("ict"),
+            scale(0.5),
+            fixed()
+          ]);
+        } else {
+          add([
+            pos(10, 50),
+            sprite("ict"),
+            scale(0.5),
+            fixed()
+          ]);
+        }
 
         // Lets find first suitable field
         const ensimmainen = Math.max(
