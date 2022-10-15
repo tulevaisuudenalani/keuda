@@ -4,20 +4,21 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tulevaisuuteni ala peli</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>Tulevaisuuteni alan peli</title>
+    <link rel="stylesheet" href="styles.css" />
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
   </head>
   <body>
+    <!-- Phone div -->
     <div class="puhelin" id="puhelinDiv">
       <h1 id="puhelin">Käännä puhelin</h1>
     </div>
 
+    <!-- Load game -->
     <script type="module" defer>
       import kaboom from "https://unpkg.com/kaboom/dist/kaboom.mjs";
-  
-      // Kaboom config
-      window.mobileCheck = function () {
+
+      window.mobileCheck = () => {
         let check = false;
         (function (a) {
           if (
@@ -32,31 +33,33 @@
         })(navigator.userAgent || navigator.vendor || window.opera);
         return check;
       };
-  
+
       const mobile = window.mobileCheck();
-  
+
       function timeout(ms) {
         return new Promise((resolve) => setTimeout(resolve, ms));
       }
-  
+
       let lsm = false;
-  
+
       async function checkOR() {
-        if (screen.orientation.type == "landscape-primary" || screen.orientation.type == "landscape-secondary") {
+        if (
+          screen.orientation.type == "landscape-primary" ||
+          screen.orientation.type == "landscape-secondary"
+        ) {
           lsm = true;
           document.getElementById("puhelin").style.display = "none";
         } else {
           document.getElementById("puhelin").style.display = "block";
         }
       }
-  
+
       if (mobile) {
-  
         while (!lsm) {
           checkOR();
           await timeout(200);
         }
-  
+
         kaboom({
           global: true,
           fullscreen: true,
@@ -65,6 +68,7 @@
           background: [51, 151, 255],
         });
       } else {
+        // Game Engine configuration
         kaboom({
           global: true,
           fullscreen: true,
@@ -73,7 +77,7 @@
           background: [51, 151, 255],
         });
       }
-  
+
       document.getElementById("puhelinDiv").remove();
 
       //KOULUTUS ALA LINKIT
@@ -113,77 +117,77 @@
       // Kolmas taso
       let kys31 = false;
       let kys32 = false;
-      
-      //Kuvat
-      loadSprite("player", "Kuvat/hahmo.png");
-      loadSprite("background", "Kuvat/tausta.png");
-      loadSprite("line", "Kuvat/tausta_alareuna.png");
-      loadSprite("teleport", "Kuvat/ampari.png");
-      loadSprite("ohjaus", "Kuvat/ohjausnuoli.png");
 
-      loadSprite("logo", "Kuvat/keuda_logo.png");
-      loadSprite("bg2", "Kuvat/tausta_shade.png");
-      loadSprite("suprise", "Kuvat/block_tyhja_kysymys.png");
-      loadSprite("spider", "Kuvat/örkki.png");
-      loadSprite("block", "Kuvat/block.png");
-      loadSprite("arrow", "Kuvat/nuoli.png");
-      loadSprite("reminder", "Kuvat/teksti_nuoli.png");
-      loadSprite("flagfinish", "Kuvat/maali_tausta_levelille.png");
-      loadSprite("start", "Kuvat/start.png");
-      loadSprite("empty", "Kuvat/block_vastaus.png");
-      loadSprite("end", "Kuvat/maali_tausta.png");
-      loadSprite("endback", "Kuvat/maali_tausta_ala.png");
-      loadSprite("endbox", "Kuvat/loppu_solu.png");
-      loadSprite("endtext", "Kuvat/loppu_teksti.png");
-      loadSprite("aloitus1", "Kuvat/aloitus otsikko_ala.png");
-      loadSprite("aloitus2", "Kuvat/aloitus otsikko_alin.png");
-      loadSprite("aloitus3", "Kuvat/aloitus_otsikko.png");
-      loadSprite("aloitus2puh", "Kuvat/aloitus otsikko_mobile.png");
-      loadSprite("ict", "Kuvat/teksti_alku.png");
-      loadSprite("ala1", "Kuvat/ala1.png");
-      loadSprite("ala2", "Kuvat/ala2.png");
-      loadSprite("ala3", "Kuvat/ala3.png");
-      loadSprite("ala4", "Kuvat/ala4.png");
-      loadSprite("ala5", "Kuvat/ala5.png");
-      loadSprite("ala6", "Kuvat/ala6.png");
-      loadSprite("ala7", "Kuvat/ala7.png");
-      loadSprite("ala8", "Kuvat/ala8.png");
+      //Kuvat
+      loadSprite("player", "image/hahmo.png");
+      loadSprite("background", "image/tausta.png");
+      loadSprite("line", "image/tausta_alareuna.png");
+      loadSprite("teleport", "image/ampari.png");
+      loadSprite("ohjaus", "image/ohjausnuoli.png");
+
+      loadSprite("logo", "image/keuda_logo.png");
+      loadSprite("bg2", "image/tausta_shade.png");
+      loadSprite("suprise", "image/block_tyhja_kysymys.png");
+      loadSprite("spider", "image/örkki.png");
+      loadSprite("block", "image/block.png");
+      loadSprite("arrow", "image/nuoli.png");
+      loadSprite("reminder", "image/teksti_nuoli.png");
+      loadSprite("flagfinish", "image/maali_tausta_levelille.png");
+      loadSprite("start", "image/start.png");
+      loadSprite("empty", "image/block_vastaus.png");
+      loadSprite("end", "image/maali_tausta.png");
+      loadSprite("endback", "image/maali_tausta_ala.png");
+      loadSprite("endbox", "image/loppu_solu.png");
+      loadSprite("endtext", "image/loppu_teksti.png");
+      loadSprite("aloitus1", "image/aloitus otsikko_ala.png");
+      loadSprite("aloitus2", "image/aloitus otsikko_alin.png");
+      loadSprite("aloitus3", "image/aloitus_otsikko.png");
+      loadSprite("aloitus2puh", "image/aloitus otsikko_mobile.png");
+      loadSprite("ict", "image/teksti_alku.png");
+      loadSprite("ala1", "image/ala1.png");
+      loadSprite("ala2", "image/ala2.png");
+      loadSprite("ala3", "image/ala3.png");
+      loadSprite("ala4", "image/ala4.png");
+      loadSprite("ala5", "image/ala5.png");
+      loadSprite("ala6", "image/ala6.png");
+      loadSprite("ala7", "image/ala7.png");
+      loadSprite("ala8", "image/ala8.png");
 
       // Questions
-      loadSprite("k1", "Kuvat/kysymykset/k_1.png");
-      loadSprite("k2", "Kuvat/kysymykset/k_2.png");
-      loadSprite("k3", "Kuvat/kysymykset/k_3.png");
+      loadSprite("k1", "image/kysymykset/k_1.png");
+      loadSprite("k2", "image/kysymykset/k_2.png");
+      loadSprite("k3", "image/kysymykset/k_3.png");
 
-      loadSprite("k4", "Kuvat/kysymykset/k_4.png");
-      loadSprite("k5", "Kuvat/kysymykset/k_5.png");
-      loadSprite("k6", "Kuvat/kysymykset/k_6.png");
+      loadSprite("k4", "image/kysymykset/k_4.png");
+      loadSprite("k5", "image/kysymykset/k_5.png");
+      loadSprite("k6", "image/kysymykset/k_6.png");
 
-      loadSprite("k7", "Kuvat/kysymykset/k_7.png");
-      loadSprite("k8", "Kuvat/kysymykset/k_8.png");
+      loadSprite("k7", "image/kysymykset/k_7.png");
+      loadSprite("k8", "image/kysymykset/k_8.png");
 
       // Answers
-      loadSprite("k1a", "Kuvat/kysymykset/k_1_a.png");
-      loadSprite("k1b", "Kuvat/kysymykset/k_1_b.png");
-      loadSprite("k1c", "Kuvat/kysymykset/k_1_c.png");
-      loadSprite("k2a", "Kuvat/kysymykset/k_2_a.png");
-      loadSprite("k2b", "Kuvat/kysymykset/k_2_b.png");
-      loadSprite("k2c", "Kuvat/kysymykset/k_2_c.png");
-      loadSprite("k3a", "Kuvat/kysymykset/k_3_a.png");
-      loadSprite("k3b", "Kuvat/kysymykset/k_3_b.png");
-      loadSprite("k4a", "Kuvat/kysymykset/k_4_a.png");
-      loadSprite("k4b", "Kuvat/kysymykset/k_4_b.png");
-      loadSprite("k4c", "Kuvat/kysymykset/k_4_c.png");
-      loadSprite("k5a", "Kuvat/kysymykset/k_5_a.png");
-      loadSprite("k5b", "Kuvat/kysymykset/k_5_b.png");
-      loadSprite("k5c", "Kuvat/kysymykset/k_5_c.png");
-      loadSprite("k6a", "Kuvat/kysymykset/k_6_a.png");
-      loadSprite("k6b", "Kuvat/kysymykset/k_6_b.png");
-      loadSprite("k6c", "Kuvat/kysymykset/k_6_c.png");
-      loadSprite("k7a", "Kuvat/kysymykset/k_7_a.png");
-      loadSprite("k7b", "Kuvat/kysymykset/k_7_b.png");
-      loadSprite("k8a", "Kuvat/kysymykset/k_8_a.png");
-      loadSprite("k8b", "Kuvat/kysymykset/k_8_b.png");
-      loadSprite("k8c", "Kuvat/kysymykset/k_8_c.png");
+      loadSprite("k1a", "image/kysymykset/k_1_a.png");
+      loadSprite("k1b", "image/kysymykset/k_1_b.png");
+      loadSprite("k1c", "image/kysymykset/k_1_c.png");
+      loadSprite("k2a", "image/kysymykset/k_2_a.png");
+      loadSprite("k2b", "image/kysymykset/k_2_b.png");
+      loadSprite("k2c", "image/kysymykset/k_2_c.png");
+      loadSprite("k3a", "image/kysymykset/k_3_a.png");
+      loadSprite("k3b", "image/kysymykset/k_3_b.png");
+      loadSprite("k4a", "image/kysymykset/k_4_a.png");
+      loadSprite("k4b", "image/kysymykset/k_4_b.png");
+      loadSprite("k4c", "image/kysymykset/k_4_c.png");
+      loadSprite("k5a", "image/kysymykset/k_5_a.png");
+      loadSprite("k5b", "image/kysymykset/k_5_b.png");
+      loadSprite("k5c", "image/kysymykset/k_5_c.png");
+      loadSprite("k6a", "image/kysymykset/k_6_a.png");
+      loadSprite("k6b", "image/kysymykset/k_6_b.png");
+      loadSprite("k6c", "image/kysymykset/k_6_c.png");
+      loadSprite("k7a", "image/kysymykset/k_7_a.png");
+      loadSprite("k7b", "image/kysymykset/k_7_b.png");
+      loadSprite("k8a", "image/kysymykset/k_8_a.png");
+      loadSprite("k8b", "image/kysymykset/k_8_b.png");
+      loadSprite("k8c", "image/kysymykset/k_8_c.png");
 
       // Load sounds
       loadSound("block", "./audio/block.wav");
@@ -192,29 +196,29 @@
 
       // Load levels
       let levels = [
-      [
-        "£                                    £",
-        "£                                    £",
-        "£                                    £",
-        "£                                    £",
-        "£                                    £",
-        "£                                    £",
-        "£                                    £",
-        "£                                    £",
-        "£                                    £",
-        "£                                    £",
-        "£                                    £",
-        "£                                    £",
-        "£                                    £",
-        "£                                    £",
-        "£                                    £",
-        "£                                    £",
-        "£                                    £",
-        "£                                    £",
-        "£                                    £",
-        "£                        (           £",
-        "======================================",
-      ],
+        [
+          "£                                    £",
+          "£                                    £",
+          "£                                    £",
+          "£                                    £",
+          "£                                    £",
+          "£                                    £",
+          "£                                    £",
+          "£                                    £",
+          "£                                    £",
+          "£                                    £",
+          "£                                    £",
+          "£                                    £",
+          "£                                    £",
+          "£                                    £",
+          "£                                    £",
+          "£                                    £",
+          "£                                    £",
+          "£                                    £",
+          "£                                    £",
+          "£                        (           £",
+          "======================================",
+        ],
         [
           "£                                                                       £",
           "£                                                                       £",
@@ -295,242 +299,235 @@
         ],
       ];
 
-
       onLoad(() => {
         go("start");
-      })
-        // Start level
-        scene("start", () => {
-      add([
-        sprite("background", { width: width(), height: height() }),
-        pos(0, 0),
-        fixed(),
-      ]);
-
-      addLevel(levels[0], {
-        width: 20,
-        height: 20,
-        "=": () => [sprite("block"), solid(), area(), scale(0.44), ""],
-        "£": () => [sprite("block"), solid(), area(), scale(0.44), ""],
-        "+": () => [sprite("tunnel"), solid(), area(), scale(0.5), "Tunnel"],
-        "^": () => [sprite("arrow"), scale(0.4), "Arrow"],
-        "#": () => [sprite("spider"), solid(), area(), scale(1), "Spider"],
-        "-": () => [sprite("reminder"), area(), scale(0.2), "Reminder"],
-        "(": () => [sprite("start"), area(), scale(0.4), origin("center"), "Start"],
       });
-      
-      
+      // Start level
+      scene("start", () => {
         add([
-          pos(380, 300),
-          sprite("aloitus3"),
-          origin("center"),
-          scale(0.07)
+          sprite("background", { width: width(), height: height() }),
+          pos(0, 0),
+          fixed(),
         ]);
+
+        addLevel(levels[0], {
+          width: 20,
+          height: 20,
+          "=": () => [sprite("block"), solid(), area(), scale(0.44), ""],
+          "£": () => [sprite("block"), solid(), area(), scale(0.44), ""],
+          "+": () => [sprite("tunnel"), solid(), area(), scale(0.5), "Tunnel"],
+          "^": () => [sprite("arrow"), scale(0.4), "Arrow"],
+          "#": () => [sprite("spider"), solid(), area(), scale(1), "Spider"],
+          "-": () => [sprite("reminder"), area(), scale(0.2), "Reminder"],
+          "(": () => [
+            sprite("start"),
+            area(),
+            scale(0.4),
+            origin("center"),
+            "Start",
+          ],
+        });
+
+        add([pos(380, 300), sprite("aloitus3"), origin("center"), scale(0.07)]);
 
         if (!mobile) {
           add([
             pos(380, 330),
             sprite("aloitus1"),
             origin("center"),
-            scale(0.05  )
+            scale(0.05),
           ]);
 
           add([
-          pos(380, 470),
-          text("Ellet pysty liikkumaan klikkaa peliruutua"),
-          origin("center"),
-          scale(0.2)
-        ]);
+            pos(380, 470),
+            text("Ellet pysty liikkumaan klikkaa peliruutua"),
+            origin("center"),
+            scale(0.2),
+          ]);
           add([
             pos(380, 350),
             sprite("aloitus2"),
             origin("center"),
-            scale(0.05)
+            scale(0.05),
           ]);
         } else {
           add([
             pos(380, 345),
             sprite("aloitus2puh"),
             origin("center"),
-            scale(0.7)
+            scale(0.7),
+          ]);
+        }
+
+        add([pos(390, 440), sprite("ict"), scale(0.5), origin("center")]);
+
+        add([pos(10, 10), sprite("logo"), scale(0.3), fixed()]);
+
+        add([
+          sprite("bg2", { width: width(), height: height() }),
+          pos(0, 0),
+          fixed(),
+        ]);
+
+        let player = add([
+          sprite("player"),
+          solid(),
+          pos(380, 380),
+          body(),
+          area(),
+          scale(0.7),
+        ]);
+
+        player.onCollide("Start", (Start) => {
+          go("levelONE");
+        });
+
+        gravity(660);
+
+        if (mobile) {
+          const ylosNappi = add([
+            sprite("ohjaus"),
+            pos(width() - 70, height() - 70),
+            fixed(),
+            opacity(0.8),
+            area(),
+            scale(0.25),
+
+            "ylosNappi",
           ]);
 
-        }
-      
- 
-      add([
-        pos(390, 440),
-        sprite("ict"),
-        scale(0.5),
-        origin("center")
-      ]);
+          const vasenNappi = add([
+            sprite("ohjaus"),
+            pos(40, height() - 40),
+            fixed(),
+            opacity(0.8),
+            area(),
+            scale(0.25),
+            rotate(-90),
+            origin("center"),
 
-      add([
-        pos(10, 10),
-        sprite("logo"),
-        scale(0.3),
-        fixed()
-      ]);
+            "vasenNappi",
+          ]);
 
-      add([
-        sprite("bg2", { width: width(), height: height() }),
-        pos(0, 0),
-        fixed(),
-      ]);
+          const oikeaNappi = add([
+            sprite("ohjaus"),
+            pos(110, height() - 40),
+            fixed(),
+            opacity(0.8),
+            area(),
+            scale(0.25),
+            rotate(90),
+            origin("center"),
 
+            "oikeaNappi",
+          ]);
 
-      let player = add([sprite("player"), solid(), pos(380, 380), body(), area(), scale(0.7)]);
+          let keysDown = {
+            left: false,
+            right: false,
+          };
 
-      player.onCollide("Start", (Start) => {
-        go("levelONE");
-      });
+          let jumpID = -1;
+          let leftID = -1;
+          let rightID = -1;
 
-      gravity(660);
-
-      if (mobile) {
-          const ylosNappi = add([
-          sprite("ohjaus"),
-          pos(width() - 70, height() - 70),
-          fixed(),
-          opacity(0.8),
-          area(),
-          scale(0.25),
-
-          "ylosNappi",
-        ]);
-
-        const vasenNappi = add([
-          sprite("ohjaus"),
-          pos(40, height() - 40),
-          fixed(),
-          opacity(0.8),
-          area(),
-          scale(0.25),
-          rotate(-90),
-          origin("center"),
-
-          "vasenNappi",
-        ]);
-
-        const oikeaNappi = add([
-          sprite("ohjaus"),
-          pos(110, height() - 40),
-          fixed(),
-          opacity(0.8),
-          area(),
-          scale(0.25),
-          rotate(90),
-          origin("center"),
-
-          "oikeaNappi",
-        ]);
-
-        let keysDown = {
-          left: false,
-          right: false,
-        };
-
-        let jumpID = -1;
-        let leftID = -1;
-        let rightID = -1;
-
-        onTouchStart((id, pos) => {
-          if (ylosNappi.hasPoint(pos)) {
-            if (player.isGrounded()) {
-              jumpID = id;
-              player.jump(playerJumpForce, 0);
+          onTouchStart((id, pos) => {
+            if (ylosNappi.hasPoint(pos)) {
+              if (player.isGrounded()) {
+                jumpID = id;
+                player.jump(playerJumpForce, 0);
+              }
+            } else if (vasenNappi.hasPoint(pos)) {
+              keysDown.left = true;
+              leftID = id;
+            } else if (oikeaNappi.hasPoint(pos)) {
+              keysDown.right = true;
+              rightID = id;
             }
-          } else if (vasenNappi.hasPoint(pos)) {
-            keysDown.left = true;
-            leftID = id;
-          } else if (oikeaNappi.hasPoint(pos)) {
-            keysDown.right = true;
-            rightID = id;
-          }
-        });
+          });
 
-        onUpdate(() => {
-          if (keysDown.left) {
-            player.move(-playerMoveSpeed, 0);
-            camPos(player.pos);
-            player.flipX(true);
-          }
-          if (keysDown.right) {
-            player.move(playerMoveSpeed, 0);
-            camPos(player.pos);
-            player.flipX(false);
-          }
-        });
+          onUpdate(() => {
+            if (keysDown.left) {
+              player.move(-playerMoveSpeed, 0);
+              camPos(player.pos);
+              player.flipX(true);
+            }
+            if (keysDown.right) {
+              player.move(playerMoveSpeed, 0);
+              camPos(player.pos);
+              player.flipX(false);
+            }
+          });
 
-        onTouchEnd((id, pos) => {
-          if (id == jumpID) {
-            jumpID = -1;
-            return;
-          } else if (id == rightID) {
-            rightID = -1;
-            keysDown.right = false;
-          } else if (id == leftID) {
-            leftID = -1;
-            keysDown.left = false;
-          }
-        });
-      }
-      
-      // Movement
-      player.onUpdate(() => {
-        camPos(player.pos);
-      });
-
-      onKeyDown("left", () => {
-        player.move(-playerMoveSpeed, 0);
-        camPos(player.pos);
-        player.flipX(true);
-      });
-
-      onKeyDown("a", () => {
-        player.move(-playerMoveSpeed, 0);
-        camPos(player.pos);
-        player.flipX(true);
-      });
-
-      onKeyDown("right", () => {
-        player.move(playerMoveSpeed, 0);
-        camPos(player.pos);
-        player.flipX(false);
-      });
-
-      onKeyDown("d", () => {
-        player.move(playerMoveSpeed, 0);
-        camPos(player.pos);
-        player.flipX(false);
-      });
-
-      onKeyPress("space", () => {
-        if (player.isGrounded()) {
-          player.jump(playerJumpForce, 0);
-          const jumpSound = play("hyppy", {
-            volume: 0.5,
-            loop: false,
+          onTouchEnd((id, pos) => {
+            if (id == jumpID) {
+              jumpID = -1;
+              return;
+            } else if (id == rightID) {
+              rightID = -1;
+              keysDown.right = false;
+            } else if (id == leftID) {
+              leftID = -1;
+              keysDown.left = false;
+            }
           });
         }
-      });
 
-      onKeyPress("up", () => {
-        if (player.isGrounded()) {
-          player.jump(playerJumpForce, 0);
-          const jumpSound = play("hyppy", {
-            volume: 0.5,
-            loop: false,
-          });
-        }
-      });
+        // Movement
+        player.onUpdate(() => {
+          camPos(player.pos);
+        });
 
-      onKeyPress("w", () => {
-        if (player.isGrounded()) {
-          player.jump(playerJumpForce, 0);
-        }
+        onKeyDown("left", () => {
+          player.move(-playerMoveSpeed, 0);
+          camPos(player.pos);
+          player.flipX(true);
+        });
+
+        onKeyDown("a", () => {
+          player.move(-playerMoveSpeed, 0);
+          camPos(player.pos);
+          player.flipX(true);
+        });
+
+        onKeyDown("right", () => {
+          player.move(playerMoveSpeed, 0);
+          camPos(player.pos);
+          player.flipX(false);
+        });
+
+        onKeyDown("d", () => {
+          player.move(playerMoveSpeed, 0);
+          camPos(player.pos);
+          player.flipX(false);
+        });
+
+        onKeyPress("space", () => {
+          if (player.isGrounded()) {
+            player.jump(playerJumpForce, 0);
+            const jumpSound = play("hyppy", {
+              volume: 0.5,
+              loop: false,
+            });
+          }
+        });
+
+        onKeyPress("up", () => {
+          if (player.isGrounded()) {
+            player.jump(playerJumpForce, 0);
+            const jumpSound = play("hyppy", {
+              volume: 0.5,
+              loop: false,
+            });
+          }
+        });
+
+        onKeyPress("w", () => {
+          if (player.isGrounded()) {
+            player.jump(playerJumpForce, 0);
+          }
+        });
       });
-    });
       // First level
       scene("levelONE", () => {
         add([
@@ -596,92 +593,92 @@
 
         if (mobile) {
           const ylosNappi = add([
-          sprite("ohjaus"),
-          pos(width() - 70, height() - 70),
-          fixed(),
-          opacity(0.8),
-          area(),
-          scale(0.25),
+            sprite("ohjaus"),
+            pos(width() - 70, height() - 70),
+            fixed(),
+            opacity(0.8),
+            area(),
+            scale(0.25),
 
-          "ylosNappi",
-        ]);
+            "ylosNappi",
+          ]);
 
-        const vasenNappi = add([
-          sprite("ohjaus"),
-          pos(40, height() - 40),
-          fixed(),
-          opacity(0.8),
-          area(),
-          scale(0.25),
-          rotate(-90),
-          origin("center"),
+          const vasenNappi = add([
+            sprite("ohjaus"),
+            pos(40, height() - 40),
+            fixed(),
+            opacity(0.8),
+            area(),
+            scale(0.25),
+            rotate(-90),
+            origin("center"),
 
-          "vasenNappi",
-        ]);
+            "vasenNappi",
+          ]);
 
-        const oikeaNappi = add([
-          sprite("ohjaus"),
-          pos(110, height() - 40),
-          fixed(),
-          opacity(0.8),
-          area(),
-          scale(0.25),
-          rotate(90),
-          origin("center"),
+          const oikeaNappi = add([
+            sprite("ohjaus"),
+            pos(110, height() - 40),
+            fixed(),
+            opacity(0.8),
+            area(),
+            scale(0.25),
+            rotate(90),
+            origin("center"),
 
-          "oikeaNappi",
-        ]);
+            "oikeaNappi",
+          ]);
 
-        let keysDown = {
-          left: false,
-          right: false,
-        };
+          let keysDown = {
+            left: false,
+            right: false,
+          };
 
-        let jumpID = -1;
-        let leftID = -1;
-        let rightID = -1;
+          let jumpID = -1;
+          let leftID = -1;
+          let rightID = -1;
 
-        onTouchStart((id, pos) => {
-          if (ylosNappi.hasPoint(pos)) {
-            if (player.isGrounded()) {
-              jumpID = id;
-              player.jump(playerJumpForce, 0);
+          onTouchStart((id, pos) => {
+            if (ylosNappi.hasPoint(pos)) {
+              if (player.isGrounded()) {
+                jumpID = id;
+                player.jump(playerJumpForce, 0);
+              }
+            } else if (vasenNappi.hasPoint(pos)) {
+              keysDown.left = true;
+              leftID = id;
+            } else if (oikeaNappi.hasPoint(pos)) {
+              keysDown.right = true;
+              rightID = id;
             }
-          } else if (vasenNappi.hasPoint(pos)) {
-            keysDown.left = true;
-            leftID = id;
-          } else if (oikeaNappi.hasPoint(pos)) {
-            keysDown.right = true;
-            rightID = id;
-          }
-        });
+          });
 
-        onUpdate(() => {
-          if (keysDown.left) {
-            player.move(-playerMoveSpeed, 0);
-            camPos(player.pos);
-            player.flipX(true);
-          }
-          if (keysDown.right) {
-            player.move(playerMoveSpeed, 0);
-            camPos(player.pos);
-            player.flipX(false);
-          }
-        });
+          onUpdate(() => {
+            if (keysDown.left) {
+              player.move(-playerMoveSpeed, 0);
+              camPos(player.pos);
+              player.flipX(true);
+            }
+            if (keysDown.right) {
+              player.move(playerMoveSpeed, 0);
+              camPos(player.pos);
+              player.flipX(false);
+            }
+          });
 
-        onTouchEnd((id, pos) => {
-          if (id == jumpID) {
-            jumpID = -1;
-            return;
-          } else if (id == rightID) {
-            rightID = -1;
-            keysDown.right = false;
-          } else if (id == leftID) {
-            leftID = -1;
-            keysDown.left = false;
-          }
-        });
-      }
+          onTouchEnd((id, pos) => {
+            if (id == jumpID) {
+              jumpID = -1;
+              return;
+            } else if (id == rightID) {
+              rightID = -1;
+              keysDown.right = false;
+            } else if (id == leftID) {
+              leftID = -1;
+              keysDown.left = false;
+            }
+          });
+        }
 
         // Question: 1 ------ //
         player.onCollide("A", (A) => {
@@ -790,12 +787,11 @@
         });
 
         player.onCollide("Teleport", (Teleport) => {
-          if(kys11 == true && kys12 == true && kys13 == true)
-          {
+          if (kys11 == true && kys12 == true && kys13 == true) {
             go("levelTWO");
           }
         });
-          // Movement
+        // Movement
         player.onUpdate(() => {
           camPos(player.pos);
         });
@@ -853,7 +849,7 @@
           player.flipX(false);
         });
       });
-        // Second level
+      // Second level
       scene("levelTWO", () => {
         add([
           sprite("background", { width: width(), height: height() }),
@@ -894,17 +890,17 @@
           H: () => [sprite("suprise"), solid(), area(), scale(0.4), "H"],
           I: () => [sprite("suprise"), solid(), area(), scale(0.4), "I"],
           "/": () => [sprite("k4"), area(), scale(0.2), "K4"],
-          "`": () => [sprite("k5"),pos(23, 0), area(), scale(0.15), "K5"],
-          "¤": () => [sprite("k6"), pos(18,0), area(), scale(0.2), "K6"],
+          "`": () => [sprite("k5"), pos(23, 0), area(), scale(0.15), "K5"],
+          "¤": () => [sprite("k6"), pos(18, 0), area(), scale(0.2), "K6"],
           J: () => [sprite("k4a"), pos(-14, 1), area(), scale(0.13), "K4A"],
-           K: () => [sprite("k4b"), pos(-11, 1), area(), scale(0.17), "K4B"],
-           L: () => [sprite("k4c"), pos(-19, 1), area(), scale(0.17), "K4C"],
-           M: () => [sprite("k5a"), pos(-12,  1), area(), scale(0.18), "K5A"],
-           N: () => [sprite("k5b"), pos(-14, 1), area(), scale(0.18), "K5B"],
-           O: () => [sprite("k5c"), pos(-12, 1), area(), scale(0.17), "K5C"],
-           P: () => [sprite("k6a"), pos(-11, 1), area(), scale(0.18), "K6A"],
-           Q: () => [sprite("k6b"), pos(-15, 1), area(), scale(0.19), "K6B"],
-           R: () => [sprite("k6c"), pos(-9, 1), area(), scale(0.13), "K6C"],
+          K: () => [sprite("k4b"), pos(-11, 1), area(), scale(0.17), "K4B"],
+          L: () => [sprite("k4c"), pos(-19, 1), area(), scale(0.17), "K4C"],
+          M: () => [sprite("k5a"), pos(-12, 1), area(), scale(0.18), "K5A"],
+          N: () => [sprite("k5b"), pos(-14, 1), area(), scale(0.18), "K5B"],
+          O: () => [sprite("k5c"), pos(-12, 1), area(), scale(0.17), "K5C"],
+          P: () => [sprite("k6a"), pos(-11, 1), area(), scale(0.18), "K6A"],
+          Q: () => [sprite("k6b"), pos(-15, 1), area(), scale(0.19), "K6B"],
+          R: () => [sprite("k6c"), pos(-9, 1), area(), scale(0.13), "K6C"],
         });
 
         const player = add([
@@ -920,92 +916,92 @@
 
         if (mobile) {
           const ylosNappi = add([
-          sprite("ohjaus"),
-          pos(width() - 70, height() - 70),
-          fixed(),
-          opacity(0.8),
-          area(),
-          scale(0.25),
+            sprite("ohjaus"),
+            pos(width() - 70, height() - 70),
+            fixed(),
+            opacity(0.8),
+            area(),
+            scale(0.25),
 
-          "ylosNappi",
-        ]);
+            "ylosNappi",
+          ]);
 
-        const vasenNappi = add([
-          sprite("ohjaus"),
-          pos(40, height() - 40),
-          fixed(),
-          opacity(0.8),
-          area(),
-          scale(0.25),
-          rotate(-90),
-          origin("center"),
+          const vasenNappi = add([
+            sprite("ohjaus"),
+            pos(40, height() - 40),
+            fixed(),
+            opacity(0.8),
+            area(),
+            scale(0.25),
+            rotate(-90),
+            origin("center"),
 
-          "vasenNappi",
-        ]);
+            "vasenNappi",
+          ]);
 
-        const oikeaNappi = add([
-          sprite("ohjaus"),
-          pos(110, height() - 40),
-          fixed(),
-          opacity(0.8),
-          area(),
-          scale(0.25),
-          rotate(90),
-          origin("center"),
+          const oikeaNappi = add([
+            sprite("ohjaus"),
+            pos(110, height() - 40),
+            fixed(),
+            opacity(0.8),
+            area(),
+            scale(0.25),
+            rotate(90),
+            origin("center"),
 
-          "oikeaNappi",
-        ]);
+            "oikeaNappi",
+          ]);
 
-        let keysDown = {
-          left: false,
-          right: false,
-        };
+          let keysDown = {
+            left: false,
+            right: false,
+          };
 
-        let jumpID = -1;
-        let leftID = -1;
-        let rightID = -1;
+          let jumpID = -1;
+          let leftID = -1;
+          let rightID = -1;
 
-        onTouchStart((id, pos) => {
-          if (ylosNappi.hasPoint(pos)) {
-            if (player.isGrounded()) {
-              jumpID = id;
-              player.jump(playerJumpForce, 0);
+          onTouchStart((id, pos) => {
+            if (ylosNappi.hasPoint(pos)) {
+              if (player.isGrounded()) {
+                jumpID = id;
+                player.jump(playerJumpForce, 0);
+              }
+            } else if (vasenNappi.hasPoint(pos)) {
+              keysDown.left = true;
+              leftID = id;
+            } else if (oikeaNappi.hasPoint(pos)) {
+              keysDown.right = true;
+              rightID = id;
             }
-          } else if (vasenNappi.hasPoint(pos)) {
-            keysDown.left = true;
-            leftID = id;
-          } else if (oikeaNappi.hasPoint(pos)) {
-            keysDown.right = true;
-            rightID = id;
-          }
-        });
+          });
 
-        onUpdate(() => {
-          if (keysDown.left) {
-            player.move(-playerMoveSpeed, 0);
-            camPos(player.pos);
-            player.flipX(true);
-          }
-          if (keysDown.right) {
-            player.move(playerMoveSpeed, 0);
-            camPos(player.pos);
-            player.flipX(false);
-          }
-        });
+          onUpdate(() => {
+            if (keysDown.left) {
+              player.move(-playerMoveSpeed, 0);
+              camPos(player.pos);
+              player.flipX(true);
+            }
+            if (keysDown.right) {
+              player.move(playerMoveSpeed, 0);
+              camPos(player.pos);
+              player.flipX(false);
+            }
+          });
 
-        onTouchEnd((id, pos) => {
-          if (id == jumpID) {
-            jumpID = -1;
-            return;
-          } else if (id == rightID) {
-            rightID = -1;
-            keysDown.right = false;
-          } else if (id == leftID) {
-            leftID = -1;
-            keysDown.left = false;
-          }
-        });
-      }
+          onTouchEnd((id, pos) => {
+            if (id == jumpID) {
+              jumpID = -1;
+              return;
+            } else if (id == rightID) {
+              rightID = -1;
+              keysDown.right = false;
+            } else if (id == leftID) {
+              leftID = -1;
+              keysDown.left = false;
+            }
+          });
+        }
 
         // Question: 4 ------ //
         player.onCollide("A", (A) => {
@@ -1040,7 +1036,7 @@
           scopeD++;
           kys21 = true;
         });
-          //Question 5
+        //Question 5
         player.onCollide("D", (D) => {
           let x = D.pos.x;
           let y = D.pos.y;
@@ -1116,8 +1112,7 @@
         });
 
         player.onCollide("Teleport", (Teleport) => {
-          if(kys21 == true && kys22 == true && kys23 == true)
-          {
+          if (kys21 == true && kys22 == true && kys23 == true) {
             go("levelTHREE");
           }
         });
@@ -1133,7 +1128,7 @@
             loop: false,
           });
         });
-          // Movement
+        // Movement
         player.onUpdate(() => {
           camPos(player.pos);
         });
@@ -1192,7 +1187,7 @@
           }
         });
       });
-        // Third level
+      // Third level
       scene("levelTHREE", () => {
         add([
           sprite("background", { width: width(), height: height() }),
@@ -1241,10 +1236,10 @@
           "/": () => [sprite("k7"), pos(13, 0), area(), scale(0.2), "K7"],
           "`": () => [sprite("k8"), pos(-7, 0), area(), scale(0.2), "K8"],
           J: () => [sprite("k7a"), pos(-10, 1), area(), scale(0.18), "K7A"],
-           K: () => [sprite("k7b"), pos(-12, 1), area(), scale(0.18), "K7B"],
-           L: () => [sprite("k8a"), pos(1, 1), area(), scale(0.17), "K8A"],
-           M: () => [sprite("k8b"), pos(-1, 1), area(), scale(0.12), "K8B"],
-           N: () => [sprite("k8c"), pos(5, 1), area(), scale(0.12), "K8C"],
+          K: () => [sprite("k7b"), pos(-12, 1), area(), scale(0.18), "K7B"],
+          L: () => [sprite("k8a"), pos(1, 1), area(), scale(0.17), "K8A"],
+          M: () => [sprite("k8b"), pos(-1, 1), area(), scale(0.12), "K8B"],
+          N: () => [sprite("k8c"), pos(5, 1), area(), scale(0.12), "K8C"],
         });
 
         const player = add([
@@ -1260,97 +1255,96 @@
 
         if (mobile) {
           const ylosNappi = add([
-          sprite("ohjaus"),
-          pos(width() - 70, height() - 70),
-          fixed(),
-          opacity(0.8),
-          area(),
-          scale(0.25),
+            sprite("ohjaus"),
+            pos(width() - 70, height() - 70),
+            fixed(),
+            opacity(0.8),
+            area(),
+            scale(0.25),
 
-          "ylosNappi",
-        ]);
+            "ylosNappi",
+          ]);
 
-        const vasenNappi = add([
-          sprite("ohjaus"),
-          pos(40, height() - 40),
-          fixed(),
-          opacity(0.8),
-          area(),
-          scale(0.25),
-          rotate(-90),
-          origin("center"),
+          const vasenNappi = add([
+            sprite("ohjaus"),
+            pos(40, height() - 40),
+            fixed(),
+            opacity(0.8),
+            area(),
+            scale(0.25),
+            rotate(-90),
+            origin("center"),
 
-          "vasenNappi",
-        ]);
+            "vasenNappi",
+          ]);
 
-        const oikeaNappi = add([
-          sprite("ohjaus"),
-          pos(110, height() - 40),
-          fixed(),
-          opacity(0.8),
-          area(),
-          scale(0.25),
-          rotate(90),
-          origin("center"),
+          const oikeaNappi = add([
+            sprite("ohjaus"),
+            pos(110, height() - 40),
+            fixed(),
+            opacity(0.8),
+            area(),
+            scale(0.25),
+            rotate(90),
+            origin("center"),
 
-          "oikeaNappi",
-        ]);
+            "oikeaNappi",
+          ]);
 
-        let keysDown = {
-          left: false,
-          right: false,
-        };
+          let keysDown = {
+            left: false,
+            right: false,
+          };
 
-        let jumpID = -1;
-        let leftID = -1;
-        let rightID = -1;
+          let jumpID = -1;
+          let leftID = -1;
+          let rightID = -1;
 
-        onTouchStart((id, pos) => {
-          if (ylosNappi.hasPoint(pos)) {
-            if (player.isGrounded()) {
-              jumpID = id;
-              player.jump(playerJumpForce, 0);
+          onTouchStart((id, pos) => {
+            if (ylosNappi.hasPoint(pos)) {
+              if (player.isGrounded()) {
+                jumpID = id;
+                player.jump(playerJumpForce, 0);
+              }
+            } else if (vasenNappi.hasPoint(pos)) {
+              keysDown.left = true;
+              leftID = id;
+            } else if (oikeaNappi.hasPoint(pos)) {
+              keysDown.right = true;
+              rightID = id;
             }
-          } else if (vasenNappi.hasPoint(pos)) {
-            keysDown.left = true;
-            leftID = id;
-          } else if (oikeaNappi.hasPoint(pos)) {
-            keysDown.right = true;
-            rightID = id;
-          }
-        });
+          });
 
-        onUpdate(() => {
-          if (keysDown.left) {
-            player.move(-playerMoveSpeed, 0);
-            camPos(player.pos);
-            player.flipX(true);
-          }
-          if (keysDown.right) {
-            player.move(playerMoveSpeed, 0);
-            camPos(player.pos);
-            player.flipX(false);
-          }
-        });
+          onUpdate(() => {
+            if (keysDown.left) {
+              player.move(-playerMoveSpeed, 0);
+              camPos(player.pos);
+              player.flipX(true);
+            }
+            if (keysDown.right) {
+              player.move(playerMoveSpeed, 0);
+              camPos(player.pos);
+              player.flipX(false);
+            }
+          });
 
-        onTouchEnd((id, pos) => {
-          if (id == jumpID) {
-            jumpID = -1;
-            return;
-          } else if (id == rightID) {
-            rightID = -1;
-            keysDown.right = false;
-          } else if (id == leftID) {
-            leftID = -1;
-            keysDown.left = false;
-          }
-        });
-      }
+          onTouchEnd((id, pos) => {
+            if (id == jumpID) {
+              jumpID = -1;
+              return;
+            } else if (id == rightID) {
+              rightID = -1;
+              keysDown.right = false;
+            } else if (id == leftID) {
+              leftID = -1;
+              keysDown.left = false;
+            }
+          });
+        }
 
         add([text("TASO: 3"), pos(125, 280), scale(0.2)]);
 
         // Question 7
-
 
         player.onCollide("A", (A) => {
           let x = A.pos.x;
@@ -1379,7 +1373,6 @@
         });
 
         // Question 8
-
 
         player.onCollide("D", (D) => {
           let x = D.pos.x;
@@ -1420,8 +1413,7 @@
         });
 
         player.onCollide("Teleport", (Teleport) => {
-          if(kys31 == true && kys32 == true)
-          {
+          if (kys31 == true && kys32 == true) {
             go("fifthlevel");
           }
         });
@@ -1538,16 +1530,16 @@
           sprite("end"),
           pos(width() / 2, height() / 2 - 85),
           origin("center"),
-          scale(0.070),
+          scale(0.07),
           fixed(),
         ]);
 
         let endbox = add([
           sprite("endbox"),
-          pos(width() / 2 , height() / 2 - -35),
+          pos(width() / 2, height() / 2 - -35),
           origin("center"),
-          scale(0.0700),
-          fixed()
+          scale(0.07),
+          fixed(),
         ]);
 
         let endtext = add([
@@ -1556,15 +1548,10 @@
           origin("center"),
           scale(0.05),
           fixed(),
-          area()  
+          area(),
         ]);
 
-        add([
-          pos(10, 10),
-          sprite("logo"),
-          scale(0.3),
-          fixed(),
-        ]);
+        add([pos(10, 10), sprite("logo"), scale(0.3), fixed()]);
 
         if (!mobile) {
           add([
@@ -1572,15 +1559,10 @@
             origin("center"),
             sprite("ict"),
             scale(0.5),
-            fixed()
+            fixed(),
           ]);
         } else {
-          add([
-            pos(10, 50),
-            sprite("ict"),
-            scale(0.5),
-            fixed()
-          ]);
+          add([pos(10, 50), sprite("ict"), scale(0.5), fixed()]);
         }
 
         // Lets find first suitable field
@@ -1594,58 +1576,105 @@
           scopeG,
           scopeH
         );
-        if(ensimmainen == scopeA)
-        {
+        if (ensimmainen == scopeA) {
           scopeA = 0;
-          add([sprite("ala1"), pos(width() / 2 - 110, height() /2 - 20), scale(0.3)]);
+          add([
+            sprite("ala1"),
+            pos(width() / 2 - 110, height() / 2 - 20),
+            scale(0.3),
+          ]);
           onClick(() => {
-            window.open("https://www.keuda.fi/ala/humanistiset-taidealat/",'_blank');
-            console.log('Humanistiset ja taidealat');
+            window.open(
+              "https://www.keuda.fi/ala/humanistiset-taidealat/",
+              "_blank"
+            );
+            console.log("Humanistiset ja taidealat");
           }, false);
-        } else if(ensimmainen == scopeB)
-        {
+        } else if (ensimmainen == scopeB) {
           scopeB = 0;
-          add([sprite("ala2"), pos(width() / 2 - 110, height() /2 - 20), scale(0.3)]);
+          add([
+            sprite("ala2"),
+            pos(width() / 2 - 110, height() / 2 - 20),
+            scale(0.3),
+          ]);
           onClick(() => {
-            window.open("https://www.keuda.fi/ala/kauppa-hallinto-oikeustieteet/",'_blank');
-            console.log('Kauppa, hallinto ja oikeustieteet');
+            window.open(
+              "https://www.keuda.fi/ala/kauppa-hallinto-oikeustieteet/",
+              "_blank"
+            );
+            console.log("Kauppa, hallinto ja oikeustieteet");
           }, false);
-        } else if(ensimmainen == scopeC)
-        {
+        } else if (ensimmainen == scopeC) {
           scopeC = 0;
-          add([sprite("ala3"), pos(width() / 2 - 110, height() /2 - 20), scale(0.25)]);         
+          add([
+            sprite("ala3"),
+            pos(width() / 2 - 110, height() / 2 - 20),
+            scale(0.25),
+          ]);
           onClick(() => {
-            window.open("https://www.keuda.fi/ala/luonnontieteet/",'_blank');
-            console.log('Luonnontieteet');
+            window.open("https://www.keuda.fi/ala/luonnontieteet/", "_blank");
+            console.log("Luonnontieteet");
           }, false);
-        } else if(ensimmainen == scopeD)
-        {
+        } else if (ensimmainen == scopeD) {
           scopeD = 0;
-          add([sprite("ala4"), pos(width() / 2 - 110, height() /2 - 20), scale(0.3)]);
+          add([
+            sprite("ala4"),
+            pos(width() / 2 - 110, height() / 2 - 20),
+            scale(0.3),
+          ]);
           onClick(() => {
-            window.open("https://www.keuda.fi/ala/maa-ja-metsatalousala-myos-puutarha-ala/",'_blank');
-            console.log('Maa- ja metsätalous');
+            window.open(
+              "https://www.keuda.fi/ala/maa-ja-metsatalousala-myos-puutarha-ala/",
+              "_blank"
+            );
+            console.log("Maa- ja metsätalous");
           }, false);
-        } else if(ensimmainen == scopeE)
-        {
+        } else if (ensimmainen == scopeE) {
           scopeE = 0;
-          add([sprite("ala5"), pos(width() / 2 - 110, height() /2 - 20), scale(0.25)]);
-          onClick(() => window.open("https://www.keuda.fi/ala/palvelualat/",'_blank'))
-        } else if(ensimmainen == scopeF)
-        {
+          add([
+            sprite("ala5"),
+            pos(width() / 2 - 110, height() / 2 - 20),
+            scale(0.25),
+          ]);
+          onClick(() =>
+            window.open("https://www.keuda.fi/ala/palvelualat/", "_blank")
+          );
+        } else if (ensimmainen == scopeF) {
           scopeF = 0;
-          add([sprite("ala6"), pos(width() / 2 - 110, height() /2 - 20), scale(0.25)]);
-          onClick(() => window.open("https://www.keuda.fi/ala/tekniikan-alat/",'_blank'))
-        } else if(ensimmainen == scopeG)
-        {
+          add([
+            sprite("ala6"),
+            pos(width() / 2 - 110, height() / 2 - 20),
+            scale(0.25),
+          ]);
+          onClick(() =>
+            window.open("https://www.keuda.fi/ala/tekniikan-alat/", "_blank")
+          );
+        } else if (ensimmainen == scopeG) {
           scopeG = 0;
-          add([sprite("ala7"), pos(width() / 2 - 110, height() /2 - 20), scale(0.3)]);
-          onClick(() => window.open("https://www.keuda.fi/ala/terveys-hyvinvointialat/",'_blank'))
-        } else if(ensimmainen == scopeH)
-        {
+          add([
+            sprite("ala7"),
+            pos(width() / 2 - 110, height() / 2 - 20),
+            scale(0.3),
+          ]);
+          onClick(() =>
+            window.open(
+              "https://www.keuda.fi/ala/terveys-hyvinvointialat/",
+              "_blank"
+            )
+          );
+        } else if (ensimmainen == scopeH) {
           scopeH = 0;
-          add([sprite("ala8"), pos(width() / 2 - 110, height() /2 - 20), scale(0.3)]);
-          onClick(() => window.open("https://www.keuda.fi/ala/tietojenkasittely-tietoliikenne-ict/",'_blank'))
+          add([
+            sprite("ala8"),
+            pos(width() / 2 - 110, height() / 2 - 20),
+            scale(0.3),
+          ]);
+          onClick(() =>
+            window.open(
+              "https://www.keuda.fi/ala/tietojenkasittely-tietoliikenne-ict/",
+              "_blank"
+            )
+          );
         }
 
         // Lets find second suitable field
@@ -1659,46 +1688,101 @@
           scopeG,
           scopeH
         );
-        if(toinen == scopeA)
-        {
+        if (toinen == scopeA) {
           scopeA = 0;
-          add([sprite("ala1"), pos(width() / 2 - 110, height() /2 - -30), scale(0.3)]);
-          onClick(() => window.open("https://www.keuda.fi/ala/humanistiset-taidealat/",'_blank'))
-        } else if(toinen == scopeB)
-        {
+          add([
+            sprite("ala1"),
+            pos(width() / 2 - 110, height() / 2 - -30),
+            scale(0.3),
+          ]);
+          onClick(() =>
+            window.open(
+              "https://www.keuda.fi/ala/humanistiset-taidealat/",
+              "_blank"
+            )
+          );
+        } else if (toinen == scopeB) {
           scopeB = 0;
-          add([sprite("ala2"), pos(width() / 2 - 110, height() /2 - -30), scale(0.3)]);
-          onClick(() => window.open("https://www.keuda.fi/ala/kauppa-hallinto-oikeustieteet/",'_blank'))
-        } else if(toinen == scopeC)
-        {
-          scopeC = 0;   
-          add([sprite("ala3"), pos(width() / 2 - 110, height() /2 - -30), scale(0.25)]);    
-          onClick(() => window.open("https://www.keuda.fi/ala/luonnontieteet/",'_blank'))
-        } else if(toinen == scopeD)
-        {
+          add([
+            sprite("ala2"),
+            pos(width() / 2 - 110, height() / 2 - -30),
+            scale(0.3),
+          ]);
+          onClick(() =>
+            window.open(
+              "https://www.keuda.fi/ala/kauppa-hallinto-oikeustieteet/",
+              "_blank"
+            )
+          );
+        } else if (toinen == scopeC) {
+          scopeC = 0;
+          add([
+            sprite("ala3"),
+            pos(width() / 2 - 110, height() / 2 - -30),
+            scale(0.25),
+          ]);
+          onClick(() =>
+            window.open("https://www.keuda.fi/ala/luonnontieteet/", "_blank")
+          );
+        } else if (toinen == scopeD) {
           scopeD = 0;
-          add([sprite("ala4"), pos(width() / 2 - 110, height() /2 - -30), scale(0.3)]);
-          onClick(() => window.open("https://www.keuda.fi/ala/maa-ja-metsatalousala-myos-puutarha-ala/",'_blank'))
-        } else if(toinen == scopeE)
-        {
+          add([
+            sprite("ala4"),
+            pos(width() / 2 - 110, height() / 2 - -30),
+            scale(0.3),
+          ]);
+          onClick(() =>
+            window.open(
+              "https://www.keuda.fi/ala/maa-ja-metsatalousala-myos-puutarha-ala/",
+              "_blank"
+            )
+          );
+        } else if (toinen == scopeE) {
           scopeE = 0;
-          add([sprite("ala5"), pos(width() / 2 - 110, height() /2 - -30), scale(0.25)]);
-          onClick(() => window.open("https://www.keuda.fi/ala/palvelualat/",'_blank'))
-        } else if(toinen == scopeF)
-        {
+          add([
+            sprite("ala5"),
+            pos(width() / 2 - 110, height() / 2 - -30),
+            scale(0.25),
+          ]);
+          onClick(() =>
+            window.open("https://www.keuda.fi/ala/palvelualat/", "_blank")
+          );
+        } else if (toinen == scopeF) {
           scopeF = 0;
-          add([sprite("ala6"), pos(width() / 2 - 110, height() /2 - -30), scale(0.25)]);
-          onClick(() => window.open("https://www.keuda.fi/ala/tekniikan-alat/",'_blank'))
-        } else if(toinen == scopeG)
-        {
+          add([
+            sprite("ala6"),
+            pos(width() / 2 - 110, height() / 2 - -30),
+            scale(0.25),
+          ]);
+          onClick(() =>
+            window.open("https://www.keuda.fi/ala/tekniikan-alat/", "_blank")
+          );
+        } else if (toinen == scopeG) {
           scopeG = 0;
-          add([sprite("ala7"), pos(width() / 2 - 110, height() /2 - -30), scale(0.3)]);
-          onClick(() => window.open("https://www.keuda.fi/ala/terveys-hyvinvointialat/",'_blank'))
-        } else if(toinen == scopeH)
-        {
+          add([
+            sprite("ala7"),
+            pos(width() / 2 - 110, height() / 2 - -30),
+            scale(0.3),
+          ]);
+          onClick(() =>
+            window.open(
+              "https://www.keuda.fi/ala/terveys-hyvinvointialat/",
+              "_blank"
+            )
+          );
+        } else if (toinen == scopeH) {
           scopeH = 0;
-          add([sprite("ala8"), pos(width() / 2 - 110, height() /2 - -30), scale(0.3)]);
-          onClick(() => window.open("https://www.keuda.fi/ala/tietojenkasittely-tietoliikenne-ict/",'_blank'))
+          add([
+            sprite("ala8"),
+            pos(width() / 2 - 110, height() / 2 - -30),
+            scale(0.3),
+          ]);
+          onClick(() =>
+            window.open(
+              "https://www.keuda.fi/ala/tietojenkasittely-tietoliikenne-ict/",
+              "_blank"
+            )
+          );
         }
 
         // Lets find third suitable field
@@ -1712,46 +1796,101 @@
           scopeG,
           scopeH
         );
-        if(kolmas == scopeA)
-        {
+        if (kolmas == scopeA) {
           scopeA = 0;
-          add([sprite("ala1"), pos(width() / 2 - 110, height() /2 - -75), scale(0.3)]);  
-          onClick(() => window.open("https://www.keuda.fi/ala/humanistiset-taidealat/",'_blank'))
-        } else if(kolmas == scopeB)
-        {
+          add([
+            sprite("ala1"),
+            pos(width() / 2 - 110, height() / 2 - -75),
+            scale(0.3),
+          ]);
+          onClick(() =>
+            window.open(
+              "https://www.keuda.fi/ala/humanistiset-taidealat/",
+              "_blank"
+            )
+          );
+        } else if (kolmas == scopeB) {
           scopeB = 0;
-          add([sprite("ala2"), pos(width() / 2 - 110, height() /2 - -75), scale(0.3)]);  
-          onClick(() => window.open("https://www.keuda.fi/ala/kauppa-hallinto-oikeustieteet/",'_blank'))
-        } else if(kolmas == scopeC)
-        {
+          add([
+            sprite("ala2"),
+            pos(width() / 2 - 110, height() / 2 - -75),
+            scale(0.3),
+          ]);
+          onClick(() =>
+            window.open(
+              "https://www.keuda.fi/ala/kauppa-hallinto-oikeustieteet/",
+              "_blank"
+            )
+          );
+        } else if (kolmas == scopeC) {
           scopeC = 0;
-          add([sprite("ala3"), pos(width() / 2 - 110, height() /2 - -75), scale(0.25)]);   
-          onClick(() => window.open("https://www.keuda.fi/ala/luonnontieteet/",'_blank'))      
-        } else if(kolmas == scopeD)
-        {
+          add([
+            sprite("ala3"),
+            pos(width() / 2 - 110, height() / 2 - -75),
+            scale(0.25),
+          ]);
+          onClick(() =>
+            window.open("https://www.keuda.fi/ala/luonnontieteet/", "_blank")
+          );
+        } else if (kolmas == scopeD) {
           scopeD = 0;
-          add([sprite("ala4"), pos(width() / 2 - 110, height() /2 - -75), scale(0.3)]);  
-          onClick(() => window.open("https://www.keuda.fi/ala/maa-ja-metsatalousala-myos-puutarha-ala/",'_blank'))
-        } else if(kolmas == scopeE)
-        {
+          add([
+            sprite("ala4"),
+            pos(width() / 2 - 110, height() / 2 - -75),
+            scale(0.3),
+          ]);
+          onClick(() =>
+            window.open(
+              "https://www.keuda.fi/ala/maa-ja-metsatalousala-myos-puutarha-ala/",
+              "_blank"
+            )
+          );
+        } else if (kolmas == scopeE) {
           scopeE = 0;
-          add([sprite("ala5"), pos(width() / 2 - 110, height() /2 - -75), scale(0.25)]);  
-          onClick(() => window.open("https://www.keuda.fi/ala/palvelualat/",'_blank'))
-        } else if(kolmas == scopeF)
-        {
+          add([
+            sprite("ala5"),
+            pos(width() / 2 - 110, height() / 2 - -75),
+            scale(0.25),
+          ]);
+          onClick(() =>
+            window.open("https://www.keuda.fi/ala/palvelualat/", "_blank")
+          );
+        } else if (kolmas == scopeF) {
           scopeF = 0;
-          add([sprite("ala6"), pos(width() / 2 - 110, height() /2 - -75), scale(0.25)]);  
-          onClick(() => window.open("https://www.keuda.fi/ala/tekniikan-alat/",'_blank'))
-        } else if(kolmas == scopeG)
-        {
+          add([
+            sprite("ala6"),
+            pos(width() / 2 - 110, height() / 2 - -75),
+            scale(0.25),
+          ]);
+          onClick(() =>
+            window.open("https://www.keuda.fi/ala/tekniikan-alat/", "_blank")
+          );
+        } else if (kolmas == scopeG) {
           scopeG = 0;
-          add([sprite("ala7"), pos(width() / 2 - 110, height() /2 - -75), scale(0.3)]);  
-          onClick(() => window.open("https://www.keuda.fi/ala/terveys-hyvinvointialat/",'_blank'))
-        } else if(kolmas == scopeH)
-        {
+          add([
+            sprite("ala7"),
+            pos(width() / 2 - 110, height() / 2 - -75),
+            scale(0.3),
+          ]);
+          onClick(() =>
+            window.open(
+              "https://www.keuda.fi/ala/terveys-hyvinvointialat/",
+              "_blank"
+            )
+          );
+        } else if (kolmas == scopeH) {
           scopeH = 0;
-          add([sprite("ala8"), pos(width() / 2 - 110, height() /2 - -75), scale(0.3)]);  
-          onClick(() => window.open("https://www.keuda.fi/ala/tietojenkasittely-tietoliikenne-ict/",'_blank'))
+          add([
+            sprite("ala8"),
+            pos(width() / 2 - 110, height() / 2 - -75),
+            scale(0.3),
+          ]);
+          onClick(() =>
+            window.open(
+              "https://www.keuda.fi/ala/tietojenkasittely-tietoliikenne-ict/",
+              "_blank"
+            )
+          );
         }
       });
     </script>

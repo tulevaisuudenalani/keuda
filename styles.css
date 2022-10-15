@@ -1,8 +1,10 @@
 body {
-  background-color: black;
   overflow: hidden;
-  display: flex;
-  justify-content: right;
+}
+
+* {
+  margin: 0;
+  padding: 0;
 }
 
 iframe {
@@ -22,15 +24,6 @@ iframe {
 .linkit a {
   font-size: 2em;
   color: blue;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-}
-body {
-  background-color: black;
-  overflow: hidden;
 }
 
 .puhelin {
