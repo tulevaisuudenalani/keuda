@@ -1578,7 +1578,7 @@
         );
         if (ensimmainen == scopeA) {
           scopeA = 0;
-          add([
+          const ala1_1 = add([
             sprite("ala1"),
             pos(width() / 2 - 110, height() / 2 - 20),
             scale(0.3),
@@ -1588,11 +1588,18 @@
               "https://www.keuda.fi/ala/humanistiset-taidealat/",
               "_blank"
             );
+
+            onTouchStart((id, pos) => {
+              if (ala1_1.hasPoint(pos)) {
+                window.open("https://www.keuda.fi/ala/humanistiset-taidealat/", "_blank");
+              }
+            });
+
             console.log("Humanistiset ja taidealat");
           }, false);
         } else if (ensimmainen == scopeB) {
           scopeB = 0;
-          add([
+          const ala1_2 = add([
             sprite("ala2"),
             pos(width() / 2 - 110, height() / 2 - 20),
             scale(0.3),
@@ -1602,11 +1609,16 @@
               "https://www.keuda.fi/ala/kauppa-hallinto-oikeustieteet/",
               "_blank"
             );
+            onTouchStart((id, pos) => {
+              if (ala1_2.hasPoint(pos)) {
+                window.open("https://www.keuda.fi/ala/kauppa-hallinto-oikeustieteet/", "_blank");
+              }
+            });
             console.log("Kauppa, hallinto ja oikeustieteet");
           }, false);
         } else if (ensimmainen == scopeC) {
           scopeC = 0;
-          add([
+          const ala1_3 = add([
             sprite("ala3"),
             pos(width() / 2 - 110, height() / 2 - 20),
             scale(0.25),
@@ -1615,9 +1627,14 @@
             window.open("https://www.keuda.fi/ala/luonnontieteet/", "_blank");
             console.log("Luonnontieteet");
           }, false);
+          onTouchStart((id, pos) => {
+              if (ala1_3.hasPoint(pos)) {
+                window.open("https://www.keuda.fi/ala/luonnontieteet/", "_blank");
+              }
+            });
         } else if (ensimmainen == scopeD) {
           scopeD = 0;
-          add([
+          const ala1_4 = add([
             sprite("ala4"),
             pos(width() / 2 - 110, height() / 2 - 20),
             scale(0.3),
@@ -1627,11 +1644,16 @@
               "https://www.keuda.fi/ala/maa-ja-metsatalousala-myos-puutarha-ala/",
               "_blank"
             );
+            onTouchStart((id, pos) => {
+              if (ala1_4.hasPoint(pos)) {
+                window.open("https://www.keuda.fi/ala/maa-ja-metsatalousala-myos-puutarha-ala/", "_blank");
+              }
+            });
             console.log("Maa- ja metsätalous");
           }, false);
         } else if (ensimmainen == scopeE) {
           scopeE = 0;
-          add([
+          const ala1_5 = add([
             sprite("ala5"),
             pos(width() / 2 - 110, height() / 2 - 20),
             scale(0.25),
@@ -1639,9 +1661,14 @@
           onClick(() =>
             window.open("https://www.keuda.fi/ala/palvelualat/", "_blank")
           );
+          onTouchStart((id, pos) => {
+              if (ala1_5.hasPoint(pos)) {
+                window.open("https://www.keuda.fi/ala/palvelualat/", "_blank");
+              }
+            });
         } else if (ensimmainen == scopeF) {
           scopeF = 0;
-          add([
+          const ala1_6 = add([
             sprite("ala6"),
             pos(width() / 2 - 110, height() / 2 - 20),
             scale(0.25),
@@ -1649,9 +1676,14 @@
           onClick(() =>
             window.open("https://www.keuda.fi/ala/tekniikan-alat/", "_blank")
           );
+          onTouchStart((id, pos) => {
+              if (ala1_6.hasPoint(pos)) {
+                window.open("https://www.keuda.fi/ala/tekniikan-alat/", "_blank");
+              }
+            });
         } else if (ensimmainen == scopeG) {
           scopeG = 0;
-          add([
+          const ala1_7 = add([
             sprite("ala7"),
             pos(width() / 2 - 110, height() / 2 - 20),
             scale(0.3),
@@ -1662,9 +1694,14 @@
               "_blank"
             )
           );
+          onTouchStart((id, pos) => {
+              if (ala1_7.hasPoint(pos)) {
+                window.open("https://www.keuda.fi/ala/terveys-hyvinvointialat/", "_blank");
+              }
+            });
         } else if (ensimmainen == scopeH) {
           scopeH = 0;
-          add([
+          const ala1_8 = add([
             sprite("ala8"),
             pos(width() / 2 - 110, height() / 2 - 20),
             scale(0.3),
@@ -1675,6 +1712,11 @@
               "_blank"
             )
           );
+          onTouchStart((id, pos) => {
+              if (ala1_8.hasPoint(pos)) {
+                window.open("https://www.keuda.fi/ala/tietojenkasittely-tietoliikenne-ict/", "_blank");
+              }
+            });
         }
 
         // Lets find second suitable field
@@ -1690,7 +1732,7 @@
         );
         if (toinen == scopeA) {
           scopeA = 0;
-          add([
+          const ala2_1 = add([
             sprite("ala1"),
             pos(width() / 2 - 110, height() / 2 - -30),
             scale(0.3),
@@ -1701,9 +1743,14 @@
               "_blank"
             )
           );
+          onTouchStart((id, pos) => {
+              if (ala2_1.hasPoint(pos)) {
+                window.open("https://www.keuda.fi/ala/humanistiset-taidealat/", "_blank");
+              }
+            });
         } else if (toinen == scopeB) {
           scopeB = 0;
-          add([
+          const ala2_2 = add([
             sprite("ala2"),
             pos(width() / 2 - 110, height() / 2 - -30),
             scale(0.3),
@@ -1714,9 +1761,14 @@
               "_blank"
             )
           );
+          onTouchStart((id, pos) => {
+              if (ala2_2.hasPoint(pos)) {
+                window.open("https://www.keuda.fi/ala/kauppa-hallinto-oikeustieteet/", "_blank");
+              }
+            });
         } else if (toinen == scopeC) {
           scopeC = 0;
-          add([
+          const ala2_3 = add([
             sprite("ala3"),
             pos(width() / 2 - 110, height() / 2 - -30),
             scale(0.25),
@@ -1724,9 +1776,14 @@
           onClick(() =>
             window.open("https://www.keuda.fi/ala/luonnontieteet/", "_blank")
           );
+          onTouchStart((id, pos) => {
+              if (ala2_3.hasPoint(pos)) {
+                window.open("https://www.keuda.fi/ala/luonnontieteet/", "_blank");
+              }
+            });
         } else if (toinen == scopeD) {
           scopeD = 0;
-          add([
+          const ala2_4 = add([
             sprite("ala4"),
             pos(width() / 2 - 110, height() / 2 - -30),
             scale(0.3),
@@ -1737,9 +1794,14 @@
               "_blank"
             )
           );
+          onTouchStart((id, pos) => {
+              if (ala2_4.hasPoint(pos)) {
+                window.open("https://www.keuda.fi/ala/maa-ja-metsatalousala-myos-puutarha-ala/", "_blank");
+              }
+            });
         } else if (toinen == scopeE) {
           scopeE = 0;
-          add([
+          const ala2_5 = add([
             sprite("ala5"),
             pos(width() / 2 - 110, height() / 2 - -30),
             scale(0.25),
@@ -1747,9 +1809,14 @@
           onClick(() =>
             window.open("https://www.keuda.fi/ala/palvelualat/", "_blank")
           );
+          onTouchStart((id, pos) => {
+              if (ala2_5.hasPoint(pos)) {
+                window.open("https://www.keuda.fi/ala/palvelualat/", "_blank");
+              }
+            });
         } else if (toinen == scopeF) {
           scopeF = 0;
-          add([
+          const ala2_6 = add([
             sprite("ala6"),
             pos(width() / 2 - 110, height() / 2 - -30),
             scale(0.25),
@@ -1757,9 +1824,14 @@
           onClick(() =>
             window.open("https://www.keuda.fi/ala/tekniikan-alat/", "_blank")
           );
+          onTouchStart((id, pos) => {
+              if (ala2_6.hasPoint(pos)) {
+                window.open("https://www.keuda.fi/ala/tekniikan-alat/", "_blank");
+              }
+            });
         } else if (toinen == scopeG) {
           scopeG = 0;
-          add([
+          const ala2_7 = add([
             sprite("ala7"),
             pos(width() / 2 - 110, height() / 2 - -30),
             scale(0.3),
@@ -1770,9 +1842,14 @@
               "_blank"
             )
           );
+          onTouchStart((id, pos) => {
+              if (ala2_7.hasPoint(pos)) {
+                window.open("https://www.keuda.fi/ala/terveys-hyvinvointialat/", "_blank");
+              }
+            });
         } else if (toinen == scopeH) {
           scopeH = 0;
-          add([
+          const ala2_8 = add([
             sprite("ala8"),
             pos(width() / 2 - 110, height() / 2 - -30),
             scale(0.3),
@@ -1783,6 +1860,11 @@
               "_blank"
             )
           );
+          onTouchStart((id, pos) => {
+              if (ala2_8.hasPoint(pos)) {
+                window.open("https://www.keuda.fi/ala/tietojenkasittely-tietoliikenne-ict/", "_blank");
+              }
+            });
         }
 
         // Lets find third suitable field
@@ -1798,7 +1880,7 @@
         );
         if (kolmas == scopeA) {
           scopeA = 0;
-          add([
+          const ala3_1 = add([
             sprite("ala1"),
             pos(width() / 2 - 110, height() / 2 - -75),
             scale(0.3),
@@ -1809,9 +1891,14 @@
               "_blank"
             )
           );
+          onTouchStart((id, pos) => {
+              if (ala3_1.hasPoint(pos)) {
+                window.open("https://www.keuda.fi/ala/humanistiset-taidealat/", "_blank");
+              }
+            });
         } else if (kolmas == scopeB) {
           scopeB = 0;
-          add([
+          const ala3_2 = add([
             sprite("ala2"),
             pos(width() / 2 - 110, height() / 2 - -75),
             scale(0.3),
@@ -1822,9 +1909,14 @@
               "_blank"
             )
           );
+          onTouchStart((id, pos) => {
+              if (ala3_2.hasPoint(pos)) {
+                window.open("https://www.keuda.fi/ala/kauppa-hallinto-oikeustieteet/", "_blank");
+              }
+            });
         } else if (kolmas == scopeC) {
           scopeC = 0;
-          add([
+          const ala3_3 = add([
             sprite("ala3"),
             pos(width() / 2 - 110, height() / 2 - -75),
             scale(0.25),
@@ -1832,9 +1924,14 @@
           onClick(() =>
             window.open("https://www.keuda.fi/ala/luonnontieteet/", "_blank")
           );
+          onTouchStart((id, pos) => {
+              if (ala3_3.hasPoint(pos)) {
+                window.open("https://www.keuda.fi/ala/luonnontieteet/", "_blank");
+              }
+            });
         } else if (kolmas == scopeD) {
           scopeD = 0;
-          add([
+          const ala3_4 = add([
             sprite("ala4"),
             pos(width() / 2 - 110, height() / 2 - -75),
             scale(0.3),
@@ -1845,9 +1942,14 @@
               "_blank"
             )
           );
+          onTouchStart((id, pos) => {
+              if (ala3_4.hasPoint(pos)) {
+                window.open("https://www.keuda.fi/ala/maa-ja-metsatalousala-myos-puutarha-ala/", "_blank");
+              }
+            });
         } else if (kolmas == scopeE) {
           scopeE = 0;
-          add([
+          const ala3_5 = add([
             sprite("ala5"),
             pos(width() / 2 - 110, height() / 2 - -75),
             scale(0.25),
@@ -1855,9 +1957,14 @@
           onClick(() =>
             window.open("https://www.keuda.fi/ala/palvelualat/", "_blank")
           );
+          onTouchStart((id, pos) => {
+              if (ala3_5.hasPoint(pos)) {
+                window.open("https://www.keuda.fi/ala/palvelualat/", "_blank");
+              }
+            });
         } else if (kolmas == scopeF) {
           scopeF = 0;
-          add([
+          const ala3_6 = add([
             sprite("ala6"),
             pos(width() / 2 - 110, height() / 2 - -75),
             scale(0.25),
@@ -1865,9 +1972,14 @@
           onClick(() =>
             window.open("https://www.keuda.fi/ala/tekniikan-alat/", "_blank")
           );
+          onTouchStart((id, pos) => {
+              if (ala3_6.hasPoint(pos)) {
+                window.open("https://www.keuda.fi/ala/tekniikan-alat/", "_blank");
+              }
+            });
         } else if (kolmas == scopeG) {
           scopeG = 0;
-          add([
+          const ala3_7 = add([
             sprite("ala7"),
             pos(width() / 2 - 110, height() / 2 - -75),
             scale(0.3),
@@ -1878,9 +1990,14 @@
               "_blank"
             )
           );
+          onTouchStart((id, pos) => {
+              if (ala3_7.hasPoint(pos)) {
+                window.open("https://www.keuda.fi/ala/terveys-hyvinvointialat/", "_blank");
+              }
+            });
         } else if (kolmas == scopeH) {
           scopeH = 0;
-          add([
+          const ala3_8 = add([
             sprite("ala8"),
             pos(width() / 2 - 110, height() / 2 - -75),
             scale(0.3),
@@ -1891,6 +2008,11 @@
               "_blank"
             )
           );
+          onTouchStart((id, pos) => {
+              if (ala3_8.hasPoint(pos)) {
+                window.open("https://www.keuda.fi/ala/tietojenkasittely-tietoliikenne-ict/", "_blank");
+              }
+            });
         }
       });
     </script>
