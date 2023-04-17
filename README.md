@@ -5,4 +5,4 @@
 https://kaboomjs.com/
 
 ### URL
-https://rikuu12.github.io/kouluprojekti/
+https://tulevaisuudenalani.github.io/keuda/
